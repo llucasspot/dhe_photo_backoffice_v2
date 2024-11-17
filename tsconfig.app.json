@@ -19,11 +19,15 @@
     "noUncheckedSideEffectImports": true,
     "baseUrl": ".",
     "paths": {
-      "components": ["src/components"],
-      "features": ["src/features"],
-      "lib": ["src/lib"],
-      "assets": ["src/assets"],
-      "routes": ["src/routes"]
+      "#assets": ["src/assets"],
+      "#components": ["src/components"],
+      "#features/auth": ["src/features/auth"],
+      "#features/dashboard": ["src/features/dashboard"],
+      "#features/home": ["src/features/home"],
+      "#features/projects": ["src/features/projects"],
+      "#layout": ["src/layout"],
+      "#lib/auth": ["src/lib/auth"],
+      "#routes": ["src/routes"]
     }
   },
   "include": ["src"]

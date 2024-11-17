@@ -1,15 +1,25 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import { resolve } from 'path'
+import react from '@vitejs/plugin-react';
+import path from "path";
+import {defineConfig} from 'vite';
+
+function build(relativePath: string) {
+    return path.resolve(__dirname, relativePath)
+}
 
 export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: {
-      components: resolve(__dirname, './src/components'),
-      features: resolve(__dirname, './src/features'),
-      lib: resolve(__dirname, './src/lib'),
-      assets: resolve(__dirname, './src/assets')
-    }
-  }
-})
+    plugins: [react()],
+    resolve: {
+        alias: {
+            '#lib': build('src/lib'),
+            "#assets": build("src/assets"),
+            "#components": build("src/components"),
+            "#features/auth": build("src/features/auth"),
+            "#features/dashboard": build("src/features/dashboard"),
+            "#features/home": build("src/features/home"),
+            "#features/projects": build("src/features/projects"),
+            "#layout": build("src/layout"),
+            "#lib/auth": build("src/lib/auth"),
+            "#routes": build("src/routes")
+        },
+    },
+});
