@@ -33,6 +33,32 @@ export const Sidebar = () => {
               Dashboard
             </Link>
             <Link
+              to="/schools"
+              activeProps={{
+                className:
+                  'group flex items-center px-3 py-2 text-sm font-medium rounded-md bg-gray-100 text-gray-900',
+              }}
+              inactiveProps={{
+                className:
+                  'group flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+              }}
+            >
+              <svg
+                className="mr-3 h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                />
+              </svg>
+              Schools
+            </Link>
+            <Link
               to="/projects"
               activeProps={{
                 className:

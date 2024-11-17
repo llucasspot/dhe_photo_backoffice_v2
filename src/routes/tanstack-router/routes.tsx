@@ -10,6 +10,7 @@ import { RootLayout } from '../../layout/root.layout.tsx';
 import { LoginPage, RegisterPage } from '#features/auth';
 import { DashboardPage } from '#features/dashboard';
 import { ProjectsPage } from '#features/projects';
+import { SchoolsPage } from '#features/schools';
 
 export const context = {
   auth: {
@@ -47,6 +48,19 @@ const projectsRoute = createRoute({
   },
 });
 
+const schoolsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/schools',
+  component: SchoolsPage,
+  beforeLoad: ({ context }) => {
+    if (!context.auth.isAuthenticated) {
+      throw redirect({
+        to: '/login',
+      });
+    }
+  },
+});
+
 const loginRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/login',
@@ -62,6 +76,7 @@ const registerRoute = new Route({
 export const routeTree = rootRoute.addChildren([
   indexRoute,
   projectsRoute,
+  schoolsRoute,
   loginRoute,
   registerRoute,
 ]);

@@ -10,6 +10,7 @@
     "#features/dashboard": "src/features/dashboard",
     "#features/home": "src/features/home",
     "#features/projects": "src/features/projects",
+    "#features/schools": "src/features/schools",
     "#layout": "src/layout",
     "#lib/auth": "src/lib/auth",
     "#routes": "src/routes"
