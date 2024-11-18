@@ -1,4 +1,4 @@
-import { Link } from '@tanstack/react-router';
+import { Link } from '#routing/react';
 
 export const Sidebar = () => {
   return (
@@ -7,7 +7,7 @@ export const Sidebar = () => {
         <nav className="flex-1 px-2 py-4">
           <div className="space-y-1">
             <Link
-              to="/"
+              to="home"
               activeProps={{
                 className:
                   'group flex items-center px-3 py-2 text-sm font-medium rounded-md bg-gray-100 text-gray-900',

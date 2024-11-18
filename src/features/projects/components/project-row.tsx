@@ -1,6 +1,6 @@
-import { Link } from '@tanstack/react-router';
-
 import { ProjectDto } from '../domain';
+
+import { Link } from '#routing/react';
 
 interface ProjectRowProps {
   project: ProjectDto;

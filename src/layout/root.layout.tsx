@@ -1,16 +1,18 @@
-import { Link, Outlet, useNavigate } from '@tanstack/react-router';
+import { OutletLayout } from './outlet.layout.tsx';
 
-import { Sidebar } from '../components';
-
+import { Sidebar } from '#components';
+import { useService } from '#di/react';
 import { useAuth } from '#lib/auth';
+import { RoutingServicePort } from '#routing/domain';
+import { Link } from '#routing/react';
 
 export const RootLayout = () => {
+  const routingService = useService(RoutingServicePort);
   const { isAuthenticated, logout } = useAuth();
-  const navigate = useNavigate();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     logout();
-    navigate({ to: '/auth/login' });
+    await routingService.redirect('/auth/login');
   };
 
   return (
@@ -20,7 +22,7 @@ export const RootLayout = () => {
           <div className="flex justify-between h-16">
             <div className="flex">
               <Link
-                to="/"
+                to="/home"
                 className="flex items-center px-2 py-2 text-gray-700 hover:text-gray-900"
               >
                 Dashboard
@@ -57,7 +59,7 @@ export const RootLayout = () => {
       <div className="flex pt-16">
         {isAuthenticated && <Sidebar />}
         <div className={`flex-1 ${isAuthenticated ? 'pl-64' : ''}`}>
-          <Outlet />
+          <OutletLayout />
         </div>
       </div>
     </div>

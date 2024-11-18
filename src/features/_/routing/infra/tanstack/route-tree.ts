@@ -3,18 +3,18 @@ import {
   createRoute,
 } from '@tanstack/react-router';
 
-import { OutletLayout } from '../../layout/outlet.layout.tsx';
-import { RootLayout } from '../../layout/root.layout.tsx';
-
 import { LoginPage, RegisterPage } from '#features/auth';
 import { DashboardPage } from '#features/dashboard';
 import { ProjectsPage } from '#features/projects';
 import { SchoolsPage } from '#features/schools';
+import { OutletLayout, RootLayout } from '#layout';
+import { RoutingServicePort } from '#routing/domain';
 
 type Context = {
   auth: {
     isAuthenticated: boolean;
   };
+  routingService: RoutingServicePort;
 };
 
 export const rootRoute = createRootRouteWithContext<Context>()({

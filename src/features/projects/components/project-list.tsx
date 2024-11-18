@@ -1,6 +1,6 @@
 import { ProjectDto } from '../domain';
 
-import { ProjectRow } from './project-row.tsx';
+import { ProjectRow } from './project-row';
 
 const mockProjects: ProjectDto[] = [
   {

@@ -1,6 +1,6 @@
-import { Link } from '@tanstack/react-router';
-
 import { SchoolDto } from '../domain';
+
+import { Link } from '#routing/react';
 
 interface SchoolRowProps {
   school: SchoolDto;

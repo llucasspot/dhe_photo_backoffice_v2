@@ -1,1 +1,1 @@
-export * from './project.dto.ts';
+export * from './project.dto';

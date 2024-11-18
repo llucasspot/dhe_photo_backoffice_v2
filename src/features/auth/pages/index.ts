@@ -1,2 +1,2 @@
-export * from './login.page.tsx';
-export * from './register.page.tsx';
+export * from './login.page';
+export * from './register.page';

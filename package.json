@@ -13,7 +13,14 @@
     "#features/schools": "src/features/schools",
     "#layout": "src/layout",
     "#lib/auth": "src/lib/auth",
-    "#routes": "src/routes"
+    "#di/domain": "./src/lib/di/src/domain",
+    "#di/infra": "./src/lib/di/src/infra",
+    "#di/react": "./src/lib/di/src/react",
+    "#di": "./src/lib/di/src",
+    "#routing/domain": "./src/features/_/routing/domain",
+    "#routing/infra": "./src/features/_/routing/infra",
+    "#routing/react": "./src/features/_/routing/react",
+    "#routing": "./src/features/_/routing"
   },
   "scripts": {
     "dev": "vite",
@@ -29,7 +36,9 @@
     "@types/node": "^22.9.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-hook-form": "^7.50.1"
+    "react-hook-form": "^7.50.1",
+    "reflect-metadata": "^0.2.2",
+    "tsyringe": "^4.8.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.14.0",

@@ -1,8 +1,9 @@
 import { useForm } from 'react-hook-form';
-import { useNavigate } from '@tanstack/react-router';
 
 import { Button, Input } from '#components';
+import { useService } from '#di/react';
 import { useAuth } from '#lib/auth';
+import { RoutingServicePort } from '#routing/domain';
 
 interface LoginFormData {
   email: string;
@@ -10,18 +11,18 @@ interface LoginFormData {
 }
 
 export const LoginForm = () => {
+  const routingService = useService(RoutingServicePort);
   const { login } = useAuth();
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormData>();
 
-  const onSubmit = (data: LoginFormData) => {
+  const onSubmit = async (data: LoginFormData) => {
     console.log(data);
     login('mock_token');
-    navigate({ to: '/home' });
+    await routingService.redirect('/home');
   };
 
   return (
