@@ -1,4 +1,5 @@
 import { Link } from '@tanstack/react-router';
+
 import { SchoolDto } from '../domain';
 
 interface SchoolRowProps {
@@ -23,7 +24,8 @@ export const SchoolRow = ({ school }: SchoolRowProps) => {
                 {school.name}
               </h3>
               <p className="text-sm text-gray-500">
-                {school.type} • {school.location} • {school.studentCount} students
+                {school.type} • {school.location} • {school.studentCount}{' '}
+                students
               </p>
             </div>
           </div>

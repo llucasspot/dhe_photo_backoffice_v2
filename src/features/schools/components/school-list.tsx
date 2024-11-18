@@ -1,4 +1,5 @@
 import { SchoolDto } from '../domain';
+
 import { SchoolRow } from './school-row';
 
 const mockSchools: SchoolDto[] = [

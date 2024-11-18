@@ -20,7 +20,7 @@ export default defineConfig({
       '#features/schools': build('src/features/schools'),
       '#layout': build('src/layout'),
       '#lib/auth': build('src/lib/auth'),
-      '#routes': build('src/routes'),
+      '#routes': build('src/routeConfig'),
     },
   },
 });

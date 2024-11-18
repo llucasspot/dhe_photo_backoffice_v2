@@ -1,7 +1,16 @@
-import { rootRoute } from './routes.tsx';
+import { RouterProvider } from '@tanstack/react-router';
 
-declare module '@tanstack/react-router' {
-  interface Register {
-    router: typeof rootRoute;
-  }
+import { router } from './routes.tsx';
+
+export function TanstackRouter() {
+  return (
+    <RouterProvider
+      router={router}
+      context={{
+        auth: {
+          isAuthenticated: localStorage.getItem('auth_token') !== null,
+        },
+      }}
+    />
+  );
 }

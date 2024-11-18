@@ -10,7 +10,7 @@ export const RootLayout = () => {
 
   const handleLogout = () => {
     logout();
-    navigate({ to: '/login' });
+    navigate({ to: '/auth/login' });
   };
 
   return (
@@ -37,13 +37,13 @@ export const RootLayout = () => {
               ) : (
                 <>
                   <Link
-                    to="/login"
+                    to="/auth/login"
                     className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900"
                   >
                     Sign in
                   </Link>
                   <Link
-                    to="/register"
+                    to="/auth/register"
                     className="ml-4 px-3 py-2 rounded-md text-sm font-medium bg-blue-600 text-white hover:bg-blue-700"
                   >
                     Sign up
