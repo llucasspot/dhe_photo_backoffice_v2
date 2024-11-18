@@ -89,14 +89,27 @@ export const en: Translations = {
       displayName: 'Display Name',
       phoneNumber: 'Phone Number',
       validation: {
-        emailRequired: 'Email is required',
-        emailInvalid: 'Invalid email address',
-        firstNameRequired: 'First name is required',
-        lastNameRequired: 'Last name is required',
-        displayNameRequired: 'Display name is required',
+        email: {
+          IsEmail: 'Invalid email format',
+          IsNotEmpty: 'Email is required',
+        },
+        firstName: {
+          IsString: 'First name must be text',
+          Length: 'First name must be between 2 and 50 characters',
+          Matches: 'First name can only contain letters, spaces, and hyphens',
+        },
+        lastName: {
+          IsString: 'Last name must be text',
+          Length: 'Last name must be between 2 and 50 characters',
+          Matches: 'Last name can only contain letters, spaces, and hyphens',
+        },
+        displayName: {
+          IsString: 'Display name must be text',
+          Length: 'Display name must be between 2 and 50 characters',
+        },
         phoneNumber: {
           IsNotEmpty: 'Phone number is required',
-          IsPhoneNumber: 'Invalid phone number',
+          IsPhoneNumber: 'Invalid phone number format',
         },
       },
     },

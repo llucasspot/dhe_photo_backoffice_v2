@@ -86,11 +86,24 @@ export type Translations = {
       displayName: string;
       phoneNumber: string;
       validation: {
-        emailRequired: string;
-        emailInvalid: string;
-        firstNameRequired: string;
-        lastNameRequired: string;
-        displayNameRequired: string;
+        email: {
+          IsEmail: string;
+          IsNotEmpty: string;
+        };
+        firstName: {
+          IsString: string;
+          Length: string;
+          Matches: string;
+        };
+        lastName: {
+          IsString: string;
+          Length: string;
+          Matches: string;
+        };
+        displayName: {
+          IsString: string;
+          Length: string;
+        };
         phoneNumber: {
           IsNotEmpty: string;
           IsPhoneNumber: string;

@@ -23,29 +23,35 @@ export class BankInfoDto extends Dto<BankInfoDto> {
 }
 
 export class PersonalInfoDto extends Dto<PersonalInfoDto> {
-  @IsEmail({}, { message: 'Invalid email format' })
-  @IsNotEmpty({ message: 'Email is required' })
+  @IsEmail({}, { message: 'settings.personalInfo.validation.email.IsEmail' })
+  @IsNotEmpty({ message: 'settings.personalInfo.validation.email.IsNotEmpty' })
   email!: string;
 
-  @IsString()
-  @Length(2, 50, { message: 'First name must be between 2 and 50 characters' })
+  @IsString({ message: 'settings.personalInfo.validation.firstName.IsString' })
+  @Length(2, 50, {
+    message: 'settings.personalInfo.validation.firstName.Length',
+  })
   @Matches(/^[a-zA-Z\s-]+$/, {
-    message: 'First name can only contain letters, spaces, and hyphens',
+    message: 'settings.personalInfo.validation.firstName.Matches',
   })
   @Transform(({ value }) => value?.trim())
   firstName!: string;
 
-  @IsString()
-  @Length(2, 50, { message: 'Last name must be between 2 and 50 characters' })
+  @IsString({ message: 'settings.personalInfo.validation.lastName.IsString' })
+  @Length(2, 50, {
+    message: 'settings.personalInfo.validation.lastName.Length',
+  })
   @Matches(/^[a-zA-Z\s-]+$/, {
-    message: 'Last name can only contain letters, spaces, and hyphens',
+    message: 'settings.personalInfo.validation.lastName.Matches',
   })
   @Transform(({ value }) => value?.trim())
   lastName!: string;
 
-  @IsString()
+  @IsString({
+    message: 'settings.personalInfo.validation.displayName.IsString',
+  })
   @Length(2, 50, {
-    message: 'Display name must be between 2 and 50 characters',
+    message: 'settings.personalInfo.validation.displayName.Length',
   })
   @Transform(({ value }) => value?.trim())
   displayName!: string;

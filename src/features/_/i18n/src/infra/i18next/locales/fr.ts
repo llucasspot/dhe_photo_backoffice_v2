@@ -91,14 +91,28 @@ export const fr: Translations = {
       displayName: "Nom d'affichage",
       phoneNumber: 'Numéro de téléphone',
       validation: {
-        emailRequired: "L'email est requis",
-        emailInvalid: 'Adresse email invalide',
-        firstNameRequired: 'Le prénom est requis',
-        lastNameRequired: 'Le nom est requis',
-        displayNameRequired: "Le nom d'affichage est requis",
+        email: {
+          IsEmail: 'Format email invalide',
+          IsNotEmpty: "L'email est requis",
+        },
+        firstName: {
+          IsString: 'Le prénom doit être du texte',
+          Length: 'Le prénom doit contenir entre 2 et 50 caractères',
+          Matches:
+            'Le prénom ne peut contenir que des lettres, espaces et tirets',
+        },
+        lastName: {
+          IsString: 'Le nom doit être du texte',
+          Length: 'Le nom doit contenir entre 2 et 50 caractères',
+          Matches: 'Le nom ne peut contenir que des lettres, espaces et tirets',
+        },
+        displayName: {
+          IsString: "Le nom d'affichage doit être du texte",
+          Length: "Le nom d'affichage doit contenir entre 2 et 50 caractères",
+        },
         phoneNumber: {
           IsNotEmpty: 'Le numéro de téléphone est requis',
-          IsPhoneNumber: 'Le numéro de téléphone est invalide',
+          IsPhoneNumber: 'Format de numéro de téléphone invalide',
         },
       },
     },
