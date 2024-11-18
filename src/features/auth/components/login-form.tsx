@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 
 import { Button, Input } from '#components';
 import { useService } from '#di/react';
+import { useI18n } from '#i18n/react';
 import { useAuth } from '#lib/auth';
 import { RoutingServicePort } from '#routing/domain';
 
@@ -13,6 +14,7 @@ interface LoginFormData {
 export const LoginForm = () => {
   const routingService = useService(RoutingServicePort);
   const { login } = useAuth();
+  const { t } = useI18n();
   const {
     register,
     handleSubmit,
@@ -28,33 +30,33 @@ export const LoginForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <Input
-        label="Email"
+        label={t('auth.login.email')}
         type="email"
         error={errors.email?.message}
         {...register('email', {
-          required: 'Email is required',
+          required: t('auth.login.validation.emailRequired'),
           pattern: {
             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: 'Invalid email address',
+            message: t('auth.login.validation.emailInvalid'),
           },
         })}
       />
 
       <Input
-        label="Password"
+        label={t('auth.login.password')}
         type="password"
         error={errors.password?.message}
         {...register('password', {
-          required: 'Password is required',
+          required: t('auth.login.validation.passwordRequired'),
           minLength: {
             value: 8,
-            message: 'Password must be at least 8 characters',
+            message: t('auth.login.validation.passwordMinLength'),
           },
         })}
       />
 
       <Button type="submit" className="w-full">
-        Sign In
+        {t('auth.login.submit')}
       </Button>
     </form>
   );

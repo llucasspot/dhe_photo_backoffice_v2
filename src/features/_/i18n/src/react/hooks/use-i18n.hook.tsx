@@ -1,16 +1,36 @@
-import { useTranslation } from 'react-i18next';
+import { useCallback, useEffect, useState } from 'react';
 
 import { useService } from '#di/react';
 import { I18nServicePort } from '#i18n/domain';
 
 export const useI18n = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const i18nService = useService(I18nServicePort);
-  const { t, i18n } = useTranslation();
+  const [currentLanguage, setCurrentLanguage] = useState(
+    i18nService.getCurrentLanguage(),
+  );
+
+  useEffect(() => {
+    setCurrentLanguage(i18nService.getCurrentLanguage());
+  }, [i18nService]);
+
+  const t = useCallback(
+    (key: string, options?: Record<string, unknown>) => {
+      return i18nService.translate(key, options);
+    },
+    [i18nService],
+  );
+
+  const changeLanguage = useCallback(
+    async (lang: string) => {
+      await i18nService.changeLanguage(lang);
+      setCurrentLanguage(i18nService.getCurrentLanguage());
+    },
+    [i18nService],
+  );
 
   return {
     t,
-    changeLanguage: i18n.changeLanguage.bind(i18n),
-    currentLanguage: i18n.language ?? 'fr',
+    changeLanguage,
+    currentLanguage,
   };
 };

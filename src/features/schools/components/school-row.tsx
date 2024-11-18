@@ -1,5 +1,6 @@
 import { SchoolDto } from '../domain';
 
+import { useI18n } from '#i18n/react';
 import { Link } from '#routing/react';
 
 interface SchoolRowProps {
@@ -7,6 +8,8 @@ interface SchoolRowProps {
 }
 
 export const SchoolRow = ({ school }: SchoolRowProps) => {
+  const { t } = useI18n();
+  
   return (
     <Link to="/schools" className="block px-6 py-4 hover:bg-gray-50">
       <div className="flex items-center justify-between">
@@ -24,8 +27,8 @@ export const SchoolRow = ({ school }: SchoolRowProps) => {
                 {school.name}
               </h3>
               <p className="text-sm text-gray-500">
-                {school.type} • {school.location} • {school.studentCount}{' '}
-                students
+                {t(`schools.list.type.${school.type}`)} • {school.location} •{' '}
+                {school.studentCount} {t('schools.list.students')}
               </p>
             </div>
           </div>

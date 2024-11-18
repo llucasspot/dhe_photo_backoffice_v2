@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 
 import { Button, Input } from '#components';
+import { useI18n } from '#i18n/react';
 
 interface RegisterFormData {
   email: string;
@@ -9,6 +10,7 @@ interface RegisterFormData {
 }
 
 export const RegisterForm = () => {
+  const { t } = useI18n();
   const {
     register,
     handleSubmit,
@@ -25,43 +27,44 @@ export const RegisterForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <Input
-        label="Email"
+        label={t('auth.register.email')}
         type="email"
         error={errors.email?.message}
         {...register('email', {
-          required: 'Email is required',
+          required: t('auth.register.validation.emailRequired'),
           pattern: {
             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: 'Invalid email address',
+            message: t('auth.register.validation.emailInvalid'),
           },
         })}
       />
 
       <Input
-        label="Password"
+        label={t('auth.register.password')}
         type="password"
         error={errors.password?.message}
         {...register('password', {
-          required: 'Password is required',
+          required: t('auth.register.validation.passwordRequired'),
           minLength: {
             value: 8,
-            message: 'Password must be at least 8 characters',
+            message: t('auth.register.validation.passwordMinLength'),
           },
         })}
       />
 
       <Input
-        label="Confirm Password"
+        label={t('auth.register.confirmPassword')}
         type="password"
         error={errors.confirmPassword?.message}
         {...register('confirmPassword', {
-          required: 'Please confirm your password',
-          validate: (value) => value === password || 'Passwords do not match',
+          required: t('auth.register.validation.confirmPasswordRequired'),
+          validate: (value) =>
+            value === password || t('auth.register.validation.passwordsDoNotMatch'),
         })}
       />
 
       <Button type="submit" className="w-full">
-        Sign Up
+        {t('auth.register.submit')}
       </Button>
     </form>
   );

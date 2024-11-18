@@ -1,5 +1,6 @@
 import { ProjectDto } from '../domain';
 
+import { useI18n } from '#i18n/react';
 import { Link } from '#routing/react';
 
 interface ProjectRowProps {
@@ -7,6 +8,8 @@ interface ProjectRowProps {
 }
 
 export const ProjectRow = ({ project }: ProjectRowProps) => {
+  const { t } = useI18n();
+  
   return (
     <Link to="/projects" className="block px-6 py-4 hover:bg-gray-50">
       <div className="flex items-center justify-between">
@@ -24,7 +27,8 @@ export const ProjectRow = ({ project }: ProjectRowProps) => {
                 {project.name}
               </h3>
               <p className="text-sm text-gray-500">
-                {project.schoolName} • {project.lieu}
+                {project.schoolName} • {project.lieu} •{' '}
+                {t(`common.status.${project.etat}`)}
               </p>
             </div>
           </div>

@@ -1,6 +1,9 @@
+import { useI18n } from '#i18n/react';
 import { Link } from '#routing/react';
 
 export const Sidebar = () => {
+  const { t } = useI18n();
+
   return (
     <div className="w-64 bg-white h-[calc(100vh-4rem)] border-r border-gray-200 fixed">
       <div className="h-full flex flex-col">
@@ -30,7 +33,7 @@ export const Sidebar = () => {
                   d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                 />
               </svg>
-              Dashboard
+              {t('navigation.dashboard')}
             </Link>
             <Link
               to="/schools"
@@ -56,7 +59,7 @@ export const Sidebar = () => {
                   d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
                 />
               </svg>
-              Schools
+              {t('navigation.schools')}
             </Link>
             <Link
               to="/projects"
@@ -82,7 +85,7 @@ export const Sidebar = () => {
                   d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
                 />
               </svg>
-              Projects
+              {t('navigation.projects')}
             </Link>
           </div>
         </nav>
