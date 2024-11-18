@@ -17,6 +17,10 @@
     "#di/infra": "./src/lib/di/src/infra",
     "#di/react": "./src/lib/di/src/react",
     "#di": "./src/lib/di/src",
+    "#i18n/domain": "./src/features/_/i18n/src/domain",
+    "#i18n/infra": "./src/features/_/i18n/src/infra",
+    "#i18n/react": "./src/features/_/i18n/src/react",
+    "#i18n": "./src/features/_/i18n/src",
     "#routing/domain": "./src/features/_/routing/domain",
     "#routing/infra": "./src/features/_/routing/infra",
     "#routing/react": "./src/features/_/routing/react",
@@ -29,14 +33,17 @@
     "check:lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
     "check:format": "prettier --write \"src/**/*.ts\"",
     "check:typecheck": "tsc --noEmit",
-    "check:all": "yarn check:lint && yarn check:format && yarn check:typecheck"
+    "check:all": "npm run check:lint && npm run check:format && npm run check:typecheck"
   },
   "dependencies": {
     "@tanstack/react-router": "^1.15.10",
     "@types/node": "^22.9.0",
+    "i18next": "^23.10.1",
+    "i18next-browser-languagedetector": "^7.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.50.1",
+    "react-i18next": "^14.1.0",
     "reflect-metadata": "^0.2.2",
     "tsyringe": "^4.8.0"
   },

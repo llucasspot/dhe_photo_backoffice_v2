@@ -2,6 +2,7 @@ import { OutletLayout } from './outlet.layout.tsx';
 
 import { Sidebar } from '#components';
 import { useService } from '#di/react';
+import { useI18n } from '#i18n/react';
 import { useAuth } from '#lib/auth';
 import { RoutingServicePort } from '#routing/domain';
 import { Link } from '#routing/react';
@@ -9,10 +10,16 @@ import { Link } from '#routing/react';
 export const RootLayout = () => {
   const routingService = useService(RoutingServicePort);
   const { isAuthenticated, logout } = useAuth();
+  const { t, changeLanguage, currentLanguage } = useI18n();
 
   const handleLogout = async () => {
     logout();
     await routingService.redirect('/auth/login');
+  };
+
+  const toggleLanguage = () => {
+    const newLang = currentLanguage === 'en' ? 'fr' : 'en';
+    changeLanguage(newLang);
   };
 
   return (
@@ -25,16 +32,22 @@ export const RootLayout = () => {
                 to="/home"
                 className="flex items-center px-2 py-2 text-gray-700 hover:text-gray-900"
               >
-                Dashboard
+                {t('navigation.dashboard')}
               </Link>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center space-x-4">
+              <button
+                onClick={toggleLanguage}
+                className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900"
+              >
+                {currentLanguage.toUpperCase()}
+              </button>
               {isAuthenticated ? (
                 <button
                   onClick={handleLogout}
                   className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900"
                 >
-                  Sign out
+                  {t('navigation.signOut')}
                 </button>
               ) : (
                 <>
@@ -42,13 +55,13 @@ export const RootLayout = () => {
                     to="/auth/login"
                     className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900"
                   >
-                    Sign in
+                    {t('navigation.signIn')}
                   </Link>
                   <Link
                     to="/auth/register"
                     className="ml-4 px-3 py-2 rounded-md text-sm font-medium bg-blue-600 text-white hover:bg-blue-700"
                   >
-                    Sign up
+                    {t('navigation.signUp')}
                   </Link>
                 </>
               )}
