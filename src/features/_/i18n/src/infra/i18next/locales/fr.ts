@@ -96,7 +96,10 @@ export const fr: Translations = {
         firstNameRequired: 'Le prénom est requis',
         lastNameRequired: 'Le nom est requis',
         displayNameRequired: "Le nom d'affichage est requis",
-        phoneNumberRequired: 'Le numéro de téléphone est requis',
+        phoneNumber: {
+          IsNotEmpty: 'Le numéro de téléphone est requis',
+          IsPhoneNumber: 'Le numéro de téléphone est invalide',
+        },
       },
     },
     companyInfo: {

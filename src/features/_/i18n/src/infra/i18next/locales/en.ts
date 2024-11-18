@@ -94,7 +94,10 @@ export const en: Translations = {
         firstNameRequired: 'First name is required',
         lastNameRequired: 'Last name is required',
         displayNameRequired: 'Display name is required',
-        phoneNumberRequired: 'Phone number is required',
+        phoneNumber: {
+          IsNotEmpty: 'Phone number is required',
+          IsPhoneNumber: 'Invalid phone number',
+        },
       },
     },
     companyInfo: {

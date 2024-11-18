@@ -35,7 +35,12 @@ export const useI18n = () => {
   } = useTranslation();
 
   return {
-    t,
+    t: (key?: string) => {
+      if (key) {
+        return t(key);
+      }
+      return key;
+    },
     changeLanguage,
     currentLanguage,
   };

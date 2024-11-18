@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import { classValidatorResolver } from '@hookform/resolvers/class-validator';
 
 import { PersonalInfoDto } from '../domain';
 
@@ -11,57 +12,45 @@ export const PersonalInfoForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<PersonalInfoDto>();
+  } = useForm<PersonalInfoDto>({
+    resolver: classValidatorResolver(PersonalInfoDto),
+  });
 
-  const onSubmit = (data: PersonalInfoDto) => {
+  const onSubmit = async (data: PersonalInfoDto) => {
     console.log(data);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <Input
-        label={t('settings.personalInfo.email')}
+        label={'settings.personalInfo.email'}
         type="email"
         error={errors.email?.message}
-        {...register('email', {
-          required: t('settings.personalInfo.validation.emailRequired'),
-          pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: t('settings.personalInfo.validation.emailInvalid'),
-          },
-        })}
+        {...register('email')}
       />
 
       <Input
-        label={t('settings.personalInfo.firstName')}
+        label={'settings.personalInfo.firstName'}
         error={errors.firstName?.message}
-        {...register('firstName', {
-          required: t('settings.personalInfo.validation.firstNameRequired'),
-        })}
+        {...register('firstName')}
       />
 
       <Input
-        label={t('settings.personalInfo.lastName')}
+        label={'settings.personalInfo.lastName'}
         error={errors.lastName?.message}
-        {...register('lastName', {
-          required: t('settings.personalInfo.validation.lastNameRequired'),
-        })}
+        {...register('lastName')}
       />
 
       <Input
-        label={t('settings.personalInfo.displayName')}
+        label={'settings.personalInfo.displayName'}
         error={errors.displayName?.message}
-        {...register('displayName', {
-          required: t('settings.personalInfo.validation.displayNameRequired'),
-        })}
+        {...register('displayName')}
       />
 
       <Input
-        label={t('settings.personalInfo.phoneNumber')}
+        label={'settings.personalInfo.phoneNumber'}
         error={errors.phoneNumber?.message}
-        {...register('phoneNumber', {
-          required: t('settings.personalInfo.validation.phoneNumberRequired'),
-        })}
+        {...register('phoneNumber')}
       />
 
       <Button type="submit">{t('settings.common.save')}</Button>

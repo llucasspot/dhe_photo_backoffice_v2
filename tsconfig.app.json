@@ -40,7 +40,9 @@
       "#routing/domain": ["./src/features/_/routing/domain"],
       "#routing/infra": ["./src/features/_/routing/infra"],
       "#routing/react": ["./src/features/_/routing/react"],
-      "#routing": ["./src/features/_/routing"]
+      "#routing": ["./src/features/_/routing"],
+      "#core/domain": ["./src/features/_/core/domain"],
+      "#core/react": ["./src/features/_/core/react"]
     },
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true

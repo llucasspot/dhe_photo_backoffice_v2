@@ -91,7 +91,10 @@ export type Translations = {
         firstNameRequired: string;
         lastNameRequired: string;
         displayNameRequired: string;
-        phoneNumberRequired: string;
+        phoneNumber: {
+          IsNotEmpty: string;
+          IsPhoneNumber: string;
+        };
       };
     };
     companyInfo: {

@@ -33,6 +33,8 @@ export default defineConfig({
       '#routing/infra': build('src/features/_/routing/infra'),
       '#routing/react': build('src/features/_/routing/react'),
       '#routing': build('src/features/_/routing'),
+      '#core/domain': build('src/features/_/core/domain'),
+      '#core/react': build('src/features/_/core/react'),
     },
   },
 });
