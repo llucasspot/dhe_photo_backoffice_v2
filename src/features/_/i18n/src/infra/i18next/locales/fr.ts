@@ -127,15 +127,31 @@ export const fr: Translations = {
     },
     address: {
       title: 'Adresse',
-      countryIsoCode: 'Pays',
+      countryIsoCode: 'Code pays',
       address1: 'Adresse',
       postalCode: 'Code postal',
       city: 'Ville',
       validation: {
-        countryRequired: 'Le pays est requis',
-        addressRequired: "L'adresse est requise",
-        postalCodeRequired: 'Le code postal est requis',
-        cityRequired: 'La ville est requise',
+        countryIsoCode: {
+          IsString: 'Le code pays doit être du texte',
+          Length: 'Le code pays doit contenir exactement 2 caractères',
+          IsNotEmpty: 'Le code pays est requis',
+        },
+        address1: {
+          IsString: "L'adresse doit être du texte",
+          IsNotEmpty: "L'adresse est requise",
+          MaxLength: "L'adresse ne peut pas dépasser 100 caractères",
+        },
+        postalCode: {
+          IsString: 'Le code postal doit être du texte',
+          IsNotEmpty: 'Le code postal est requis',
+          IsPostalCode: 'Format de code postal invalide',
+        },
+        city: {
+          IsString: 'La ville doit être du texte',
+          IsNotEmpty: 'La ville est requise',
+          MaxLength: 'Le nom de la ville ne peut pas dépasser 50 caractères',
+        },
       },
     },
     bankInfo: {

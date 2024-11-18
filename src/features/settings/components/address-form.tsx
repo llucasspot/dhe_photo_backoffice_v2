@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import { classValidatorResolver } from '@hookform/resolvers/class-validator';
 
 import { AddressDto } from '../domain';
 
@@ -11,44 +12,38 @@ export const AddressForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AddressDto>();
+  } = useForm<AddressDto>({
+    resolver: classValidatorResolver(AddressDto),
+  });
 
-  const onSubmit = (data: AddressDto) => {
+  const onSubmit = async (data: AddressDto) => {
     console.log(data);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <Input
-        label={t('settings.address.countryIsoCode')}
+        label={'settings.address.countryIsoCode'}
         error={errors.countryIsoCode?.message}
-        {...register('countryIsoCode', {
-          required: t('settings.address.validation.countryRequired'),
-        })}
+        {...register('countryIsoCode')}
       />
 
       <Input
-        label={t('settings.address.address1')}
+        label={'settings.address.address1'}
         error={errors.address1?.message}
-        {...register('address1', {
-          required: t('settings.address.validation.addressRequired'),
-        })}
+        {...register('address1')}
       />
 
       <Input
-        label={t('settings.address.postalCode')}
+        label={'settings.address.postalCode'}
         error={errors.postalCode?.message}
-        {...register('postalCode', {
-          required: t('settings.address.validation.postalCodeRequired'),
-        })}
+        {...register('postalCode')}
       />
 
       <Input
-        label={t('settings.address.city')}
+        label={'settings.address.city'}
         error={errors.city?.message}
-        {...register('city', {
-          required: t('settings.address.validation.cityRequired'),
-        })}
+        {...register('city')}
       />
 
       <Button type="submit">{t('settings.common.save')}</Button>

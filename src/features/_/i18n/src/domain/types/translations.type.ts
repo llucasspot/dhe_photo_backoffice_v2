@@ -126,10 +126,26 @@ export type Translations = {
       postalCode: string;
       city: string;
       validation: {
-        countryRequired: string;
-        addressRequired: string;
-        postalCodeRequired: string;
-        cityRequired: string;
+        countryIsoCode: {
+          IsString: string;
+          Length: string;
+          IsNotEmpty: string;
+        };
+        address1: {
+          IsString: string;
+          IsNotEmpty: string;
+          MaxLength: string;
+        };
+        postalCode: {
+          IsString: string;
+          IsNotEmpty: string;
+          IsPostalCode: string;
+        };
+        city: {
+          IsString: string;
+          IsNotEmpty: string;
+          MaxLength: string;
+        };
       };
     };
     bankInfo: {
