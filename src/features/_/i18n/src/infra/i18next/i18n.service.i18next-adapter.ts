@@ -2,8 +2,8 @@ import { initReactI18next } from 'react-i18next';
 import i18next, { Resource } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-import { en } from './locales/en.ts';
-import { fr } from './locales/fr.ts';
+import { en } from './locales/en';
+import { fr } from './locales/fr';
 
 import { singleton } from '#di';
 import { I18nServicePort, TranslateOptions, Translations } from '#i18n/domain';

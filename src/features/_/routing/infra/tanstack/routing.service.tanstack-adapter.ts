@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { createRouter, useLocation } from '@tanstack/react-router';
 
-import { routeTree } from './route-tree.ts';
+import { routeTree } from './route-tree';
 
 import { singleton } from '#di';
 import { RoutingServicePort } from '#routing/domain';
