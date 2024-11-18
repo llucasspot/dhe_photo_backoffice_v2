@@ -59,7 +59,8 @@ export const RegisterForm = () => {
         {...register('confirmPassword', {
           required: t('auth.register.validation.confirmPasswordRequired'),
           validate: (value) =>
-            value === password || t('auth.register.validation.passwordsDoNotMatch'),
+            value === password ||
+            t('auth.register.validation.passwordsDoNotMatch'),
         })}
       />
 

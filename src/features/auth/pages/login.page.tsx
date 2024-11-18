@@ -4,7 +4,7 @@ import { useI18n } from '#i18n/react';
 
 export const LoginPage = () => {
   const { t } = useI18n();
-  
+
   return (
     <div className="flex items-center justify-center p-8">
       <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8">

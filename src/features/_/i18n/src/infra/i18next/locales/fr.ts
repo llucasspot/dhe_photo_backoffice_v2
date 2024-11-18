@@ -12,7 +12,8 @@ export const fr: Translations = {
         emailRequired: "L'email est requis",
         emailInvalid: 'Adresse email invalide',
         passwordRequired: 'Le mot de passe est requis',
-        passwordMinLength: 'Le mot de passe doit contenir au moins 8 caractères',
+        passwordMinLength:
+          'Le mot de passe doit contenir au moins 8 caractères',
       },
     },
     register: {
@@ -26,7 +27,8 @@ export const fr: Translations = {
         emailRequired: "L'email est requis",
         emailInvalid: 'Adresse email invalide',
         passwordRequired: 'Le mot de passe est requis',
-        passwordMinLength: 'Le mot de passe doit contenir au moins 8 caractères',
+        passwordMinLength:
+          'Le mot de passe doit contenir au moins 8 caractères',
         confirmPasswordRequired: 'Veuillez confirmer votre mot de passe',
         passwordsDoNotMatch: 'Les mots de passe ne correspondent pas',
       },
@@ -39,6 +41,7 @@ export const fr: Translations = {
     signIn: 'Se connecter',
     signUp: "S'inscrire",
     signOut: 'Se déconnecter',
+    settings: 'Paramètres',
   },
   common: {
     actions: {
@@ -72,6 +75,60 @@ export const fr: Translations = {
   },
   home: {
     title: 'Bienvenue sur Notre Application',
-    subtitle: 'Commencez par créer un compte ou connectez-vous si vous en avez déjà un.',
+    subtitle:
+      'Commencez par créer un compte ou connectez-vous si vous en avez déjà un.',
   },
-};
+  settings: {
+    title: 'Paramètres',
+    common: {
+      save: 'Enregistrer les modifications',
+    },
+    personalInfo: {
+      title: 'Informations personnelles',
+      email: 'Adresse email',
+      firstName: 'Prénom',
+      lastName: 'Nom',
+      displayName: "Nom d'affichage",
+      phoneNumber: 'Numéro de téléphone',
+      validation: {
+        emailRequired: "L'email est requis",
+        emailInvalid: 'Adresse email invalide',
+        firstNameRequired: 'Le prénom est requis',
+        lastNameRequired: 'Le nom est requis',
+        displayNameRequired: "Le nom d'affichage est requis",
+        phoneNumberRequired: 'Le numéro de téléphone est requis',
+      },
+    },
+    companyInfo: {
+      title: 'Informations de la société',
+      companyName: 'Nom de la société',
+      vatNumber: 'Numéro de TVA',
+      subjectToVat: 'Assujetti à la TVA',
+      validation: {
+        companyNameRequired: 'Le nom de la société est requis',
+      },
+    },
+    address: {
+      title: 'Adresse',
+      countryIsoCode: 'Pays',
+      address1: 'Adresse',
+      postalCode: 'Code postal',
+      city: 'Ville',
+      validation: {
+        countryRequired: 'Le pays est requis',
+        addressRequired: "L'adresse est requise",
+        postalCodeRequired: 'Le code postal est requis',
+        cityRequired: 'La ville est requise',
+      },
+    },
+    bankInfo: {
+      title: 'Informations bancaires',
+      iban: 'IBAN',
+      bicNumber: 'BIC',
+      validation: {
+        ibanRequired: "L'IBAN est requis",
+        bicRequired: 'Le BIC est requis',
+      },
+    },
+  },
+} as const;

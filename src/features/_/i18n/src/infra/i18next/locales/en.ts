@@ -39,6 +39,7 @@ export const en: Translations = {
     signIn: 'Sign in',
     signUp: 'Sign up',
     signOut: 'Sign out',
+    settings: 'Settings',
   },
   common: {
     actions: {
@@ -72,6 +73,60 @@ export const en: Translations = {
   },
   home: {
     title: 'Welcome to Our App',
-    subtitle: 'Get started by signing up for an account or sign in if you already have one.',
+    subtitle:
+      'Get started by signing up for an account or sign in if you already have one.',
   },
-};
+  settings: {
+    title: 'Settings',
+    common: {
+      save: 'Save Changes',
+    },
+    personalInfo: {
+      title: 'Personal Information',
+      email: 'Email Address',
+      firstName: 'First Name',
+      lastName: 'Last Name',
+      displayName: 'Display Name',
+      phoneNumber: 'Phone Number',
+      validation: {
+        emailRequired: 'Email is required',
+        emailInvalid: 'Invalid email address',
+        firstNameRequired: 'First name is required',
+        lastNameRequired: 'Last name is required',
+        displayNameRequired: 'Display name is required',
+        phoneNumberRequired: 'Phone number is required',
+      },
+    },
+    companyInfo: {
+      title: 'Company Information',
+      companyName: 'Company Name',
+      vatNumber: 'VAT Number',
+      subjectToVat: 'Subject to VAT',
+      validation: {
+        companyNameRequired: 'Company name is required',
+      },
+    },
+    address: {
+      title: 'Address',
+      countryIsoCode: 'Country',
+      address1: 'Street Address',
+      postalCode: 'Postal Code',
+      city: 'City',
+      validation: {
+        countryRequired: 'Country is required',
+        addressRequired: 'Street address is required',
+        postalCodeRequired: 'Postal code is required',
+        cityRequired: 'City is required',
+      },
+    },
+    bankInfo: {
+      title: 'Bank Information',
+      iban: 'IBAN',
+      bicNumber: 'BIC Number',
+      validation: {
+        ibanRequired: 'IBAN is required',
+        bicRequired: 'BIC number is required',
+      },
+    },
+  },
+} as const;

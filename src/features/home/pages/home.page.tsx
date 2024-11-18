@@ -2,7 +2,7 @@ import { useI18n } from '#i18n/react';
 
 export const HomePage = () => {
   const { t } = useI18n();
-  
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 ml-64">
       <div className="text-center">

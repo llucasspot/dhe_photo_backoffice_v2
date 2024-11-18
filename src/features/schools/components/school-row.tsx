@@ -9,7 +9,7 @@ interface SchoolRowProps {
 
 export const SchoolRow = ({ school }: SchoolRowProps) => {
   const { t } = useI18n();
-  
+
   return (
     <Link to="/schools" className="block px-6 py-4 hover:bg-gray-50">
       <div className="flex items-center justify-between">

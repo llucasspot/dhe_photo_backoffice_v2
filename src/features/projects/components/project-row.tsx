@@ -9,7 +9,7 @@ interface ProjectRowProps {
 
 export const ProjectRow = ({ project }: ProjectRowProps) => {
   const { t } = useI18n();
-  
+
   return (
     <Link to="/projects" className="block px-6 py-4 hover:bg-gray-50">
       <div className="flex items-center justify-between">

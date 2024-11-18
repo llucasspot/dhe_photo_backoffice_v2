@@ -5,7 +5,8 @@ export type TPath =
   | '/auth/register'
   | '/home'
   | '/projects'
-  | '/schools';
+  | '/schools'
+  | '/settings';
 
 export abstract class RoutingServicePort {
   abstract redirect(

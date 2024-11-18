@@ -26,6 +26,7 @@
       "#features/home": ["src/features/home"],
       "#features/projects": ["src/features/projects"],
       "#features/schools": ["src/features/schools"],
+      "#features/settings": ["src/features/settings"],
       "#layout": ["src/layout"],
       "#lib/auth": ["src/lib/auth"],
       "#di/domain": ["./src/lib/di/src/domain"],

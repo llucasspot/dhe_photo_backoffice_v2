@@ -2,7 +2,7 @@ import { useI18n } from '#i18n/react';
 
 export const DashboardPage = () => {
   const { t } = useI18n();
-  
+
   return (
     <div className="p-8">
       <div className="md:flex md:items-center md:justify-between">

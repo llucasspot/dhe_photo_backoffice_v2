@@ -37,6 +37,7 @@ export type Translations = {
     signIn: string;
     signUp: string;
     signOut: string;
+    settings: string;
   };
   common: {
     actions: {
@@ -71,5 +72,58 @@ export type Translations = {
   home: {
     title: string;
     subtitle: string;
+  };
+  settings: {
+    title: string;
+    common: {
+      save: string;
+    };
+    personalInfo: {
+      title: string;
+      email: string;
+      firstName: string;
+      lastName: string;
+      displayName: string;
+      phoneNumber: string;
+      validation: {
+        emailRequired: string;
+        emailInvalid: string;
+        firstNameRequired: string;
+        lastNameRequired: string;
+        displayNameRequired: string;
+        phoneNumberRequired: string;
+      };
+    };
+    companyInfo: {
+      title: string;
+      companyName: string;
+      vatNumber: string;
+      subjectToVat: string;
+      validation: {
+        companyNameRequired: string;
+      };
+    };
+    address: {
+      title: string;
+      countryIsoCode: string;
+      address1: string;
+      postalCode: string;
+      city: string;
+      validation: {
+        countryRequired: string;
+        addressRequired: string;
+        postalCodeRequired: string;
+        cityRequired: string;
+      };
+    };
+    bankInfo: {
+      title: string;
+      iban: string;
+      bicNumber: string;
+      validation: {
+        ibanRequired: string;
+        bicRequired: string;
+      };
+    };
   };
 };

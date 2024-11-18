@@ -18,6 +18,7 @@ export default defineConfig({
       '#features/home': build('src/features/home'),
       '#features/projects': build('src/features/projects'),
       '#features/schools': build('src/features/schools'),
+      '#features/settings': build('src/features/settings'),
       '#layout': build('src/layout'),
       '#lib/auth': build('src/lib/auth'),
       '#di/domain': build('src/lib/di/src/domain'),
