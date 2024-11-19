@@ -1,4 +1,4 @@
-import { AuthI18nTranslationsKeys } from '../auth.i18n-translations-keys.ts';
+import { AuthI18nTranslationsKeys } from '../auth.i18n-translations-keys';
 
 export const enAuth: AuthI18nTranslationsKeys = {
   login: {

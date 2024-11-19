@@ -1,4 +1,4 @@
-import { OutletLayout } from './outlet.layout.tsx';
+import { OutletLayout } from './outlet.layout';
 
 import { Sidebar } from '#components';
 import { useService } from '#di/react';

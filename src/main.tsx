@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client';
 import 'reflect-metadata';
 import './features/app.module';
 
-import { App } from './App.tsx';
+import { App } from './App';
 
 import './index.css';
 

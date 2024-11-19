@@ -1,4 +1,4 @@
-import { SettingsI18nTranslationsKeys } from '../settings.i18n-translations-keys.ts';
+import { SettingsI18nTranslationsKeys } from '../settings.i18n-translations-keys';
 
 export const enSettings: SettingsI18nTranslationsKeys = {
   title: 'Settings',
