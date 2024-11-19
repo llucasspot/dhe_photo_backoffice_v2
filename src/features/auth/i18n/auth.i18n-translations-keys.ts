@@ -6,10 +6,15 @@ export type AuthI18nTranslationsKeys = {
     password: string;
     submit: string;
     validation: {
-      emailRequired: string;
-      emailInvalid: string;
-      passwordRequired: string;
-      passwordMinLength: string;
+      email: {
+        IsEmail: string;
+        IsNotEmpty: string;
+      };
+      password: {
+        IsString: string;
+        Length: string;
+        IsNotEmpty: string;
+      };
     };
   };
   register: {
@@ -20,12 +25,20 @@ export type AuthI18nTranslationsKeys = {
     confirmPassword: string;
     submit: string;
     validation: {
-      emailRequired: string;
-      emailInvalid: string;
-      passwordRequired: string;
-      passwordMinLength: string;
-      confirmPasswordRequired: string;
-      passwordsDoNotMatch: string;
+      email: {
+        IsEmail: string;
+        IsNotEmpty: string;
+      };
+      password: {
+        IsString: string;
+        Length: string;
+        IsNotEmpty: string;
+      };
+      confirmPassword: {
+        IsString: string;
+        IsNotEmpty: string;
+        Matches: string;
+      };
     };
   };
 };

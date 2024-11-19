@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import { classValidatorResolver } from '@hookform/resolvers/class-validator';
 
 import { CompanyInfoDto } from '../domain';
 
@@ -11,7 +12,9 @@ export const CompanyInfoForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<CompanyInfoDto>();
+  } = useForm<CompanyInfoDto>({
+    resolver: classValidatorResolver(CompanyInfoDto),
+  });
 
   const onSubmit = (data: CompanyInfoDto) => {
     console.log(data);
@@ -20,15 +23,13 @@ export const CompanyInfoForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <Input
-        label={t('settings.companyInfo.companyName')}
+        label={'settings.companyInfo.companyName'}
         error={errors.companyName?.message}
-        {...register('companyName', {
-          required: t('settings.companyInfo.validation.companyNameRequired'),
-        })}
+        {...register('companyName')}
       />
 
       <Input
-        label={t('settings.companyInfo.vatNumber')}
+        label={'settings.companyInfo.vatNumber'}
         error={errors.vatNumber?.message}
         {...register('vatNumber')}
       />

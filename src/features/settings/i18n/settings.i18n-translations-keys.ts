@@ -41,7 +41,18 @@ export type SettingsI18nTranslationsKeys = {
     vatNumber: string;
     subjectToVat: string;
     validation: {
-      companyNameRequired: string;
+      companyName: {
+        IsString: string;
+        IsNotEmpty: string;
+        MaxLength: string;
+      };
+      vatNumber: {
+        IsString: string;
+        Matches: string;
+      };
+      subjectToVat: {
+        IsBoolean: string;
+      };
     };
   };
   address: {
@@ -79,7 +90,9 @@ export type SettingsI18nTranslationsKeys = {
     bicNumber: string;
     validation: {
       ibanRequired: string;
+      ibanInvalid: string;
       bicRequired: string;
+      bicInvalid: string;
     };
   };
 };

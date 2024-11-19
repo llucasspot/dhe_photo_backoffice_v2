@@ -1,7 +1,10 @@
 import { Transform } from 'class-transformer';
 import {
+  IsBoolean,
   IsEmail,
+  IsIBAN,
   IsNotEmpty,
+  IsOptional,
   IsPhoneNumber,
   IsPostalCode,
   IsString,
@@ -31,7 +34,6 @@ export class AddressDto extends Dto<AddressDto> {
 
   @IsString({ message: 'settings.address.validation.postalCode.IsString' })
   @IsNotEmpty({ message: 'settings.address.validation.postalCode.IsNotEmpty' })
-  // TODO IsPostalCode
   @IsPostalCode('FR', {
     message: 'settings.address.validation.postalCode.IsPostalCode',
   })
@@ -46,8 +48,19 @@ export class AddressDto extends Dto<AddressDto> {
 }
 
 export class BankInfoDto extends Dto<BankInfoDto> {
-  declare iban: string;
-  declare bicNumber: string;
+  @IsString({ message: 'settings.bankInfo.validation.ibanRequired' })
+  @IsIBAN({ message: 'settings.bankInfo.validation.ibanInvalid' })
+  @IsNotEmpty({ message: 'settings.bankInfo.validation.ibanRequired' })
+  @Transform(({ value }) => value?.trim().toUpperCase())
+  iban!: string;
+
+  @IsString({ message: 'settings.bankInfo.validation.bicRequired' })
+  @IsNotEmpty({ message: 'settings.bankInfo.validation.bicRequired' })
+  @Matches(/^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/, {
+    message: 'settings.bankInfo.validation.bicInvalid',
+  })
+  @Transform(({ value }) => value?.trim().toUpperCase())
+  bicNumber!: string;
 }
 
 export class PersonalInfoDto extends Dto<PersonalInfoDto> {
@@ -94,9 +107,28 @@ export class PersonalInfoDto extends Dto<PersonalInfoDto> {
 }
 
 export class CompanyInfoDto extends Dto<CompanyInfoDto> {
-  declare companyName: string;
-  declare vatNumber: string;
-  declare subjectToVat: boolean;
+  @IsString({ message: 'settings.companyInfo.validation.companyName.IsString' })
+  @IsNotEmpty({
+    message: 'settings.companyInfo.validation.companyName.IsNotEmpty',
+  })
+  @MaxLength(100, {
+    message: 'settings.companyInfo.validation.companyName.MaxLength',
+  })
+  @Transform(({ value }) => value?.trim())
+  companyName!: string;
+
+  @IsString({ message: 'settings.companyInfo.validation.vatNumber.IsString' })
+  @IsOptional()
+  @Matches(/^[A-Z]{2}[0-9A-Z]+$/, {
+    message: 'settings.companyInfo.validation.vatNumber.Matches',
+  })
+  @Transform(({ value }) => value?.trim().toUpperCase())
+  vatNumber?: string;
+
+  @IsBoolean({
+    message: 'settings.companyInfo.validation.subjectToVat.IsBoolean',
+  })
+  subjectToVat!: boolean;
 }
 
 export class UserSettingsDto extends Dto<UserSettingsDto> {

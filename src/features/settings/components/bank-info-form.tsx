@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import { classValidatorResolver } from '@hookform/resolvers/class-validator';
 
 import { BankInfoDto } from '../domain';
 
@@ -11,7 +12,9 @@ export const BankInfoForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<BankInfoDto>();
+  } = useForm<BankInfoDto>({
+    resolver: classValidatorResolver(BankInfoDto),
+  });
 
   const onSubmit = (data: BankInfoDto) => {
     console.log(data);
@@ -20,19 +23,15 @@ export const BankInfoForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <Input
-        label={t('settings.bankInfo.iban')}
+        label={'settings.bankInfo.iban'}
         error={errors.iban?.message}
-        {...register('iban', {
-          required: t('settings.bankInfo.validation.ibanRequired'),
-        })}
+        {...register('iban')}
       />
 
       <Input
-        label={t('settings.bankInfo.bicNumber')}
+        label={'settings.bankInfo.bicNumber'}
         error={errors.bicNumber?.message}
-        {...register('bicNumber', {
-          required: t('settings.bankInfo.validation.bicRequired'),
-        })}
+        {...register('bicNumber')}
       />
 
       <Button type="submit">{t('settings.common.save')}</Button>

@@ -1,4 +1,4 @@
-import { SettingsI18nTranslationsKeys } from '#features/settings';
+import { SettingsI18nTranslationsKeys } from '../settings.i18n-translations-keys.ts';
 
 export const frSettings: SettingsI18nTranslationsKeys = {
   title: 'Paramètres',
@@ -44,7 +44,18 @@ export const frSettings: SettingsI18nTranslationsKeys = {
     vatNumber: 'Numéro de TVA',
     subjectToVat: 'Assujetti à la TVA',
     validation: {
-      companyNameRequired: 'Le nom de la société est requis',
+      companyName: {
+        IsString: 'Le nom de la société doit être du texte',
+        IsNotEmpty: 'Le nom de la société est requis',
+        MaxLength: 'Le nom de la société ne peut pas dépasser 100 caractères',
+      },
+      vatNumber: {
+        IsString: 'Le numéro de TVA doit être du texte',
+        Matches: 'Format de numéro de TVA invalide',
+      },
+      subjectToVat: {
+        IsBoolean: 'Assujetti à la TVA doit être une valeur booléenne',
+      },
     },
   },
   address: {
@@ -82,7 +93,9 @@ export const frSettings: SettingsI18nTranslationsKeys = {
     bicNumber: 'BIC',
     validation: {
       ibanRequired: "L'IBAN est requis",
+      ibanInvalid: "Format d'IBAN invalide",
       bicRequired: 'Le BIC est requis',
+      bicInvalid: 'Format de BIC invalide',
     },
   },
 } as const;

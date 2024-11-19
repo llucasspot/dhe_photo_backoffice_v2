@@ -8,10 +8,15 @@ export const enAuth: AuthI18nTranslationsKeys = {
     password: 'Password',
     submit: 'Sign In',
     validation: {
-      emailRequired: 'Email is required',
-      emailInvalid: 'Invalid email address',
-      passwordRequired: 'Password is required',
-      passwordMinLength: 'Password must be at least 8 characters',
+      email: {
+        IsEmail: 'Invalid email address',
+        IsNotEmpty: 'Email is required',
+      },
+      password: {
+        IsString: 'Password must be text',
+        Length: 'Password must be at least 8 characters',
+        IsNotEmpty: 'Password is required',
+      },
     },
   },
   register: {
@@ -22,12 +27,20 @@ export const enAuth: AuthI18nTranslationsKeys = {
     confirmPassword: 'Confirm Password',
     submit: 'Sign Up',
     validation: {
-      emailRequired: 'Email is required',
-      emailInvalid: 'Invalid email address',
-      passwordRequired: 'Password is required',
-      passwordMinLength: 'Password must be at least 8 characters',
-      confirmPasswordRequired: 'Please confirm your password',
-      passwordsDoNotMatch: 'Passwords do not match',
+      email: {
+        IsEmail: 'Invalid email address',
+        IsNotEmpty: 'Email is required',
+      },
+      password: {
+        IsString: 'Password must be text',
+        Length: 'Password must be at least 8 characters',
+        IsNotEmpty: 'Password is required',
+      },
+      confirmPassword: {
+        IsString: 'Confirm password must be text',
+        IsNotEmpty: 'Please confirm your password',
+        Matches: 'Passwords do not match',
+      },
     },
   },
 } as const;

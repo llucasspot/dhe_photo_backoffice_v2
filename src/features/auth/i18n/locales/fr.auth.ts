@@ -8,10 +8,15 @@ export const frAuth: AuthI18nTranslationsKeys = {
     password: 'Mot de passe',
     submit: 'Se connecter',
     validation: {
-      emailRequired: "L'email est requis",
-      emailInvalid: 'Adresse email invalide',
-      passwordRequired: 'Le mot de passe est requis',
-      passwordMinLength: 'Le mot de passe doit contenir au moins 8 caractères',
+      email: {
+        IsEmail: 'Adresse email invalide',
+        IsNotEmpty: "L'email est requis",
+      },
+      password: {
+        IsString: 'Le mot de passe doit être du texte',
+        Length: 'Le mot de passe doit contenir au moins 8 caractères',
+        IsNotEmpty: 'Le mot de passe est requis',
+      },
     },
   },
   register: {
@@ -22,12 +27,20 @@ export const frAuth: AuthI18nTranslationsKeys = {
     confirmPassword: 'Confirmer le mot de passe',
     submit: "S'inscrire",
     validation: {
-      emailRequired: "L'email est requis",
-      emailInvalid: 'Adresse email invalide',
-      passwordRequired: 'Le mot de passe est requis',
-      passwordMinLength: 'Le mot de passe doit contenir au moins 8 caractères',
-      confirmPasswordRequired: 'Veuillez confirmer votre mot de passe',
-      passwordsDoNotMatch: 'Les mots de passe ne correspondent pas',
+      email: {
+        IsEmail: 'Adresse email invalide',
+        IsNotEmpty: "L'email est requis",
+      },
+      password: {
+        IsString: 'Le mot de passe doit être du texte',
+        Length: 'Le mot de passe doit contenir au moins 8 caractères',
+        IsNotEmpty: 'Le mot de passe est requis',
+      },
+      confirmPassword: {
+        IsString: 'La confirmation du mot de passe doit être du texte',
+        IsNotEmpty: 'Veuillez confirmer votre mot de passe',
+        Matches: 'Les mots de passe ne correspondent pas',
+      },
     },
   },
 } as const;
