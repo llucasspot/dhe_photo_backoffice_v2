@@ -1,6 +1,5 @@
-import { PersonalInfoDto } from '../domain';
-
 import { Button, Form, Input } from '#components';
+import { PersonalInfoDto } from '#features/settings/domain';
 import { useI18n } from '#i18n/react';
 
 export const PersonalInfoForm = () => {

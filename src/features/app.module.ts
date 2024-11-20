@@ -1,7 +1,7 @@
-import { AuthModule } from '#features/auth';
 import { CommonModule } from './common.module';
 
 import { Module } from '#di';
+import { AuthModule } from '#features/auth';
 
 @Module({
   imports: [CommonModule, AuthModule],

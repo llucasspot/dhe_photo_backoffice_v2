@@ -1,6 +1,5 @@
-import { CompanyInfoDto } from '../domain';
-
 import { Button, CheckboxInput, Form, Input } from '#components';
+import { CompanyInfoDto } from '#features/settings/domain';
 import { useI18n } from '#i18n/react';
 
 export const CompanyInfoForm = () => {

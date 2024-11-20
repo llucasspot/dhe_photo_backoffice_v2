@@ -1,5 +1,4 @@
-import { ProjectDto } from '../domain';
-
+import { ProjectDto } from '#features/projects/domain';
 import { useI18n } from '#i18n/react';
 import { Link } from '#routing/react';
 

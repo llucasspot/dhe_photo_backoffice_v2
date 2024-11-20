@@ -1,5 +1,4 @@
-import { SchoolDto } from '../domain';
-
+import { SchoolDto } from '#features/schools/domain';
 import { useI18n } from '#i18n/react';
 import { Link } from '#routing/react';
 

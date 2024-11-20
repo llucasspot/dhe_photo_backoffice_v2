@@ -1,7 +1,7 @@
-import { AuthProviderPort } from '#features/auth/domain';
 import { AuthProviderMockAdapter } from './infra/providers';
 
 import { Module } from '#di';
+import { AuthProviderPort } from '#features/auth/domain';
 
 @Module({
   providers: [

@@ -1,6 +1,6 @@
-import { SchoolDto } from '../domain';
+import { SchoolRow } from './school-row.tsx';
 
-import { SchoolRow } from './school-row';
+import { SchoolDto } from '#features/schools/domain';
 
 const mockSchools: SchoolDto[] = [
   {

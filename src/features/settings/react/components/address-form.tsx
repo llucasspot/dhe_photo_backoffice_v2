@@ -1,6 +1,5 @@
-import { AddressDto } from '../domain';
-
 import { Button, Form, Input } from '#components';
+import { AddressDto } from '#features/settings/domain';
 import { useI18n } from '#i18n/react';
 
 export const AddressForm = () => {

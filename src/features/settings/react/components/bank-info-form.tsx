@@ -1,6 +1,5 @@
-import { BankInfoDto } from '../domain';
-
 import { Button, Form, Input } from '#components';
+import { BankInfoDto } from '#features/settings/domain';
 import { useI18n } from '#i18n/react';
 
 export const BankInfoForm = () => {

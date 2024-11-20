@@ -4,10 +4,10 @@ import {
 } from '@tanstack/react-router';
 
 import { LoginPage, RegisterPage } from '#features/auth/react';
-import { DashboardPage } from '#features/dashboard';
-import { ProjectsPage } from '#features/projects';
-import { SchoolsPage } from '#features/schools';
-import { SettingsPage } from '#features/settings';
+import { DashboardPage } from '#features/dashboard/react';
+import { ProjectsPage } from '#features/projects/react';
+import { SchoolsPage } from '#features/schools/react';
+import { SettingsPage } from '#features/settings/react';
 import { OutletLayout, RootLayout } from '#layout';
 import { RoutingServicePort } from '#routing/domain';
 

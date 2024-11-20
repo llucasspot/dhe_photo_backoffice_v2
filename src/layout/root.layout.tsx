@@ -1,9 +1,8 @@
-import { useAuth } from '#features/auth/react';
-
 import { OutletLayout } from './outlet.layout';
 
 import { Sidebar } from '#components';
 import { useService } from '#di/react';
+import { useAuth } from '#features/auth/react';
 import { useI18n } from '#i18n/react';
 import { RoutingServicePort } from '#routing/domain';
 import { Link } from '#routing/react';
