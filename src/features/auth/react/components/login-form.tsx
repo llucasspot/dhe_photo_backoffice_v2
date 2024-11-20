@@ -1,9 +1,9 @@
-import { LoginDto } from '../domain/auth.dto';
+import { LoginDto } from '../../domain/auth.dto';
+import { useAuth } from '../hooks';
 
 import { Button, Form, Input } from '#components';
 import { useService } from '#di/react';
 import { useI18n } from '#i18n/react';
-import { useAuth } from '#lib/auth';
 import { RoutingServicePort } from '#routing/domain';
 
 export const LoginForm = () => {
@@ -13,7 +13,7 @@ export const LoginForm = () => {
 
   const onSubmit = async (data: LoginDto) => {
     console.log(data);
-    login('mock_token');
+    await login(data);
     await routingService.redirect('/home');
   };
 

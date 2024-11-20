@@ -1,4 +1,4 @@
-import { RegisterDto } from '../domain/auth.dto';
+import { RegisterDto } from '../../domain/auth.dto';
 
 import { Button, Form, Input } from '#components';
 import { useI18n } from '#i18n/react';

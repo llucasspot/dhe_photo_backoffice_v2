@@ -1,4 +1,5 @@
-import { AuthProvider } from '#lib/auth';
+import { AuthProvider } from '#features/auth/react';
+
 import { Router } from '#routing/react';
 
 export const App = () => {

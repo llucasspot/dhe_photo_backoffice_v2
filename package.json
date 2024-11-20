@@ -8,6 +8,8 @@
     "#components": "src/components",
     "#features/auth": "src/features/auth",
     "#features/auth/i18n": "src/features/auth/i18n",
+    "#features/auth/domain": "src/features/auth/domain",
+    "#features/auth/react": "src/features/auth/react",
     "#features/dashboard": "src/features/dashboard",
     "#features/home": "src/features/home",
     "#features/projects": "src/features/projects",
@@ -15,7 +17,6 @@
     "#features/settings": "src/features/settings",
     "#features/settings/i18n": "src/features/settings/i18n",
     "#layout": "src/layout",
-    "#lib/auth": "src/lib/auth",
     "#di/domain": "./src/lib/di/src/domain",
     "#di/infra": "./src/lib/di/src/infra",
     "#di/react": "./src/lib/di/src/react",
@@ -37,7 +38,7 @@
     "preview": "vite preview",
     "check:lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
     "check:format": "prettier --write \"src/**/*.ts\"",
-    "check:typecheck": "tsc --noEmit",
+    "check:typecheck": "tsc --noEmit -p ./tsconfig.app.json",
     "check:all": "npm run check:lint && npm run check:format && npm run check:typecheck"
   },
   "dependencies": {
@@ -66,6 +67,7 @@
     "autoprefixer": "^10.4.17",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",

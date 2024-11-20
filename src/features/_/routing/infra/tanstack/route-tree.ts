@@ -3,7 +3,7 @@ import {
   createRoute,
 } from '@tanstack/react-router';
 
-import { LoginPage, RegisterPage } from '#features/auth';
+import { LoginPage, RegisterPage } from '#features/auth/react';
 import { DashboardPage } from '#features/dashboard';
 import { ProjectsPage } from '#features/projects';
 import { SchoolsPage } from '#features/schools';
