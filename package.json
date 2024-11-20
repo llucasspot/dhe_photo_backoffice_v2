@@ -12,6 +12,7 @@
     "#features/auth/react": "src/features/auth/react",
     "#features/dashboard/react": "src/features/dashboard/react",
     "#features/home/react": "src/features/home/react",
+    "#features/projects": "src/features/project",
     "#features/projects/domain": "src/features/projects/domain",
     "#features/projects/react": "src/features/projects/react",
     "#features/schools/domain": "src/features/schools/domain",
@@ -46,6 +47,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
+    "@tanstack/react-query": "^5.61.0",
     "@tanstack/react-router": "^1.15.10",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
@@ -56,10 +58,12 @@
     "react-hook-form": "^7.50.1",
     "react-i18next": "^14.1.0",
     "reflect-metadata": "^0.2.2",
+    "ts-pattern": "^5.5.0",
     "tsyringe": "^4.8.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.14.0",
+    "@tanstack/eslint-plugin-query": "^5.60.1",
     "@tanstack/router-devtools": "^1.81.14",
     "@tanstack/router-plugin": "^1.81.9",
     "@types/node": "^22.9.0",

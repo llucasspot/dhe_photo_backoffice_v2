@@ -1,6 +1,7 @@
 import {
   createRootRouteWithContext,
   createRoute,
+  redirect,
 } from '@tanstack/react-router';
 
 import { LoginPage, RegisterPage } from '#features/auth/react';
@@ -22,10 +23,17 @@ export const rootRoute = createRootRouteWithContext<Context>()({
   component: OutletLayout,
 });
 
+// ----- authLayout -----
+
 export const authLayout = createRoute({
   getParentRoute: () => rootRoute,
   path: '/auth',
   component: OutletLayout,
+  beforeLoad: ({ context }) => {
+    if (context.auth.isAuthenticated) {
+      throw redirect({ to: '/home' });
+    }
+  },
 });
 
 export const signInRoute = createRoute({
@@ -40,10 +48,17 @@ export const signUpRoute = createRoute({
   component: RegisterPage,
 });
 
+// ----- rootLayout -----
+
 export const rootLayout = createRoute({
   getParentRoute: () => rootRoute,
   path: '/',
   component: RootLayout,
+  beforeLoad: ({ context }) => {
+    if (!context.auth.isAuthenticated) {
+      throw redirect({ to: '/auth/login' });
+    }
+  },
 });
 
 export const dashboardRoute = createRoute({
@@ -69,6 +84,8 @@ export const settingsRoute = createRoute({
   path: '/settings',
   component: SettingsPage,
 });
+
+// ----- routeTree -----
 
 export const routeTree = rootRoute.addChildren([
   authLayout.addChildren([signInRoute, signUpRoute]),

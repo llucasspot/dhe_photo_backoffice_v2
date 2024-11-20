@@ -1,6 +1,7 @@
 import { RouterProvider } from '@tanstack/react-router';
 
 import { useService } from '#di/react';
+import { useAuth } from '#features/auth/react';
 import { RoutingServicePort } from '#routing/domain';
 import { RoutingServiceTanstackAdapter } from '#routing/infra';
 
@@ -11,6 +12,7 @@ declare module '@tanstack/react-router' {
 }
 
 export function TanstackRouter() {
+  const { isAuthenticated } = useAuth();
   const routingService = useService(RoutingServicePort);
   return (
     <RouterProvider
@@ -18,7 +20,7 @@ export function TanstackRouter() {
       context={{
         routingService,
         auth: {
-          isAuthenticated: localStorage.getItem('auth_token') !== null,
+          isAuthenticated,
         },
       }}
     />

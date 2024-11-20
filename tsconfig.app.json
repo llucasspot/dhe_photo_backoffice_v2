@@ -27,6 +27,7 @@
       "#features/auth/react": ["src/features/auth/react"],
       "#features/dashboard/react": ["src/features/dashboard/react"],
       "#features/home/react": ["src/features/home/react"],
+      "#features/projects": ["src/features/projects"],
       "#features/projects/domain": ["src/features/projects/domain"],
       "#features/projects/react": ["src/features/projects/react"],
       "#features/schools/domain": ["src/features/schools/domain"],

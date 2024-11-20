@@ -1,9 +1,11 @@
 import { ProjectList } from '../components';
+import { useProjects } from '../hooks';
 
 import { useI18n } from '#i18n/react';
 
 export const ProjectsPage = () => {
   const { t } = useI18n();
+  const { data: projects = [], isLoading, error } = useProjects();
 
   return (
     <div className="p-8">
@@ -24,7 +26,7 @@ export const ProjectsPage = () => {
       </div>
 
       <div className="mt-8 bg-white shadow overflow-hidden sm:rounded-md">
-        <ProjectList />
+        <ProjectList projects={projects} error={error} isLoading={isLoading} />
       </div>
     </div>
   );

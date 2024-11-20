@@ -19,6 +19,7 @@ export default defineConfig({
       '#features/auth/react': build('src/features/auth/react'),
       '#features/dashboard/react': build('src/features/dashboard/react'),
       '#features/home/react': build('src/features/home/react'),
+      '#features/projects': build('src/features/projects'),
       '#features/projects/domain': build('src/features/projects/domain'),
       '#features/projects/react': build('src/features/projects/react'),
       '#features/schools/domain': build('src/features/schools/domain'),
