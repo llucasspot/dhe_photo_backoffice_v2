@@ -1,6 +1,6 @@
 import { match } from 'ts-pattern';
 
-import { ProjectRow } from './project-row.tsx';
+import { ProjectRow } from './project-row';
 
 import { ProjectDto } from '#features/projects/domain';
 

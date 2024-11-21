@@ -1,2 +1,2 @@
-export * from './school-list.tsx';
-export * from './school-row.tsx';
+export * from './school-list';
+export * from './school-row';

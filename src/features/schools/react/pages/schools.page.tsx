@@ -1,9 +1,12 @@
 import { SchoolList } from '../components';
+import { useSchools } from '../hooks/use-schools.hook';
 
 import { useI18n } from '#i18n/react';
 
 export const SchoolsPage = () => {
   const { t } = useI18n();
+
+  const { data: schools = [], isLoading, error } = useSchools();
 
   return (
     <div className="p-8">
@@ -24,7 +27,7 @@ export const SchoolsPage = () => {
       </div>
 
       <div className="mt-8 bg-white shadow overflow-hidden sm:rounded-md">
-        <SchoolList />
+        <SchoolList schools={schools} isLoading={isLoading} error={error} />
       </div>
     </div>
   );

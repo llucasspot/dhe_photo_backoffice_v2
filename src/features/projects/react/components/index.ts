@@ -1,2 +1,2 @@
-export * from './project-list.tsx';
-export * from './project-row.tsx';
+export * from './project-list';
+export * from './project-row';
