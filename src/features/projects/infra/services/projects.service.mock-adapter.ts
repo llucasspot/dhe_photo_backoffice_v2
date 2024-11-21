@@ -9,21 +9,21 @@ export class ProjectsServiceMockAdapter extends ProjectsServicePort {
       name: 'School Project A',
       schoolName: 'High School 1',
       lieu: 'Paris',
-      etat: 'published',
+      state: 'published',
     },
     {
       id: '2',
       name: 'School Project B',
       schoolName: 'High School 2',
       lieu: 'Lyon',
-      etat: 'unpublished',
+      state: 'unpublished',
     },
     {
       id: '3',
       name: 'School Project C',
       schoolName: 'High School 3',
       lieu: 'Marseille',
-      etat: 'published',
+      state: 'published',
     },
   ];
 

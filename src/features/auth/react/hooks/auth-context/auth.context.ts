@@ -1,10 +1,10 @@
 import { createContext } from 'react';
 
-import { LoginDto } from '#features/auth/domain';
+import { LoginBody } from '#features/auth/domain';
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  login: (body: LoginDto) => Promise<string>;
+  login: (body: LoginBody) => Promise<string>;
   logout: () => Promise<void>;
 }
 

@@ -3,8 +3,7 @@ import { ReactNode, useCallback, useState } from 'react';
 import { AuthContext } from './auth.context';
 
 import { useService } from '#di/react';
-import { LoginDto } from '#features/auth/domain';
-import { AuthProviderPort } from '#features/auth/domain';
+import { AuthProviderPort, LoginBody } from '#features/auth/domain';
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const authProvider = useService(AuthProviderPort);
@@ -13,7 +12,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const login = useCallback(
-    async (body: LoginDto) => {
+    async (body: LoginBody) => {
       const token = await authProvider.login(body);
       setIsAuthenticated(true);
       return token;

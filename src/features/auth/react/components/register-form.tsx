@@ -1,17 +1,16 @@
-import { RegisterDto } from '../../domain/auth.dto';
-
 import { Button, Form, Input } from '#components';
+import { RegisterBody } from '#features/auth/domain';
 import { useI18n } from '#i18n/react';
 
 export const RegisterForm = () => {
   const { t } = useI18n();
 
-  const onSubmit = (data: RegisterDto) => {
+  const onSubmit = (data: RegisterBody) => {
     console.log(data);
   };
 
   return (
-    <Form dto={RegisterDto} onSubmit={onSubmit} className="space-y-6">
+    <Form dto={RegisterBody} onSubmit={onSubmit} className="space-y-6">
       <Input formKey="email" label={'auth.register.email'} type="email" />
       <Input
         formKey="password"

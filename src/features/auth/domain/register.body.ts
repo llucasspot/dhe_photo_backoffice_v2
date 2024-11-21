@@ -10,19 +10,7 @@ import {
 
 import { Dto } from '#core/domain';
 
-export class LoginDto extends Dto<LoginDto> {
-  @IsEmail({}, { message: 'auth.login.validation.email.IsEmail' })
-  @IsNotEmpty({ message: 'auth.login.validation.email.IsNotEmpty' })
-  @Transform(({ value }) => value?.trim().toLowerCase())
-  email!: string;
-
-  @IsString({ message: 'auth.login.validation.password.IsString' })
-  @Length(8, undefined, { message: 'auth.login.validation.password.Length' })
-  @IsNotEmpty({ message: 'auth.login.validation.password.IsNotEmpty' })
-  password!: string;
-}
-
-export class RegisterDto extends Dto<RegisterDto> {
+export class RegisterBody extends Dto<RegisterBody> {
   @IsEmail({}, { message: 'auth.register.validation.email.IsEmail' })
   @IsNotEmpty({ message: 'auth.register.validation.email.IsNotEmpty' })
   @Transform(({ value }) => value?.trim().toLowerCase())
@@ -33,12 +21,12 @@ export class RegisterDto extends Dto<RegisterDto> {
   @IsNotEmpty({ message: 'auth.register.validation.password.IsNotEmpty' })
   password!: string;
 
-  @ValidateIf((dto: RegisterDto) => dto.password !== undefined)
+  @ValidateIf((dto: RegisterBody) => dto.password !== undefined)
   @IsString({ message: 'auth.register.validation.confirmPassword.IsString' })
   @IsNotEmpty({
     message: 'auth.register.validation.confirmPassword.IsNotEmpty',
   })
-  @Validate((dto: RegisterDto) => dto.confirmPassword === dto.password, {
+  @Validate((dto: RegisterBody) => dto.confirmPassword === dto.password, {
     message: 'auth.register.validation.passwordsDoNotMatch',
   })
   confirmPassword!: string;

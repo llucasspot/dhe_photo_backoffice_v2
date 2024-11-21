@@ -1,6 +1,10 @@
 import { singleton } from '#di';
-import { AuthProviderPort, AuthUser } from '#features/auth/domain';
-import { LoginDto, RegisterDto } from '#features/auth/domain';
+import {
+  AuthProviderPort,
+  AuthUser,
+  LoginBody,
+  RegisterBody,
+} from '#features/auth/domain';
 
 @singleton()
 export class AuthProviderMockAdapter extends AuthProviderPort {
@@ -16,7 +20,7 @@ export class AuthProviderMockAdapter extends AuthProviderPort {
   private currentUser: AuthUser | null = null;
   private authToken: string | null = null;
 
-  async login({ email }: LoginDto): Promise<string> {
+  async login({ email }: LoginBody): Promise<string> {
     const user = this.mockUsers.find((u) => u.email === email);
 
     if (!user) {
@@ -30,7 +34,7 @@ export class AuthProviderMockAdapter extends AuthProviderPort {
     return this.authToken;
   }
 
-  async register({ email }: RegisterDto): Promise<string> {
+  async register({ email }: RegisterBody): Promise<string> {
     if (this.mockUsers.some((u) => u.email === email)) {
       throw new Error('User already exists');
     }

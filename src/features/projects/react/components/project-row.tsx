@@ -19,7 +19,7 @@ export const ProjectRow = ({ project }: ProjectRowProps) => {
             <div className="flex-shrink-0">
               <div
                 className={`w-3 h-3 rounded-full ${
-                  project.etat === 'published' ? 'bg-green-400' : 'bg-gray-400'
+                  project.state === 'published' ? 'bg-green-400' : 'bg-gray-400'
                 }`}
               />
             </div>
@@ -29,7 +29,7 @@ export const ProjectRow = ({ project }: ProjectRowProps) => {
               </h3>
               <p className="text-sm text-gray-500">
                 {project.schoolName} • {project.lieu} •{' '}
-                {t(`common.status.${project.etat}`)}
+                {t(`common.status.${project.state}`)}
               </p>
             </div>
           </div>

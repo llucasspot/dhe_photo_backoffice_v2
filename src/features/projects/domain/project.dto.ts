@@ -3,5 +3,5 @@ export interface ProjectDto {
   id: string;
   name: string;
   lieu: string;
-  etat: 'published' | 'unpublished';
+  state: 'published' | 'unpublished';
 }
