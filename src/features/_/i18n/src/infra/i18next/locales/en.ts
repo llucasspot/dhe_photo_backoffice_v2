@@ -1,5 +1,6 @@
 import { enAuth } from '#features/auth/i18n';
 import { enProjects } from '#features/projects/i18n';
+import { enSchools } from '#features/schools/i18n';
 import { enSettings } from '#features/settings/i18n';
 import { Translations } from '#i18n/domain';
 
@@ -7,6 +8,7 @@ export const en: Translations = {
   auth: enAuth,
   settings: enSettings,
   projects: enProjects,
+  schools: enSchools,
   navigation: {
     dashboard: 'Dashboard',
     schools: 'Schools',
@@ -26,17 +28,6 @@ export const en: Translations = {
       inactive: 'Inactive',
       published: 'Published',
       unpublished: 'Unpublished',
-    },
-  },
-  schools: {
-    title: 'Schools',
-    addSchool: 'Add School',
-    list: {
-      students: 'students',
-      type: {
-        public: 'public',
-        private: 'private',
-      },
     },
   },
   dashboard: {

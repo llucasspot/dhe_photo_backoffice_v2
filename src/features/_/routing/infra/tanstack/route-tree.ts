@@ -7,7 +7,7 @@ import {
 import { LoginPage, RegisterPage } from '#features/auth/react';
 import { DashboardPage } from '#features/dashboard/react';
 import { CreateProjectPage, ProjectsPage } from '#features/projects/react';
-import { SchoolsPage } from '#features/schools/react';
+import { CreateSchoolPage, SchoolsPage } from '#features/schools/react';
 import { SettingsPage } from '#features/settings/react';
 import { OutletLayout, RootLayout } from '#layout';
 import { RoutingServicePort } from '#routing/domain';
@@ -85,6 +85,12 @@ export const schoolsRoute = createRoute({
   component: SchoolsPage,
 });
 
+export const createSchoolRoute = createRoute({
+  getParentRoute: () => rootLayout,
+  path: '/schools/create',
+  component: CreateSchoolPage,
+});
+
 export const settingsRoute = createRoute({
   getParentRoute: () => rootLayout,
   path: '/settings',
@@ -100,6 +106,7 @@ export const routeTree = rootRoute.addChildren([
     projectsRoute,
     createProjectRoute,
     schoolsRoute,
+    createSchoolRoute,
     settingsRoute,
   ]),
 ]);

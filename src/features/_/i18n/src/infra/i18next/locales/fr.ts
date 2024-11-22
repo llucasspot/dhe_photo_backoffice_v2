@@ -1,5 +1,6 @@
 import { frAuth } from '#features/auth/i18n';
 import { frProjects } from '#features/projects/i18n';
+import { frSchools } from '#features/schools/i18n';
 import { frSettings } from '#features/settings/i18n';
 import { Translations } from '#i18n/domain';
 
@@ -7,6 +8,7 @@ export const fr: Translations = {
   auth: frAuth,
   settings: frSettings,
   projects: frProjects,
+  schools: frSchools,
   navigation: {
     dashboard: 'Tableau de bord',
     schools: 'Écoles',
@@ -26,17 +28,6 @@ export const fr: Translations = {
       inactive: 'Inactif',
       published: 'Publié',
       unpublished: 'Non publié',
-    },
-  },
-  schools: {
-    title: 'Écoles',
-    addSchool: 'Ajouter une école',
-    list: {
-      students: 'élèves',
-      type: {
-        public: 'publique',
-        private: 'privée',
-      },
     },
   },
   dashboard: {

@@ -7,6 +7,7 @@ export type TPath =
   | '/projects'
   | '/projects/create'
   | '/schools'
+  | '/schools/create'
   | '/settings';
 
 export abstract class RoutingServicePort {

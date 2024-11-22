@@ -33,6 +33,7 @@
       "#features/projects/infra": ["src/features/projects/infra"],
       "#features/projects/react": ["src/features/projects/react"],
       "#features/schools": ["src/features/schools"],
+      "#features/schools/i18n": ["src/features/schools/i18n"],
       "#features/schools/domain": ["src/features/schools/domain"],
       "#features/schools/infra": ["src/features/schools/infra"],
       "#features/schools/react": ["src/features/schools/react"],

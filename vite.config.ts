@@ -25,6 +25,7 @@ export default defineConfig({
       '#features/projects/infra': build('src/features/projects/infra'),
       '#features/projects/react': build('src/features/projects/react'),
       '#features/schools': build('src/features/schools'),
+      '#features/schools/i18n': build('src/features/schools/i18n'),
       '#features/schools/domain': build('src/features/schools/domain'),
       '#features/schools/infra': build('src/features/schools/infra'),
       '#features/schools/react': build('src/features/schools/react'),
