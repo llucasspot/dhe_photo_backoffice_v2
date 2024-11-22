@@ -1,7 +1,7 @@
 import { Transform } from 'class-transformer';
 import { IsEnum, IsNotEmpty, IsString, MaxLength } from 'class-validator';
 
-import { ProjectState } from './project.dto.ts';
+import { ProjectState } from './project.dto';
 
 import { Dto } from '#core/domain';
 
