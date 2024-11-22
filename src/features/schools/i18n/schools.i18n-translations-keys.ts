@@ -5,9 +5,8 @@ export type SchoolsI18nTranslationsKeys = {
     title: string;
     form: {
       name: string;
-      location: string;
-      type: string;
-      studentCount: string;
+      currency: string;
+      city: string;
       submit: string;
     };
     validation: {
@@ -16,35 +15,15 @@ export type SchoolsI18nTranslationsKeys = {
         IsNotEmpty: string;
         MaxLength: string;
       };
-      location: {
+      currency: {
+        IsEnum: string;
+        IsNotEmpty: string;
+      };
+      city: {
         IsString: string;
         IsNotEmpty: string;
         MaxLength: string;
       };
-      type: {
-        IsEnum: string;
-        IsNotEmpty: string;
-      };
-      status: {
-        IsEnum: string;
-        IsNotEmpty: string;
-      };
-      studentCount: {
-        IsNumber: string;
-        Min: string;
-        IsNotEmpty: string;
-      };
-    };
-  };
-  list: {
-    students: string;
-    type: {
-      public: string;
-      private: string;
-    };
-    status: {
-      active: string;
-      inactive: string;
     };
   };
 };

@@ -1,0 +1,31 @@
+import { SchoolsI18nTranslationsKeys } from '../schools.i18n-translations-keys';
+
+export const frSchools: SchoolsI18nTranslationsKeys = {
+  title: 'Écoles',
+  addSchool: 'Ajouter une école',
+  create: {
+    title: 'Créer une nouvelle école',
+    form: {
+      name: "Nom de l'école",
+      currency: 'Devise',
+      city: 'Ville',
+      submit: "Créer l'école",
+    },
+    validation: {
+      name: {
+        IsString: "Le nom de l'école doit être du texte",
+        IsNotEmpty: "Le nom de l'école est requis",
+        MaxLength: "Le nom de l'école ne peut pas dépasser 100 caractères",
+      },
+      currency: {
+        IsEnum: 'La devise doit être EUR',
+        IsNotEmpty: 'La devise est requise',
+      },
+      city: {
+        IsString: 'La ville doit être du texte',
+        IsNotEmpty: 'La ville est requise',
+        MaxLength: 'Le nom de la ville ne peut pas dépasser 100 caractères',
+      },
+    },
+  },
+} as const;

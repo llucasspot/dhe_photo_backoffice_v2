@@ -1,18 +1,14 @@
-export enum SchoolType {
-  Public = 'public',
-  Private = 'private',
+export enum AvailableCurrency {
+  EUR = 'EUR',
 }
 
-export enum SchoolStatus {
-  Active = 'active',
-  Inactive = 'inactive',
-}
+export const availableCurrencyOptions = [
+  { value: AvailableCurrency.EUR, label: AvailableCurrency.EUR },
+] as const satisfies { value: AvailableCurrency; label: AvailableCurrency }[];
 
 export interface SchoolDto {
   id: string;
   name: string;
-  location: string;
-  type: SchoolType;
-  studentCount: number;
-  status: SchoolStatus;
+  currency: AvailableCurrency;
+  city: string;
 }

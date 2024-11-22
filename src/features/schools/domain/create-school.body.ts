@@ -1,14 +1,7 @@
 import { Transform } from 'class-transformer';
-import {
-  IsEnum,
-  IsNotEmpty,
-  IsNumber,
-  IsString,
-  MaxLength,
-  Min,
-} from 'class-validator';
+import { IsEnum, IsNotEmpty, IsString, MaxLength } from 'class-validator';
 
-import { SchoolStatus, SchoolType } from './school.dto';
+import { AvailableCurrency } from './school.dto';
 
 import { Dto } from '#core/domain';
 
@@ -19,22 +12,15 @@ export class CreateSchoolBody extends Dto<CreateSchoolBody> {
   @Transform(({ value }) => value?.trim())
   name!: string;
 
-  @IsString({ message: 'schools.create.validation.location.IsString' })
-  @IsNotEmpty({ message: 'schools.create.validation.location.IsNotEmpty' })
-  @MaxLength(100, { message: 'schools.create.validation.location.MaxLength' })
-  @Transform(({ value }) => value?.trim())
-  location!: string;
+  @IsEnum(AvailableCurrency, {
+    message: 'schools.create.validation.currency.IsEnum',
+  })
+  @IsNotEmpty({ message: 'schools.create.validation.currency.IsNotEmpty' })
+  @Transform(({ value }) => value?.trim().toUpperCase())
+  currency!: AvailableCurrency;
 
-  @IsEnum(SchoolType, { message: 'schools.create.validation.type.IsEnum' })
-  @IsNotEmpty({ message: 'schools.create.validation.type.IsNotEmpty' })
-  type!: SchoolType;
-
-  @IsEnum(SchoolStatus, { message: 'schools.create.validation.status.IsEnum' })
-  @IsNotEmpty({ message: 'schools.create.validation.status.IsNotEmpty' })
-  status!: SchoolStatus;
-
-  @IsNumber({}, { message: 'schools.create.validation.studentCount.IsNumber' })
-  @Min(0, { message: 'schools.create.validation.studentCount.Min' })
-  @IsNotEmpty({ message: 'schools.create.validation.studentCount.IsNotEmpty' })
-  studentCount!: number;
+  @IsString({ message: 'schools.create.validation.city.IsString' })
+  @IsNotEmpty({ message: 'schools.create.validation.city.IsNotEmpty' })
+  @MaxLength(100, { message: 'schools.create.validation.city.MaxLength' })
+  city!: string;
 }

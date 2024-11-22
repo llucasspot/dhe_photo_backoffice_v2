@@ -1,10 +1,9 @@
 import { singleton } from '#di';
 import {
+  AvailableCurrency,
   CreateSchoolBody,
   SchoolDto,
   SchoolsServicePort,
-  SchoolStatus,
-  SchoolType,
 } from '#features/schools/domain';
 
 @singleton()
@@ -13,26 +12,20 @@ export class SchoolsServiceMockAdapter extends SchoolsServicePort {
     {
       id: '1',
       name: 'Saint Joseph High School',
-      location: 'Paris',
-      type: SchoolType.Private,
-      studentCount: 850,
-      status: SchoolStatus.Active,
+      currency: AvailableCurrency.EUR,
+      city: 'Paris',
     },
     {
       id: '2',
       name: 'Lycée Victor Hugo',
-      location: 'Lyon',
-      type: SchoolType.Public,
-      studentCount: 1200,
-      status: SchoolStatus.Active,
+      currency: AvailableCurrency.EUR,
+      city: 'Lyon',
     },
     {
       id: '3',
       name: 'International School of Marseille',
-      location: 'Marseille',
-      type: SchoolType.Private,
-      studentCount: 600,
-      status: SchoolStatus.Inactive,
+      currency: AvailableCurrency.EUR,
+      city: 'Marseille',
     },
   ];
 

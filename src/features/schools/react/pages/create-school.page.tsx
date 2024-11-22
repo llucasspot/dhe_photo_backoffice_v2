@@ -1,10 +1,9 @@
-import { Button, Form, Input } from '#components';
+import { Button, Form, Input, Select } from '#components';
 import { useService } from '#di/react';
 import {
+  availableCurrencyOptions,
   CreateSchoolBody,
   SchoolsServicePort,
-  SchoolStatus,
-  SchoolType,
 } from '#features/schools/domain';
 import { useI18n } from '#i18n/react';
 import { RoutingServicePort } from '#routing/domain';
@@ -31,35 +30,12 @@ export const CreateSchoolPage = () => {
       <div className="bg-white shadow rounded-lg p-6">
         <Form dto={CreateSchoolBody} onSubmit={onSubmit} className="space-y-6">
           <Input formKey="name" label="schools.create.form.name" />
-          <Input formKey="location" label="schools.create.form.location" />
-          <select
-            name="type"
-            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
-          >
-            <option value={SchoolType.Public}>
-              {t('schools.list.type.public')}
-            </option>
-            <option value={SchoolType.Private}>
-              {t('schools.list.type.private')}
-            </option>
-          </select>
-          <select
-            name="status"
-            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
-          >
-            <option value={SchoolStatus.Active}>
-              {t('schools.list.status.active')}
-            </option>
-            <option value={SchoolStatus.Inactive}>
-              {t('schools.list.status.inactive')}
-            </option>
-          </select>
-          <Input
-            formKey="studentCount"
-            label="schools.create.form.studentCount"
-            type="number"
-            min="0"
+          <Select
+            formKey="currency"
+            label="schools.create.form.currency"
+            options={availableCurrencyOptions}
           />
+          <Input formKey="city" label="schools.create.form.city" />
           <div className="flex justify-end space-x-4">
             <Link to="/schools">
               <Button variant="secondary" type="button">
