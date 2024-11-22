@@ -12,13 +12,10 @@ export class CreateProjectBody extends Dto<CreateProjectBody> {
   @Transform(({ value }) => value?.trim())
   name!: string;
 
-  @IsString({ message: 'projects.create.validation.schoolName.IsString' })
-  @IsNotEmpty({ message: 'projects.create.validation.schoolName.IsNotEmpty' })
-  @MaxLength(100, {
-    message: 'projects.create.validation.schoolName.MaxLength',
-  })
+  @IsString({ message: 'projects.create.validation.schoolId.IsString' })
+  @IsNotEmpty({ message: 'projects.create.validation.schoolId.IsNotEmpty' })
   @Transform(({ value }) => value?.trim())
-  schoolName!: string;
+  schoolId!: string;
 
   @IsString({ message: 'projects.create.validation.lieu.IsString' })
   @IsNotEmpty({ message: 'projects.create.validation.lieu.IsNotEmpty' })

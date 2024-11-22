@@ -5,7 +5,7 @@ export type ProjectsI18nTranslationsKeys = {
     title: string;
     form: {
       name: string;
-      schoolName: string;
+      school: string;
       lieu: string;
       submit: string;
       state: string;
@@ -16,10 +16,9 @@ export type ProjectsI18nTranslationsKeys = {
         IsNotEmpty: string;
         MaxLength: string;
       };
-      schoolName: {
+      schoolId: {
         IsString: string;
         IsNotEmpty: string;
-        MaxLength: string;
       };
       lieu: {
         IsString: string;

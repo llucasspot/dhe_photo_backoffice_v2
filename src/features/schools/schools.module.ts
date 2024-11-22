@@ -6,7 +6,7 @@ import { SchoolsServiceMockAdapter } from '#features/schools/infra';
   providers: [
     {
       token: SchoolsServicePort,
-      useClass: SchoolsServiceMockAdapter,
+      useToken: SchoolsServiceMockAdapter,
     },
   ],
 })

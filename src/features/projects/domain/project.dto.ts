@@ -4,7 +4,11 @@ export enum ProjectState {
 }
 
 export interface ProjectDto {
-  schoolName: string;
+  schoolId: string;
+  school: {
+    id: string;
+    name: string;
+  };
   id: string;
   name: string;
   lieu: string;

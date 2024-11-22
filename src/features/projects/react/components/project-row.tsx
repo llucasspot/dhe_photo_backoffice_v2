@@ -26,7 +26,7 @@ export const ProjectRow = ({ project }: ProjectRowProps) => {
                 {project.name}
               </h3>
               <p className="text-sm text-gray-500">
-                {project.schoolName} • {project.lieu} •{' '}
+                {project.school.name} • {project.lieu} •{' '}
                 {t(`common.status.${project.state}`)}
               </p>
             </div>

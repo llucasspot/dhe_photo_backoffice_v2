@@ -1,5 +1,6 @@
 import { singleton } from '#di';
 import {
+  CreateSchoolBody,
   SchoolDto,
   SchoolsServicePort,
   SchoolStatus,
@@ -8,7 +9,7 @@ import {
 
 @singleton()
 export class SchoolsServiceMockAdapter extends SchoolsServicePort {
-  private schools: SchoolDto[] = [
+  public schools: SchoolDto[] = [
     {
       id: '1',
       name: 'Saint Joseph High School',
@@ -47,7 +48,7 @@ export class SchoolsServiceMockAdapter extends SchoolsServicePort {
     return { ...school };
   }
 
-  async createSchools(school: Omit<SchoolDto, 'id'>): Promise<SchoolDto> {
+  async createSchools(school: CreateSchoolBody): Promise<SchoolDto> {
     const newSchool = {
       ...school,
       id: (this.schools.length + 1).toString(),

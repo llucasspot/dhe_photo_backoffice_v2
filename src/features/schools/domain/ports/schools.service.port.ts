@@ -1,11 +1,11 @@
-import { SchoolDto } from '#features/schools/domain';
+import { CreateSchoolBody, SchoolDto } from '#features/schools/domain';
 
 export abstract class SchoolsServicePort {
   abstract getSchools(): Promise<SchoolDto[]>;
 
   abstract getSchool(id: string): Promise<SchoolDto>;
 
-  abstract createSchools(project: Omit<SchoolDto, 'id'>): Promise<SchoolDto>;
+  abstract createSchools(project: CreateSchoolBody): Promise<SchoolDto>;
 
   abstract updateSchool(
     id: string,

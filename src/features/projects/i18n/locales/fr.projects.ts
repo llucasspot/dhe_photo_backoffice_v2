@@ -7,10 +7,10 @@ export const frProjects: ProjectsI18nTranslationsKeys = {
     title: 'Créer un nouveau projet',
     form: {
       name: 'Nom du projet',
-      schoolName: "Nom de l'école",
+      school: 'École',
       lieu: 'Lieu',
       submit: 'Créer le projet',
-      state: 'Etat',
+      state: 'État',
     },
     validation: {
       name: {
@@ -18,10 +18,9 @@ export const frProjects: ProjectsI18nTranslationsKeys = {
         IsNotEmpty: 'Le nom du projet est requis',
         MaxLength: 'Le nom du projet ne peut pas dépasser 100 caractères',
       },
-      schoolName: {
-        IsString: "Le nom de l'école doit être du texte",
-        IsNotEmpty: "Le nom de l'école est requis",
-        MaxLength: "Le nom de l'école ne peut pas dépasser 100 caractères",
+      schoolId: {
+        IsString: "L'école doit être sélectionnée",
+        IsNotEmpty: "L'école est requise",
       },
       lieu: {
         IsString: 'Le lieu doit être du texte',

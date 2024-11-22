@@ -1,35 +1,48 @@
-import { singleton } from '#di';
+import { inject, singleton } from '#di';
 import {
+  CreateProjectBody,
   ProjectDto,
   ProjectsServicePort,
   ProjectState,
 } from '#features/projects/domain';
+import { SchoolsServiceMockAdapter } from '#features/schools/infra';
 
 @singleton()
 export class ProjectsServiceMockAdapter extends ProjectsServicePort {
-  private projects: ProjectDto[] = [
-    {
-      id: '1',
-      name: 'School Project A',
-      schoolName: 'High School 1',
-      lieu: 'Paris',
-      state: ProjectState.Published,
-    },
-    {
-      id: '2',
-      name: 'School Project B',
-      schoolName: 'High School 2',
-      lieu: 'Lyon',
-      state: ProjectState.Unpublished,
-    },
-    {
-      id: '3',
-      name: 'School Project C',
-      schoolName: 'High School 3',
-      lieu: 'Marseille',
-      state: ProjectState.Published,
-    },
-  ];
+  private projects: ProjectDto[];
+
+  constructor(
+    @inject(SchoolsServiceMockAdapter)
+    private readonly schoolsService: SchoolsServiceMockAdapter,
+  ) {
+    super();
+    this.projects = [
+      {
+        id: '1',
+        name: 'School Project A',
+        lieu: 'Paris',
+        state: ProjectState.Published,
+        schoolId: this.schoolsService.schools[0].id,
+        school: this.schoolsService.schools[0],
+      },
+      {
+        id: '2',
+        name: 'School Project B',
+        lieu: 'Lyon',
+        state: ProjectState.Unpublished,
+        schoolId: this.schoolsService.schools[1].id,
+        school: this.schoolsService.schools[1],
+      },
+      {
+        id: '3',
+        name: 'School Project C',
+        lieu: 'Marseille',
+        state: ProjectState.Published,
+        schoolId: this.schoolsService.schools[1].id,
+        school: this.schoolsService.schools[1],
+      },
+    ];
+  }
 
   async getProjects(): Promise<ProjectDto[]> {
     return [...this.projects];
@@ -43,10 +56,13 @@ export class ProjectsServiceMockAdapter extends ProjectsServicePort {
     return { ...project };
   }
 
-  async createProject(project: Omit<ProjectDto, 'id'>): Promise<ProjectDto> {
+  async createProject(project: CreateProjectBody): Promise<ProjectDto> {
     const newProject = {
       ...project,
       id: (this.projects.length + 1).toString(),
+      school: this.schoolsService.schools.find(
+        (school) => school.id === project.schoolId,
+      )!,
     };
     this.projects.push(newProject);
     return { ...newProject };

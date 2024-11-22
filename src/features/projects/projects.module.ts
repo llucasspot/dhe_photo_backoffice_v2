@@ -6,7 +6,7 @@ import { ProjectsServiceMockAdapter } from '#features/projects/infra';
   providers: [
     {
       token: ProjectsServicePort,
-      useClass: ProjectsServiceMockAdapter,
+      useToken: ProjectsServiceMockAdapter,
     },
   ],
 })

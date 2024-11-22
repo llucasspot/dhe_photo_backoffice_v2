@@ -1,10 +1,11 @@
-import { Button, Form, Input } from '#components';
+import { Button, Form, Input, Select } from '#components';
 import { useService } from '#di/react';
 import {
   CreateProjectBody,
   ProjectsServicePort,
   ProjectState,
 } from '#features/projects/domain';
+import { useSchools } from '#features/schools/react';
 import { useI18n } from '#i18n/react';
 import { RoutingServicePort } from '#routing/domain';
 import { Link } from '#routing/react';
@@ -13,6 +14,12 @@ export const CreateProjectPage = () => {
   const routingService = useService(RoutingServicePort);
   const { t } = useI18n();
   const projectsService = useService(ProjectsServicePort);
+
+  const { data: schools = [] } = useSchools();
+  const schoolOptions = schools.map((school) => ({
+    value: school.id,
+    label: school.name,
+  }));
 
   const onSubmit = async (data: CreateProjectBody) => {
     await projectsService.createProject(data);
@@ -30,7 +37,11 @@ export const CreateProjectPage = () => {
       <div className="bg-white shadow rounded-lg p-6">
         <Form dto={CreateProjectBody} onSubmit={onSubmit} className="space-y-6">
           <Input formKey="name" label="projects.create.form.name" />
-          <Input formKey="schoolName" label="projects.create.form.schoolName" />
+          <Select
+            formKey="schoolId"
+            label="projects.create.form.school"
+            options={schoolOptions}
+          />
           <Input formKey="lieu" label="projects.create.form.lieu" />
           <Input
             hidden

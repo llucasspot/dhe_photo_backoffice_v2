@@ -22,6 +22,7 @@ export const fr: Translations = {
     actions: {
       add: 'Ajouter',
       cancel: 'Annuler',
+      select: 'Sélectionner une option',
     },
     status: {
       active: 'Actif',
