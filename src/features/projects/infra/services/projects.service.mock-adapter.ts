@@ -1,3 +1,4 @@
+import { MockAdapter } from '#core/domain';
 import { inject, singleton } from '#di';
 import {
   CreateProjectBody,
@@ -8,7 +9,10 @@ import {
 import { SchoolsServiceMockAdapter } from '#features/schools/infra';
 
 @singleton()
-export class ProjectsServiceMockAdapter extends ProjectsServicePort {
+export class ProjectsServiceMockAdapter
+  extends MockAdapter
+  implements ProjectsServicePort
+{
   private projects: ProjectDto[];
 
   constructor(

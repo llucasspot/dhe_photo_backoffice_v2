@@ -1,4 +1,4 @@
-import { I18nModule } from '../i18n/i18n.module.ts';
+import { I18nModule } from '../i18n/i18n.module';
 
 import { ToastServicePort } from './domain';
 import { ToastServiceToastifyAdapter } from './infra';

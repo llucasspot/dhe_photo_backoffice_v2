@@ -1,3 +1,4 @@
+import { MockAdapter } from '#core/domain';
 import { singleton } from '#di';
 import {
   AvailableCurrency,
@@ -7,7 +8,10 @@ import {
 } from '#features/schools/domain';
 
 @singleton()
-export class SchoolsServiceMockAdapter extends SchoolsServicePort {
+export class SchoolsServiceMockAdapter
+  extends MockAdapter
+  implements SchoolsServicePort
+{
   public schools: SchoolDto[] = [
     {
       id: '1',
@@ -42,6 +46,7 @@ export class SchoolsServiceMockAdapter extends SchoolsServicePort {
   }
 
   async createSchools(school: CreateSchoolBody): Promise<SchoolDto> {
+    // await this.delay(5);
     const newSchool = {
       ...school,
       id: (this.schools.length + 1).toString(),
