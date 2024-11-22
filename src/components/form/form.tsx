@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 import {
   FormProvider as RHFFormProvider,
   SubmitHandler,
@@ -24,6 +24,13 @@ export function Form<TDto extends Dto<TDto>>({
   const methods = useForm<TDto>({
     resolver: classValidatorResolver(dto),
   });
+
+  const errors = methods.formState.errors;
+
+  useEffect(() => {
+    console.log('form errors : ', errors);
+  }, [errors]);
+
   return (
     <RHFFormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)} className={className}>

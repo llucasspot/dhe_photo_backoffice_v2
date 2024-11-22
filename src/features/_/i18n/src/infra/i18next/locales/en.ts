@@ -1,10 +1,12 @@
 import { enAuth } from '#features/auth/i18n';
+import { enProjects } from '#features/projects/i18n';
 import { enSettings } from '#features/settings/i18n';
 import { Translations } from '#i18n/domain';
 
 export const en: Translations = {
   auth: enAuth,
   settings: enSettings,
+  projects: enProjects,
   navigation: {
     dashboard: 'Dashboard',
     schools: 'Schools',
@@ -17,6 +19,7 @@ export const en: Translations = {
   common: {
     actions: {
       add: 'Add',
+      cancel: 'Cancel',
     },
     status: {
       active: 'Active',
@@ -35,10 +38,6 @@ export const en: Translations = {
         private: 'private',
       },
     },
-  },
-  projects: {
-    title: 'Projects',
-    addProject: 'Add Project',
   },
   dashboard: {
     title: 'Dashboard',

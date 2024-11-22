@@ -11,6 +11,8 @@ export function Input({
   label,
   formKey,
   className = '',
+  hidden,
+  readOnly = hidden,
   ...props
 }: InputProps) {
   const { t } = useI18n();
@@ -23,10 +25,14 @@ export function Input({
 
   return (
     <div className="space-y-1">
-      <label className="block text-sm font-medium text-gray-700">
-        {t(label)}
-      </label>
+      {!hidden && (
+        <label className="block text-sm font-medium text-gray-700">
+          {t(label)}
+        </label>
+      )}
       <input
+        hidden={hidden}
+        readOnly={readOnly}
         className={`
           w-full px-3 py-2 border rounded-lg shadow-sm
           focus:outline-none focus:ring-2 focus:ring-blue-500
@@ -36,7 +42,7 @@ export function Input({
         {...register(formKey)}
         {...props}
       />
-      {error && <p className="text-sm text-red-600">{t(error)}</p>}
+      {!hidden && error && <p className="text-sm text-red-600">{t(error)}</p>}
     </div>
   );
 }

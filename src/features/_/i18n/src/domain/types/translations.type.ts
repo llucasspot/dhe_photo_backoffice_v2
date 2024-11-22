@@ -1,9 +1,11 @@
 import { AuthI18nTranslationsKeys } from '#features/auth/i18n';
+import { ProjectsI18nTranslationsKeys } from '#features/projects/i18n';
 import { SettingsI18nTranslationsKeys } from '#features/settings/i18n';
 
 export type Translations = {
   auth: AuthI18nTranslationsKeys;
   settings: SettingsI18nTranslationsKeys;
+  projects: ProjectsI18nTranslationsKeys;
   navigation: {
     dashboard: string;
     schools: string;
@@ -16,6 +18,7 @@ export type Translations = {
   common: {
     actions: {
       add: string;
+      cancel: string;
     };
     status: {
       active: string;
@@ -34,10 +37,6 @@ export type Translations = {
         private: string;
       };
     };
-  };
-  projects: {
-    title: string;
-    addProject: string;
   };
   dashboard: {
     title: string;

@@ -1,7 +1,7 @@
-import { AddressDto } from './address.dto.ts';
-import { BankInfoDto } from './bank-info.dto.ts';
-import { CompanyInfoDto } from './company-info.dto.ts';
-import { PersonalInfoDto } from './personal-info.dto.ts';
+import { AddressDto } from './address.dto';
+import { BankInfoDto } from './bank-info.dto';
+import { CompanyInfoDto } from './company-info.dto';
+import { PersonalInfoDto } from './personal-info.dto';
 
 import { Dto } from '#core/domain';
 

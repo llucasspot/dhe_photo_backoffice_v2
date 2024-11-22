@@ -20,6 +20,7 @@ export default defineConfig({
       '#features/dashboard/react': build('src/features/dashboard/react'),
       '#features/home/react': build('src/features/home/react'),
       '#features/projects': build('src/features/projects'),
+      '#features/projects/i18n': build('src/features/projects/i18n'),
       '#features/projects/domain': build('src/features/projects/domain'),
       '#features/projects/infra': build('src/features/projects/infra'),
       '#features/projects/react': build('src/features/projects/react'),

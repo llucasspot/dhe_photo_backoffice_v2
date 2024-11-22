@@ -1,5 +1,9 @@
 import { singleton } from '#di';
-import { ProjectDto, ProjectsServicePort } from '#features/projects/domain';
+import {
+  ProjectDto,
+  ProjectsServicePort,
+  ProjectState,
+} from '#features/projects/domain';
 
 @singleton()
 export class ProjectsServiceMockAdapter extends ProjectsServicePort {
@@ -9,21 +13,21 @@ export class ProjectsServiceMockAdapter extends ProjectsServicePort {
       name: 'School Project A',
       schoolName: 'High School 1',
       lieu: 'Paris',
-      state: 'published',
+      state: ProjectState.Published,
     },
     {
       id: '2',
       name: 'School Project B',
       schoolName: 'High School 2',
       lieu: 'Lyon',
-      state: 'unpublished',
+      state: ProjectState.Unpublished,
     },
     {
       id: '3',
       name: 'School Project C',
       schoolName: 'High School 3',
       lieu: 'Marseille',
-      state: 'published',
+      state: ProjectState.Published,
     },
   ];
 

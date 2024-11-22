@@ -6,7 +6,7 @@ import {
 
 import { LoginPage, RegisterPage } from '#features/auth/react';
 import { DashboardPage } from '#features/dashboard/react';
-import { ProjectsPage } from '#features/projects/react';
+import { CreateProjectPage, ProjectsPage } from '#features/projects/react';
 import { SchoolsPage } from '#features/schools/react';
 import { SettingsPage } from '#features/settings/react';
 import { OutletLayout, RootLayout } from '#layout';
@@ -73,6 +73,12 @@ export const projectsRoute = createRoute({
   component: ProjectsPage,
 });
 
+export const createProjectRoute = createRoute({
+  getParentRoute: () => rootLayout,
+  path: '/projects/create',
+  component: CreateProjectPage,
+});
+
 export const schoolsRoute = createRoute({
   getParentRoute: () => rootLayout,
   path: '/schools',
@@ -92,6 +98,7 @@ export const routeTree = rootRoute.addChildren([
   rootLayout.addChildren([
     dashboardRoute,
     projectsRoute,
+    createProjectRoute,
     schoolsRoute,
     settingsRoute,
   ]),

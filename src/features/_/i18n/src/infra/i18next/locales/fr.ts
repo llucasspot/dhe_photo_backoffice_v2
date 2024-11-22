@@ -1,10 +1,12 @@
 import { frAuth } from '#features/auth/i18n';
+import { frProjects } from '#features/projects/i18n';
 import { frSettings } from '#features/settings/i18n';
 import { Translations } from '#i18n/domain';
 
 export const fr: Translations = {
   auth: frAuth,
   settings: frSettings,
+  projects: frProjects,
   navigation: {
     dashboard: 'Tableau de bord',
     schools: 'Écoles',
@@ -17,6 +19,7 @@ export const fr: Translations = {
   common: {
     actions: {
       add: 'Ajouter',
+      cancel: 'Annuler',
     },
     status: {
       active: 'Actif',
@@ -35,10 +38,6 @@ export const fr: Translations = {
         private: 'privée',
       },
     },
-  },
-  projects: {
-    title: 'Projets',
-    addProject: 'Ajouter un projet',
   },
   dashboard: {
     title: 'Tableau de bord',

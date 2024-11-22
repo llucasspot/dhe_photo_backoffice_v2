@@ -5,6 +5,7 @@ export type TPath =
   | '/auth/register'
   | '/home'
   | '/projects'
+  | '/projects/create'
   | '/schools'
   | '/settings';
 

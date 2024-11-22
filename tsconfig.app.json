@@ -28,6 +28,7 @@
       "#features/dashboard/react": ["src/features/dashboard/react"],
       "#features/home/react": ["src/features/home/react"],
       "#features/projects": ["src/features/projects"],
+      "#features/projects/i18n": ["src/features/projects/i18n"],
       "#features/projects/domain": ["src/features/projects/domain"],
       "#features/projects/infra": ["src/features/projects/infra"],
       "#features/projects/react": ["src/features/projects/react"],
