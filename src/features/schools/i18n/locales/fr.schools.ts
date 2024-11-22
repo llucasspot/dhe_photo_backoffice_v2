@@ -5,14 +5,15 @@ export const frSchools: SchoolsI18nTranslationsKeys = {
   addSchool: 'Ajouter une école',
   create: {
     title: 'Créer une nouvelle école',
+    pending: "Création de l'école en cours...",
+    success: 'École créée avec succès !',
+    error: "Échec de la création de l'école. Veuillez réessayer.",
     form: {
       name: "Nom de l'école",
       currency: 'Devise',
       city: 'Ville',
       submit: "Créer l'école",
     },
-    success: 'École créée avec succès !',
-    error: "Échec de la création de l'école. Veuillez réessayer.",
     validation: {
       name: {
         IsString: "Le nom de l'école doit être du texte",

@@ -46,7 +46,6 @@ export class SchoolsServiceMockAdapter
   }
 
   async createSchools(school: CreateSchoolBody): Promise<SchoolDto> {
-    // await this.delay(5);
     const newSchool = {
       ...school,
       id: (this.schools.length + 1).toString(),

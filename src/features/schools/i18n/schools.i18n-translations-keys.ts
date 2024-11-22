@@ -3,14 +3,15 @@ export type SchoolsI18nTranslationsKeys = {
   addSchool: string;
   create: {
     title: string;
+    pending: string;
+    success: string;
+    error: string;
     form: {
       name: string;
       currency: string;
       city: string;
       submit: string;
     };
-    success: string;
-    error: string;
     validation: {
       name: {
         IsString: string;

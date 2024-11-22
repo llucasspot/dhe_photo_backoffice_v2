@@ -41,4 +41,19 @@ export class ToastService extends ToastServicePort {
   dark(message: string, options?: ToastOptions) {
     return this.toastService.dark(this.i18nService.translate(message), options);
   }
+
+  promise<TPromiseResult>(
+    promise: () => Promise<TPromiseResult>,
+    messages: {
+      success: string;
+      pending: string;
+      error: string;
+    },
+  ) {
+    return this.toastService.promise(promise, {
+      error: this.i18nService.translate(messages.error),
+      pending: this.i18nService.translate(messages.pending),
+      success: this.i18nService.translate(messages.success),
+    });
+  }
 }

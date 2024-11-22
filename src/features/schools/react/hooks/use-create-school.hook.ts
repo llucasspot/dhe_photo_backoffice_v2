@@ -12,15 +12,18 @@ export const useCreateSchool = () => {
   const toastService = useService(ToastService);
 
   return useMutation({
-    mutationFn: async (data: CreateSchoolBody) =>
-      await schoolsService.createSchools(data),
+    mutationFn: async (data: CreateSchoolBody) => {
+      return toastService.promise(() => schoolsService.createSchools(data), {
+        pending: 'schools.create.pending',
+        success: 'schools.create.success',
+        error: 'schools.create.error',
+      });
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: schoolsKeys.lists() });
-      toastService.success('schools.create.success');
     },
     onError: (error) => {
       console.error('Failed to create school:', error);
-      toastService.error('schools.create.error');
     },
   });
 };
