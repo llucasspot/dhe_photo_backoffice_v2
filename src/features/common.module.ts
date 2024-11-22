@@ -4,9 +4,10 @@ import { I18nModule } from './_/i18n/i18n.module';
 
 import { Module } from '#di';
 import { RoutingModule } from '#routing';
+import { ToastModule } from '#toast';
 
 @Module({
-  imports: [RoutingModule, I18nModule],
+  imports: [RoutingModule, I18nModule, ToastModule],
   providers: [
     {
       token: QueryClient,

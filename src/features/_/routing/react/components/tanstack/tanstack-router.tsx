@@ -1,9 +1,10 @@
 import { RouterProvider } from '@tanstack/react-router';
 
+import { RoutingServiceTanstackAdapter } from '../../../infra';
+
 import { useService } from '#di/react';
 import { useAuth } from '#features/auth/react';
 import { RoutingServicePort } from '#routing/domain';
-import { RoutingServiceTanstackAdapter } from '#routing/infra';
 
 declare module '@tanstack/react-router' {
   interface Register {

@@ -7,7 +7,7 @@ import { AuthProviderPort } from '#features/auth/domain';
   providers: [
     {
       token: AuthProviderPort,
-      useClass: AuthProviderMockAdapter,
+      useToken: AuthProviderMockAdapter,
     },
   ],
 })

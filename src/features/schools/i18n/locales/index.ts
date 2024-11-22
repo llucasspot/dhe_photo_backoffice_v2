@@ -1,2 +1,2 @@
-export * from './en.schools.ts';
-export * from './fr.schools.ts';
+export * from './en.schools';
+export * from './fr.schools';

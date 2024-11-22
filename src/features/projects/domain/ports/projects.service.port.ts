@@ -1,4 +1,4 @@
-import { CreateProjectBody } from '../create-project.body.ts';
+import { CreateProjectBody } from '../create-project.body';
 import { ProjectDto } from '../project.dto';
 
 export abstract class ProjectsServicePort {

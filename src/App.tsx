@@ -13,7 +13,18 @@ export const App = () => {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <Router />
-        <ToastContainer />
+        <ToastContainer
+          style={{ zIndex: 10000 }}
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </AuthProvider>
     </QueryClientProvider>
   );

@@ -42,19 +42,19 @@
       "#features/settings/react": ["src/features/settings/react"],
       "#layout": ["src/layout"],
       "#di/domain": ["./src/lib/di/src/domain"],
-      "#di/infra": ["./src/lib/di/src/infra"],
       "#di/react": ["./src/lib/di/src/react"],
       "#di": ["./src/lib/di/src"],
       "#i18n/domain": ["./src/features/_/i18n/src/domain"],
-      "#i18n/infra": ["./src/features/_/i18n/src/infra"],
       "#i18n/react": ["./src/features/_/i18n/src/react"],
       "#i18n": ["./src/features/_/i18n/src"],
       "#routing/domain": ["./src/features/_/routing/domain"],
-      "#routing/infra": ["./src/features/_/routing/infra"],
       "#routing/react": ["./src/features/_/routing/react"],
       "#routing": ["./src/features/_/routing"],
       "#core/domain": ["./src/features/_/core/domain"],
-      "#core/react": ["./src/features/_/core/react"]
+      "#core/react": ["./src/features/_/core/react"],
+      "#toast/domain": ["./src/features/_/toast/domain"],
+      "#toast/react": ["./src/features/_/toast/react"],
+      "#toast": ["./src/features/_/toast"]
     },
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
