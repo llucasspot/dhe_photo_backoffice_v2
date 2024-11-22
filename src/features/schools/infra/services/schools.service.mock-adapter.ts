@@ -12,7 +12,7 @@ export class SchoolsServiceMockAdapter
   extends MockAdapter
   implements SchoolsServicePort
 {
-  public schools: SchoolDto[] = [
+  private schools: SchoolDto[] = [
     {
       id: '1',
       name: 'Saint Joseph High School',

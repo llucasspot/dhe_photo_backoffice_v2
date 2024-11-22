@@ -13,42 +13,19 @@ export class ProjectsServiceMockAdapter
   extends MockAdapter
   implements ProjectsServicePort
 {
-  private projects: ProjectDto[];
+  private projects: ProjectDto[] = [];
 
   constructor(
     @inject(SchoolsServiceMockAdapter)
     private readonly schoolsService: SchoolsServiceMockAdapter,
   ) {
     super();
-    this.projects = [
-      {
-        id: '1',
-        name: 'School Project A',
-        lieu: 'Paris',
-        state: ProjectState.Published,
-        schoolId: this.schoolsService.schools[0].id,
-        school: this.schoolsService.schools[0],
-      },
-      {
-        id: '2',
-        name: 'School Project B',
-        lieu: 'Lyon',
-        state: ProjectState.Unpublished,
-        schoolId: this.schoolsService.schools[1].id,
-        school: this.schoolsService.schools[1],
-      },
-      {
-        id: '3',
-        name: 'School Project C',
-        lieu: 'Marseille',
-        state: ProjectState.Published,
-        schoolId: this.schoolsService.schools[1].id,
-        school: this.schoolsService.schools[1],
-      },
-    ];
   }
 
   async getProjects(): Promise<ProjectDto[]> {
+    if (!this.projects.length) {
+      await this.init();
+    }
     return [...this.projects];
   }
 
@@ -61,12 +38,11 @@ export class ProjectsServiceMockAdapter
   }
 
   async createProject(project: CreateProjectBody): Promise<ProjectDto> {
+    const school = await this.schoolsService.getSchool(project.schoolId);
     const newProject = {
       ...project,
       id: (this.projects.length + 1).toString(),
-      school: this.schoolsService.schools.find(
-        (school) => school.id === project.schoolId,
-      )!,
+      school,
     };
     this.projects.push(newProject);
     return { ...newProject };
@@ -94,5 +70,35 @@ export class ProjectsServiceMockAdapter
       throw new Error('Project not found');
     }
     this.projects.splice(index, 1);
+  }
+
+  private async init() {
+    const schools = await this.schoolsService.getSchools();
+    this.projects = [
+      {
+        id: '1',
+        name: 'School Project A',
+        lieu: 'Paris',
+        state: ProjectState.Published,
+        schoolId: schools[0].id,
+        school: schools[0],
+      },
+      {
+        id: '2',
+        name: 'School Project B',
+        lieu: 'Lyon',
+        state: ProjectState.Unpublished,
+        schoolId: schools[1].id,
+        school: schools[1],
+      },
+      {
+        id: '3',
+        name: 'School Project C',
+        lieu: 'Marseille',
+        state: ProjectState.Published,
+        schoolId: schools[1].id,
+        school: schools[1],
+      },
+    ];
   }
 }
