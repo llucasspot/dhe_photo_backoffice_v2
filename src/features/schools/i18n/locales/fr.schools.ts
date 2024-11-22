@@ -11,6 +11,8 @@ export const frSchools: SchoolsI18nTranslationsKeys = {
       city: 'Ville',
       submit: "Créer l'école",
     },
+    success: 'École créée avec succès !',
+    error: "Échec de la création de l'école. Veuillez réessayer.",
     validation: {
       name: {
         IsString: "Le nom de l'école doit être du texte",

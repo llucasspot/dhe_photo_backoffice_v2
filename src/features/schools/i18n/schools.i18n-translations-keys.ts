@@ -9,6 +9,8 @@ export type SchoolsI18nTranslationsKeys = {
       city: string;
       submit: string;
     };
+    success: string;
+    error: string;
     validation: {
       name: {
         IsString: string;

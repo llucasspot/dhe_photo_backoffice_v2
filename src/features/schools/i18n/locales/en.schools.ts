@@ -11,6 +11,8 @@ export const enSchools: SchoolsI18nTranslationsKeys = {
       city: 'City',
       submit: 'Create School',
     },
+    success: 'School created successfully!',
+    error: 'Failed to create school. Please try again.',
     validation: {
       name: {
         IsString: 'School name must be text',

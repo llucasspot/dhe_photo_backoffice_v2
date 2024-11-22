@@ -1,9 +1,10 @@
+import { useCreateSchool } from '../hooks';
+
 import { Button, Form, Input, Select } from '#components';
 import { useService } from '#di/react';
 import {
   availableCurrencyOptions,
   CreateSchoolBody,
-  SchoolsServicePort,
 } from '#features/schools/domain';
 import { useI18n } from '#i18n/react';
 import { RoutingServicePort } from '#routing/domain';
@@ -12,11 +13,15 @@ import { Link } from '#routing/react';
 export const CreateSchoolPage = () => {
   const routingService = useService(RoutingServicePort);
   const { t } = useI18n();
-  const schoolsService = useService(SchoolsServicePort);
+  const createSchool = useCreateSchool();
 
   const onSubmit = async (data: CreateSchoolBody) => {
-    await schoolsService.createSchools(data);
-    await routingService.redirect('/schools');
+    try {
+      await createSchool.mutateAsync(data);
+      await routingService.redirect('/schools');
+    } catch (error) {
+      console.log('CreateSchoolPage form error : ', error);
+    }
   };
 
   return (
@@ -42,7 +47,9 @@ export const CreateSchoolPage = () => {
                 {t('common.actions.cancel')}
               </Button>
             </Link>
-            <Button type="submit">{t('schools.create.form.submit')}</Button>
+            <Button type="submit" disabled={createSchool.isPending}>
+              {t('schools.create.form.submit')}
+            </Button>
           </div>
         </Form>
       </div>
