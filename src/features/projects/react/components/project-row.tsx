@@ -8,9 +8,7 @@ interface ProjectRowProps {
 
 export const ProjectRow = ({ project }: ProjectRowProps) => {
   const { t } = useI18n();
-
   const projectId = project.id;
-
   return (
     <Link
       to="/projects/$projectId"

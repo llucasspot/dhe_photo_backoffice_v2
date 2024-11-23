@@ -1,36 +1,36 @@
 import { useParams } from '@tanstack/react-router';
+import { match } from 'ts-pattern';
 
 import { useProject } from '../hooks';
 
+import { ProjectDto } from '#features/projects/domain';
 import { useI18n } from '#i18n/react';
 import { Link } from '#routing/react';
 
-export const ProjectDetailPage = () => {
+const ProjectDetailLoading = () => (
+  <div className="p-8">
+    <div className="animate-pulse space-y-4">
+      <div className="h-8 bg-gray-200 rounded w-1/4"></div>
+      <div className="space-y-3">
+        <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+        <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+      </div>
+    </div>
+  </div>
+);
+
+const ProjectDetailError = ({ error }: { error: Error | null }) => {
   const { t } = useI18n();
-  const { projectId } = useParams({ from: '/projects/$projectId' });
-  const { data: project, isLoading, error } = useProject(projectId);
+  console.error('Project detail error:', error);
+  return (
+    <div className="p-8">
+      <div className="text-red-500">{t('projects.detail.error')}</div>
+    </div>
+  );
+};
 
-  if (isLoading) {
-    return (
-      <div className="p-8">
-        <div className="animate-pulse space-y-4">
-          <div className="h-8 bg-gray-200 rounded w-1/4"></div>
-          <div className="space-y-3">
-            <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-            <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (error || !project) {
-    return (
-      <div className="p-8">
-        <div className="text-red-500">Error loading project details</div>
-      </div>
-    );
-  }
+const ProjectDetailContent = ({ project }: { project: ProjectDto }) => {
+  const { t } = useI18n();
 
   return (
     <div className="p-8">
@@ -121,4 +121,18 @@ export const ProjectDetailPage = () => {
       </div>
     </div>
   );
+};
+
+export const ProjectDetailPage = () => {
+  const { projectId } = useParams({ from: '/projects/$projectId' });
+  const { data: project, isLoading, error } = useProject(projectId);
+
+  return match({ project, isLoading, error })
+    .with({ isLoading: true }, ProjectDetailLoading)
+    .when(({ error }) => !!error, ProjectDetailError)
+    .when(
+      ({ project }) => !!project,
+      ({ project }) => <ProjectDetailContent project={project!} />,
+    )
+    .run();
 };

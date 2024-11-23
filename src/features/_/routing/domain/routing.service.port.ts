@@ -9,7 +9,7 @@ export const routes = {
   projectDetail: '/projects/$projectId',
   schools: '/schools',
   schoolCreation: '/schools/create',
-  schoolDetail: '/schools/schoolId',
+  schoolDetail: '/schools/$schoolId',
   settings: '/settings',
 } as const;
 

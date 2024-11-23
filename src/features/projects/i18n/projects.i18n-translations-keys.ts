@@ -1,9 +1,15 @@
 export type ProjectsI18nTranslationsKeys = {
   title: string;
   addProject: string;
+  list: {
+    error: string;
+    pending: string;
+    empty: string;
+  };
   detail: {
     title: string;
     subtitle: string;
+    error: string;
     fields: {
       name: string;
       school: string;

@@ -3,9 +3,15 @@ import { ProjectsI18nTranslationsKeys } from '../projects.i18n-translations-keys
 export const enProjects: ProjectsI18nTranslationsKeys = {
   title: 'Projects',
   addProject: 'Add Project',
+  list: {
+    error: 'Error loading projects.',
+    pending: 'Loading projects...',
+    empty: 'No projects found.',
+  },
   detail: {
     title: 'Project Details',
     subtitle: 'View detailed information about this project.',
+    error: 'Error loading project details.',
     fields: {
       name: 'Project Name',
       school: 'School',

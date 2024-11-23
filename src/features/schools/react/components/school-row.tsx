@@ -6,8 +6,13 @@ interface SchoolRowProps {
 }
 
 export const SchoolRow = ({ school }: SchoolRowProps) => {
+  const schoolId = school.id;
   return (
-    <Link to="/schools" className="block px-6 py-4 hover:bg-gray-50">
+    <Link
+      to="/schools/$schoolId"
+      params={{ schoolId }}
+      className="block px-6 py-4 hover:bg-gray-50"
+    >
       <div className="flex items-center justify-between">
         <div className="min-w-0 flex-1">
           <div className="flex items-center space-x-3">

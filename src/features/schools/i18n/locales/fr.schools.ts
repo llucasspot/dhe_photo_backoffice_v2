@@ -3,6 +3,21 @@ import { SchoolsI18nTranslationsKeys } from '../schools.i18n-translations-keys';
 export const frSchools: SchoolsI18nTranslationsKeys = {
   title: 'Écoles',
   addSchool: 'Ajouter une école',
+  list: {
+    error: 'Erreur lors du chargement des écoles.',
+    pending: 'Chargement des écoles....',
+    empty: 'Aucune école trouvée.',
+  },
+  detail: {
+    title: "Détails de l'école",
+    subtitle: 'Voir les informations détaillées de cette école.',
+    error: "Erreur lors du chargement des détails de l'école.",
+    fields: {
+      name: "Nom de l'école",
+      currency: 'Devise',
+      city: 'Ville',
+    },
+  },
   create: {
     title: 'Créer une nouvelle école',
     pending: "Création de l'école en cours...",

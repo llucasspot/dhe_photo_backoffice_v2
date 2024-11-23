@@ -1,6 +1,21 @@
 export type SchoolsI18nTranslationsKeys = {
   title: string;
   addSchool: string;
+  list: {
+    error: string;
+    pending: string;
+    empty: string;
+  };
+  detail: {
+    title: string;
+    subtitle: string;
+    error: string;
+    fields: {
+      name: string;
+      currency: string;
+      city: string;
+    };
+  };
   create: {
     title: string;
     pending: string;
