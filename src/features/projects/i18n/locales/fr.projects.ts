@@ -12,6 +12,17 @@ export const frProjects: ProjectsI18nTranslationsKeys = {
     title: 'Détails du projet',
     subtitle: 'Voir les informations détaillées de ce projet.',
     error: 'Erreur lors du chargement des détails du project.',
+    dropzone: {
+      instructions: 'Déposez un dossier contenant les dossiers de classe ici',
+      dragDrop: 'Chaque sous-dossier créera une nouvelle classe',
+      dragActive: 'Déposez le dossier ici',
+    },
+    klasses: {
+      title: 'Classes',
+      creating: 'Création des classes...',
+      created: 'Classes créées avec succès !',
+      error: 'Échec de la création des classes. Veuillez réessayer.',
+    },
     fields: {
       name: 'Nom du projet',
       school: 'École',

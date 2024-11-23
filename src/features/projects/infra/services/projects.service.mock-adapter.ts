@@ -2,6 +2,7 @@ import { MockAdapter } from '#core/domain';
 import { inject, singleton } from '#di';
 import {
   CreateProjectBody,
+  KlassDto,
   ProjectDto,
   ProjectsServicePort,
   ProjectState,
@@ -14,6 +15,7 @@ export class ProjectsServiceMockAdapter
   implements ProjectsServicePort
 {
   private projects: ProjectDto[] = [];
+  private klasses: KlassDto[] = [];
 
   constructor(
     @inject(SchoolsServiceMockAdapter)
@@ -26,7 +28,10 @@ export class ProjectsServiceMockAdapter
     if (!this.projects.length) {
       await this.init();
     }
-    return [...this.projects];
+    return this.projects.map((project) => ({
+      ...project,
+      klasses: this.klasses.filter((klass) => klass.projectId === project.id),
+    }));
   }
 
   async getProject(id: string): Promise<ProjectDto> {
@@ -35,7 +40,10 @@ export class ProjectsServiceMockAdapter
     if (!project) {
       throw new Error('Project not found');
     }
-    return { ...project };
+    return {
+      ...project,
+      klasses: this.klasses.filter((klass) => klass.projectId === id),
+    };
   }
 
   async createProject(project: CreateProjectBody): Promise<ProjectDto> {
@@ -46,6 +54,7 @@ export class ProjectsServiceMockAdapter
       id: (this.projects.length + 1).toString(),
       school,
       state: ProjectState.Unpublished,
+      klasses: [],
     };
     this.projects.push(newProject);
     return { ...newProject };
@@ -65,7 +74,10 @@ export class ProjectsServiceMockAdapter
       ...projectUpdate,
     };
     this.projects[index] = updatedProject;
-    return { ...updatedProject };
+    return {
+      ...updatedProject,
+      klasses: this.klasses.filter((klass) => klass.projectId === id),
+    };
   }
 
   async deleteProject(id: string): Promise<void> {
@@ -75,6 +87,22 @@ export class ProjectsServiceMockAdapter
       throw new Error('Project not found');
     }
     this.projects.splice(index, 1);
+    // Also delete associated klasses
+    this.klasses = this.klasses.filter((klass) => klass.projectId !== id);
+  }
+
+  async createKlassesFromFolders(
+    projectId: string,
+    folderNames: string[],
+  ): Promise<KlassDto[]> {
+    await this.delay(1);
+    const newKlasses = folderNames.map((name, index) => ({
+      id: (this.klasses.length + index + 1).toString(),
+      name,
+      projectId,
+    }));
+    this.klasses.push(...newKlasses);
+    return [...newKlasses];
   }
 
   private async init() {
@@ -88,6 +116,7 @@ export class ProjectsServiceMockAdapter
         school: schools[0],
         shotDate: new Date(),
         orderEndDate: new Date(),
+        klasses: [],
       },
       {
         id: '2',
@@ -97,6 +126,7 @@ export class ProjectsServiceMockAdapter
         school: schools[1],
         shotDate: new Date(),
         orderEndDate: new Date(),
+        klasses: [],
       },
       {
         id: '3',
@@ -106,6 +136,7 @@ export class ProjectsServiceMockAdapter
         school: schools[1],
         shotDate: new Date(),
         orderEndDate: new Date(),
+        klasses: [],
       },
     ];
   }

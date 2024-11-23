@@ -1,3 +1,5 @@
+import { KlassDto } from './klass.dto';
+
 export enum ProjectState {
   Published = 'published',
   Unpublished = 'unpublished',
@@ -15,4 +17,5 @@ export interface ProjectDto {
   orderEndDate: Date;
   messageForClients?: string;
   state: ProjectState;
+  klasses: KlassDto[];
 }

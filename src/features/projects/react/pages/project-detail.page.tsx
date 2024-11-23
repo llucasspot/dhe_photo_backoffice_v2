@@ -1,6 +1,7 @@
 import { useParams } from '@tanstack/react-router';
 import { match } from 'ts-pattern';
 
+import { FolderDropzone, KlassGrid } from '../components';
 import { useProject } from '../hooks';
 
 import { ProjectDto } from '#features/projects/domain';
@@ -118,6 +119,14 @@ const ProjectDetailContent = ({ project }: { project: ProjectDto }) => {
             )}
           </dl>
         </div>
+      </div>
+
+      <div className="mt-8">
+        <h3 className="text-lg font-medium text-gray-900 mb-4">
+          {t('projects.detail.klasses.title')}
+        </h3>
+        <FolderDropzone projectId={project.id} />
+        <KlassGrid klasses={project.klasses} />
       </div>
     </div>
   );

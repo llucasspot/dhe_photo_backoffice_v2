@@ -18,6 +18,17 @@ export type ProjectsI18nTranslationsKeys = {
       status: string;
       messageForClients: string;
     };
+    dropzone: {
+      instructions: string;
+      dragDrop: string;
+      dragActive: string;
+    };
+    klasses: {
+      title: string;
+      creating: string;
+      created: string;
+      error: string;
+    };
   };
   create: {
     title: string;
