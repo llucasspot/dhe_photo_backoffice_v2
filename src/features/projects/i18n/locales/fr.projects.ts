@@ -3,6 +3,18 @@ import { ProjectsI18nTranslationsKeys } from '../projects.i18n-translations-keys
 export const frProjects: ProjectsI18nTranslationsKeys = {
   title: 'Projets',
   addProject: 'Ajouter un projet',
+  detail: {
+    title: 'Détails du projet',
+    subtitle: 'Voir les informations détaillées de ce projet.',
+    fields: {
+      name: 'Nom du projet',
+      school: 'École',
+      shotDate: 'Date de prise de vue',
+      orderEndDate: 'Date de fin des commandes',
+      status: 'Statut',
+      messageForClients: 'Message pour les clients',
+    },
+  },
   create: {
     title: 'Créer un nouveau projet',
     pending: 'Création du projet en cours...',
@@ -45,4 +57,4 @@ export const frProjects: ProjectsI18nTranslationsKeys = {
       },
     },
   },
-} as const;
+};

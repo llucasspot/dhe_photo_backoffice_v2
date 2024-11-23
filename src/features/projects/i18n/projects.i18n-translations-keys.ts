@@ -1,6 +1,18 @@
 export type ProjectsI18nTranslationsKeys = {
   title: string;
   addProject: string;
+  detail: {
+    title: string;
+    subtitle: string;
+    fields: {
+      name: string;
+      school: string;
+      shotDate: string;
+      orderEndDate: string;
+      status: string;
+      messageForClients: string;
+    };
+  };
   create: {
     title: string;
     pending: string;

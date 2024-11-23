@@ -22,6 +22,7 @@ export type Translations = {
       add: string;
       cancel: string;
       select: string;
+      back: string;
     };
     status: {
       active: string;
