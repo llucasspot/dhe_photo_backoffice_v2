@@ -1,7 +1,5 @@
 import { Transform } from 'class-transformer';
-import { IsEnum, IsNotEmpty, IsString, MaxLength } from 'class-validator';
-
-import { ProjectState } from './project.dto';
+import { IsDate, IsNotEmpty, IsString, MaxLength } from 'class-validator';
 
 import { Dto } from '#core/domain';
 
@@ -17,13 +15,26 @@ export class CreateProjectBody extends Dto<CreateProjectBody> {
   @Transform(({ value }) => value?.trim())
   schoolId!: string;
 
-  @IsString({ message: 'projects.create.validation.lieu.IsString' })
-  @IsNotEmpty({ message: 'projects.create.validation.lieu.IsNotEmpty' })
-  @MaxLength(100, { message: 'projects.create.validation.lieu.MaxLength' })
-  @Transform(({ value }) => value?.trim())
-  lieu!: string;
+  @IsDate({ message: 'projects.create.validation.shotDate.IsDate' })
+  @IsNotEmpty({ message: 'projects.create.validation.shotDate.IsNotEmpty' })
+  @Transform(({ value }) => (value ? new Date(value) : null))
+  shotDate!: Date;
 
-  @IsEnum(ProjectState, { message: 'projects.create.validation.state.IsEnum' })
-  @IsNotEmpty({ message: 'projects.create.validation.state.IsNotEmpty' })
-  state!: ProjectState;
+  @IsDate({ message: 'projects.create.validation.orderEndDate.IsDate' })
+  @IsNotEmpty({ message: 'projects.create.validation.orderEndDate.IsNotEmpty' })
+  @Transform(({ value }) => (value ? new Date(value) : null))
+  orderEndDate!: Date;
+
+  @IsString({
+    message: 'projects.create.validation.messageForClients.IsString',
+  })
+  @MaxLength(500, {
+    message: 'projects.create.validation.messageForClients.MaxLength',
+  })
+  @Transform(({ value }) => value?.trim())
+  messageForClients?: string;
+
+  // @IsEnum(ProjectState, { message: 'projects.create.validation.state.IsEnum' })
+  // @IsNotEmpty({ message: 'projects.create.validation.state.IsNotEmpty' })
+  // state!: ProjectState;
 }

@@ -5,12 +5,17 @@ export const enProjects: ProjectsI18nTranslationsKeys = {
   addProject: 'Add Project',
   create: {
     title: 'Create New Project',
+    pending: 'Creating project...',
+    success: 'Project created successfully!',
+    error: 'Failed to create project. Please try again.',
     form: {
       name: 'Project Name',
       school: 'School',
-      lieu: 'Location',
+      shotDate: 'Shooting Date',
+      orderEndDate: 'Order End Date',
+      messageForClients: 'Message for Clients',
+      state: 'Status',
       submit: 'Create Project',
-      state: 'State',
     },
     validation: {
       name: {
@@ -22,14 +27,21 @@ export const enProjects: ProjectsI18nTranslationsKeys = {
         IsString: 'School must be selected',
         IsNotEmpty: 'School is required',
       },
-      lieu: {
-        IsString: 'Location must be text',
-        IsNotEmpty: 'Location is required',
-        MaxLength: 'Location cannot exceed 100 characters',
+      shotDate: {
+        IsDate: 'Invalid shooting date format',
+        IsNotEmpty: 'Shooting date is required',
+      },
+      orderEndDate: {
+        IsDate: 'Invalid order end date format',
+        IsNotEmpty: 'Order end date is required',
+      },
+      messageForClients: {
+        IsString: 'Message must be text',
+        MaxLength: 'Message cannot exceed 500 characters',
       },
       state: {
-        IsEnum: 'Invalid project state',
-        IsNotEmpty: 'Project state is required',
+        IsEnum: 'Invalid project status',
+        IsNotEmpty: 'Project status is required',
       },
     },
   },

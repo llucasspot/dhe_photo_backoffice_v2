@@ -11,6 +11,8 @@ export interface ProjectDto {
   };
   id: string;
   name: string;
-  lieu: string;
+  shotDate: Date;
+  orderEndDate: Date;
+  messageForClients?: string;
   state: ProjectState;
 }

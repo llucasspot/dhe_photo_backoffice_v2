@@ -3,12 +3,17 @@ export type ProjectsI18nTranslationsKeys = {
   addProject: string;
   create: {
     title: string;
+    pending: string;
+    success: string;
+    error: string;
     form: {
       name: string;
       school: string;
-      lieu: string;
-      submit: string;
+      shotDate: string;
+      orderEndDate: string;
+      messageForClients: string;
       state: string;
+      submit: string;
     };
     validation: {
       name: {
@@ -20,9 +25,16 @@ export type ProjectsI18nTranslationsKeys = {
         IsString: string;
         IsNotEmpty: string;
       };
-      lieu: {
-        IsString: string;
+      shotDate: {
+        IsDate: string;
         IsNotEmpty: string;
+      };
+      orderEndDate: {
+        IsDate: string;
+        IsNotEmpty: string;
+      };
+      messageForClients: {
+        IsString: string;
         MaxLength: string;
       };
       state: {

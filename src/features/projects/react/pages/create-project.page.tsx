@@ -1,10 +1,8 @@
+import { useCreateProject } from '../hooks';
+
 import { Button, Form, Input, Select } from '#components';
 import { useService } from '#di/react';
-import {
-  CreateProjectBody,
-  ProjectsServicePort,
-  ProjectState,
-} from '#features/projects/domain';
+import { CreateProjectBody } from '#features/projects/domain';
 import { useSchools } from '#features/schools/react';
 import { useI18n } from '#i18n/react';
 import { RoutingServicePort } from '#routing/domain';
@@ -13,7 +11,7 @@ import { Link } from '#routing/react';
 export const CreateProjectPage = () => {
   const routingService = useService(RoutingServicePort);
   const { t } = useI18n();
-  const projectsService = useService(ProjectsServicePort);
+  const createProject = useCreateProject();
 
   const { data: schools = [] } = useSchools();
   const schoolOptions = schools.map((school) => ({
@@ -22,8 +20,12 @@ export const CreateProjectPage = () => {
   }));
 
   const onSubmit = async (data: CreateProjectBody) => {
-    await projectsService.createProject(data);
-    await routingService.redirect('/projects');
+    try {
+      await createProject.mutateAsync(data);
+      await routingService.redirect('/projects');
+    } catch (error) {
+      console.log('CreateProjectPage form error : ', error);
+    }
   };
 
   return (
@@ -42,12 +44,20 @@ export const CreateProjectPage = () => {
             label="projects.create.form.school"
             options={schoolOptions}
           />
-          <Input formKey="lieu" label="projects.create.form.lieu" />
           <Input
-            hidden
-            formKey="state"
-            label="projects.create.form.state"
-            value={ProjectState.Unpublished}
+            formKey="shotDate"
+            label="projects.create.form.shotDate"
+            type="date"
+          />
+          <Input
+            formKey="orderEndDate"
+            label="projects.create.form.orderEndDate"
+            type="date"
+          />
+          <Input
+            formKey="messageForClients"
+            label="projects.create.form.messageForClients"
+            type="text"
           />
           <div className="flex justify-end space-x-4">
             <Link to="/projects">
@@ -55,7 +65,9 @@ export const CreateProjectPage = () => {
                 {t('common.actions.cancel')}
               </Button>
             </Link>
-            <Button type="submit">{t('projects.create.form.submit')}</Button>
+            <Button type="submit" disabled={createProject.isPending}>
+              {t('projects.create.form.submit')}
+            </Button>
           </div>
         </Form>
       </div>

@@ -5,12 +5,17 @@ export const frProjects: ProjectsI18nTranslationsKeys = {
   addProject: 'Ajouter un projet',
   create: {
     title: 'Créer un nouveau projet',
+    pending: 'Création du projet en cours...',
+    success: 'Projet créé avec succès !',
+    error: 'Échec de la création du projet. Veuillez réessayer.',
     form: {
       name: 'Nom du projet',
       school: 'École',
-      lieu: 'Lieu',
+      shotDate: 'Date de prise de vue',
+      orderEndDate: 'Date de fin des commandes',
+      messageForClients: 'Message pour les clients',
+      state: 'Statut',
       submit: 'Créer le projet',
-      state: 'État',
     },
     validation: {
       name: {
@@ -22,14 +27,21 @@ export const frProjects: ProjectsI18nTranslationsKeys = {
         IsString: "L'école doit être sélectionnée",
         IsNotEmpty: "L'école est requise",
       },
-      lieu: {
-        IsString: 'Le lieu doit être du texte',
-        IsNotEmpty: 'Le lieu est requis',
-        MaxLength: 'Le lieu ne peut pas dépasser 100 caractères',
+      shotDate: {
+        IsDate: 'Format de date de prise de vue invalide',
+        IsNotEmpty: 'La date de prise de vue est requise',
+      },
+      orderEndDate: {
+        IsDate: 'Format de date de fin des commandes invalide',
+        IsNotEmpty: 'La date de fin des commandes est requise',
+      },
+      messageForClients: {
+        IsString: 'Le message doit être du texte',
+        MaxLength: 'Le message ne peut pas dépasser 500 caractères',
       },
       state: {
-        IsEnum: 'État du projet invalide',
-        IsNotEmpty: "L'état du projet est requis",
+        IsEnum: 'Statut du projet invalide',
+        IsNotEmpty: 'Le statut du projet est requis',
       },
     },
   },

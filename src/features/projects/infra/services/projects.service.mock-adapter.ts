@@ -39,10 +39,11 @@ export class ProjectsServiceMockAdapter
 
   async createProject(project: CreateProjectBody): Promise<ProjectDto> {
     const school = await this.schoolsService.getSchool(project.schoolId);
-    const newProject = {
+    const newProject: ProjectDto = {
       ...project,
       id: (this.projects.length + 1).toString(),
       school,
+      state: ProjectState.Unpublished,
     };
     this.projects.push(newProject);
     return { ...newProject };
@@ -78,26 +79,29 @@ export class ProjectsServiceMockAdapter
       {
         id: '1',
         name: 'School Project A',
-        lieu: 'Paris',
         state: ProjectState.Published,
         schoolId: schools[0].id,
         school: schools[0],
+        shotDate: new Date(),
+        orderEndDate: new Date(),
       },
       {
         id: '2',
         name: 'School Project B',
-        lieu: 'Lyon',
         state: ProjectState.Unpublished,
         schoolId: schools[1].id,
         school: schools[1],
+        shotDate: new Date(),
+        orderEndDate: new Date(),
       },
       {
         id: '3',
         name: 'School Project C',
-        lieu: 'Marseille',
         state: ProjectState.Published,
         schoolId: schools[1].id,
         school: schools[1],
+        shotDate: new Date(),
+        orderEndDate: new Date(),
       },
     ];
   }
