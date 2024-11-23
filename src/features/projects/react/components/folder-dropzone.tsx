@@ -5,6 +5,33 @@ import { useCreateKlassesFromFolders } from '../hooks';
 
 import { useI18n } from '#i18n/react';
 
+function fileValidator(file: File | DataTransferItem) {
+  if (!(file instanceof File)) {
+    return {
+      code: 'not-file',
+      message: `File is not a file`,
+    };
+  }
+  const path = file.webkitRelativePath;
+  const parts = path.split('/');
+  // We only want direct subfolders of the root folder
+  if (parts.length <= 2) {
+    return {
+      code: 'no-in-subfolder',
+      message: `File is not in a subfolder`,
+    };
+  }
+  const [, subFolderName] = parts;
+  // Skip files (those with extensions) and hidden folders
+  if (subFolderName.includes('.')) {
+    return {
+      code: 'hidden-folder',
+      message: `File is an hidden folder`,
+    };
+  }
+  return null;
+}
+
 interface FolderDropzoneProps {
   projectId: string;
 }
@@ -18,36 +45,30 @@ export const FolderDropzone = ({ projectId }: FolderDropzoneProps) => {
       console.log('acceptedItems : ', acceptedItems);
       console.log('rejectedItems : ', rejectedItems);
 
-      const uniqueFolders = new Set<string>();
-      // Process each file to extract unique folder paths
-      acceptedItems.forEach((file) => {
+      const folderNames = acceptedItems.map((file) => {
         const path = file.webkitRelativePath;
         const parts = path.split('/');
-        // We only want direct subfolders of the root folder
-        if (parts.length > 2) {
-          const [, subFolderName] = parts;
-          // Skip files (those with extensions) and hidden folders
-          if (!subFolderName.includes('.')) {
-            uniqueFolders.add(subFolderName);
-          }
-        }
+        const [, subFolderName] = parts;
+        return subFolderName;
       });
-
-      const folderNames = Array.from(uniqueFolders);
-
-      if (folderNames.length > 0) {
-        await createKlasses.mutateAsync(folderNames);
+      if (folderNames.length <= 0) {
+        return;
       }
+      await createKlasses.mutateAsync(Array.from(new Set(folderNames)));
     },
     [createKlasses],
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
+    accept: {
+      'image/*': [],
+    },
     multiple: true,
     noClick: false,
     noKeyboard: false,
-    useFsAccessApi: false, // Disable File System Access API to ensure webkitRelativePath works
+    useFsAccessApi: false, // Disable File System Access API to ensure webkitRelativePath works,
+    validator: fileValidator,
   });
 
   return (
