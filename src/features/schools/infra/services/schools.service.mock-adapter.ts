@@ -34,10 +34,12 @@ export class SchoolsServiceMockAdapter
   ];
 
   async getSchools(): Promise<SchoolDto[]> {
+    await this.delay(1);
     return [...this.schools];
   }
 
   async getSchool(id: string): Promise<SchoolDto> {
+    await this.delay(1);
     const school = this.schools.find((p) => p.id === id);
     if (!school) {
       throw new Error('School not found');
@@ -46,6 +48,7 @@ export class SchoolsServiceMockAdapter
   }
 
   async createSchools(school: CreateSchoolBody): Promise<SchoolDto> {
+    await this.delay(1);
     const newSchool = {
       ...school,
       id: (this.schools.length + 1).toString(),
@@ -58,6 +61,7 @@ export class SchoolsServiceMockAdapter
     id: string,
     schoolUpdate: Partial<SchoolDto>,
   ): Promise<SchoolDto> {
+    await this.delay(1);
     const index = this.schools.findIndex((p) => p.id === id);
     if (index === -1) {
       throw new Error('School not found');
@@ -71,6 +75,7 @@ export class SchoolsServiceMockAdapter
   }
 
   async deleteSchool(id: string): Promise<void> {
+    await this.delay(1);
     const index = this.schools.findIndex((p) => p.id === id);
     if (index === -1) {
       throw new Error('School not found');

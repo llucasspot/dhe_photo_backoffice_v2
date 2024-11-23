@@ -1,4 +1,5 @@
 import { enAuth } from '#features/auth/i18n';
+import { enProducts } from '#features/products/i18n';
 import { enProjects } from '#features/projects/i18n';
 import { enSchools } from '#features/schools/i18n';
 import { enSettings } from '#features/settings/i18n';
@@ -8,11 +9,13 @@ export const en: Translations = {
   auth: enAuth,
   settings: enSettings,
   projects: enProjects,
+  products: enProducts,
   schools: enSchools,
   navigation: {
     dashboard: 'Dashboard',
     schools: 'Schools',
     projects: 'Projects',
+    products: 'Products',
     signIn: 'Sign in',
     signUp: 'Sign up',
     signOut: 'Sign out',

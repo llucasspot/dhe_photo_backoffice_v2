@@ -88,6 +88,32 @@ export const Sidebar = () => {
               {t('navigation.projects')}
             </Link>
             <Link
+              to="/products"
+              activeProps={{
+                className:
+                  'group flex items-center px-3 py-2 text-sm font-medium rounded-md bg-gray-100 text-gray-900',
+              }}
+              inactiveProps={{
+                className:
+                  'group flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+              }}
+            >
+              <svg
+                className="mr-3 h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+                />
+              </svg>
+              {t('navigation.products')}
+            </Link>
+            <Link
               to="/settings"
               activeProps={{
                 className:

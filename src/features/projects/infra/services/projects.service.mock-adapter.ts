@@ -30,6 +30,7 @@ export class ProjectsServiceMockAdapter
   }
 
   async getProject(id: string): Promise<ProjectDto> {
+    await this.delay(1);
     const project = this.projects.find((p) => p.id === id);
     if (!project) {
       throw new Error('Project not found');
@@ -38,6 +39,7 @@ export class ProjectsServiceMockAdapter
   }
 
   async createProject(project: CreateProjectBody): Promise<ProjectDto> {
+    await this.delay(1);
     const school = await this.schoolsService.getSchool(project.schoolId);
     const newProject: ProjectDto = {
       ...project,
@@ -53,6 +55,7 @@ export class ProjectsServiceMockAdapter
     id: string,
     projectUpdate: Partial<ProjectDto>,
   ): Promise<ProjectDto> {
+    await this.delay(1);
     const index = this.projects.findIndex((p) => p.id === id);
     if (index === -1) {
       throw new Error('Project not found');
@@ -66,6 +69,7 @@ export class ProjectsServiceMockAdapter
   }
 
   async deleteProject(id: string): Promise<void> {
+    await this.delay(1);
     const index = this.projects.findIndex((p) => p.id === id);
     if (index === -1) {
       throw new Error('Project not found');

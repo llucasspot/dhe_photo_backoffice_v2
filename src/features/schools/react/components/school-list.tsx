@@ -9,7 +9,7 @@ const SchoolListLoading = () => {
   const { t } = useI18n();
   return (
     <div className="p-4 text-center text-gray-500">
-      {t('schools.list.empty')}
+      {t('schools.list.pending')}
     </div>
   );
 };
@@ -19,7 +19,7 @@ const SchoolListError = ({ error }: { error: Error | null }) => {
   console.log(error);
   return (
     <div className="p-4 text-center text-red-500">
-      {t('schools.list.empty')}
+      {t('schools.list.error')}
     </div>
   );
 };

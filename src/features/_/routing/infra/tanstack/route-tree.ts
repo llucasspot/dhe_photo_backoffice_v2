@@ -7,15 +7,17 @@ import {
 import { LoginPage, RegisterPage } from '#features/auth/react';
 import { DashboardPage } from '#features/dashboard/react';
 import {
+  CreateProductPage,
+  ProductDetailPage,
+  ProductsPage,
+} from '#features/products/react';
+import {
   CreateProjectPage,
   ProjectDetailPage,
   ProjectsPage,
 } from '#features/projects/react';
-import {
-  CreateSchoolPage,
-  SchoolDetailPage,
-  SchoolsPage,
-} from '#features/schools/react';
+import { SchoolDetailPage } from '#features/schools/react';
+import { CreateSchoolPage, SchoolsPage } from '#features/schools/react';
 import { SettingsPage } from '#features/settings/react';
 import { OutletLayout, RootLayout } from '#layout';
 import { RoutingServicePort } from '#routing/domain';
@@ -93,6 +95,24 @@ export const projectDetailRoute = createRoute({
   component: ProjectDetailPage,
 });
 
+export const productsRoute = createRoute({
+  getParentRoute: () => rootLayout,
+  path: '/products',
+  component: ProductsPage,
+});
+
+export const createProductRoute = createRoute({
+  getParentRoute: () => rootLayout,
+  path: '/products/create',
+  component: CreateProductPage,
+});
+
+export const productDetailRoute = createRoute({
+  getParentRoute: () => rootLayout,
+  path: '/products/$productId',
+  component: ProductDetailPage,
+});
+
 export const schoolsRoute = createRoute({
   getParentRoute: () => rootLayout,
   path: '/schools',
@@ -126,6 +146,9 @@ export const routeTree = rootRoute.addChildren([
     projectsRoute,
     createProjectRoute,
     projectDetailRoute,
+    productsRoute,
+    createProductRoute,
+    productDetailRoute,
     schoolsRoute,
     createSchoolRoute,
     schoolDetailRoute,

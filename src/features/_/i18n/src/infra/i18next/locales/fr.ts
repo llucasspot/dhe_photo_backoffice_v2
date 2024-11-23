@@ -1,4 +1,5 @@
 import { frAuth } from '#features/auth/i18n';
+import { frProducts } from '#features/products/i18n';
 import { frProjects } from '#features/projects/i18n';
 import { frSchools } from '#features/schools/i18n';
 import { frSettings } from '#features/settings/i18n';
@@ -8,11 +9,13 @@ export const fr: Translations = {
   auth: frAuth,
   settings: frSettings,
   projects: frProjects,
+  products: frProducts,
   schools: frSchools,
   navigation: {
     dashboard: 'Tableau de bord',
     schools: 'Écoles',
     projects: 'Projets',
+    products: 'Produits',
     signIn: 'Se connecter',
     signUp: "S'inscrire",
     signOut: 'Se déconnecter',
