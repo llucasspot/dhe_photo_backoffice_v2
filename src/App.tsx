@@ -1,5 +1,6 @@
 import { ToastContainer } from 'react-toastify';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { AuthProviderMockAdapter } from './features/auth/infra/providers';
 
@@ -60,6 +61,7 @@ export const App = () => {
           draggable
           pauseOnHover
         />
+        <ReactQueryDevtools initialIsOpen={false} />
       </AuthProvider>
     </QueryClientProvider>
   );

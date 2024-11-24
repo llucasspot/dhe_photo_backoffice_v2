@@ -14,6 +14,8 @@ export function LogAction(): MethodDecorator {
         if (this.logger) {
           // @ts-expect-error this.logger
           this.logger.log(`[${action}]`, ...data);
+        } else if (this.constructor && this.constructor.name) {
+          console.log(`[${this.constructor.name}] [${action}]`, ...data);
         } else {
           console.log(`[no logger found on class] [${action}]`, ...data);
         }

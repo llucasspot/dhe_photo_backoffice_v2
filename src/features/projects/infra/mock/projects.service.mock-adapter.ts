@@ -44,10 +44,12 @@ export class ProjectsServiceMockAdapter
     const projects = await this.projectsDao.getAll();
     for (const project of projects) {
       const klasses = await this.getKlassesWithStudents(project);
+      const klassIds = klasses.map((klass) => klass.id);
       const school = await this.schoolsService.getSchool(project.schoolId);
       res.push({
         ...project,
         klasses,
+        klassIds,
         school,
       });
     }
@@ -62,10 +64,12 @@ export class ProjectsServiceMockAdapter
       throw new Error('Project not found');
     }
     const klasses = await this.getKlassesWithStudents(project);
+    const klassIds = klasses.map((klass) => klass.id);
     const school = await this.schoolsService.getSchool(project.schoolId);
     return {
       ...project,
       klasses,
+      klassIds,
       school,
     };
   }
@@ -76,13 +80,14 @@ export class ProjectsServiceMockAdapter
     const project = await this.projectsDao.save({
       ...body,
       state: ProjectState.Unpublished,
-      klassIds: [],
     });
     const klasses = await this.getKlassesWithStudents(project);
+    const klassIds = klasses.map((klass) => klass.id);
     const school = await this.schoolsService.getSchool(project.schoolId);
     return {
       ...project,
       klasses,
+      klassIds,
       school,
     };
   }
@@ -98,10 +103,12 @@ export class ProjectsServiceMockAdapter
       throw new Error('Project not found');
     }
     const klasses = await this.getKlassesWithStudents(project);
+    const klassIds = klasses.map((klass) => klass.id);
     const school = await this.schoolsService.getSchool(project.schoolId);
     return {
       ...project,
       klasses,
+      klassIds,
       school,
     };
   }
@@ -167,7 +174,7 @@ export class ProjectsServiceMockAdapter
 
   @LogAction()
   private async getKlassesWithStudents(
-    project: Omit<ProjectDto, 'klasses' | 'school'>,
+    project: Omit<ProjectDto, 'klasses' | 'school' | 'klassIds'>,
   ): Promise<Omit<KlassDto, 'project'>[]> {
     const klasses = await this.klassesDao.getAll();
     const students = await this.studentsDao.getAll();
