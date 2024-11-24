@@ -5,6 +5,15 @@ import { useCreateKlassesFromFolders } from '../hooks';
 
 import { useI18n } from '#i18n/react';
 
+function getFilePath(_file: File) {
+  const file = _file as File & { path: string };
+  const path = file.path;
+  if (path.startsWith('/')) {
+    return path.slice(1);
+  }
+  return path;
+}
+
 function fileValidator(file: File | DataTransferItem) {
   if (!(file instanceof File)) {
     return {
@@ -12,12 +21,12 @@ function fileValidator(file: File | DataTransferItem) {
       message: `File is not a file`,
     };
   }
-  const path = file.webkitRelativePath;
+  const path = getFilePath(file);
   const parts = path.split('/');
   // We only want direct subfolders of the root folder
   if (parts.length <= 2) {
     return {
-      code: 'no-in-subfolder',
+      code: 'not-in-subfolder',
       message: `File is not in a subfolder`,
     };
   }
@@ -52,7 +61,7 @@ export const FolderDropzone = ({ projectId }: FolderDropzoneProps) => {
       console.log('rejectedItems : ', rejectedItems);
 
       const folders = acceptedItems.map((file) => {
-        const path = file.webkitRelativePath;
+        const path = getFilePath(file);
         const parts = path.split('/');
         const [, subFolderName, fileName] = parts;
         return { subFolderName, fileName, file };

@@ -38,9 +38,8 @@ export class DatabaseServiceDexieAdapter
     });
     db.tables.forEach((table) => {
       table.hook('creating', (_primaryKey, obj) => {
-        console.log('obj : ', obj);
         if (!obj.id) {
-          obj.id = uuidv4(); // Generate a UUID if no ID is provided
+          obj.id = uuidv4();
         }
       });
     });
