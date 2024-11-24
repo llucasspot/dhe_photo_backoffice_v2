@@ -1,7 +1,7 @@
-import { FilesDaoPort } from '../ports/files-dao.port';
+import { FilesDaoPort } from '../ports';
 
 import { inject, singleton } from '#di';
-import { FileDto } from '#features/students/domain';
+import { FileDto } from '#features/files/domain';
 import { DatabaseServiceDexieAdapter, DexieDao } from '#mock';
 
 @singleton()

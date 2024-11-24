@@ -1,7 +1,8 @@
-import { FilesDaoPort, StudentsDaoPort } from './daos';
+import { StudentsDaoPort } from './daos';
 
 import { LogAction, MockAdapter } from '#core/domain';
 import { inject, singleton } from '#di';
+import { FilesServicePort } from '#features/files/domain';
 import {
   CreateStudentBody,
   StudentDto,
@@ -25,8 +26,8 @@ export class StudentsServiceMockAdapter
   constructor(
     @inject(StudentsDaoPort)
     private readonly studentsDao: StudentsDaoPort,
-    @inject(FilesDaoPort)
-    private readonly filesDao: FilesDaoPort,
+    @inject(FilesServicePort)
+    private readonly filesService: FilesServicePort,
   ) {
     super();
   }
@@ -51,9 +52,7 @@ export class StudentsServiceMockAdapter
   @LogAction()
   async createStudent(body: CreateStudentBody): Promise<StudentDto> {
     await this.delay();
-    const uploadedFiles = await this.filesDao.saveMany(
-      body.photos.map((photo) => ({ file: photo })),
-    );
+    const uploadedFiles = await this.filesService.createFiles(body.photos);
     return this.studentsDao.save({
       ...body,
       code: generateUniqueCode(),

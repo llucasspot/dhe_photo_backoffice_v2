@@ -1,7 +1,7 @@
 import { FilesDaoPort } from '../ports';
 
 import { singleton } from '#di';
-import { FileDto } from '#features/students/domain';
+import { FileDto } from '#features/files/domain';
 import { MockDao } from '#mock';
 
 @singleton()

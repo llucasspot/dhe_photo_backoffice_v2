@@ -1,8 +1,6 @@
 import { Module } from '#di';
 import { StudentsServicePort } from '#features/students/domain';
 import {
-  FilesDaoDexieAdapter,
-  FilesDaoPort,
   StudentsDaoDexieAdapter,
   StudentsDaoPort,
   StudentsServiceMockAdapter,
@@ -17,10 +15,6 @@ import {
     {
       token: StudentsDaoPort,
       useToken: StudentsDaoDexieAdapter,
-    },
-    {
-      token: FilesDaoPort,
-      useToken: FilesDaoDexieAdapter,
     },
   ],
 })

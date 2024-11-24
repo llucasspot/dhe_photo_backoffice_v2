@@ -2,6 +2,7 @@ import { CommonModule } from './common.module';
 
 import { Module } from '#di';
 import { AuthModule } from '#features/auth';
+import { FilesModule } from '#features/files';
 import { KlassesModule } from '#features/klasses';
 import { ProductsModule } from '#features/products';
 import { ProjectsModule } from '#features/projects';
@@ -17,6 +18,7 @@ import { StudentsModule } from '#features/students';
     SchoolsModule,
     StudentsModule,
     KlassesModule,
+    FilesModule,
   ],
 })
 export class AppModule {}
