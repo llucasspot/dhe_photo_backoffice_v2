@@ -1,4 +1,5 @@
 import { AuthI18nTranslationsKeys } from '#features/auth/i18n';
+import { KlassesI18nTranslationsKeys } from '#features/klasses/i18n';
 import { ProductsI18nTranslationsKeys } from '#features/products/i18n';
 import { ProjectsI18nTranslationsKeys } from '#features/projects/i18n';
 import { SchoolsI18nTranslationsKeys } from '#features/schools/i18n';
@@ -12,6 +13,7 @@ export type Translations = {
   products: ProductsI18nTranslationsKeys;
   schools: SchoolsI18nTranslationsKeys;
   students: StudentsI18nTranslationsKeys;
+  klasses: KlassesI18nTranslationsKeys;
   navigation: {
     dashboard: string;
     schools: string;

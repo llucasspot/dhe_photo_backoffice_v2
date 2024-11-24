@@ -24,7 +24,7 @@ const KlassDetailError = ({ error }: { error: Error | null }) => {
   console.error('Klass detail error:', error);
   return (
     <div className="p-8">
-      <div className="text-red-500">{t('projects.detail.klasses.error')}</div>
+      <div className="text-red-500">{t('klasses.detail.error')}</div>
     </div>
   );
 };

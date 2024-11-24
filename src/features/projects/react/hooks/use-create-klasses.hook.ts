@@ -18,9 +18,9 @@ export const useCreateKlassesFromFolders = () => {
       return toastService.promise(
         () => projectsService.createKlassesFromFolders(body),
         {
-          pending: 'projects.detail.klasses.creating',
-          success: 'projects.detail.klasses.created',
-          error: 'projects.detail.klasses.error',
+          pending: 'klasses.create.pending',
+          success: 'klasses.create.success',
+          error: 'klasses.create.error',
         },
       );
     },

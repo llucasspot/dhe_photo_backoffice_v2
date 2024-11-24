@@ -124,7 +124,7 @@ const ProjectDetailContent = ({ project }: { project: ProjectDto }) => {
 
       <div className="mt-8">
         <h3 className="text-lg font-medium text-gray-900 mb-4">
-          {t('projects.detail.klasses.title')}
+          {t('klasses.title')}
         </h3>
         <FolderDropzone projectId={project.id} />
         <KlassGrid klasses={project.klasses} />
