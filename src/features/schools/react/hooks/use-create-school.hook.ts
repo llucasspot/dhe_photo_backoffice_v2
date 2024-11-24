@@ -13,7 +13,7 @@ export const useCreateSchool = () => {
 
   return useMutation({
     mutationFn: async (data: CreateSchoolBody) => {
-      return toastService.promise(() => schoolsService.createSchools(data), {
+      return toastService.promise(() => schoolsService.createSchool(data), {
         pending: 'schools.create.pending',
         success: 'schools.create.success',
         error: 'schools.create.error',

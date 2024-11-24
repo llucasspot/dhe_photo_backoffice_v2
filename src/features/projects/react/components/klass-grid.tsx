@@ -3,7 +3,7 @@ import { KlassCard } from './klass-card';
 import { KlassDto } from '#features/projects/domain';
 
 interface KlassGridProps {
-  klasses: KlassDto[];
+  klasses: Omit<KlassDto, 'project'>[];
 }
 
 export const KlassGrid = ({ klasses }: KlassGridProps) => {

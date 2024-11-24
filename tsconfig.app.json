@@ -45,6 +45,11 @@
       "#features/settings/i18n": ["src/features/settings/i18n"],
       "#features/settings/domain": ["src/features/settings/domain"],
       "#features/settings/react": ["src/features/settings/react"],
+      "#features/students": ["src/features/students"],
+      "#features/students/i18n": ["src/features/students/i18n"],
+      "#features/students/domain": ["src/features/students/domain"],
+      "#features/students/infra": ["src/features/students/infra"],
+      "#features/students/react": ["src/features/students/react"],
       "#layout": ["src/layout"],
       "#di/domain": ["./src/lib/di/src/domain"],
       "#di/react": ["./src/lib/di/src/react"],
@@ -59,7 +64,8 @@
       "#core/react": ["./src/features/_/core/react"],
       "#toast/domain": ["./src/features/_/toast/domain"],
       "#toast/react": ["./src/features/_/toast/react"],
-      "#toast": ["./src/features/_/toast"]
+      "#toast": ["./src/features/_/toast"],
+      "#mock": ["./src/features/_/mock"]
     },
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true

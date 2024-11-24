@@ -1,3 +1,4 @@
+import { CreateKlassesBody } from '../create-klasses.body';
 import { CreateProjectBody } from '../create-project.body';
 import { KlassDto } from '../klass.dto';
 import { ProjectDto } from '../project.dto';
@@ -17,7 +18,8 @@ export abstract class ProjectsServicePort {
   abstract deleteProject(id: string): Promise<void>;
 
   abstract createKlassesFromFolders(
-    projectId: string,
-    folderNames: string[],
+    body: CreateKlassesBody,
   ): Promise<KlassDto[]>;
+
+  abstract uploadPhoto(photo: File): Promise<string>;
 }

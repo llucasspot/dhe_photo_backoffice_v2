@@ -5,6 +5,7 @@ import { AuthModule } from '#features/auth';
 import { ProductsModule } from '#features/products';
 import { ProjectsModule } from '#features/projects';
 import { SchoolsModule } from '#features/schools';
+import { StudentsModule } from '#features/students';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { SchoolsModule } from '#features/schools';
     ProjectsModule,
     ProductsModule,
     SchoolsModule,
+    StudentsModule,
   ],
 })
 export class AppModule {}

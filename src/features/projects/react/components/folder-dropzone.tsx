@@ -21,12 +21,18 @@ function fileValidator(file: File | DataTransferItem) {
       message: `File is not in a subfolder`,
     };
   }
-  const [, subFolderName] = parts;
+  const [, subFolderName, fileName] = parts;
   // Skip files (those with extensions) and hidden folders
   if (subFolderName.includes('.')) {
     return {
       code: 'hidden-folder',
       message: `File is an hidden folder`,
+    };
+  }
+  if (fileName.startsWith('.')) {
+    return {
+      code: 'hidden-file',
+      message: `File is an hidden file`,
     };
   }
   return null;
@@ -38,25 +44,36 @@ interface FolderDropzoneProps {
 
 export const FolderDropzone = ({ projectId }: FolderDropzoneProps) => {
   const { t } = useI18n();
-  const createKlasses = useCreateKlassesFromFolders(projectId);
+  const createKlasses = useCreateKlassesFromFolders();
 
   const onDrop = useCallback(
     async (acceptedItems: File[], rejectedItems: FileRejection[]) => {
       console.log('acceptedItems : ', acceptedItems);
       console.log('rejectedItems : ', rejectedItems);
 
-      const folderNames = acceptedItems.map((file) => {
+      const folders = acceptedItems.map((file) => {
         const path = file.webkitRelativePath;
         const parts = path.split('/');
-        const [, subFolderName] = parts;
-        return subFolderName;
+        const [, subFolderName, fileName] = parts;
+        return { subFolderName, fileName, file };
       });
-      if (folderNames.length <= 0) {
+      if (folders.length <= 0) {
         return;
       }
-      await createKlasses.mutateAsync(Array.from(new Set(folderNames)));
+      await createKlasses.mutateAsync({
+        projectId,
+        klasses: folders.map((folder) => {
+          return {
+            name: folder.subFolderName,
+            studentPicture: {
+              fileName: folder.fileName,
+              file: folder.file,
+            },
+          };
+        }),
+      });
     },
-    [createKlasses],
+    [createKlasses, projectId],
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({

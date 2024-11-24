@@ -16,7 +16,7 @@ const SchoolListLoading = () => {
 
 const SchoolListError = ({ error }: { error: Error | null }) => {
   const { t } = useI18n();
-  console.log(error);
+  console.error('SchoolListError list error:', error);
   return (
     <div className="p-4 text-center text-red-500">
       {t('schools.list.error')}

@@ -12,7 +12,6 @@ export const LoginForm = () => {
   const { t } = useI18n();
 
   const onSubmit = async (data: LoginBody) => {
-    console.log(data);
     await login(data);
     await routingService.redirect('/home');
   };

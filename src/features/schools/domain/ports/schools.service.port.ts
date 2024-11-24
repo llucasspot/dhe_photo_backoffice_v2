@@ -5,7 +5,7 @@ export abstract class SchoolsServicePort {
 
   abstract getSchool(id: string): Promise<SchoolDto>;
 
-  abstract createSchools(project: CreateSchoolBody): Promise<SchoolDto>;
+  abstract createSchool(project: CreateSchoolBody): Promise<SchoolDto>;
 
   abstract updateSchool(
     id: string,

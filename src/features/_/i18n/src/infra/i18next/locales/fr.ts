@@ -3,6 +3,7 @@ import { frProducts } from '#features/products/i18n';
 import { frProjects } from '#features/projects/i18n';
 import { frSchools } from '#features/schools/i18n';
 import { frSettings } from '#features/settings/i18n';
+import { frStudents } from '#features/students/i18n';
 import { Translations } from '#i18n/domain';
 
 export const fr: Translations = {
@@ -11,6 +12,7 @@ export const fr: Translations = {
   projects: frProjects,
   products: frProducts,
   schools: frSchools,
+  students: frStudents,
   navigation: {
     dashboard: 'Tableau de bord',
     schools: 'Écoles',

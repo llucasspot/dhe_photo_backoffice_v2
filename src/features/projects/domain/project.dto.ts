@@ -17,5 +17,6 @@ export interface ProjectDto {
   orderEndDate: Date;
   messageForClients?: string;
   state: ProjectState;
-  klasses: KlassDto[];
+  klassIds: string[];
+  klasses: Omit<KlassDto, 'project'>[];
 }
