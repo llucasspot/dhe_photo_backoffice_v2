@@ -1,4 +1,5 @@
-import { StudentsMockDao } from './students.mock-dao';
+import { FilesMockDao } from './daos';
+import { StudentsDaoPort } from './daos';
 
 import { LogAction, MockAdapter } from '#core/domain';
 import { inject, singleton } from '#di';
@@ -22,25 +23,24 @@ export class StudentsServiceMockAdapter
   extends MockAdapter
   implements StudentsServicePort
 {
-  private files: Record<string, File> = {};
-
   constructor(
-    @inject(StudentsMockDao)
-    private readonly studentsDao: StudentsMockDao,
+    @inject(StudentsDaoPort)
+    private readonly studentsDao: StudentsDaoPort,
+    @inject(FilesMockDao)
+    private readonly filesDao: FilesMockDao,
   ) {
     super();
   }
 
   async getStudents(klassId: string): Promise<StudentDto[]> {
     await this.delay();
-    return this.studentsDao
-      .getAll()
-      .filter((student) => student.klassId === klassId);
+    const students = await this.studentsDao.getAll();
+    return students.filter((student) => student.klassId === klassId);
   }
 
   async getStudent(id: string): Promise<StudentDto> {
     await this.delay();
-    const student = this.studentsDao.getById(id);
+    const student = await this.studentsDao.getById(id);
     if (!student) {
       throw new Error('Student not found');
     }
@@ -49,11 +49,13 @@ export class StudentsServiceMockAdapter
 
   async createStudent(body: CreateStudentBody): Promise<StudentDto> {
     await this.delay();
-    const uploadedFiles = await this.uploadPhotos(body.photos);
+    const uploadedFiles = await this.filesDao.saveMany(
+      body.photos.map((photo) => ({ file: photo })),
+    );
     return this.studentsDao.save({
       ...body,
       code: generateUniqueCode(),
-      photoIds: uploadedFiles,
+      photoIds: uploadedFiles.map((file) => file.id),
     });
   }
 
@@ -68,7 +70,7 @@ export class StudentsServiceMockAdapter
     body: Partial<StudentDto>,
   ): Promise<StudentDto> {
     await this.delay();
-    const student = this.studentsDao.update(id, body);
+    const student = await this.studentsDao.update(id, body);
     if (!student) {
       throw new Error('Student not found');
     }
@@ -81,18 +83,5 @@ export class StudentsServiceMockAdapter
     if (!student) {
       throw new Error('Student not found');
     }
-  }
-
-  async uploadPhotos(files: File[]): Promise<string[]> {
-    await this.delay();
-    // Simulate file upload by generating random IDs
-    const filesMap = files.map((file) => ({
-      id: Math.random().toString(36).substring(7),
-      file,
-    }));
-    Array.from(filesMap.values()).forEach(({ id, file }) => {
-      this.files[id] = file;
-    });
-    return Array.from(filesMap.values()).map((file) => file.id);
   }
 }

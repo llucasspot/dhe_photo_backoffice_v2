@@ -27,7 +27,7 @@ export class ProductsServiceMockAdapter
 
   async getProduct(id: string): Promise<ProductDto> {
     await this.delay();
-    const product = this.productsMockDao.getById(id);
+    const product = await this.productsMockDao.getById(id);
     if (!product) {
       throw new Error('Product not found');
     }
@@ -46,7 +46,7 @@ export class ProductsServiceMockAdapter
     body: Partial<ProductDto>,
   ): Promise<ProductDto> {
     await this.delay();
-    const product = this.productsMockDao.update(id, body);
+    const product = await this.productsMockDao.update(id, body);
     if (!product) {
       throw new Error('Product not found');
     }

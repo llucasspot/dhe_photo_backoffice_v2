@@ -16,6 +16,4 @@ export abstract class StudentsServicePort {
   ): Promise<StudentDto>;
 
   abstract deleteStudent(id: string): Promise<void>;
-
-  abstract uploadPhotos(files: File[]): Promise<string[]>;
 }

@@ -27,7 +27,7 @@ export class SchoolsServiceMockAdapter
 
   async getSchool(id: string): Promise<SchoolDto> {
     await this.delay();
-    const school = this.schoolsDao.getById(id);
+    const school = await this.schoolsDao.getById(id);
     if (!school) {
       throw new Error('School not found');
     }
@@ -43,7 +43,7 @@ export class SchoolsServiceMockAdapter
 
   async updateSchool(id: string, body: Partial<SchoolDto>): Promise<SchoolDto> {
     await this.delay();
-    const school = this.schoolsDao.update(id, body);
+    const school = await this.schoolsDao.update(id, body);
     if (!school) {
       throw new Error('School not found');
     }

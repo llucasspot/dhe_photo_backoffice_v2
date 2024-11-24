@@ -14,10 +14,8 @@ import {
 } from '#features/projects/domain';
 import { SchoolsServiceMockAdapter } from '#features/schools/infra';
 import { StudentDto } from '#features/students/domain';
-import {
-  StudentsMockDao,
-  StudentsServiceMockAdapter,
-} from '#features/students/infra';
+import { StudentsDaoPort } from '#features/students/infra';
+import { StudentsServiceMockAdapter } from '#features/students/infra';
 
 @singleton()
 export class ProjectsServiceMockAdapter
@@ -29,8 +27,8 @@ export class ProjectsServiceMockAdapter
     private readonly projectsDao: ProjectsMockDao,
     @inject(KlassesMockDao)
     private readonly klassesDao: KlassesMockDao,
-    @inject(StudentsMockDao)
-    private readonly studentsDao: StudentsMockDao,
+    @inject(StudentsDaoPort)
+    private readonly studentsDao: StudentsDaoPort,
     @inject(SchoolsServiceMockAdapter)
     private readonly schoolsService: SchoolsServiceMockAdapter,
     @inject(StudentsServiceMockAdapter)
@@ -43,9 +41,9 @@ export class ProjectsServiceMockAdapter
   async getProjects(): Promise<ProjectDto[]> {
     await this.delay();
     const res: ProjectDto[] = [];
-    const projects = this.projectsDao.getAll();
+    const projects = await this.projectsDao.getAll();
     for (const project of projects) {
-      const klasses = this.getKlassesWithStudents(project);
+      const klasses = await this.getKlassesWithStudents(project);
       const school = await this.schoolsService.getSchool(project.schoolId);
       res.push({
         ...project,
@@ -58,11 +56,11 @@ export class ProjectsServiceMockAdapter
 
   async getProject(id: string): Promise<ProjectDto> {
     await this.delay();
-    const project = this.projectsDao.getById(id);
+    const project = await this.projectsDao.getById(id);
     if (!project) {
       throw new Error('Project not found');
     }
-    const klasses = this.getKlassesWithStudents(project);
+    const klasses = await this.getKlassesWithStudents(project);
     const school = await this.schoolsService.getSchool(project.schoolId);
     return {
       ...project,
@@ -73,12 +71,12 @@ export class ProjectsServiceMockAdapter
 
   async createProject(body: CreateProjectBody): Promise<ProjectDto> {
     await this.delay();
-    const project = this.projectsDao.save({
+    const project = await this.projectsDao.save({
       ...body,
       state: ProjectState.Unpublished,
       klassIds: [],
     });
-    const klasses = this.getKlassesWithStudents(project);
+    const klasses = await this.getKlassesWithStudents(project);
     const school = await this.schoolsService.getSchool(project.schoolId);
     return {
       ...project,
@@ -92,11 +90,11 @@ export class ProjectsServiceMockAdapter
     body: Partial<ProjectDto>,
   ): Promise<ProjectDto> {
     await this.delay();
-    const project = this.projectsDao.update(id, body);
+    const project = await this.projectsDao.update(id, body);
     if (!project) {
       throw new Error('Project not found');
     }
-    const klasses = this.getKlassesWithStudents(project);
+    const klasses = await this.getKlassesWithStudents(project);
     const school = await this.schoolsService.getSchool(project.schoolId);
     return {
       ...project,
@@ -128,7 +126,7 @@ export class ProjectsServiceMockAdapter
     } of klassesBody) {
       let klass = this.klassesDao.getByName(name);
       if (!klass) {
-        klass = this.klassesDao.save({
+        klass = await this.klassesDao.save({
           name,
           projectId,
         });
@@ -161,19 +159,20 @@ export class ProjectsServiceMockAdapter
     return photoId;
   }
 
-  private getKlassesWithStudents(
+  private async getKlassesWithStudents(
     project: Omit<ProjectDto, 'klasses' | 'school'>,
-  ): Omit<KlassDto, 'project'>[] {
-    return this.klassesDao
-      .getAll()
+  ): Promise<Omit<KlassDto, 'project'>[]> {
+    const klasses = await this.klassesDao.getAll();
+    const students = await this.studentsDao.getAll();
+    return klasses
       .filter((klass) => klass.projectId === project.id)
       .map((klass) => {
-        const students = this.studentsDao
-          .getAll()
-          .filter((student) => student.klassId === klass.id);
+        const klassStudents = students.filter(
+          (student) => student.klassId === klass.id,
+        );
         return {
           ...klass,
-          students,
+          students: klassStudents,
           studentIds: students.map((student) => student.id),
         };
       });

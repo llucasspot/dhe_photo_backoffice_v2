@@ -1,19 +1,23 @@
-export abstract class MockDao<TData extends { id: string }> {
+import { Dao } from './dao';
+
+export abstract class MockDao<TData extends { id: string }>
+  implements Dao<TData>
+{
   protected readonly table: TData[];
 
   constructor(initialData: TData[] = []) {
     this.table = initialData;
   }
 
-  getAll(): TData[] {
+  async getAll(): Promise<TData[]> {
     return this.table;
   }
 
-  getById(id: string): TData | undefined {
+  async getById(id: string): Promise<TData | undefined> {
     return this.table.find((item) => item.id === id);
   }
 
-  save(entity: Omit<TData, 'id'>): TData {
+  async save(entity: Omit<TData, 'id'>): Promise<TData> {
     const id = (this.table.length + 1).toString();
     const newEntity = {
       id,
@@ -23,16 +27,19 @@ export abstract class MockDao<TData extends { id: string }> {
     return newEntity;
   }
 
-  saveMany(entities: Omit<TData, 'id'>[]): TData[] {
+  async saveMany(entities: Omit<TData, 'id'>[]): Promise<TData[]> {
     const res: TData[] = [];
     for (const entity of entities) {
-      const newEntity = this.save(entity);
+      const newEntity = await this.save(entity);
       res.push(newEntity);
     }
     return res;
   }
 
-  update(id: string, updatedEntity: Partial<TData>): TData | undefined {
+  async update(
+    id: string,
+    updatedEntity: Partial<TData>,
+  ): Promise<TData | undefined> {
     const index = this.table.findIndex((item) => item.id === id);
     if (index === -1) {
       return undefined;
@@ -41,7 +48,7 @@ export abstract class MockDao<TData extends { id: string }> {
     return this.table[index];
   }
 
-  deleteById(id: string): boolean {
+  async deleteById(id: string): Promise<boolean> {
     const index = this.table.findIndex((item) => item.id === id);
     if (index !== -1) {
       this.table.splice(index, 1);

@@ -1,23 +1,18 @@
-import { inject, singleton } from '#di';
+import { singleton } from '#di';
 import { ProjectDto, ProjectState } from '#features/projects/domain';
-import { SchoolsMockDao } from '#features/schools/infra';
 import { MockDao } from '#mock';
 
 @singleton()
 export class ProjectsMockDao extends MockDao<
   Omit<ProjectDto, 'klasses' | 'school'>
 > {
-  constructor(
-    @inject(SchoolsMockDao)
-    schoolsDao: SchoolsMockDao,
-  ) {
-    const schools = schoolsDao.getAll();
+  constructor() {
     super([
       {
         id: '1',
         name: 'School Project A',
         state: ProjectState.Published,
-        schoolId: schools[0].id,
+        schoolId: '1',
         shotDate: new Date(),
         orderEndDate: new Date(),
         klassIds: [],
@@ -26,7 +21,7 @@ export class ProjectsMockDao extends MockDao<
         id: '2',
         name: 'School Project B',
         state: ProjectState.Unpublished,
-        schoolId: schools[1].id,
+        schoolId: '2',
         shotDate: new Date(),
         orderEndDate: new Date(),
         klassIds: [],
@@ -35,7 +30,7 @@ export class ProjectsMockDao extends MockDao<
         id: '3',
         name: 'School Project C',
         state: ProjectState.Published,
-        schoolId: schools[1].id,
+        schoolId: '3',
         shotDate: new Date(),
         orderEndDate: new Date(),
         klassIds: [],
