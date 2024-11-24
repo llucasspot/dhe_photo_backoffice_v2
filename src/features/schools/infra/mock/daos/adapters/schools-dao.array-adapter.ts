@@ -1,9 +1,14 @@
+import { SchoolsDaoPort } from '../ports';
+
 import { singleton } from '#di';
 import { AvailableCurrency, SchoolDto } from '#features/schools/domain';
 import { MockDao } from '#mock';
 
 @singleton()
-export class SchoolsMockDao extends MockDao<SchoolDto> {
+export class SchoolsDaoArrayAdapter
+  extends MockDao<Omit<SchoolDto, ''>>
+  implements SchoolsDaoPort
+{
   constructor() {
     super([
       {

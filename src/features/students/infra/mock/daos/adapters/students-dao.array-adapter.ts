@@ -1,4 +1,4 @@
-import { StudentsDaoPort } from '../students-dao.port';
+import { StudentsDaoPort } from '../ports';
 
 import { singleton } from '#di';
 import { StudentDto } from '#features/students/domain';

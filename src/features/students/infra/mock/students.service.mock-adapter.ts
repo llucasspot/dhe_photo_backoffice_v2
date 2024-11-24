@@ -1,5 +1,4 @@
-import { FilesMockDao } from './daos';
-import { StudentsDaoPort } from './daos';
+import { FilesDaoPort, StudentsDaoPort } from './daos';
 
 import { LogAction, MockAdapter } from '#core/domain';
 import { inject, singleton } from '#di';
@@ -26,18 +25,20 @@ export class StudentsServiceMockAdapter
   constructor(
     @inject(StudentsDaoPort)
     private readonly studentsDao: StudentsDaoPort,
-    @inject(FilesMockDao)
-    private readonly filesDao: FilesMockDao,
+    @inject(FilesDaoPort)
+    private readonly filesDao: FilesDaoPort,
   ) {
     super();
   }
 
+  @LogAction()
   async getStudents(klassId: string): Promise<StudentDto[]> {
     await this.delay();
     const students = await this.studentsDao.getAll();
     return students.filter((student) => student.klassId === klassId);
   }
 
+  @LogAction()
   async getStudent(id: string): Promise<StudentDto> {
     await this.delay();
     const student = await this.studentsDao.getById(id);
@@ -47,6 +48,7 @@ export class StudentsServiceMockAdapter
     return student;
   }
 
+  @LogAction()
   async createStudent(body: CreateStudentBody): Promise<StudentDto> {
     await this.delay();
     const uploadedFiles = await this.filesDao.saveMany(
@@ -65,6 +67,7 @@ export class StudentsServiceMockAdapter
     return Promise.all(students.map((student) => this.createStudent(student)));
   }
 
+  @LogAction()
   async updateStudent(
     id: string,
     body: Partial<StudentDto>,
@@ -77,6 +80,7 @@ export class StudentsServiceMockAdapter
     return student;
   }
 
+  @LogAction()
   async deleteStudent(id: string): Promise<void> {
     await this.delay();
     const student = this.studentsDao.deleteById(id);

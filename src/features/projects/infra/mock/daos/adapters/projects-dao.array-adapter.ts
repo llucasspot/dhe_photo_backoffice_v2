@@ -1,11 +1,14 @@
+import { ProjectsDaoPort } from '../ports';
+
 import { singleton } from '#di';
 import { ProjectDto, ProjectState } from '#features/projects/domain';
 import { MockDao } from '#mock';
 
 @singleton()
-export class ProjectsMockDao extends MockDao<
-  Omit<ProjectDto, 'klasses' | 'school'>
-> {
+export class ProjectsDaoArrayAdapter
+  extends MockDao<Omit<ProjectDto, 'klasses' | 'school'>>
+  implements ProjectsDaoPort
+{
   constructor() {
     super([
       {

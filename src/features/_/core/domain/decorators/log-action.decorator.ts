@@ -9,7 +9,6 @@ export function LogAction(): MethodDecorator {
     const originalMethod = descriptor.value;
     descriptor.value = async function (...args: any[]) {
       const action = propertyKey.toString();
-      const params = JSON.stringify(args);
       const log = (...data: any[]) => {
         // @ts-expect-error this.logger
         if (this.logger) {
@@ -20,7 +19,7 @@ export function LogAction(): MethodDecorator {
         }
       };
 
-      log('called with params : ', params);
+      log('called with params : ', args);
       try {
         const response = await originalMethod.apply(this, args);
         log('ended with response : ', response);

@@ -1,7 +1,6 @@
 import { CreateKlassesBody } from '../../domain/create-klasses.body';
 
-import { KlassesMockDao } from './klasses.mock-dao';
-import { ProjectsMockDao } from './projects.mock-dao';
+import { KlassesDaoPort, ProjectsDaoPort } from './daos';
 
 import { LogAction, MockAdapter } from '#core/domain';
 import { inject, singleton } from '#di';
@@ -13,9 +12,10 @@ import {
   ProjectState,
 } from '#features/projects/domain';
 import { SchoolsServiceMockAdapter } from '#features/schools/infra';
-import { StudentDto } from '#features/students/domain';
-import { StudentsDaoPort } from '#features/students/infra';
-import { StudentsServiceMockAdapter } from '#features/students/infra';
+import {
+  StudentsDaoPort,
+  StudentsServiceMockAdapter,
+} from '#features/students/infra';
 
 @singleton()
 export class ProjectsServiceMockAdapter
@@ -23,10 +23,10 @@ export class ProjectsServiceMockAdapter
   implements ProjectsServicePort
 {
   constructor(
-    @inject(ProjectsMockDao)
-    private readonly projectsDao: ProjectsMockDao,
-    @inject(KlassesMockDao)
-    private readonly klassesDao: KlassesMockDao,
+    @inject(ProjectsDaoPort)
+    private readonly projectsDao: ProjectsDaoPort,
+    @inject(KlassesDaoPort)
+    private readonly klassesDao: KlassesDaoPort,
     @inject(StudentsDaoPort)
     private readonly studentsDao: StudentsDaoPort,
     @inject(SchoolsServiceMockAdapter)
@@ -54,6 +54,7 @@ export class ProjectsServiceMockAdapter
     return res;
   }
 
+  @LogAction()
   async getProject(id: string): Promise<ProjectDto> {
     await this.delay();
     const project = await this.projectsDao.getById(id);
@@ -69,6 +70,7 @@ export class ProjectsServiceMockAdapter
     };
   }
 
+  @LogAction()
   async createProject(body: CreateProjectBody): Promise<ProjectDto> {
     await this.delay();
     const project = await this.projectsDao.save({
@@ -85,6 +87,7 @@ export class ProjectsServiceMockAdapter
     };
   }
 
+  @LogAction()
   async updateProject(
     id: string,
     body: Partial<ProjectDto>,
@@ -103,6 +106,7 @@ export class ProjectsServiceMockAdapter
     };
   }
 
+  @LogAction()
   async deleteProject(id: string): Promise<void> {
     await this.delay();
     const project = this.projectsDao.deleteById(id);
@@ -111,6 +115,7 @@ export class ProjectsServiceMockAdapter
     }
   }
 
+  @LogAction()
   async createKlassesFromFolders({
     projectId,
     klasses: klassesBody,
@@ -118,37 +123,38 @@ export class ProjectsServiceMockAdapter
     await this.delay();
     const project = await this.getProject(projectId);
 
-    const klasses: Omit<KlassDto, 'project' | 'studentIds' | 'students'>[] = [];
-    const students: StudentDto[] = [];
+    const klasses: Omit<KlassDto, 'project'>[] = [];
     for (const {
       name,
       studentPicture: { file },
     } of klassesBody) {
-      let klass = this.klassesDao.getByName(name);
+      let klass = await this.klassesDao.getByName(project.id, name);
       if (!klass) {
         klass = await this.klassesDao.save({
           name,
           projectId,
         });
+        const student = await this.studentsService.createStudent({
+          photos: [file],
+          klassId: klass.id,
+        });
+        klasses.push({
+          ...klass,
+          students: [student],
+          studentIds: [student].map((student) => student.id),
+        });
       }
-      const student = await this.studentsService.createStudent({
-        photos: [file],
-        klassId: klass.id,
-      });
-      klasses.push(klass);
-      students.push(student);
     }
 
     return klasses.map((klass) => {
       return {
         ...klass,
-        students,
-        studentIds: students.map((student) => student.id),
         project,
       };
     });
   }
 
+  @LogAction()
   async uploadPhoto(photo: File): Promise<string> {
     await this.delay();
     console.log(photo.name);
@@ -159,6 +165,7 @@ export class ProjectsServiceMockAdapter
     return photoId;
   }
 
+  @LogAction()
   private async getKlassesWithStudents(
     project: Omit<ProjectDto, 'klasses' | 'school'>,
   ): Promise<Omit<KlassDto, 'project'>[]> {

@@ -26,7 +26,9 @@ export const useCreateKlassesFromFolders = () => {
     },
     onSuccess: (_res, body) => {
       queryClient.invalidateQueries({
+        // TODO bug see
         queryKey: projectsKeys.detail(body.projectId),
+        // queryKey: projectsKeys.all,
       });
     },
     onError: (error) => {

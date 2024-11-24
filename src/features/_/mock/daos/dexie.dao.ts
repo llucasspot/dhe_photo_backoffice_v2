@@ -16,7 +16,7 @@ export abstract class DexieDao<TData extends { id: string }>
   }
 
   async getById(id: string): Promise<TData | undefined> {
-    return this.entity.get({ id });
+    return this.entity.get({ id: parseInt(id, 10) });
   }
 
   async save(body: Omit<TData, 'id'>): Promise<TData> {

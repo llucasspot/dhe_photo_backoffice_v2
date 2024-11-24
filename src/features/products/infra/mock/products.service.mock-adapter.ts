@@ -1,6 +1,6 @@
-import { ProductsMockDao } from './products.mock-dao';
+import { ProductsDaoPort } from './daos';
 
-import { MockAdapter } from '#core/domain';
+import { LogAction, MockAdapter } from '#core/domain';
 import { inject, singleton } from '#di';
 import {
   CreateProductBody,
@@ -14,17 +14,19 @@ export class ProductsServiceMockAdapter
   implements ProductsServicePort
 {
   constructor(
-    @inject(ProductsMockDao)
-    private readonly productsMockDao: ProductsMockDao,
+    @inject(ProductsDaoPort)
+    private readonly productsMockDao: ProductsDaoPort,
   ) {
     super();
   }
 
+  @LogAction()
   async getProducts(): Promise<ProductDto[]> {
     await this.delay();
     return this.productsMockDao.getAll();
   }
 
+  @LogAction()
   async getProduct(id: string): Promise<ProductDto> {
     await this.delay();
     const product = await this.productsMockDao.getById(id);
@@ -34,6 +36,7 @@ export class ProductsServiceMockAdapter
     return product;
   }
 
+  @LogAction()
   async createProduct(body: CreateProductBody): Promise<ProductDto> {
     await this.delay();
     return this.productsMockDao.save({
@@ -41,6 +44,7 @@ export class ProductsServiceMockAdapter
     });
   }
 
+  @LogAction()
   async updateProduct(
     id: string,
     body: Partial<ProductDto>,
@@ -53,6 +57,7 @@ export class ProductsServiceMockAdapter
     return product;
   }
 
+  @LogAction()
   async deleteProduct(id: string): Promise<void> {
     await this.delay();
     const product = this.productsMockDao.deleteById(id);
