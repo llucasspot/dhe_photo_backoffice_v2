@@ -1,9 +1,10 @@
 import { useParams } from '@tanstack/react-router';
 import { match } from 'ts-pattern';
 
-import { FolderDropzone, KlassGrid } from '../components';
+import { FolderDropzone } from '../components';
 import { useProject } from '../hooks';
 
+import { KlassGrid } from '#features/klasses/react';
 import { ProjectDto } from '#features/projects/domain';
 import { useI18n } from '#i18n/react';
 import { Link } from '#routing/react';

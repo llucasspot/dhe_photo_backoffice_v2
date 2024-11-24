@@ -1,6 +1,6 @@
 import { KlassCard } from './klass-card';
 
-import { KlassDto } from '#features/projects/domain';
+import { KlassDto } from '#features/klasses/domain';
 
 interface KlassGridProps {
   klasses: Omit<KlassDto, 'project'>[];

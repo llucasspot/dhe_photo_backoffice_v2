@@ -1,4 +1,4 @@
-import { KlassDto } from './klass.dto';
+import { KlassDto } from '#features/klasses/domain';
 
 export enum ProjectState {
   Published = 'published',

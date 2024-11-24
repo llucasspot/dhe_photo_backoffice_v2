@@ -13,6 +13,7 @@ import {
 } from '#features/products/react';
 import {
   CreateProjectPage,
+  KlassDetailPage,
   ProjectDetailPage,
   ProjectsPage,
 } from '#features/projects/react';
@@ -95,6 +96,12 @@ export const projectDetailRoute = createRoute({
   component: ProjectDetailPage,
 });
 
+export const klassDetailRoute = createRoute({
+  getParentRoute: () => rootLayout,
+  path: '/projects/$projectId/klasses/$klassId',
+  component: KlassDetailPage,
+});
+
 export const productsRoute = createRoute({
   getParentRoute: () => rootLayout,
   path: '/products',
@@ -146,6 +153,7 @@ export const routeTree = rootRoute.addChildren([
     projectsRoute,
     createProjectRoute,
     projectDetailRoute,
+    klassDetailRoute,
     productsRoute,
     createProductRoute,
     productDetailRoute,

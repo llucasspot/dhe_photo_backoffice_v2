@@ -4,8 +4,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { DatabaseServicePort } from './database.service.port';
 
 import { singleton } from '#di';
+import { KlassDto } from '#features/klasses/domain';
 import { ProductDto } from '#features/products/domain';
-import { KlassDto, ProjectDto } from '#features/projects/domain';
+import { ProjectDto } from '#features/projects/domain';
 import { SchoolDto } from '#features/schools/domain';
 import { FileDto, StudentDto } from '#features/students/domain';
 

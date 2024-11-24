@@ -1,4 +1,4 @@
-import { KlassDto } from '#features/projects/domain';
+import { KlassDto } from '#features/klasses/domain';
 import { Dao } from '#mock';
 
 export abstract class KlassesDaoPort extends Dao<

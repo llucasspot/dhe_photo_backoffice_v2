@@ -10,6 +10,7 @@ export const routes = {
   projects: '/projects',
   projectCreation: '/projects/create',
   projectDetail: '/projects/$projectId',
+  klassDetail: '/projects/$projectId/klasses/$klassId',
   schools: '/schools',
   schoolCreation: '/schools/create',
   schoolDetail: '/schools/$schoolId',

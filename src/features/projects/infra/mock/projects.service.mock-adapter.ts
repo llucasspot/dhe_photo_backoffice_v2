@@ -1,12 +1,13 @@
 import { CreateKlassesBody } from '../../domain/create-klasses.body';
 
-import { KlassesDaoPort, ProjectsDaoPort } from './daos';
+import { ProjectsDaoPort } from './daos';
 
 import { LogAction, MockAdapter } from '#core/domain';
 import { inject, singleton } from '#di';
+import { KlassDto } from '#features/klasses/domain';
+import { KlassesDaoPort } from '#features/klasses/infra';
 import {
   CreateProjectBody,
-  KlassDto,
   ProjectDto,
   ProjectsServicePort,
   ProjectState,
@@ -35,6 +36,24 @@ export class ProjectsServiceMockAdapter
     private readonly studentsService: StudentsServiceMockAdapter,
   ) {
     super();
+  }
+
+  @LogAction()
+  async getKlass(id: string): Promise<Omit<KlassDto, 'project'>> {
+    await this.delay();
+    const klass = await this.klassesDao.getById(id);
+    if (!klass) {
+      throw new Error('Klass not found');
+    }
+    const students = await this.studentsDao.getAll();
+    const klassStudents = students.filter(
+      (student) => student.klassId === klass.id,
+    );
+    return {
+      ...klass,
+      students: klassStudents,
+      studentIds: klassStudents.map((student) => student.id),
+    };
   }
 
   @LogAction()
@@ -166,9 +185,6 @@ export class ProjectsServiceMockAdapter
     await this.delay();
     console.log(photo.name);
     const photoId = `photo_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    // In a real implementation, we would upload the file to a storage service
-    // Here we just store the file name
-    // this.uploadedPhotos.set(photoId, photo.name);
     return photoId;
   }
 
