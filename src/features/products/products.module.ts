@@ -1,11 +1,11 @@
 import { Module } from '#di';
-import { ProductsServicePort } from '#features/products/domain';
+import { ProductsControllerServicePort } from '#features/products/domain';
 import { ProductsServiceMockAdapter } from '#features/products/infra';
 
 @Module({
   providers: [
     {
-      token: ProductsServicePort,
+      token: ProductsControllerServicePort,
       useToken: ProductsServiceMockAdapter,
     },
   ],

@@ -1,7 +1,7 @@
 import { CreateProjectBody } from '../create-project.body';
 import { ProjectDto } from '../project.dto';
 
-export abstract class ProjectsServicePort {
+export abstract class ProjectsControllerServicePort {
   abstract getProjects(): Promise<ProjectDto[]>;
 
   abstract getProject(id: string): Promise<ProjectDto>;

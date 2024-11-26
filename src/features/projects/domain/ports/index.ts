@@ -1,1 +1,1 @@
-export * from './projects.service.port';
+export * from './projects.controller-service.port.ts';

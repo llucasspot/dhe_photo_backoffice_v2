@@ -1,22 +1,22 @@
 import { ProjectsDaoPort } from './daos';
 
-import { LogAction, MockAdapter } from '#core/domain';
+import { ForMockControllerService, LogAction } from '#core/domain';
 import { inject, singleton } from '#di';
 import { KlassDto } from '#features/klasses/domain';
 import { KlassesDaoPort } from '#features/klasses/infra';
 import {
   CreateProjectBody,
   ProjectDto,
-  ProjectsServicePort,
+  ProjectsControllerServicePort,
   ProjectState,
 } from '#features/projects/domain';
 import { SchoolsServiceMockAdapter } from '#features/schools/infra';
-import { StudentsGetterPort } from '#features/students/domain';
+import { StudentsGetterControllerServicePort } from '#features/students/domain';
 
 @singleton()
 export class ProjectsServiceMockAdapter
-  extends MockAdapter
-  implements ProjectsServicePort
+  extends ForMockControllerService
+  implements ProjectsControllerServicePort
 {
   constructor(
     @inject(ProjectsDaoPort)
@@ -25,8 +25,8 @@ export class ProjectsServiceMockAdapter
     private readonly klassesDao: KlassesDaoPort,
     @inject(SchoolsServiceMockAdapter)
     private readonly schoolsService: SchoolsServiceMockAdapter,
-    @inject(StudentsGetterPort)
-    private readonly studentsGetterPort: StudentsGetterPort,
+    @inject(StudentsGetterControllerServicePort)
+    private readonly studentsGetterPort: StudentsGetterControllerServicePort,
   ) {
     super();
   }

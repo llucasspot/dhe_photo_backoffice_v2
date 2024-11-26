@@ -1,6 +1,6 @@
 import { CreateSchoolBody, SchoolDto } from '#features/schools/domain';
 
-export abstract class SchoolsServicePort {
+export abstract class SchoolsServiceControllerServicePort {
   abstract getSchools(): Promise<SchoolDto[]>;
 
   abstract getSchool(schoolId: string): Promise<SchoolDto>;

@@ -1,7 +1,7 @@
 import { CreateProductBody } from '../create-product.body';
 import { ProductDto } from '../product.dto';
 
-export abstract class ProductsServicePort {
+export abstract class ProductsControllerServicePort {
   abstract getProducts(): Promise<ProductDto[]>;
 
   abstract getProduct(id: string): Promise<ProductDto>;

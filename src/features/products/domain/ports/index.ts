@@ -1,1 +1,1 @@
-export * from './products.service.port';
+export * from './products.controller-service.port.ts';

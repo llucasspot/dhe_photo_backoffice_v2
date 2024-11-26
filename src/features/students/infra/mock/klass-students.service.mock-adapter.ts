@@ -1,16 +1,16 @@
 import { StudentsDaoPort } from './daos';
 
-import { MockAdapter } from '#core/domain';
+import { ForMockControllerService } from '#core/domain';
 import { inject, singleton } from '#di';
 import { KlassDto } from '#features/klasses/domain';
 import { KlassesDaoPort } from '#features/klasses/infra';
-import { KlassStudentsServicePort } from '#features/students/domain';
+import { KlassStudentsGetterControllerServicePort } from '#features/students/domain';
 import { Finder, Populator } from '#mock';
 
 @singleton()
 export class KlassStudentsServiceMockAdapter
-  extends MockAdapter
-  implements KlassStudentsServicePort
+  extends ForMockControllerService
+  implements KlassStudentsGetterControllerServicePort
 {
   constructor(
     @inject(KlassesDaoPort)

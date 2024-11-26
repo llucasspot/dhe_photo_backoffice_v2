@@ -5,13 +5,13 @@ import { projectsKeys } from './use-projects.hook';
 import { useService } from '#di/react';
 import {
   CreateProjectBody,
-  ProjectsServicePort,
+  ProjectsControllerServicePort,
 } from '#features/projects/domain';
 import { ToastService } from '#toast/domain';
 
 export const useCreateProject = () => {
   const queryClient = useQueryClient();
-  const projectsService = useService(ProjectsServicePort);
+  const projectsService = useService(ProjectsControllerServicePort);
   const toastService = useService(ToastService);
 
   return useMutation({

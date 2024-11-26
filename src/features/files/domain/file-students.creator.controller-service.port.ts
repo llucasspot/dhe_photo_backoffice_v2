@@ -2,7 +2,7 @@ import { CreateFileStudentBody } from './create-file-student.body';
 import { CreateStudentFilesBody } from './create-student-files.body';
 import { FileStudentDto } from './file-student.dto';
 
-export abstract class FileStudentsServicePort {
+export abstract class FileStudentsCreatorControllerServicePort {
   abstract createStudentFile(
     body: CreateFileStudentBody,
   ): Promise<Omit<FileStudentDto, ''>>;

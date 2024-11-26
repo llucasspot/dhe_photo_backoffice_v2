@@ -1,11 +1,11 @@
 import { Module } from '#di';
-import { KlassesServicePort } from '#features/klasses/domain';
+import { KlassesControllerServicePort } from '#features/klasses/domain';
 import { KlassesServiceMockAdapter } from '#features/klasses/infra';
 
 @Module({
   providers: [
     {
-      token: KlassesServicePort,
+      token: KlassesControllerServicePort,
       useToken: KlassesServiceMockAdapter,
     },
   ],

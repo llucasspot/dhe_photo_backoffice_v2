@@ -1,17 +1,17 @@
 import { ProductsDaoPort } from './daos';
 
-import { LogAction, MockAdapter } from '#core/domain';
+import { ForMockControllerService, LogAction } from '#core/domain';
 import { inject, singleton } from '#di';
 import {
   CreateProductBody,
   ProductDto,
-  ProductsServicePort,
+  ProductsControllerServicePort,
 } from '#features/products/domain';
 
 @singleton()
 export class ProductsServiceMockAdapter
-  extends MockAdapter
-  implements ProductsServicePort
+  extends ForMockControllerService
+  implements ProductsControllerServicePort
 {
   constructor(
     @inject(ProductsDaoPort)

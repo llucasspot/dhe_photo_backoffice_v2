@@ -3,12 +3,15 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { schoolsKeys } from './use-schools.hook';
 
 import { useService } from '#di/react';
-import { CreateSchoolBody, SchoolsServicePort } from '#features/schools/domain';
+import {
+  CreateSchoolBody,
+  SchoolsServiceControllerServicePort,
+} from '#features/schools/domain';
 import { ToastService } from '#toast/domain';
 
 export const useCreateSchool = () => {
   const queryClient = useQueryClient();
-  const schoolsService = useService(SchoolsServicePort);
+  const schoolsService = useService(SchoolsServiceControllerServicePort);
   const toastService = useService(ToastService);
 
   return useMutation({

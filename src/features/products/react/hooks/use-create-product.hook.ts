@@ -5,13 +5,13 @@ import { productsKeys } from './use-products.hook';
 import { useService } from '#di/react';
 import {
   CreateProductBody,
-  ProductsServicePort,
+  ProductsControllerServicePort,
 } from '#features/products/domain';
 import { ToastService } from '#toast/domain';
 
 export const useCreateProduct = () => {
   const queryClient = useQueryClient();
-  const productsService = useService(ProductsServicePort);
+  const productsService = useService(ProductsControllerServicePort);
   const toastService = useService(ToastService);
 
   return useMutation({

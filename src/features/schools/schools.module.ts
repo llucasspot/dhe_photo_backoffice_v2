@@ -1,11 +1,11 @@
 import { Module } from '#di';
-import { SchoolsServicePort } from '#features/schools/domain';
+import { SchoolsServiceControllerServicePort } from '#features/schools/domain';
 import { SchoolsServiceMockAdapter } from '#features/schools/infra';
 
 @Module({
   providers: [
     {
-      token: SchoolsServicePort,
+      token: SchoolsServiceControllerServicePort,
       useToken: SchoolsServiceMockAdapter,
     },
   ],

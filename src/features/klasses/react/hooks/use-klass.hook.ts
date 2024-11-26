@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { useService } from '#di/react';
-import { KlassesServicePort } from '#features/klasses/domain';
+import { KlassesControllerServicePort } from '#features/klasses/domain';
 
 export const klassKeys = {
   all: ['klasses'] as const,
@@ -12,7 +12,7 @@ export const klassKeys = {
 };
 
 export const useKlass = (id: string) => {
-  const klassesServicePort = useService(KlassesServicePort);
+  const klassesServicePort = useService(KlassesControllerServicePort);
 
   return useQuery({
     queryKey: klassKeys.detail(id),

@@ -1,18 +1,18 @@
 import { SchoolsDaoPort } from './daos';
 
-import { LogAction, MockAdapter } from '#core/domain';
+import { ForMockControllerService, LogAction } from '#core/domain';
 import { inject, singleton } from '#di';
 import {
   CreateSchoolBody,
   SchoolDto,
-  SchoolsServicePort,
+  SchoolsServiceControllerServicePort,
 } from '#features/schools/domain';
 import { ExtractPopulatedEntity, Finder, Populator } from '#mock';
 
 @singleton()
 export class SchoolsServiceMockAdapter
-  extends MockAdapter
-  implements SchoolsServicePort
+  extends ForMockControllerService
+  implements SchoolsServiceControllerServicePort
 {
   constructor(
     @inject(SchoolsDaoPort)

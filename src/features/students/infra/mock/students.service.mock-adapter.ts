@@ -1,20 +1,23 @@
 import { StudentsDaoPort } from './daos';
 
-import { LogAction, MockAdapter } from '#core/domain';
+import { ForMockControllerService, LogAction } from '#core/domain';
 import { inject, singleton } from '#di';
-import { StudentsGetterPort } from '#features/students/domain';
-import { StudentDto, StudentsServicePort } from '#features/students/domain';
+import { StudentsGetterControllerServicePort } from '#features/students/domain';
+import {
+  StudentDto,
+  StudentsControllerServicePort,
+} from '#features/students/domain';
 
 @singleton()
 export class StudentsServiceMockAdapter
-  extends MockAdapter
-  implements StudentsServicePort
+  extends ForMockControllerService
+  implements StudentsControllerServicePort
 {
   constructor(
     @inject(StudentsDaoPort)
     private readonly studentsDao: StudentsDaoPort,
-    @inject(StudentsGetterPort)
-    private readonly studentsGetter: StudentsGetterPort,
+    @inject(StudentsGetterControllerServicePort)
+    private readonly studentsGetter: StudentsGetterControllerServicePort,
   ) {
     super();
   }

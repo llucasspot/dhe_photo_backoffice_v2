@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { useService } from '#di/react';
-import { SchoolsServicePort } from '#features/schools/domain';
+import { SchoolsServiceControllerServicePort } from '#features/schools/domain';
 
 export const schoolsKeys = {
   all: ['schools'] as const,
@@ -12,7 +12,7 @@ export const schoolsKeys = {
 };
 
 export const useSchools = () => {
-  const schoolsService = useService(SchoolsServicePort);
+  const schoolsService = useService(SchoolsServiceControllerServicePort);
 
   return useQuery({
     queryKey: schoolsKeys.lists(),

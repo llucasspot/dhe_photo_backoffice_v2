@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { useService } from '#di/react';
-import { ProductsServicePort } from '#features/products/domain';
+import { ProductsControllerServicePort } from '#features/products/domain';
 
 export const productsKeys = {
   all: ['products'] as const,
@@ -12,7 +12,7 @@ export const productsKeys = {
 };
 
 export const useProducts = () => {
-  const productsService = useService(ProductsServicePort);
+  const productsService = useService(ProductsControllerServicePort);
 
   return useQuery({
     queryKey: productsKeys.lists(),

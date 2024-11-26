@@ -1,14 +1,14 @@
-import { FileDto, FilesServicePort } from '../../domain';
+import { FileDto, FilesCreatorControllerServicePort } from '../../domain';
 
 import { FilesDaoPort } from './daos';
 
-import { LogAction, MockAdapter } from '#core/domain';
+import { ForMockControllerService, LogAction } from '#core/domain';
 import { inject, singleton } from '#di';
 
 @singleton()
 export class FilesServiceMockAdapter
-  extends MockAdapter
-  implements FilesServicePort
+  extends ForMockControllerService
+  implements FilesCreatorControllerServicePort
 {
   constructor(
     @inject(FilesDaoPort)
