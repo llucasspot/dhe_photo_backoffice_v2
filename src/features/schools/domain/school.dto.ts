@@ -1,3 +1,5 @@
+import { ProjectDto } from '#features/projects/domain';
+
 export enum AvailableCurrency {
   EUR = 'EUR',
 }
@@ -11,4 +13,6 @@ export interface SchoolDto {
   name: string;
   currency: AvailableCurrency;
   city: string;
+  projects: Omit<ProjectDto, 'school'>[];
+  projectIds: string[];
 }

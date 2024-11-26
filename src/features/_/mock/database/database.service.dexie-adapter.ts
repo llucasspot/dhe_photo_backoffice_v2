@@ -1,42 +1,42 @@
 import Dexie, { EntityTable } from 'dexie';
 import { v4 as uuidv4 } from 'uuid';
 
+import { DtoByTableName } from '../daos';
+
 import { DatabaseServicePort } from './database.service.port';
 
 import { singleton } from '#di';
-import { FileDto } from '#features/files/domain';
-import { KlassDto } from '#features/klasses/domain';
-import { ProductDto } from '#features/products/domain';
-import { ProjectDto } from '#features/projects/domain';
-import { SchoolDto } from '#features/schools/domain';
-import { StudentDto } from '#features/students/domain';
 
-type TConnexion = Dexie & {
-  students: EntityTable<StudentDto, 'id'>;
-  files: EntityTable<FileDto, 'id'>;
-  klasses: EntityTable<KlassDto, 'id'>;
-  projects: EntityTable<ProjectDto, 'id'>;
-  products: EntityTable<ProductDto, 'id'>;
-  schools: EntityTable<SchoolDto, 'id'>;
+export type DexieEntityTable = {
+  files: EntityTable<DtoByTableName['files'], 'id'>;
+  studentFiles: EntityTable<DtoByTableName['studentFiles'], 'id'>;
+  schools: EntityTable<DtoByTableName['schools'], 'id'>;
+  klasses: EntityTable<DtoByTableName['klasses'], 'id'>;
+  products: EntityTable<DtoByTableName['products'], 'id'>;
+  projects: EntityTable<DtoByTableName['projects'], 'id'>;
+  students: EntityTable<DtoByTableName['students'], 'id'>;
 };
+
+export type DexieConnexion = Dexie & DexieEntityTable;
 
 @singleton()
 export class DatabaseServiceDexieAdapter
-  implements DatabaseServicePort<TConnexion>
+  implements DatabaseServicePort<DexieConnexion>
 {
-  private db: TConnexion;
+  private db: DexieConnexion;
 
   constructor() {
-    const db: TConnexion = new Dexie('MyDatabase') as TConnexion;
+    const db: DexieConnexion = new Dexie('MyDatabase') as DexieConnexion;
 
     db.version(1).stores({
-      students: 'id, code, photoIds, klassId',
       files: 'id, file',
-      klasses: 'id, name, projectId',
-      projects:
-        'id, name, schoolId, orderEndDate, shotDate, messageForClients, state',
+      studentFiles: 'id, fileId, studentId',
+      klasses: 'id, projectId, name',
       products: 'id, name, description, longSize, shortSize',
+      projects:
+        'id, schoolId, name, orderEndDate, shotDate, messageForClients, state',
       schools: 'id, name, currency, city',
+      students: 'id, klassId, code',
     });
     db.tables.forEach((table) => {
       table.hook('creating', (_primaryKey, obj) => {

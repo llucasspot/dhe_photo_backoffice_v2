@@ -1,12 +1,12 @@
 import { ProjectsDaoPort } from '../ports';
 
 import { singleton } from '#di';
-import { ProjectDto, ProjectState } from '#features/projects/domain';
+import { ProjectState } from '#features/projects/domain';
 import { MockDao } from '#mock';
 
 @singleton()
 export class ProjectsDaoArrayAdapter
-  extends MockDao<Omit<ProjectDto, 'klasses' | 'school'>>
+  extends MockDao<'projects'>
   implements ProjectsDaoPort
 {
   constructor() {
@@ -18,7 +18,6 @@ export class ProjectsDaoArrayAdapter
         schoolId: '1',
         shotDate: new Date(),
         orderEndDate: new Date(),
-        klassIds: [],
       },
       {
         id: '2',
@@ -27,7 +26,6 @@ export class ProjectsDaoArrayAdapter
         schoolId: '2',
         shotDate: new Date(),
         orderEndDate: new Date(),
-        klassIds: [],
       },
       {
         id: '3',
@@ -36,7 +34,6 @@ export class ProjectsDaoArrayAdapter
         schoolId: '3',
         shotDate: new Date(),
         orderEndDate: new Date(),
-        klassIds: [],
       },
     ]);
   }

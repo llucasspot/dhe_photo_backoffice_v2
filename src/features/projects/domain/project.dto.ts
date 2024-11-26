@@ -1,4 +1,5 @@
 import { KlassDto } from '#features/klasses/domain';
+import { SchoolDto } from '#features/schools/domain';
 
 export enum ProjectState {
   Published = 'published',
@@ -6,12 +7,9 @@ export enum ProjectState {
 }
 
 export interface ProjectDto {
-  schoolId: string;
-  school: {
-    id: string;
-    name: string;
-  };
   id: string;
+  schoolId: string;
+  school?: Omit<SchoolDto, 'projects' | 'projectIds'>;
   name: string;
   shotDate: Date;
   orderEndDate: Date;

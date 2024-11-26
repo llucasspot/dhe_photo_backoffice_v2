@@ -1,13 +1,50 @@
-export abstract class Dao<TData extends { id: string }> {
-  abstract getAll(): Promise<TData[]>;
+import { DtoByTableName } from './dto-by-table-name.type';
+import { Finder } from './populator.builder';
 
-  abstract getById(id: string): Promise<TData | undefined>;
+export abstract class Dao<TTableName extends keyof DtoByTableName> {
+  abstract getAll(): Promise<DtoByTableName[TTableName][]>;
+  abstract getAll<TPopulatedEntity extends DtoByTableName[TTableName]>(
+    finder: Finder<TTableName, TPopulatedEntity>,
+  ): Promise<TPopulatedEntity[]>;
+  abstract getAll<TPopulatedEntity extends DtoByTableName[TTableName]>(
+    finder?: Finder<TTableName, TPopulatedEntity>,
+  ): Promise<DtoByTableName[TTableName][] | TPopulatedEntity[]>;
 
-  abstract save(body: Omit<TData, 'id'>): Promise<TData>;
+  abstract getById(id: string): Promise<DtoByTableName[TTableName] | undefined>;
 
-  abstract saveMany(bodies: Omit<TData, 'id'>[]): Promise<TData[]>;
+  abstract get(): Promise<DtoByTableName[TTableName] | undefined>;
+  abstract get<TPopulatedEntity extends DtoByTableName[TTableName]>(
+    finder: Finder<TTableName, TPopulatedEntity>,
+  ): Promise<TPopulatedEntity | undefined>;
+  abstract get<TPopulatedEntity extends DtoByTableName[TTableName]>(
+    finder?: Finder<TTableName, TPopulatedEntity>,
+  ): Promise<DtoByTableName[TTableName] | TPopulatedEntity | undefined>;
 
-  abstract update(id: string, body: Partial<TData>): Promise<TData | undefined>;
+  abstract save(
+    body: Omit<DtoByTableName[TTableName], 'id'>,
+  ): Promise<DtoByTableName[TTableName]>;
+
+  abstract saveMany(
+    bodies: Omit<DtoByTableName[TTableName], 'id'>[],
+  ): Promise<DtoByTableName[TTableName][]>;
+
+  abstract update(
+    id: string,
+    body: Partial<DtoByTableName[TTableName]>,
+  ): Promise<DtoByTableName[TTableName] | undefined>;
 
   abstract deleteById(id: string): Promise<boolean>;
 }
+
+export type FilterOperator = '$equals' | '$notEquals' | '$in' | '$like';
+
+export type Filter<
+  TData extends object,
+  TOperator extends FilterOperator = FilterOperator,
+> = TOperator extends '$equals' | '$notEquals'
+  ? [key: keyof TData, operator: TOperator, value: TData[keyof TData]]
+  : TOperator extends '$in'
+    ? [key: keyof TData, operator: TOperator, value: TData[keyof TData][]]
+    : TOperator extends '$like'
+      ? [key: keyof TData, operator: TOperator, value: string]
+      : never;

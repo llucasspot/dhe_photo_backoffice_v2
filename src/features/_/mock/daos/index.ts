@@ -1,3 +1,3 @@
 export * from './dao';
-export * from './dexie.dao';
-export * from './mock-dao';
+export * from './dto-by-table-name.type';
+export * from './populator.builder';

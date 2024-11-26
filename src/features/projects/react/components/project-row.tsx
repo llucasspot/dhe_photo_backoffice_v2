@@ -9,6 +9,9 @@ interface ProjectRowProps {
 export const ProjectRow = ({ project }: ProjectRowProps) => {
   const { t } = useI18n();
   const projectId = project.id;
+
+  const school = project.school;
+
   return (
     <Link
       to="/projects/$projectId"
@@ -30,7 +33,8 @@ export const ProjectRow = ({ project }: ProjectRowProps) => {
                 {project.name}
               </h3>
               <p className="text-sm text-gray-500">
-                {project.school.name} • {t(`common.status.${project.state}`)}
+                {school ? school.name : '// TODO unknown'} •{' '}
+                {t(`common.status.${project.state}`)}
               </p>
             </div>
           </div>

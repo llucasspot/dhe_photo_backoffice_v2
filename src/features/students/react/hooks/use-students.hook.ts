@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { useService } from '#di/react';
-import { StudentsServicePort } from '#features/students/domain';
+import { KlassStudentsServicePort } from '#features/students/domain';
 
 export const studentsKeys = {
   all: ['students'] as const,
@@ -12,10 +12,10 @@ export const studentsKeys = {
 };
 
 export const useStudents = (klassId: string) => {
-  const studentsService = useService(StudentsServicePort);
+  const klassStudentsService = useService(KlassStudentsServicePort);
 
   return useQuery({
     queryKey: studentsKeys.list(klassId),
-    queryFn: () => studentsService.getStudents(klassId),
+    queryFn: () => klassStudentsService.getStudents(klassId),
   });
 };

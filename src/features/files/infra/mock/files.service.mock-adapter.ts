@@ -18,6 +18,11 @@ export class FilesServiceMockAdapter
   }
 
   @LogAction()
+  async createFile(file: File): Promise<Omit<FileDto, ''>> {
+    return this.filesDao.save({ file });
+  }
+
+  @LogAction()
   async createFiles(body: File[]): Promise<Omit<FileDto, ''>[]> {
     return this.filesDao.saveMany(body.map((photo) => ({ file: photo })));
   }

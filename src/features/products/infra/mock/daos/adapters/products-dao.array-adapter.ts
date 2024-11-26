@@ -1,12 +1,11 @@
 import { ProductsDaoPort } from '../ports';
 
 import { singleton } from '#di';
-import { ProductDto } from '#features/products/domain';
 import { MockDao } from '#mock';
 
 @singleton()
 export class ProductsDaoArrayAdapter
-  extends MockDao<Omit<ProductDto, ''>>
+  extends MockDao<'products'>
   implements ProductsDaoPort
 {
   constructor() {

@@ -6,7 +6,7 @@ import { MockDao } from '#mock';
 
 @singleton()
 export class KlassesDaoArrayAdapter
-  extends MockDao<Omit<KlassDto, 'project' | 'students' | 'studentIds'>>
+  extends MockDao<'klasses'>
   implements KlassesDaoPort
 {
   constructor() {

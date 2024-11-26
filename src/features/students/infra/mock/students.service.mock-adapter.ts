@@ -2,21 +2,8 @@ import { StudentsDaoPort } from './daos';
 
 import { LogAction, MockAdapter } from '#core/domain';
 import { inject, singleton } from '#di';
-import { FilesServicePort } from '#features/files/domain';
-import {
-  CreateStudentBody,
-  StudentDto,
-  StudentsServicePort,
-} from '#features/students/domain';
-
-function generateUniqueCode(): string {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let code = '';
-  for (let i = 0; i < 8; i++) {
-    code += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return code;
-}
+import { StudentsGetterPort } from '#features/students/domain';
+import { StudentDto, StudentsServicePort } from '#features/students/domain';
 
 @singleton()
 export class StudentsServiceMockAdapter
@@ -26,63 +13,29 @@ export class StudentsServiceMockAdapter
   constructor(
     @inject(StudentsDaoPort)
     private readonly studentsDao: StudentsDaoPort,
-    @inject(FilesServicePort)
-    private readonly filesService: FilesServicePort,
+    @inject(StudentsGetterPort)
+    private readonly studentsGetter: StudentsGetterPort,
   ) {
     super();
   }
 
   @LogAction()
-  async getStudents(klassId: string): Promise<StudentDto[]> {
-    await this.delay();
-    const students = await this.studentsDao.getAll();
-    return students.filter((student) => student.klassId === klassId);
-  }
-
-  @LogAction()
-  async getStudent(id: string): Promise<StudentDto> {
-    await this.delay();
-    const student = await this.studentsDao.getById(id);
-    if (!student) {
-      throw new Error('Student not found');
-    }
-    return student;
-  }
-
-  @LogAction()
-  async createStudent(body: CreateStudentBody): Promise<StudentDto> {
-    await this.delay();
-    const uploadedFiles = await this.filesService.createFiles(body.photos);
-    return this.studentsDao.save({
-      ...body,
-      code: generateUniqueCode(),
-      photoIds: uploadedFiles.map((file) => file.id),
-    });
-  }
-
-  @LogAction()
-  async createStudents(students: CreateStudentBody[]): Promise<StudentDto[]> {
-    await this.delay();
-    return Promise.all(students.map((student) => this.createStudent(student)));
-  }
-
-  @LogAction()
   async updateStudent(
-    id: string,
+    studentId: string,
     body: Partial<StudentDto>,
   ): Promise<StudentDto> {
     await this.delay();
-    const student = await this.studentsDao.update(id, body);
+    const student = await this.studentsDao.update(studentId, body);
     if (!student) {
       throw new Error('Student not found');
     }
-    return student;
+    return this.studentsGetter.getStudent(studentId);
   }
 
   @LogAction()
-  async deleteStudent(id: string): Promise<void> {
+  async deleteStudent(studentId: string): Promise<void> {
     await this.delay();
-    const student = this.studentsDao.deleteById(id);
+    const student = this.studentsDao.deleteById(studentId);
     if (!student) {
       throw new Error('Student not found');
     }

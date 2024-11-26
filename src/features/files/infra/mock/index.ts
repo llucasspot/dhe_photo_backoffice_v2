@@ -1,2 +1,3 @@
 export * from './daos';
-export * from './files.service.mock-adapter.ts';
+export * from './file-students.service.mock-adapter';
+export * from './files.service.mock-adapter';

@@ -1,22 +1,21 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { CreateKlassesBody } from '../../domain/create-klasses.body';
-
 import { projectsKeys } from './use-projects.hook';
 
 import { useService } from '#di/react';
-import { ProjectsServicePort } from '#features/projects/domain';
+import { KlassesServicePort } from '#features/klasses/domain';
+import { CreateKlassesBody } from '#features/projects/domain';
 import { ToastService } from '#toast/domain';
 
 export const useCreateKlassesFromFolders = () => {
   const queryClient = useQueryClient();
-  const projectsService = useService(ProjectsServicePort);
+  const klassesService = useService(KlassesServicePort);
   const toastService = useService(ToastService);
 
   return useMutation({
     mutationFn: async (body: CreateKlassesBody) => {
       return toastService.promise(
-        () => projectsService.createKlassesFromFolders(body),
+        () => klassesService.createKlassesFromFolders(body),
         {
           pending: 'klasses.create.pending',
           success: 'klasses.create.success',

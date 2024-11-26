@@ -6,14 +6,14 @@ import { DatabaseServiceDexieAdapter, DexieDao } from '#mock';
 
 @singleton()
 export class KlassesDaoDexieAdapter
-  extends DexieDao<Omit<KlassDto, 'project' | 'students' | 'studentIds'>>
+  extends DexieDao<'klasses'>
   implements KlassesDaoPort
 {
   constructor(
     @inject(DatabaseServiceDexieAdapter)
     databaseService: DatabaseServiceDexieAdapter,
   ) {
-    super(databaseService.getConnexion().klasses);
+    super(databaseService.getConnexion(), 'klasses');
   }
 
   async getByName(
@@ -22,6 +22,6 @@ export class KlassesDaoDexieAdapter
   ): Promise<
     Omit<KlassDto, 'project' | 'students' | 'studentIds'> | undefined
   > {
-    return this.entity.get({ name, projectId });
+    return this.query.get({ name, projectId });
   }
 }

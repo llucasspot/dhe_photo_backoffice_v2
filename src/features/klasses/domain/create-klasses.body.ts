@@ -1,4 +1,4 @@
-import { CreateKlassBody } from './create-klass.body.ts';
+import { CreateKlassBody } from './create-klass.body';
 
 import { Dto } from '#core/domain';
 
