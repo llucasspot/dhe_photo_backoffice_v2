@@ -1,5 +1,6 @@
 import { CommonModule } from './common.module';
 
+import { ApiModule } from '#api';
 import { Module } from '#di';
 import { AuthModule } from '#features/auth';
 import { FilesModule } from '#features/files';
@@ -11,6 +12,7 @@ import { StudentsModule } from '#features/students';
 
 @Module({
   imports: [
+    ApiModule,
     CommonModule,
     AuthModule,
     ProjectsModule,

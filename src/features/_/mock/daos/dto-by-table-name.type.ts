@@ -15,3 +15,5 @@ export type DtoByTableName = {
   projects: Project;
   students: Student;
 };
+
+export type TableName = keyof DtoByTableName;

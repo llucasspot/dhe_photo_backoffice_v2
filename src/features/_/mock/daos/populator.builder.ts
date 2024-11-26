@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { DtoByTableName } from './dto-by-table-name.type';
+import { DtoByTableName, TableName } from './dto-by-table-name.type';
 
 import { Filter } from '#mock';
 
@@ -22,7 +22,7 @@ export type PopulateManyWith<
 };
 
 export class Populator<
-  TTableName extends keyof DtoByTableName,
+  TTableName extends TableName,
   TPopulatedEntity extends DtoByTableName[TTableName],
   TPopulatedAs extends string,
 > {
@@ -32,8 +32,8 @@ export class Populator<
     public readonly as: TPopulatedAs,
     public readonly tableName: TTableName,
     public readonly populators: Populator<
-      keyof DtoByTableName,
-      DtoByTableName[keyof DtoByTableName],
+      TableName,
+      DtoByTableName[TableName],
       string
     >[],
     public readonly filters: Filter<TPopulatedEntity>[],
@@ -41,7 +41,7 @@ export class Populator<
   ) {}
 
   static builder<
-    TTableName extends keyof DtoByTableName,
+    TTableName extends TableName,
     TPopulatedEntity extends DtoByTableName[TTableName],
     TPopulatedAs extends string,
   >(as: TPopulatedAs, tableName: TTableName) {
@@ -53,7 +53,7 @@ export class Populator<
 }
 
 class PopulatorBuilder<
-  TTableName extends keyof DtoByTableName,
+  TTableName extends TableName,
   TPopulatedEntity extends DtoByTableName[TTableName],
   TPopulatedAs extends string,
 > {
@@ -61,8 +61,8 @@ class PopulatorBuilder<
     private readonly as: TPopulatedAs,
     public readonly tableName: TTableName,
     private readonly populators: Populator<
-      keyof DtoByTableName,
-      DtoByTableName[keyof DtoByTableName],
+      TableName,
+      DtoByTableName[TableName],
       string
     >[] = [],
     private readonly filters: Filter<TPopulatedEntity>[] = [],
@@ -76,7 +76,7 @@ class PopulatorBuilder<
 
   populateWith<
     TForeignKey extends keyof TPopulatedEntity,
-    TTableName extends keyof DtoByTableName,
+    TTableName extends TableName,
     TEntity extends DtoByTableName[TTableName],
     TAs extends string,
   >(foreignKey: TForeignKey, populator: Populator<TTableName, TEntity, TAs>) {
@@ -91,7 +91,7 @@ class PopulatorBuilder<
   }
 
   populateManyWith<
-    TTableName extends keyof DtoByTableName,
+    TTableName extends TableName,
     TEntity extends DtoByTableName[TTableName],
     TAs extends string,
   >(populator: Populator<TTableName, TEntity, TAs>) {
@@ -139,14 +139,14 @@ export type ExtractPopulatedEntity<TFinder> =
     : never;
 
 export class Finder<
-  TTableName extends keyof DtoByTableName,
+  TTableName extends TableName,
   TPopulatedEntity extends DtoByTableName[TTableName],
 > {
   constructor(
     public readonly tableName: TTableName,
     public readonly populators: Populator<
-      keyof DtoByTableName,
-      DtoByTableName[keyof DtoByTableName],
+      TableName,
+      DtoByTableName[TableName],
       string
     >[] = [],
     public readonly filters: Filter<TPopulatedEntity>[] = [],
@@ -161,7 +161,7 @@ export class Finder<
 
   populateWith<
     TForeignKey extends keyof TPopulatedEntity,
-    TTableName extends keyof DtoByTableName,
+    TTableName extends TableName,
     TEntity extends DtoByTableName[TTableName],
     TAs extends string,
   >(foreignKey: TForeignKey, populator: Populator<TTableName, TEntity, TAs>) {
@@ -175,7 +175,7 @@ export class Finder<
   }
 
   populateManyWith<
-    TTableName extends keyof DtoByTableName,
+    TTableName extends TableName,
     TEntity extends DtoByTableName[TTableName],
     TAs extends string,
   >(populator: Populator<TTableName, TEntity, TAs>) {

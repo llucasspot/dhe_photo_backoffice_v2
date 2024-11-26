@@ -12,6 +12,6 @@ export class ProductsDaoDexieAdapter
     @inject(DatabaseServiceDexieAdapter)
     databaseService: DatabaseServiceDexieAdapter,
   ) {
-    super(databaseService.getConnexion(), 'products');
+    super(databaseService, 'products');
   }
 }

@@ -1,2 +1,2 @@
-export * from './dexie.dao';
-export * from './mock-dao';
+export * from './dexie';
+export * from './run-time';

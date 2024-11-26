@@ -13,7 +13,7 @@ export class KlassesDaoDexieAdapter
     @inject(DatabaseServiceDexieAdapter)
     databaseService: DatabaseServiceDexieAdapter,
   ) {
-    super(databaseService.getConnexion(), 'klasses');
+    super(databaseService, 'klasses');
   }
 
   async getByName(

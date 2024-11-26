@@ -7,21 +7,13 @@ import { StudentsGetterPortMockAdapter } from './infra/mock/students.getter.mock
 
 import { Module } from '#di';
 import { StudentsServicePort } from '#features/students/domain';
-import {
-  StudentsDaoDexieAdapter,
-  StudentsDaoPort,
-  StudentsServiceMockAdapter,
-} from '#features/students/infra';
+import { StudentsServiceMockAdapter } from '#features/students/infra';
 
 @Module({
   providers: [
     {
       token: StudentsServicePort,
       useToken: StudentsServiceMockAdapter,
-    },
-    {
-      token: StudentsDaoPort,
-      useToken: StudentsDaoDexieAdapter,
     },
     {
       token: KlassStudentsServicePort,

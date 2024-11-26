@@ -10,15 +10,17 @@ export abstract class Dao<TTableName extends keyof DtoByTableName> {
     finder?: Finder<TTableName, TPopulatedEntity>,
   ): Promise<DtoByTableName[TTableName][] | TPopulatedEntity[]>;
 
-  abstract getById(id: string): Promise<DtoByTableName[TTableName] | undefined>;
+  abstract getById(
+    id: string,
+  ): Promise<DtoByTableName[TTableName] | undefined | null>;
 
-  abstract get(): Promise<DtoByTableName[TTableName] | undefined>;
+  abstract get(): Promise<DtoByTableName[TTableName] | undefined | null>;
   abstract get<TPopulatedEntity extends DtoByTableName[TTableName]>(
     finder: Finder<TTableName, TPopulatedEntity>,
   ): Promise<TPopulatedEntity | undefined>;
   abstract get<TPopulatedEntity extends DtoByTableName[TTableName]>(
     finder?: Finder<TTableName, TPopulatedEntity>,
-  ): Promise<DtoByTableName[TTableName] | TPopulatedEntity | undefined>;
+  ): Promise<DtoByTableName[TTableName] | TPopulatedEntity | undefined | null>;
 
   abstract save(
     body: Omit<DtoByTableName[TTableName], 'id'>,
@@ -31,7 +33,7 @@ export abstract class Dao<TTableName extends keyof DtoByTableName> {
   abstract update(
     id: string,
     body: Partial<DtoByTableName[TTableName]>,
-  ): Promise<DtoByTableName[TTableName] | undefined>;
+  ): Promise<DtoByTableName[TTableName] | undefined | null>;
 
   abstract deleteById(id: string): Promise<boolean>;
 }

@@ -68,6 +68,7 @@ export default defineConfig({
       '#toast/react': build('src/features/_/toast/react'),
       '#toast': build('src/features/_/toast'),
       '#mock': build('src/features/_/mock'),
+      '#api': build('src/features/_/api'),
     },
   },
 });

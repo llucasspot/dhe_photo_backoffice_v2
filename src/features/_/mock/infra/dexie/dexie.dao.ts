@@ -1,25 +1,23 @@
 import { Collection, EntityTable, IDType, InsertType } from 'dexie';
 
-import { Finder, Populator } from '../daos';
-import { DtoByTableName } from '../daos';
-import { Dao, Filter, FilterOperator } from '../daos';
-import { DexieConnexion, DexieEntityTable } from '../database';
+import {
+  Dao,
+  DtoByTableName,
+  Filter,
+  Finder,
+  Populator,
+  TableName,
+} from '../../daos';
 
-type OperatorMapperr<
-  TData extends { id: string },
-  TFilterOperator extends FilterOperator = FilterOperator,
-> = (
-  query: Pick<EntityTable<TData, 'id'>, 'filter'>,
-  filter: Filter<TData, TFilterOperator>,
-) => Collection<TData, IDType<TData, 'id'>, InsertType<TData, 'id'>>;
+import {
+  DatabaseServiceDexieAdapter,
+  DexieConnexion,
+} from './database.service.dexie-adapter';
 
-export class DexieDao<TTableName extends keyof DtoByTableName>
-  implements Dao<TTableName>
-{
+export class DexieDao<TTableName extends TableName> implements Dao<TTableName> {
   protected query: EntityTable<DtoByTableName[TTableName], 'id'>;
   private connexion: DexieConnexion;
-  private tableName: TTableName;
-  private operatorMapperr = {
+  private operatorMapper = {
     $equals: <TData extends { id: string }>(
       query: Pick<EntityTable<TData, 'id'>, 'filter'>,
       [key, , value]: Filter<TData, '$equals'>,
@@ -43,22 +41,36 @@ export class DexieDao<TTableName extends keyof DtoByTableName>
           .startsWith(value.toLowerCase());
       }),
   } as const satisfies {
-    $equals: OperatorMapperr<DtoByTableName[TTableName], '$equals'>;
-    $notEquals: OperatorMapperr<DtoByTableName[TTableName], '$notEquals'>;
-    $in: OperatorMapperr<DtoByTableName[TTableName], '$in'>;
-    $like: OperatorMapperr<DtoByTableName[TTableName], '$like'>;
+    $equals: <TData extends { id: string }>(
+      query: Pick<EntityTable<TData, 'id'>, 'filter'>,
+      filter: Filter<TData, '$equals'>,
+    ) => Collection<TData, IDType<TData, 'id'>, InsertType<TData, 'id'>>;
+    $notEquals: <TData extends { id: string }>(
+      query: Pick<EntityTable<TData, 'id'>, 'filter'>,
+      filter: Filter<TData, '$notEquals'>,
+    ) => Collection<TData, IDType<TData, 'id'>, InsertType<TData, 'id'>>;
+    $in: <TData extends { id: string }>(
+      query: Pick<EntityTable<TData, 'id'>, 'filter'>,
+      filter: Filter<TData, '$in'>,
+    ) => Collection<TData, IDType<TData, 'id'>, InsertType<TData, 'id'>>;
+    $like: <TData extends { id: string }>(
+      query: Pick<EntityTable<TData, 'id'>, 'filter'>,
+      filter: Filter<TData, '$like'>,
+    ) => Collection<TData, IDType<TData, 'id'>, InsertType<TData, 'id'>>;
   };
 
-  constructor(connexion: DexieConnexion, tableName: TTableName) {
-    this.connexion = connexion;
-    this.tableName = tableName;
+  constructor(
+    databaseService: DatabaseServiceDexieAdapter,
+    tableName: TTableName,
+  ) {
+    this.connexion = databaseService.getConnexion();
     this.query = this.getRelatedTable(tableName);
   }
 
   async getAll<TPopulatedEntity extends DtoByTableName[TTableName]>(
     finder?: Finder<TTableName, TPopulatedEntity>,
   ): Promise<DtoByTableName[TTableName][] | TPopulatedEntity[]> {
-    const query = this.getRelatedTable(this.tableName);
+    const query = this.query;
     this.applyFilters(query, finder?.filters);
     const results = await query.toArray();
     await this.applyPopulators(results, finder?.populators);
@@ -162,13 +174,6 @@ export class DexieDao<TTableName extends keyof DtoByTableName>
   ) {
     for (const filter of filters) {
       this.applyFilter(query, filter);
-      // const [, operator] = filter;
-      // const applyOperator = this.operatorMapperr[operator];
-      // query = applyOperator(
-      //   query,
-      //   // @ts-expect-error filter
-      //   filter,
-      // );
     }
   }
 
@@ -180,7 +185,7 @@ export class DexieDao<TTableName extends keyof DtoByTableName>
     filter: Filter<TPopulatedEntity>,
   ) {
     const [, operator] = filter;
-    const applyOperator = this.operatorMapperr[operator];
+    const applyOperator = this.operatorMapper[operator];
     query = applyOperator<TData>(
       query,
       // @ts-expect-error filter
@@ -190,11 +195,7 @@ export class DexieDao<TTableName extends keyof DtoByTableName>
 
   private async applyPopulatorsForGet<
     TData extends { id: string },
-    TPopulator extends Populator<
-      keyof DtoByTableName,
-      DtoByTableName[keyof DtoByTableName],
-      string
-    >,
+    TPopulator extends Populator<TableName, DtoByTableName[TableName], string>,
   >(results: TData, populators: TPopulator[] = []) {
     for (const populator of populators) {
       await this.applyPopulatorForGet(results, populator);
@@ -203,11 +204,7 @@ export class DexieDao<TTableName extends keyof DtoByTableName>
 
   private async applyPopulators<
     TData extends { id: string },
-    TPopulator extends Populator<
-      keyof DtoByTableName,
-      DtoByTableName[keyof DtoByTableName],
-      string
-    >,
+    TPopulator extends Populator<TableName, DtoByTableName[TableName], string>,
   >(results: TData[], populators: TPopulator[] = []) {
     for (const populator of populators) {
       await this.applyPopulator(results, populator);
@@ -216,24 +213,17 @@ export class DexieDao<TTableName extends keyof DtoByTableName>
 
   private async applyPopulatorForGet<
     TData extends { id: string },
-    TTableName extends keyof DtoByTableName,
+    TTableName extends TableName,
     TPopulatedEntity extends DtoByTableName[TTableName],
     TPopulatedAs extends string,
   >(
     result: TData,
     populator: Populator<TTableName, TPopulatedEntity, TPopulatedAs>,
   ) {
-    console.log('[DexieDao] [applyPopulatorForGet] [result] :', result);
     const query = this.getRelatedTable(populator.tableName);
     this.applyFilters(query, populator.filters);
-    console.log('[DexieDao] [applyPopulatorForGet] [populator] :', populator);
     if (populator.isMany) {
-      console.log('[DexieDao] [applyPopulatorForGet] [lala] : ', query);
       const relatedResults = await query.toArray();
-      console.log(
-        '[DexieDao] [applyPopulatorForGet] [relatedResults] :',
-        relatedResults,
-      );
       await this.applyPopulators(relatedResults, populator.populators);
       // @ts-expect-error Type TPopulatedAs cannot be used to index type TData
       result[populator.as] = relatedResults;
@@ -246,7 +236,7 @@ export class DexieDao<TTableName extends keyof DtoByTableName>
 
   private async applyPopulator<
     TData extends { id: string },
-    TTableName extends keyof DtoByTableName,
+    TTableName extends TableName,
     TPopulatedEntity extends DtoByTableName[TTableName],
     TPopulatedAs extends string,
   >(
@@ -273,9 +263,7 @@ export class DexieDao<TTableName extends keyof DtoByTableName>
     }
   }
 
-  private getRelatedTable<TTableName extends keyof DexieEntityTable>(
-    tableName: TTableName,
-  ) {
+  private getRelatedTable<TTableName extends TableName>(tableName: TTableName) {
     return this.connexion[tableName] as unknown as EntityTable<
       DtoByTableName[TTableName],
       'id'

@@ -75,7 +75,8 @@
       "#toast/domain": ["./src/features/_/toast/domain"],
       "#toast/react": ["./src/features/_/toast/react"],
       "#toast": ["./src/features/_/toast"],
-      "#mock": ["./src/features/_/mock"]
+      "#mock": ["./src/features/_/mock"],
+      "#api": ["./src/features/_/api"]
     },
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true

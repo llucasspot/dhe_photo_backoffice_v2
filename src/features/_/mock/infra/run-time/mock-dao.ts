@@ -1,8 +1,8 @@
-import { Finder } from '../daos';
-import { DtoByTableName } from '../daos';
-import { Dao } from '../daos';
+import { Finder, TableName } from '../../daos';
+import { DtoByTableName } from '../../daos';
+import { Dao } from '../../daos';
 
-export abstract class MockDao<TTableName extends keyof DtoByTableName>
+export abstract class MockDao<TTableName extends TableName>
   implements Dao<TTableName>
 {
   protected readonly table: DtoByTableName[TTableName][];

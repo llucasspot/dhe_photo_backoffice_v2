@@ -12,6 +12,6 @@ export class FileStudentsDaoDexieAdapter
     @inject(DatabaseServiceDexieAdapter)
     databaseService: DatabaseServiceDexieAdapter,
   ) {
-    super(databaseService.getConnexion(), 'studentFiles');
+    super(databaseService, 'studentFiles');
   }
 }

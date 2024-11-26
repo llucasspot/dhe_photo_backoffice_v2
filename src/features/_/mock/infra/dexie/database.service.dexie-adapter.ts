@@ -1,23 +1,14 @@
 import Dexie, { EntityTable } from 'dexie';
 import { v4 as uuidv4 } from 'uuid';
 
-import { DtoByTableName } from '../daos';
-
-import { DatabaseServicePort } from './database.service.port';
+import { DtoByTableName, TableName } from '../../daos';
+import { DatabaseServicePort } from '../../database';
 
 import { singleton } from '#di';
 
-export type DexieEntityTable = {
-  files: EntityTable<DtoByTableName['files'], 'id'>;
-  studentFiles: EntityTable<DtoByTableName['studentFiles'], 'id'>;
-  schools: EntityTable<DtoByTableName['schools'], 'id'>;
-  klasses: EntityTable<DtoByTableName['klasses'], 'id'>;
-  products: EntityTable<DtoByTableName['products'], 'id'>;
-  projects: EntityTable<DtoByTableName['projects'], 'id'>;
-  students: EntityTable<DtoByTableName['students'], 'id'>;
+export type DexieConnexion = Dexie & {
+  [K in TableName]: EntityTable<DtoByTableName[K], 'id'>;
 };
-
-export type DexieConnexion = Dexie & DexieEntityTable;
 
 @singleton()
 export class DatabaseServiceDexieAdapter
