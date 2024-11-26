@@ -1,4 +1,4 @@
-import { DexieDatabaseModule } from '../mock/infra/dexie/dexie-database.module.ts';
+import { DexieDatabaseModule } from '../mock/infra/dexie/dexie-database.module';
 
 import { Module } from '#di';
 

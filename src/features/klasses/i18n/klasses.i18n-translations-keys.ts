@@ -13,6 +13,17 @@ export type KlassesI18nTranslationsKeys = {
     fields: {
       name: string;
     };
+    groupPhoto: {
+      title: string;
+      dropzone: {
+        instructions: string;
+        hint: string;
+        dragActive: string;
+      };
+      list: {
+        empty: string;
+      };
+    };
   };
   create: {
     title: string;

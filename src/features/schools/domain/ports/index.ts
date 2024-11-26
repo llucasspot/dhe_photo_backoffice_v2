@@ -1,1 +1,1 @@
-export * from './schools.service.controller-service.port.ts';
+export * from './schools.service.controller-service.port';

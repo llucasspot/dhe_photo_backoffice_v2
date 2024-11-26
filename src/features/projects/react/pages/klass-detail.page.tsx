@@ -1,6 +1,7 @@
 import { useParams } from '@tanstack/react-router';
 import { match } from 'ts-pattern';
 
+import { FolderDropzone } from '../components';
 import { useKlass } from '../hooks';
 
 import { KlassDto } from '#features/klasses/domain';
@@ -54,6 +55,29 @@ const KlassDetailContent = ({
         </div>
       </div>
 
+      {/* Group Photos Section */}
+      <div className="mb-8">
+        <h3 className="text-lg font-medium text-gray-900 mb-4">
+          {t('klasses.detail.groupPhoto.title')}
+        </h3>
+        <FolderDropzone
+          labels={{
+            instructions: 'klasses.detail.groupPhoto.dropzone.instructions',
+            hint: 'klasses.detail.groupPhoto.dropzone.hint',
+            dragActive: 'klasses.detail.groupPhoto.dropzone.dragActive',
+          }}
+          fileValidator={() => null}
+          onDrop={async () => {}}
+        />
+        <div className="mt-4">
+          {/* TODO: Add group photos list */}
+          <p className="text-sm text-gray-500">
+            {t('klasses.detail.groupPhoto.list.empty')}
+          </p>
+        </div>
+      </div>
+
+      {/* Students Section */}
       <div className="bg-white shadow overflow-hidden sm:rounded-lg">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-6">
           {klass.students.map((student) => (

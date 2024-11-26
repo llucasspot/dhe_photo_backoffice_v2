@@ -14,7 +14,7 @@ export const frProjects: ProjectsI18nTranslationsKeys = {
     error: 'Erreur lors du chargement des détails du project.',
     dropzone: {
       instructions: 'Déposez un dossier contenant les dossiers de classe ici',
-      dragDrop: 'Chaque sous-dossier créera une nouvelle classe',
+      hint: 'Chaque sous-dossier créera une nouvelle classe',
       dragActive: 'Déposez le dossier ici',
     },
     klasses: {

@@ -1,27 +1,29 @@
+import { FileRejection } from 'react-dropzone';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+import { KlassDropzoneHandlerService } from '../components';
 
 import { projectsKeys } from './use-projects.hook';
 
 import { useService } from '#di/react';
-import { KlassesControllerServicePort } from '#features/klasses/domain';
-import { CreateKlassesBody } from '#features/projects/domain';
 import { ToastService } from '#toast/domain';
 
-export const useCreateKlassesFromFolders = () => {
+export const useCreateKlassesFromFiles = () => {
   const queryClient = useQueryClient();
-  const klassesService = useService(KlassesControllerServicePort);
+  const folderDropzoneService = useService(KlassDropzoneHandlerService);
   const toastService = useService(ToastService);
 
   return useMutation({
-    mutationFn: async (body: CreateKlassesBody) => {
-      return toastService.promise(
-        () => klassesService.createKlassesFromFolders(body),
-        {
-          pending: 'klasses.create.pending',
-          success: 'klasses.create.success',
-          error: 'klasses.create.error',
-        },
-      );
+    mutationFn: async (body: {
+      projectId: string;
+      acceptedFiles: File[];
+      rejectedFiles: FileRejection[];
+    }) => {
+      return toastService.promise(() => folderDropzoneService.onDrop(body), {
+        pending: 'klasses.create.pending',
+        success: 'klasses.create.success',
+        error: 'klasses.create.error',
+      });
     },
     onSuccess: (_res, body) => {
       queryClient.invalidateQueries({

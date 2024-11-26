@@ -14,7 +14,7 @@ export const enProjects: ProjectsI18nTranslationsKeys = {
     error: 'Error loading project details.',
     dropzone: {
       instructions: 'Drop a folder containing class folders here',
-      dragDrop: 'Each subfolder will create a new class',
+      hint: 'Each subfolder will create a new class',
       dragActive: 'Drop the folder here',
     },
     klasses: {

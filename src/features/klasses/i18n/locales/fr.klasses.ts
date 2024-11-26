@@ -15,11 +15,22 @@ export const frKlasses: KlassesI18nTranslationsKeys = {
     fields: {
       name: 'Nom de la classe',
     },
+    groupPhoto: {
+      title: 'Photos de groupe',
+      dropzone: {
+        instructions: 'Déposez une photo de groupe ici',
+        hint: 'Cliquez ou glissez-déposez un fichier image',
+        dragActive: 'Déposez la photo ici',
+      },
+      list: {
+        empty: 'Aucune photo de groupe pour le moment',
+      },
+    },
   },
   create: {
     title: 'Créer une nouvelle classe',
     pending: 'Création de la classe en cours...',
     success: 'Classe créée avec succès !',
-    error: 'Échec de la création de la classe. Veuillez réessayer.',
+    error: 'Échec de la création des classes. Veuillez réessayer.',
   },
 } as const;

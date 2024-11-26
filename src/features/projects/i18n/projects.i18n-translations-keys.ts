@@ -20,7 +20,7 @@ export type ProjectsI18nTranslationsKeys = {
     };
     dropzone: {
       instructions: string;
-      dragDrop: string;
+      hint: string;
       dragActive: string;
     };
     klasses: {

@@ -15,6 +15,17 @@ export const enKlasses: KlassesI18nTranslationsKeys = {
     fields: {
       name: 'Class Name',
     },
+    groupPhoto: {
+      title: 'Group Photos',
+      dropzone: {
+        instructions: 'Drop a group photo here',
+        hint: 'Click or drag and drop an image file',
+        dragActive: 'Drop the photo here',
+      },
+      list: {
+        empty: 'No group photos yet',
+      },
+    },
   },
   create: {
     title: 'Create New Class',

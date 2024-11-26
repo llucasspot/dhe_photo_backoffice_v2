@@ -1,9 +1,10 @@
 import { useParams } from '@tanstack/react-router';
 import { match } from 'ts-pattern';
 
-import { FolderDropzone } from '../components';
-import { useProject } from '../hooks';
+import { FolderDropzone, KlassDropzoneHandlerService } from '../components';
+import { useCreateKlassesFromFiles, useProject } from '../hooks';
 
+import { useService } from '#di/react';
 import { KlassGrid } from '#features/klasses/react';
 import { ProjectDto } from '#features/projects/domain';
 import { useI18n } from '#i18n/react';
@@ -33,7 +34,10 @@ const ProjectDetailError = ({ error }: { error: Error | null }) => {
 
 const ProjectDetailContent = ({ project }: { project: ProjectDto }) => {
   const { t } = useI18n();
+  const folderDropzoneService = useService(KlassDropzoneHandlerService);
+  const createKlassesFromFiles = useCreateKlassesFromFiles();
 
+  const projectId = project.id;
   const school = project.school;
 
   return (
@@ -128,7 +132,23 @@ const ProjectDetailContent = ({ project }: { project: ProjectDto }) => {
         <h3 className="text-lg font-medium text-gray-900 mb-4">
           {t('klasses.title')}
         </h3>
-        <FolderDropzone projectId={project.id} />
+        <FolderDropzone
+          labels={{
+            instructions: 'projects.detail.dropzone.instructions',
+            hint: 'projects.detail.dropzone.hint',
+            dragActive: 'projects.detail.dropzone.dragActive',
+          }}
+          fileValidator={(file) => {
+            return folderDropzoneService.fileValidator(file);
+          }}
+          onDrop={async ({ acceptedFiles, rejectedFiles }) => {
+            await createKlassesFromFiles.mutateAsync({
+              projectId,
+              acceptedFiles,
+              rejectedFiles,
+            });
+          }}
+        />
         <KlassGrid klasses={project.klasses} />
       </div>
     </div>

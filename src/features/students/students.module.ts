@@ -1,6 +1,6 @@
-import { KlassStudentsGetterControllerServicePort } from './domain/klass-students.getter.controller-service.port.ts';
-import { StudentsCreatorControllerServicePort } from './domain/students.creator.controller-service.port.ts';
-import { StudentsGetterControllerServicePort } from './domain/students.getter.controller-service.port.ts';
+import { KlassStudentsGetterControllerServicePort } from './domain/klass-students.getter.controller-service.port';
+import { StudentsCreatorControllerServicePort } from './domain/students.creator.controller-service.port';
+import { StudentsGetterControllerServicePort } from './domain/students.getter.controller-service.port';
 import { KlassStudentsServiceMockAdapter } from './infra/mock/klass-students.service.mock-adapter';
 import { StudentsCreatorMockAdapter } from './infra/mock/students.creator.mock-adapter';
 import { StudentsGetterPortMockAdapter } from './infra/mock/students.getter.mock-adapter';
