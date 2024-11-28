@@ -2,10 +2,12 @@ import { Module } from '#di';
 import {
   FilesDaoDexieAdapter,
   FilesDaoPort,
-  FileStudentsDaoDexieAdapter,
-  FileStudentsDaoPort,
+  StudentPicturesDaoDexieAdapter,
+  StudentPicturesDaoPort,
 } from '#features/files/infra';
+import { GroupPicturesDaoPort } from '#features/klasses/domain';
 import {
+  GroupPicturesDaoDexieAdapter,
   KlassesDaoDexieAdapter,
   KlassesDaoPort,
 } from '#features/klasses/infra';
@@ -41,8 +43,8 @@ import {
       useToken: FilesDaoDexieAdapter,
     },
     {
-      token: FileStudentsDaoPort,
-      useToken: FileStudentsDaoDexieAdapter,
+      token: StudentPicturesDaoPort,
+      useToken: StudentPicturesDaoDexieAdapter,
     },
     {
       token: KlassesDaoPort,
@@ -55,6 +57,10 @@ import {
     {
       token: ProjectsDaoPort,
       useToken: ProjectsDaoDexieAdapter,
+    },
+    {
+      token: GroupPicturesDaoPort,
+      useToken: GroupPicturesDaoDexieAdapter,
     },
   ],
 })

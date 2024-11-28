@@ -21,8 +21,8 @@ export class CompanyInfoDto extends Dto<CompanyInfoDto> {
   @Transform(({ value }) => value?.trim())
   companyName!: string;
 
-  @IsString({ message: 'settings.companyInfo.validation.vatNumber.IsString' })
   @IsOptional()
+  @IsString({ message: 'settings.companyInfo.validation.vatNumber.IsString' })
   @Matches(/^[A-Z]{2}[0-9A-Z]+$/, {
     message: 'settings.companyInfo.validation.vatNumber.Matches',
   })

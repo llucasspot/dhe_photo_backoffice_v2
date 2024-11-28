@@ -1,9 +1,8 @@
 import { Model, ModelStatic, Sequelize } from 'sequelize';
 
-import { DtoByTableName, TableName } from '../../daos';
-import { DatabaseServicePort } from '../../database';
-
 import { singleton } from '#di';
+import { DtoByTableName, TableName } from '#mock';
+import { DatabaseServicePort } from '#mock';
 
 export type SequelizeConnexion = Sequelize & {
   [TTableName in TableName]: ModelStatic<

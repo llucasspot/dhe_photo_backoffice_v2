@@ -17,7 +17,11 @@ export class KlassesDaoArrayAdapter
     projectId: string,
     name: string,
   ): Promise<
-    Omit<KlassDto, 'project' | 'students' | 'studentIds'> | undefined
+    | Omit<
+        KlassDto,
+        'project' | 'students' | 'studentIds' | 'photos' | 'photoIds'
+      >
+    | undefined
   > {
     return this.table.find(
       (item) => item.name === name && item.projectId === projectId,

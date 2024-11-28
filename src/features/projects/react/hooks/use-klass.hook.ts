@@ -11,11 +11,11 @@ export const klassKeys = {
   detail: (id: string) => [...klassKeys.details(), id] as const,
 };
 
-export const useKlass = (id: string) => {
+export const useKlass = (projectId: string, klassId: string) => {
   const klassesServicePort = useService(KlassesControllerServicePort);
 
   return useQuery({
-    queryKey: klassKeys.detail(id),
-    queryFn: () => klassesServicePort.getKlass(id),
+    queryKey: klassKeys.detail(klassId),
+    queryFn: () => klassesServicePort.getKlass(projectId, klassId),
   });
 };

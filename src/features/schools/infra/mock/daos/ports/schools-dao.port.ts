@@ -1,6 +1,12 @@
-import { SchoolDto } from '#features/schools/domain';
+import { Dto } from '#core/domain';
+import { AvailableCurrency } from '#features/schools/domain';
 import { Dao } from '#mock';
 
-export type School = Pick<SchoolDto, 'id' | 'name' | 'currency' | 'city'>;
+export class School extends Dto<School> {
+  id!: string;
+  name!: string;
+  currency!: AvailableCurrency;
+  city!: string;
+}
 
 export abstract class SchoolsDaoPort extends Dao<'schools'> {}

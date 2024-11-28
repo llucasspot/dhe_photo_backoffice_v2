@@ -1,10 +1,15 @@
+import { plainToInstance } from 'class-transformer';
+
 import { StudentsDaoPort } from './daos';
 
 import { ForMockControllerService } from '#core/domain';
 import { inject, singleton } from '#di';
 import { KlassDto } from '#features/klasses/domain';
 import { KlassesDaoPort } from '#features/klasses/infra';
-import { KlassStudentsGetterControllerServicePort } from '#features/students/domain';
+import {
+  KlassStudentsGetterControllerServicePort,
+  StudentDto,
+} from '#features/students/domain';
 import { Finder, Populator } from '#mock';
 
 @singleton()
@@ -21,14 +26,16 @@ export class KlassStudentsServiceMockAdapter
     super();
   }
 
-  async getStudents(KlassId: string): Promise<KlassDto['students']> {
+  async getStudents(klassId: string): Promise<KlassDto['students']> {
     const klass = await this.klassesDao.get(
       new Finder('klasses')
-        .filtersWith(['id', '$equals', KlassId])
+        .filtersWith(['id', '$equals', klassId])
         .populateManyWith(
+          'klassId',
           Populator.builder('students', 'students')
             .populateManyWith(
-              Populator.builder('photos', 'studentFiles')
+              'studentId',
+              Populator.builder('photos', 'studentPictures')
                 .populateWith(
                   'fileId',
                   Populator.builder('file', 'files').build(),
@@ -42,14 +49,15 @@ export class KlassStudentsServiceMockAdapter
       throw new Error('Classe not found');
     }
     return klass.students.map((student) => {
-      const photos = student.photos
-        .filter((photo) => photo.file !== undefined)
-        .map((photo) => photo.file!);
-      return {
-        ...student,
-        photos,
-        photoIds: photos.map((photo) => photo.id),
-      };
+      return plainToInstance(StudentDto, student);
+      // const photos = student.photos
+      //   .filter((photo) => photo.file !== undefined)
+      //   .map((photo) => photo.file!);
+      // return {
+      //   ...student,
+      //   photos,
+      //   photoIds: photos.map((photo) => photo.id),
+      // };
     });
 
     // const students = await this.studentsDao.getAll(
@@ -80,7 +88,8 @@ export class KlassStudentsServiceMockAdapter
         .filtersWith(['klassId', '$equals', klassId])
         .filtersWith(['id', '$equals', studentId])
         .populateManyWith(
-          Populator.builder('photos', 'studentFiles')
+          'studentId',
+          Populator.builder('photos', 'studentPictures')
             .populateWith('fileId', Populator.builder('file', 'files').build())
             .build(),
         ),
@@ -88,13 +97,14 @@ export class KlassStudentsServiceMockAdapter
     if (!student) {
       throw new Error('Student not found');
     }
-    const photos = student.photos
-      .filter((photo) => photo.file !== undefined)
-      .map((photo) => photo.file!);
-    return {
-      ...student,
-      photos,
-      photoIds: photos.map((photo) => photo.id),
-    };
+    return plainToInstance(StudentDto, student);
+    // const photos = student.photos
+    //   .filter((photo) => photo.file !== undefined)
+    //   .map((photo) => photo.file!);
+    // return {
+    //   ...student,
+    //   photos,
+    //   photoIds: photos.map((photo) => photo.id),
+    // };
   }
 }

@@ -1,5 +1,10 @@
+import { GroupPicturesServiceMockAdapter } from './infra/mock/group-pictures.service.mock-adapter';
+
 import { Module } from '#di';
-import { KlassesControllerServicePort } from '#features/klasses/domain';
+import {
+  GroupPicturesCreatorControllerServicePort,
+  KlassesControllerServicePort,
+} from '#features/klasses/domain';
 import { KlassesServiceMockAdapter } from '#features/klasses/infra';
 
 @Module({
@@ -7,6 +12,10 @@ import { KlassesServiceMockAdapter } from '#features/klasses/infra';
     {
       token: KlassesControllerServicePort,
       useToken: KlassesServiceMockAdapter,
+    },
+    {
+      token: GroupPicturesCreatorControllerServicePort,
+      useToken: GroupPicturesServiceMockAdapter,
     },
   ],
 })

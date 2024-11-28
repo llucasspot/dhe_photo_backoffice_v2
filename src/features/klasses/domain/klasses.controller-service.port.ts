@@ -1,9 +1,11 @@
-import { KlassDto } from './klass.dto';
+import { KlassDto } from './dtos';
 
 import { CreateKlassesBody } from '#features/projects/domain';
 
 export abstract class KlassesControllerServicePort {
-  abstract getKlass(id: string): Promise<Omit<KlassDto, 'project'>>;
+  abstract getKlasses(projectId: string): Promise<KlassDto[]>;
+
+  abstract getKlass(projectId: string, klassId: string): Promise<KlassDto>;
 
   abstract createKlassesFromFolders(
     body: CreateKlassesBody,

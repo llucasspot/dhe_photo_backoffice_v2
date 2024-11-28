@@ -1,6 +1,10 @@
-import { StudentDto } from '#features/students/domain';
+import { Dto } from '#core/domain';
 import { Dao } from '#mock';
 
-export type Student = Pick<StudentDto, 'id' | 'code' | 'klassId'>;
+export class Student extends Dto<Student> {
+  id!: string;
+  code!: string;
+  klassId!: string;
+}
 
 export abstract class StudentsDaoPort extends Dao<'students'> {}

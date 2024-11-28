@@ -1,15 +1,15 @@
-import { ProjectDto } from '#features/projects/domain';
+import { Dto } from '#core/domain';
+import { ProjectState } from '#features/projects/domain';
 import { Dao } from '#mock';
 
-export type Project = Pick<
-  ProjectDto,
-  | 'schoolId'
-  | 'id'
-  | 'name'
-  | 'shotDate'
-  | 'orderEndDate'
-  | 'messageForClients'
-  | 'state'
->;
+export class Project extends Dto<Project> {
+  id!: string;
+  schoolId!: string;
+  name!: string;
+  shotDate!: Date;
+  orderEndDate!: Date;
+  messageForClients?: string;
+  state!: ProjectState;
+}
 
 export abstract class ProjectsDaoPort extends Dao<'projects'> {}

@@ -1,3 +1,5 @@
+import { plainToInstance } from 'class-transformer';
+
 import { SchoolsDaoPort } from './daos';
 
 import { ForMockControllerService, LogAction } from '#core/domain';
@@ -26,7 +28,10 @@ export class SchoolsServiceMockAdapter
     await this.delay();
     const finder = this.buildFinder();
     const schools = await this.schoolsDao.getAll(finder);
-    return schools.map((school) => this.toDto(school));
+    return schools.map((school) => {
+      return plainToInstance(SchoolDto, school);
+      // return this.toDto(school)
+    });
   }
 
   @LogAction()
@@ -38,7 +43,8 @@ export class SchoolsServiceMockAdapter
       throw new Error('School not found');
     }
     console.log('[SchoolsServiceMockAdapter] [getSchool] [school] ', school);
-    return this.toDto(school);
+    return plainToInstance(SchoolDto, school);
+    // return this.toDto(school);
   }
 
   @LogAction()
@@ -78,13 +84,26 @@ export class SchoolsServiceMockAdapter
       finder = finder.filtersWith(['id', '$equals', schoolId]);
     }
     return finder.populateManyWith(
+      'schoolId',
       Populator.builder('projects', 'projects')
         .populateManyWith(
+          'projectId',
           Populator.builder('klasses', 'klasses')
             .populateManyWith(
+              'klassId',
+              Populator.builder('photos', 'groupPictures')
+                .populateWith(
+                  'fileId',
+                  Populator.builder('file', 'files').build(),
+                )
+                .build(),
+            )
+            .populateManyWith(
+              'klassId',
               Populator.builder('students', 'students')
                 .populateManyWith(
-                  Populator.builder('photos', 'studentFiles')
+                  'studentId',
+                  Populator.builder('photos', 'studentPictures')
                     .populateWith(
                       'fileId',
                       Populator.builder('file', 'files').build(),
@@ -99,6 +118,7 @@ export class SchoolsServiceMockAdapter
     );
   }
 
+  // @ts-expect-error TODO
   private toDto(
     school: ExtractPopulatedEntity<ReturnType<typeof this.buildFinder>>,
   ) {
@@ -106,22 +126,29 @@ export class SchoolsServiceMockAdapter
       ...school,
       projects: school.projects.map((project) => ({
         ...project,
-        klasses: project.klasses.map((klass) => ({
-          ...klass,
-          students: klass.students.map((student) => {
-            const photos = student.photos
-              .filter((photo) => photo.file !== undefined)
-              .map((photo) => photo.file!);
-            return {
-              ...student,
-              photos,
-              photoIds: photos.map((photo) => {
-                return photo.id;
-              }),
-            };
-          }),
-          studentIds: klass.students.map((student) => student.id),
-        })),
+        klasses: project.klasses.map((klass) => {
+          const photos = klass.photos
+            .filter((photo) => photo.file !== undefined)
+            .map((photo) => photo.file!);
+          return {
+            ...klass,
+            students: klass.students.map((student) => {
+              const photos = student.photos
+                .filter((photo) => photo.file !== undefined)
+                .map((photo) => photo.file!);
+              return {
+                ...student,
+                photos,
+                photoIds: photos.map((photo) => {
+                  return photo.id;
+                }),
+              };
+            }),
+            studentIds: klass.students.map((student) => student.id),
+            photos,
+            photoIds: photos.map((photo) => photo.id),
+          };
+        }),
         klassIds: project.klasses.map((klass) => klass.id),
       })),
       projectIds: school.projects.map((project) => project.id),

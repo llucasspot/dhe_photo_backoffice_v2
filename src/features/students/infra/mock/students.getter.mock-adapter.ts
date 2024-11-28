@@ -1,3 +1,5 @@
+import { plainToInstance } from 'class-transformer';
+
 import { StudentsDaoPort } from './daos';
 
 import { ForMockControllerService, LogAction } from '#core/domain';
@@ -25,7 +27,10 @@ export class StudentsGetterPortMockAdapter
     await this.delay();
     const finder = this.buildFinder();
     const students = await this.studentsDao.getAll(finder);
-    return students.map((student) => this.toDto(student));
+    return students.map((student) => {
+      return plainToInstance(StudentDto, student);
+      // return this.toDto(student)
+    });
   }
 
   @LogAction()
@@ -36,7 +41,8 @@ export class StudentsGetterPortMockAdapter
     if (!student) {
       throw new Error('Student not found');
     }
-    return this.toDto(student);
+    return plainToInstance(StudentDto, student);
+    // return this.toDto(student);
   }
 
   private buildFinder(studentId?: string) {
@@ -57,21 +63,50 @@ export class StudentsGetterPortMockAdapter
               )
               .build(),
           )
+          .populateManyWith(
+            'klassId',
+            Populator.builder('photos', 'groupPictures')
+              .populateWith(
+                'fileId',
+                Populator.builder('file', 'files').build(),
+              )
+              .build(),
+          )
           .build(),
       )
       .populateManyWith(
-        Populator.builder('photos', 'studentFiles')
+        'studentId',
+        Populator.builder('photos', 'studentPictures')
           .populateWith('fileId', Populator.builder('file', 'files').build())
           .build(),
       );
   }
 
-  private toDto(
-    student: ExtractPopulatedEntity<ReturnType<typeof this.buildFinder>>,
-  ) {
+  // @ts-expect-error TODO
+  private toDto({
+    klass,
+    ...student
+  }: ExtractPopulatedEntity<ReturnType<typeof this.buildFinder>>) {
     const photos = student.photos
       .filter((photo) => photo.file !== undefined)
       .map((photo) => photo.file!);
-    return { ...student, photos, photoIds: photos.map((photo) => photo.id) };
+
+    const res = {
+      ...student,
+      photos,
+      photoIds: photos.map((photo) => photo.id),
+    };
+
+    if (klass) {
+      const photos = klass.photos
+        .filter((photo) => photo.file !== undefined)
+        .map((photo) => photo.file!);
+      // @ts-expect-error reassign
+      klass.photos = photos;
+      // @ts-expect-error reassign
+      klass.photoIds = photos.map((photo) => photo.id);
+    }
+
+    return res;
   }
 }

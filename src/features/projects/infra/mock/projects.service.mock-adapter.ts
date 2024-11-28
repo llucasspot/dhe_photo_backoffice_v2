@@ -2,8 +2,7 @@ import { ProjectsDaoPort } from './daos';
 
 import { ForMockControllerService, LogAction } from '#core/domain';
 import { inject, singleton } from '#di';
-import { KlassDto } from '#features/klasses/domain';
-import { KlassesDaoPort } from '#features/klasses/infra';
+import { KlassesControllerServicePort } from '#features/klasses/domain';
 import {
   CreateProjectBody,
   ProjectDto,
@@ -11,7 +10,6 @@ import {
   ProjectState,
 } from '#features/projects/domain';
 import { SchoolsServiceMockAdapter } from '#features/schools/infra';
-import { StudentsGetterControllerServicePort } from '#features/students/domain';
 
 @singleton()
 export class ProjectsServiceMockAdapter
@@ -21,12 +19,10 @@ export class ProjectsServiceMockAdapter
   constructor(
     @inject(ProjectsDaoPort)
     private readonly projectsDao: ProjectsDaoPort,
-    @inject(KlassesDaoPort)
-    private readonly klassesDao: KlassesDaoPort,
     @inject(SchoolsServiceMockAdapter)
     private readonly schoolsService: SchoolsServiceMockAdapter,
-    @inject(StudentsGetterControllerServicePort)
-    private readonly studentsGetterPort: StudentsGetterControllerServicePort,
+    @inject(KlassesControllerServicePort)
+    private readonly klassesControllerService: KlassesControllerServicePort,
   ) {
     super();
   }
@@ -37,7 +33,9 @@ export class ProjectsServiceMockAdapter
     const res: ProjectDto[] = [];
     const projects = await this.projectsDao.getAll();
     for (const project of projects) {
-      const klasses = await this.getKlassesWithStudents(project);
+      const klasses = await this.klassesControllerService.getKlasses(
+        project.id,
+      );
       const klassIds = klasses.map((klass) => klass.id);
       const school = await this.schoolsService.getSchool(project.schoolId);
       res.push({
@@ -57,7 +55,7 @@ export class ProjectsServiceMockAdapter
     if (!project) {
       throw new Error('Project not found');
     }
-    const klasses = await this.getKlassesWithStudents(project);
+    const klasses = await this.klassesControllerService.getKlasses(project.id);
     const klassIds = klasses.map((klass) => klass.id);
     const school = await this.schoolsService.getSchool(project.schoolId);
     return {
@@ -75,7 +73,7 @@ export class ProjectsServiceMockAdapter
       ...body,
       state: ProjectState.Unpublished,
     });
-    const klasses = await this.getKlassesWithStudents(project);
+    const klasses = await this.klassesControllerService.getKlasses(project.id);
     const klassIds = klasses.map((klass) => klass.id);
     const school = await this.schoolsService.getSchool(project.schoolId);
     return {
@@ -96,7 +94,7 @@ export class ProjectsServiceMockAdapter
     if (!project) {
       throw new Error('Project not found');
     }
-    const klasses = await this.getKlassesWithStudents(project);
+    const klasses = await this.klassesControllerService.getKlasses(project.id);
     const klassIds = klasses.map((klass) => klass.id);
     const school = await this.schoolsService.getSchool(project.schoolId);
     return {
@@ -122,25 +120,5 @@ export class ProjectsServiceMockAdapter
     console.log(file.name);
     const photoId = `photo_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     return photoId;
-  }
-
-  @LogAction()
-  private async getKlassesWithStudents(
-    project: Omit<ProjectDto, 'klasses' | 'school' | 'klassIds'>,
-  ): Promise<Omit<KlassDto, 'project'>[]> {
-    const klasses = await this.klassesDao.getAll();
-    const students = await this.studentsGetterPort.getStudents();
-    return klasses
-      .filter((klass) => klass.projectId === project.id)
-      .map((klass) => {
-        const klassStudents = students.filter(
-          (student) => student.klassId === klass.id,
-        );
-        return {
-          ...klass,
-          students: klassStudents,
-          studentIds: students.map((student) => student.id),
-        };
-      });
   }
 }

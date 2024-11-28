@@ -1,9 +1,12 @@
-import { ProductDto } from '#features/products/domain';
+import { Dto } from '#core/domain';
 import { Dao } from '#mock';
 
-export type Product = Pick<
-  ProductDto,
-  'id' | 'name' | 'description' | 'longSize' | 'shortSize'
->;
+export class Product extends Dto<Product> {
+  id!: string;
+  name!: string;
+  description!: string;
+  longSize!: number;
+  shortSize!: number;
+}
 
 export abstract class ProductsDaoPort extends Dao<'products'> {}

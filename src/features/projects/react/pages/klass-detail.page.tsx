@@ -1,9 +1,15 @@
 import { useParams } from '@tanstack/react-router';
 import { match } from 'ts-pattern';
 
-import { FolderDropzone } from '../components';
+import {
+  FolderDropzone,
+  KlassPictureDropzoneHandlerService,
+} from '../components';
 import { useKlass } from '../hooks';
+import { useCreateGroupPictureFromFiles } from '../hooks/use-create-group-picture-from-files.hook';
 
+import { BlobViewer } from '#components';
+import { useService } from '#di/react';
 import { KlassDto } from '#features/klasses/domain';
 import { useI18n } from '#i18n/react';
 import { Link } from '#routing/react';
@@ -36,6 +42,12 @@ const KlassDetailContent = ({
   klass: Omit<KlassDto, 'project'>;
 }) => {
   const { t } = useI18n();
+  const klassPictureDropzoneHandlerService = useService(
+    KlassPictureDropzoneHandlerService,
+  );
+  const createGroupPictureFromFiles = useCreateGroupPictureFromFiles();
+  const klassId = klass.id;
+  const projectId = klass.projectId;
 
   return (
     <div className="p-8">
@@ -66,8 +78,17 @@ const KlassDetailContent = ({
             hint: 'klasses.detail.groupPhoto.dropzone.hint',
             dragActive: 'klasses.detail.groupPhoto.dropzone.dragActive',
           }}
-          fileValidator={() => null}
-          onDrop={async () => {}}
+          fileValidator={(file) =>
+            klassPictureDropzoneHandlerService.fileValidator(file)
+          }
+          onDrop={async ({ acceptedFiles, rejectedFiles }) => {
+            await createGroupPictureFromFiles.mutateAsync({
+              projectId,
+              klassId,
+              acceptedFiles,
+              rejectedFiles,
+            });
+          }}
         />
         <div className="mt-4">
           {/* TODO: Add group photos list */}
@@ -91,14 +112,15 @@ const KlassDetailContent = ({
                 </span>
               </div>
               <div className="grid grid-cols-2 gap-2">
-                {student.photoIds.map((photoId) => (
+                {student.photos.map((file) => (
                   <div
-                    key={photoId}
+                    key={file.fileId}
                     className="aspect-square bg-gray-100 rounded-md flex items-center justify-center"
                   >
                     <span className="text-xs text-gray-500">
-                      Photo {photoId}
+                      Photo {file.fileId}
                     </span>
+                    <BlobViewer blob={file.file?.blob} />
                   </div>
                 ))}
               </div>
@@ -111,10 +133,10 @@ const KlassDetailContent = ({
 };
 
 export const KlassDetailPage = () => {
-  const { klassId } = useParams({
+  const { klassId, projectId } = useParams({
     from: '/projects/$projectId/klasses/$klassId',
   });
-  const { data: klass, isLoading, error } = useKlass(klassId);
+  const { data: klass, isLoading, error } = useKlass(projectId, klassId);
 
   return match({ klass, isLoading, error })
     .with({ isLoading: true }, KlassDetailLoading)

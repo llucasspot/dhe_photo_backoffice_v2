@@ -1,5 +1,5 @@
 import { SchoolList } from '../components';
-import { useSchools } from '../hooks/use-schools.hook';
+import { useSchools } from '../hooks';
 
 import { useI18n } from '#i18n/react';
 import { Link } from '#routing/react';

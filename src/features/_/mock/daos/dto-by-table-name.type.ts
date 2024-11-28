@@ -1,5 +1,6 @@
-import { FileStudent } from '#features/files/infra';
+import { StudentPicture } from '#features/files/infra';
 import { Filee } from '#features/files/infra';
+import { GroupPicture } from '#features/klasses/domain';
 import { Klass } from '#features/klasses/infra';
 import { Product } from '#features/products/infra';
 import { Project } from '#features/projects/infra';
@@ -8,7 +9,8 @@ import { Student } from '#features/students/infra';
 
 export type DtoByTableName = {
   files: Filee;
-  studentFiles: FileStudent;
+  studentPictures: StudentPicture;
+  groupPictures: GroupPicture;
   schools: School;
   klasses: Klass;
   products: Product;

@@ -27,7 +27,7 @@ export class Populator<
   TPopulatedAs extends string,
 > {
   public isMany = false;
-  public foreignKey = '';
+  public foreignKey?: string;
   constructor(
     public readonly as: TPopulatedAs,
     public readonly tableName: TTableName,
@@ -94,7 +94,9 @@ class PopulatorBuilder<
     TTableName extends TableName,
     TEntity extends DtoByTableName[TTableName],
     TAs extends string,
-  >(populator: Populator<TTableName, TEntity, TAs>) {
+    TForeignKey extends keyof TEntity,
+  >(foreignKey: TForeignKey, populator: Populator<TTableName, TEntity, TAs>) {
+    populator.foreignKey = foreignKey as string;
     populator.isMany = true;
     // @ts-expect-error push
     this.populators.push(populator);
@@ -178,7 +180,9 @@ export class Finder<
     TTableName extends TableName,
     TEntity extends DtoByTableName[TTableName],
     TAs extends string,
-  >(populator: Populator<TTableName, TEntity, TAs>) {
+    TForeignKey extends keyof TEntity,
+  >(foreignKey: TForeignKey, populator: Populator<TTableName, TEntity, TAs>) {
+    populator.foreignKey = foreignKey as string;
     populator.isMany = true;
     // @ts-expect-error push
     this.populators.push(populator);

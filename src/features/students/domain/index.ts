@@ -1,3 +1,4 @@
+export * from './beans';
 export * from './create-student.body';
 export * from './create-student.body';
 export * from './klass-students.getter.controller-service.port';

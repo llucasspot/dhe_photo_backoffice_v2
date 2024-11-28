@@ -8,18 +8,18 @@ import {
 } from 'sequelize';
 
 import {
+  DatabaseServiceSequelizeAdapter,
+  SequelizeConnexion,
+} from './database.service.sequelize-adapter';
+
+import {
   Dao,
   DtoByTableName,
   Filter,
   Finder,
   Populator,
   TableName,
-} from '../../daos';
-
-import {
-  DatabaseServiceSequelizeAdapter,
-  SequelizeConnexion,
-} from './database.service.sequelize-adapter';
+} from '#mock';
 
 export class SequelizeDao<TTableName extends TableName>
   implements Dao<TTableName>

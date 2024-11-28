@@ -1,6 +1,6 @@
 import { FileRejection } from 'react-dropzone';
 
-import { ForDropzone } from './for-dropzone.ts';
+import { ForDropzone } from './for-dropzone';
 
 import { inject, singleton } from '#di';
 import { KlassesControllerServicePort } from '#features/klasses/domain';
@@ -65,7 +65,7 @@ export class KlassDropzoneHandlerService
     const path = this.getFilePath(file);
     const parts = path.split('/');
     // We only want direct subfolders of the root folder
-    if (parts.length <= 2) {
+    if (parts.length != 3) {
       return {
         code: 'not-in-subfolder',
         message: `File is not in a subfolder`,

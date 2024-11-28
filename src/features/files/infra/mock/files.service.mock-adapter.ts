@@ -18,12 +18,18 @@ export class FilesServiceMockAdapter
   }
 
   @LogAction()
-  async createFile(file: File): Promise<Omit<FileDto, ''>> {
-    return this.filesDao.save({ file });
+  async createFile(file: File): Promise<FileDto> {
+    const fileBlob = new Blob([file], { type: file.type });
+    return this.filesDao.save({ blob: fileBlob });
   }
 
   @LogAction()
-  async createFiles(body: File[]): Promise<Omit<FileDto, ''>[]> {
-    return this.filesDao.saveMany(body.map((photo) => ({ file: photo })));
+  async createFiles(body: File[]): Promise<FileDto[]> {
+    return this.filesDao.saveMany(
+      body.map((file) => {
+        const fileBlob = new Blob([file], { type: file.type });
+        return { blob: fileBlob };
+      }),
+    );
   }
 }

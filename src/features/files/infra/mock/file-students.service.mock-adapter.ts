@@ -1,12 +1,12 @@
 import { FilesCreatorControllerServicePort } from '../../domain';
 
-import { FileStudentsDaoPort } from './daos';
+import { StudentPicturesDaoPort } from './daos';
 
 import { ForMockControllerService, LogAction } from '#core/domain';
 import { inject, singleton } from '#di';
 import { CreateFileStudentBody } from '#features/files/domain';
 import { CreateStudentFilesBody } from '#features/files/domain';
-import { FileStudentDto } from '#features/files/domain';
+import { StudentPictureDto } from '#features/files/domain';
 import { FileStudentsCreatorControllerServicePort } from '#features/files/domain';
 import { StudentsGetterControllerServicePort } from '#features/students/domain';
 
@@ -16,8 +16,8 @@ export class FileStudentsServiceMockAdapter
   implements FileStudentsCreatorControllerServicePort
 {
   constructor(
-    @inject(FileStudentsDaoPort)
-    private readonly fileStudentsDao: FileStudentsDaoPort,
+    @inject(StudentPicturesDaoPort)
+    private readonly studentPicturesDao: StudentPicturesDaoPort,
     @inject(FilesCreatorControllerServicePort)
     private readonly filesService: FilesCreatorControllerServicePort,
     @inject(StudentsGetterControllerServicePort)
@@ -29,13 +29,13 @@ export class FileStudentsServiceMockAdapter
   async createStudentFiles({
     studentId,
     files,
-  }: CreateStudentFilesBody): Promise<Omit<FileStudentDto, ''>[]> {
+  }: CreateStudentFilesBody): Promise<Omit<StudentPictureDto, ''>[]> {
     const student = await this.studentsGetter.getStudent(studentId);
     if (!student) {
       throw new Error('Student not found');
     }
     const fileDtos = await this.filesService.createFiles(files);
-    const fileStudents = await this.fileStudentsDao.saveMany(
+    const fileStudents = await this.studentPicturesDao.saveMany(
       fileDtos.map((fileDto) => ({
         fileId: fileDto.id,
         studentId,
@@ -54,13 +54,13 @@ export class FileStudentsServiceMockAdapter
   async createStudentFile({
     studentId,
     file,
-  }: CreateFileStudentBody): Promise<Omit<FileStudentDto, ''>> {
+  }: CreateFileStudentBody): Promise<Omit<StudentPictureDto, ''>> {
     const student = await this.studentsGetter.getStudent(studentId);
     if (!student) {
       throw new Error('Student not found');
     }
     const fileDto = await this.filesService.createFile(file);
-    const fileStudent = await this.fileStudentsDao.save({
+    const fileStudent = await this.studentPicturesDao.save({
       fileId: fileDto.id,
       studentId,
     });

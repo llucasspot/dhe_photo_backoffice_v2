@@ -1,12 +1,18 @@
-import { Dto } from '#core/domain';
-import { FileDto } from '#features/files/domain';
-import { KlassDto } from '#features/klasses/domain';
+import { IsOptional } from 'class-validator';
 
-export class StudentDto extends Dto<StudentDto> {
+import { HavePictures } from './beans';
+
+import { OmitType } from '#core/domain';
+import { StudentKlassDto } from '#features/klasses/domain';
+
+export class StudentDto extends HavePictures<StudentDto> {
+  // properties
   id!: string;
   code!: string;
-  photoIds!: string[];
-  photos!: FileDto[];
   klassId!: string;
-  klass?: Omit<KlassDto, 'students' | 'studentIds'>;
+  // relationships
+  @IsOptional()
+  klass?: StudentKlassDto;
 }
+
+export class KlassStudentDto extends OmitType(StudentDto, ['klass']) {}
