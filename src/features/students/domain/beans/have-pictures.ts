@@ -14,5 +14,5 @@ export abstract class HavePictures<TDto extends object> extends Dto<
   photos: HavePicture[] = [];
   @IsArray()
   @IsString({ each: true })
-  photoIds: string[] = this.photos.map((photo) => photo.fileId);
+  photoIds: string[] = this.photos.map((photo) => photo.pictureId);
 }

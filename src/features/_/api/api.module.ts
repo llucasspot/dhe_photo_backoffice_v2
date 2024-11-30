@@ -1,8 +1,8 @@
-import { DexieDatabaseModule } from '../mock/infra/dexie/dexie-database.module';
+import { ApiMockModule } from './api.mock.module';
 
 import { Module } from '#di';
 
 @Module({
-  imports: [DexieDatabaseModule],
+  imports: [ApiMockModule],
 })
 export class ApiModule {}

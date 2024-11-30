@@ -5,9 +5,9 @@ import { StudentPictureDto } from './student-picture.dto';
 export abstract class FileStudentsCreatorControllerServicePort {
   abstract createStudentFile(
     body: CreateFileStudentBody,
-  ): Promise<Omit<StudentPictureDto, ''>>;
+  ): Promise<StudentPictureDto>;
 
   abstract createStudentFiles(
     body: CreateStudentFilesBody,
-  ): Promise<Omit<StudentPictureDto, ''>[]>;
+  ): Promise<StudentPictureDto[]>;
 }

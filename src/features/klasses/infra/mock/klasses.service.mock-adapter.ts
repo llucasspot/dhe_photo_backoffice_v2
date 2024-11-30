@@ -10,7 +10,7 @@ import {
 } from '#features/klasses/domain';
 import { CreateKlassesBody } from '#features/projects/domain';
 import { StudentsCreatorControllerServicePort } from '#features/students/domain';
-import { Finder, Populator } from '#mock';
+import { Finder, Populator } from '#mock/domain';
 
 @singleton()
 export class KlassesServiceMockAdapter
@@ -45,7 +45,10 @@ export class KlassesServiceMockAdapter
         .populateManyWith(
           'klassId',
           Populator.builder('photos', 'groupPictures')
-            .populateWith('fileId', Populator.builder('file', 'files').build())
+            .populateWith(
+              'pictureId',
+              Populator.builder('picture', 'pictures').build(),
+            )
             .build(),
         )
         .populateManyWith(
@@ -55,8 +58,8 @@ export class KlassesServiceMockAdapter
               'studentId',
               Populator.builder('photos', 'studentPictures')
                 .populateWith(
-                  'fileId',
-                  Populator.builder('file', 'files').build(),
+                  'pictureId',
+                  Populator.builder('picture', 'pictures').build(),
                 )
                 .build(),
             )
@@ -66,9 +69,6 @@ export class KlassesServiceMockAdapter
     if (!klass) {
       throw new Error('Klass not found');
     }
-
-    // TODO pb with blob not returned when plainToInstance
-    console.log(klass);
     return plainToInstance(KlassDto, klass);
   }
 
@@ -117,8 +117,8 @@ export class KlassesServiceMockAdapter
               'studentId',
               Populator.builder('photos', 'studentPictures')
                 .populateWith(
-                  'fileId',
-                  Populator.builder('file', 'files').build(),
+                  'pictureId',
+                  Populator.builder('picture', 'pictures').build(),
                 )
                 .build(),
             )
@@ -127,7 +127,10 @@ export class KlassesServiceMockAdapter
         .populateManyWith(
           'klassId',
           Populator.builder('photos', 'groupPictures')
-            .populateWith('fileId', Populator.builder('file', 'files').build())
+            .populateWith(
+              'pictureId',
+              Populator.builder('picture', 'pictures').build(),
+            )
             .build(),
         ),
     );

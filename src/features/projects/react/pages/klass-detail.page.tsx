@@ -6,7 +6,7 @@ import {
   KlassPictureDropzoneHandlerService,
 } from '../components';
 import { useKlass } from '../hooks';
-import { useCreateGroupPictureFromFiles } from '../hooks/use-create-group-picture-from-files.hook';
+import { useCreateGroupPictureFromFiles } from '../hooks';
 
 import { BlobViewer } from '#components';
 import { useService } from '#di/react';
@@ -112,15 +112,12 @@ const KlassDetailContent = ({
                 </span>
               </div>
               <div className="grid grid-cols-2 gap-2">
-                {student.photos.map((file) => (
+                {student.photos.map((picture) => (
                   <div
-                    key={file.fileId}
+                    key={picture.pictureId}
                     className="aspect-square bg-gray-100 rounded-md flex items-center justify-center"
                   >
-                    <span className="text-xs text-gray-500">
-                      Photo {file.fileId}
-                    </span>
-                    <BlobViewer blob={file.file?.blob} />
+                    <BlobViewer pictureId={picture.picture?.id} />
                   </div>
                 ))}
               </div>

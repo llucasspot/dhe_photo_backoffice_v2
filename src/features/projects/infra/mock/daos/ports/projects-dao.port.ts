@@ -1,15 +1,3 @@
-import { Dto } from '#core/domain';
-import { ProjectState } from '#features/projects/domain';
-import { Dao } from '#mock';
+import { Dao, DtoByTableName } from '#mock/domain';
 
-export class Project extends Dto<Project> {
-  id!: string;
-  schoolId!: string;
-  name!: string;
-  shotDate!: Date;
-  orderEndDate!: Date;
-  messageForClients?: string;
-  state!: ProjectState;
-}
-
-export abstract class ProjectsDaoPort extends Dao<'projects'> {}
+export abstract class ProjectsDaoPort extends Dao<DtoByTableName, 'projects'> {}

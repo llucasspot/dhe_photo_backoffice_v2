@@ -118,6 +118,8 @@
     "#toast/react": "./src/features/_/toast/react",
     "#toast": "./src/features/_/toast",
     "#mock": "./src/features/_/mock",
+    "#mock/domain": "./src/features/_/mock/domain",
+    "#mock/infra": "./src/features/_/mock/infra",
     "#api": "./src/features/_/api"
   }
 }

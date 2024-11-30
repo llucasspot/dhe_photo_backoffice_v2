@@ -29,7 +29,7 @@ export class FileStudentsServiceMockAdapter
   async createStudentFiles({
     studentId,
     files,
-  }: CreateStudentFilesBody): Promise<Omit<StudentPictureDto, ''>[]> {
+  }: CreateStudentFilesBody): Promise<StudentPictureDto[]> {
     const student = await this.studentsGetter.getStudent(studentId);
     if (!student) {
       throw new Error('Student not found');
@@ -37,14 +37,16 @@ export class FileStudentsServiceMockAdapter
     const fileDtos = await this.filesService.createFiles(files);
     const fileStudents = await this.studentPicturesDao.saveMany(
       fileDtos.map((fileDto) => ({
-        fileId: fileDto.id,
+        pictureId: fileDto.id,
         studentId,
       })),
     );
     return fileStudents.map((fileStudent) => {
       return {
         ...fileStudent,
-        file: fileDtos.find((fileDto) => fileDto.id == fileStudent.fileId)!,
+        picture: fileDtos.find(
+          (fileDto) => fileDto.id == fileStudent.pictureId,
+        )!,
         student,
       };
     });
@@ -54,19 +56,19 @@ export class FileStudentsServiceMockAdapter
   async createStudentFile({
     studentId,
     file,
-  }: CreateFileStudentBody): Promise<Omit<StudentPictureDto, ''>> {
+  }: CreateFileStudentBody): Promise<StudentPictureDto> {
     const student = await this.studentsGetter.getStudent(studentId);
     if (!student) {
       throw new Error('Student not found');
     }
     const fileDto = await this.filesService.createFile(file);
     const fileStudent = await this.studentPicturesDao.save({
-      fileId: fileDto.id,
+      pictureId: fileDto.id,
       studentId,
     });
     return {
       ...fileStudent,
-      file: fileDto,
+      picture: fileDto,
       student,
     };
   }

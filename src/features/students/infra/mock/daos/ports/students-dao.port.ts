@@ -1,10 +1,3 @@
-import { Dto } from '#core/domain';
-import { Dao } from '#mock';
+import { Dao, DtoByTableName } from '#mock/domain';
 
-export class Student extends Dto<Student> {
-  id!: string;
-  code!: string;
-  klassId!: string;
-}
-
-export abstract class StudentsDaoPort extends Dao<'students'> {}
+export abstract class StudentsDaoPort extends Dao<DtoByTableName, 'students'> {}

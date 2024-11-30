@@ -6,7 +6,7 @@ export const PersonalInfoForm = () => {
   const { t } = useI18n();
 
   const onSubmit = async (data: PersonalInfoDto) => {
-    console.log(data);
+    console.log('form data : ', data);
   };
 
   return (

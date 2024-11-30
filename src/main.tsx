@@ -6,6 +6,7 @@ import './features/app.module';
 
 import { App } from './App';
 
+import 'react-toastify/dist/ReactToastify.css';
 import './index.css';
 
 createRoot(document.getElementById('root')!).render(

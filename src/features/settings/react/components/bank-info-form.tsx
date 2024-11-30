@@ -6,7 +6,7 @@ export const BankInfoForm = () => {
   const { t } = useI18n();
 
   const onSubmit = (data: BankInfoDto) => {
-    console.log(data);
+    console.log('form data : ', data);
   };
 
   return (

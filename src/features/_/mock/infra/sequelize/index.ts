@@ -1,2 +1,3 @@
-export * from './database.service.sequelize-adapter';
-export * from './sequelize.dao';
+export * from './dao';
+export * from './database.sequelize.module';
+export * from './service';

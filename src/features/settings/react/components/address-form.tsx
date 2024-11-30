@@ -6,7 +6,7 @@ export const AddressForm = () => {
   const { t } = useI18n();
 
   const onSubmit = async (data: AddressDto) => {
-    console.log(data);
+    console.log('form data : ', data);
   };
 
   return (

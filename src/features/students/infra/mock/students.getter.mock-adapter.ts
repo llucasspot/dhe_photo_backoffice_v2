@@ -8,7 +8,7 @@ import {
   StudentDto,
   StudentsGetterControllerServicePort,
 } from '#features/students/domain';
-import { ExtractPopulatedEntity, Finder, Populator } from '#mock';
+import { ExtractPopulatedEntity, Finder, Populator } from '#mock/domain';
 
 @singleton()
 export class StudentsGetterPortMockAdapter
@@ -67,8 +67,8 @@ export class StudentsGetterPortMockAdapter
             'klassId',
             Populator.builder('photos', 'groupPictures')
               .populateWith(
-                'fileId',
-                Populator.builder('file', 'files').build(),
+                'pictureId',
+                Populator.builder('picture', 'pictures').build(),
               )
               .build(),
           )
@@ -77,7 +77,10 @@ export class StudentsGetterPortMockAdapter
       .populateManyWith(
         'studentId',
         Populator.builder('photos', 'studentPictures')
-          .populateWith('fileId', Populator.builder('file', 'files').build())
+          .populateWith(
+            'pictureId',
+            Populator.builder('picture', 'pictures').build(),
+          )
           .build(),
       );
   }
@@ -88,8 +91,8 @@ export class StudentsGetterPortMockAdapter
     ...student
   }: ExtractPopulatedEntity<ReturnType<typeof this.buildFinder>>) {
     const photos = student.photos
-      .filter((photo) => photo.file !== undefined)
-      .map((photo) => photo.file!);
+      .filter((photo) => photo.picture !== undefined)
+      .map((photo) => photo.picture!);
 
     const res = {
       ...student,
@@ -99,8 +102,8 @@ export class StudentsGetterPortMockAdapter
 
     if (klass) {
       const photos = klass.photos
-        .filter((photo) => photo.file !== undefined)
-        .map((photo) => photo.file!);
+        .filter((photo) => photo.picture !== undefined)
+        .map((photo) => photo.picture!);
       // @ts-expect-error reassign
       klass.photos = photos;
       // @ts-expect-error reassign

@@ -6,7 +6,7 @@ export const RegisterForm = () => {
   const { t } = useI18n();
 
   const onSubmit = (data: RegisterBody) => {
-    console.log(data);
+    console.log('form data : ', data);
   };
 
   return (

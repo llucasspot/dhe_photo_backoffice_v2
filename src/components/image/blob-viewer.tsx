@@ -1,12 +1,31 @@
 import { useEffect, useState } from 'react';
 
+import { useService } from '#di/react';
+import { PictureControllerServicePort } from '#features/files/domain';
+
 type BlobViewerProps = {
-  blob?: Blob;
+  pictureId?: string;
 };
 
-export const BlobViewer = ({ blob }: BlobViewerProps) => {
+export const BlobViewer = ({ pictureId }: BlobViewerProps) => {
+  const [blob, setBlob] = useState<Blob | null>(null);
   const [content, setContent] = useState<string | null>(null);
   const [url, setUrl] = useState<string | null>(null);
+
+  const pictureControllerService = useService(PictureControllerServicePort);
+
+  useEffect(() => {
+    if (!pictureId) {
+      return () => {};
+    }
+    pictureControllerService
+      .getPictureById(pictureId)
+      .then(({ blob }) => {
+        setBlob(blob);
+      })
+      .catch((err) => console.log(err));
+    return () => {};
+  }, [pictureControllerService, pictureId]);
 
   useEffect(() => {
     if (!blob) {

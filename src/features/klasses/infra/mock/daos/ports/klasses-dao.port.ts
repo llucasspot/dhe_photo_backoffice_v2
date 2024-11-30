@@ -1,22 +1,8 @@
-import { Dto } from '#core/domain';
-import { KlassDto } from '#features/klasses/domain';
-import { Dao } from '#mock';
+import { Dao, DtoByTableName } from '#mock/domain';
 
-export class Klass extends Dto<Klass> {
-  id!: string;
-  name!: string;
-  projectId!: string;
-}
-
-export abstract class KlassesDaoPort extends Dao<'klasses'> {
+export abstract class KlassesDaoPort extends Dao<DtoByTableName, 'klasses'> {
   abstract getByName(
     projectId: string,
     name: string,
-  ): Promise<
-    | Omit<
-        KlassDto,
-        'project' | 'students' | 'studentIds' | 'photos' | 'photoIds'
-      >
-    | undefined
-  >;
+  ): Promise<DtoByTableName['klasses'] | undefined>;
 }

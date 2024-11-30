@@ -9,7 +9,7 @@ import {
   SchoolDto,
   SchoolsServiceControllerServicePort,
 } from '#features/schools/domain';
-import { ExtractPopulatedEntity, Finder, Populator } from '#mock';
+import { ExtractPopulatedEntity, Finder, Populator } from '#mock/domain';
 
 @singleton()
 export class SchoolsServiceMockAdapter
@@ -93,8 +93,8 @@ export class SchoolsServiceMockAdapter
               'klassId',
               Populator.builder('photos', 'groupPictures')
                 .populateWith(
-                  'fileId',
-                  Populator.builder('file', 'files').build(),
+                  'pictureId',
+                  Populator.builder('picture', 'pictures').build(),
                 )
                 .build(),
             )
@@ -105,8 +105,8 @@ export class SchoolsServiceMockAdapter
                   'studentId',
                   Populator.builder('photos', 'studentPictures')
                     .populateWith(
-                      'fileId',
-                      Populator.builder('file', 'files').build(),
+                      'pictureId',
+                      Populator.builder('picture', 'pictures').build(),
                     )
                     .build(),
                 )
@@ -128,14 +128,14 @@ export class SchoolsServiceMockAdapter
         ...project,
         klasses: project.klasses.map((klass) => {
           const photos = klass.photos
-            .filter((photo) => photo.file !== undefined)
-            .map((photo) => photo.file!);
+            .filter((photo) => photo.picture !== undefined)
+            .map((photo) => photo.picture!);
           return {
             ...klass,
             students: klass.students.map((student) => {
               const photos = student.photos
-                .filter((photo) => photo.file !== undefined)
-                .map((photo) => photo.file!);
+                .filter((photo) => photo.picture !== undefined)
+                .map((photo) => photo.picture!);
               return {
                 ...student,
                 photos,

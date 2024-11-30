@@ -1,12 +1,14 @@
-import { CreateGroupPictureBody } from '../../domain/group-pictures/create-group-picture.body';
+import { GroupPicturesDaoPort } from './daos';
 
 import { ForMockControllerService } from '#core/domain';
 import { inject, singleton } from '#di';
-import { FilesCreatorControllerServicePort } from '#features/files/domain';
 import {
-  GroupPicture,
+  FilesCreatorControllerServicePort,
+  GroupPictureDto,
+} from '#features/files/domain';
+import { CreateGroupPictureBody } from '#features/klasses/domain';
+import {
   GroupPicturesCreatorControllerServicePort,
-  GroupPicturesDaoPort,
   KlassesControllerServicePort,
 } from '#features/klasses/domain';
 
@@ -30,14 +32,14 @@ export class GroupPicturesServiceMockAdapter
     projectId,
     klassId,
     photo,
-  }: CreateGroupPictureBody): Promise<GroupPicture> {
+  }: CreateGroupPictureBody): Promise<GroupPictureDto> {
     const klass = await this.klassesControllerService.getKlass(
       projectId,
       klassId,
     );
     const fileDto = await this.filesService.createFile(photo);
     return this.groupPictureDao.save({
-      fileId: fileDto.id,
+      pictureId: fileDto.id,
       klassId: klass.id,
     });
   }

@@ -1,9 +1,10 @@
-import { FileDto, FilesCreatorControllerServicePort } from '../../domain';
+import { FilesCreatorControllerServicePort, PictureDto } from '../../domain';
 
-import { FilesDaoPort } from './daos';
+import { PicturesDaoPort } from './daos';
 
 import { ForMockControllerService, LogAction } from '#core/domain';
 import { inject, singleton } from '#di';
+import { PictureControllerServicePort } from '#features/files/domain';
 
 @singleton()
 export class FilesServiceMockAdapter
@@ -11,25 +12,30 @@ export class FilesServiceMockAdapter
   implements FilesCreatorControllerServicePort
 {
   constructor(
-    @inject(FilesDaoPort)
-    private readonly filesDao: FilesDaoPort,
+    @inject(PicturesDaoPort)
+    private readonly picturesDao: PicturesDaoPort,
+    @inject(PictureControllerServicePort)
+    private readonly pictureControllerService: PictureControllerServicePort,
   ) {
     super();
   }
 
   @LogAction()
-  async createFile(file: File): Promise<FileDto> {
-    const fileBlob = new Blob([file], { type: file.type });
-    return this.filesDao.save({ blob: fileBlob });
+  async createFile(file: File): Promise<PictureDto> {
+    // const fileBlob = new Blob([file], { type: file.type });
+    const picture = await this.picturesDao.save({});
+    await this.pictureControllerService.uploadPicture(picture.id, file);
+    return picture;
   }
 
   @LogAction()
-  async createFiles(body: File[]): Promise<FileDto[]> {
-    return this.filesDao.saveMany(
-      body.map((file) => {
-        const fileBlob = new Blob([file], { type: file.type });
-        return { blob: fileBlob };
-      }),
-    );
+  async createFiles(files: File[]): Promise<PictureDto[]> {
+    const pictures: PictureDto[] = [];
+    for (const file of files) {
+      // const fileBlob = new Blob([file], { type: file.type });
+      const picture = await this.createFile(file);
+      pictures.push(picture);
+    }
+    return pictures;
   }
 }

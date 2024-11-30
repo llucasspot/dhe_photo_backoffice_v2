@@ -1,1 +1,1 @@
-export * from './schools.module';
+export * from './schools.mock.module';

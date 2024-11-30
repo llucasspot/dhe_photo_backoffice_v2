@@ -2,12 +2,11 @@ import { Type } from 'class-transformer';
 import { IsArray, IsOptional, IsString, ValidateNested } from 'class-validator';
 
 import { OmitType } from '#core/domain';
-import { Klass } from '#features/klasses/infra';
 import { KlassProject } from '#features/projects/domain';
 import { HavePictures } from '#features/students/domain';
 import { KlassStudentDto } from '#features/students/domain';
 
-export class KlassDto extends HavePictures<KlassDto> implements Klass {
+export class KlassDto extends HavePictures<KlassDto> {
   // properties
   @IsString()
   id!: string;

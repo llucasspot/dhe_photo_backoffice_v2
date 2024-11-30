@@ -1,12 +1,12 @@
 import { KlassesDaoPort } from '../ports';
 
 import { singleton } from '#di';
-import { KlassDto } from '#features/klasses/domain';
-import { MockDao } from '#mock';
+import { DtoByTableName } from '#mock/domain';
+import { MockDao } from '#mock/infra';
 
 @singleton()
 export class KlassesDaoArrayAdapter
-  extends MockDao<'klasses'>
+  extends MockDao<DtoByTableName, 'klasses'>
   implements KlassesDaoPort
 {
   constructor() {
@@ -16,13 +16,7 @@ export class KlassesDaoArrayAdapter
   async getByName(
     projectId: string,
     name: string,
-  ): Promise<
-    | Omit<
-        KlassDto,
-        'project' | 'students' | 'studentIds' | 'photos' | 'photoIds'
-      >
-    | undefined
-  > {
+  ): Promise<DtoByTableName['klasses'] | undefined> {
     return this.table.find(
       (item) => item.name === name && item.projectId === projectId,
     );

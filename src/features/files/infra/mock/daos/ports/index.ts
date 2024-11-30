@@ -1,2 +1,2 @@
-export * from './files-dao.port';
+export * from './pictures-dao.port';
 export * from './student-pictures-dao.port';

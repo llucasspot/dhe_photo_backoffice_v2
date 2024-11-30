@@ -1,14 +1,14 @@
 import { Type } from 'class-transformer';
 import { IsOptional, IsString, ValidateNested } from 'class-validator';
 
-import { FileDto } from '#features/files/domain';
+import { PictureDto } from '#features/files/domain';
 
 export class HavePicture {
   @IsString()
-  fileId!: string;
+  pictureId!: string;
 
   @IsOptional()
   @ValidateNested()
-  @Type(() => FileDto)
-  file?: FileDto;
+  @Type(() => PictureDto)
+  picture?: PictureDto;
 }

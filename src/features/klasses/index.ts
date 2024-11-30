@@ -1,1 +1,1 @@
-export * from './klasses.module';
+export * from './klasses.mock.module';

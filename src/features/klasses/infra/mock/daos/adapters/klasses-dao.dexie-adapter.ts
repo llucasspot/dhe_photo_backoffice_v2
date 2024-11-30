@@ -1,12 +1,12 @@
 import { KlassesDaoPort } from '../ports';
 
 import { inject, singleton } from '#di';
-import { KlassDto } from '#features/klasses/domain';
-import { DatabaseServiceDexieAdapter, DexieDao } from '#mock';
+import { DtoByTableName } from '#mock/domain';
+import { DaoDexie, DatabaseServiceDexieAdapter } from '#mock/infra';
 
 @singleton()
 export class KlassesDaoDexieAdapter
-  extends DexieDao<'klasses'>
+  extends DaoDexie<'klasses'>
   implements KlassesDaoPort
 {
   constructor(
@@ -19,13 +19,7 @@ export class KlassesDaoDexieAdapter
   async getByName(
     projectId: string,
     name: string,
-  ): Promise<
-    | Omit<
-        KlassDto,
-        'project' | 'students' | 'studentIds' | 'photos' | 'photoIds'
-      >
-    | undefined
-  > {
+  ): Promise<DtoByTableName['klasses'] | undefined> {
     return this.query.get({ name, projectId });
   }
 }

@@ -1,6 +1,6 @@
-import { FileDto } from './file.dto';
+import { PictureDto } from './picture.dto';
 
 export abstract class FilesCreatorControllerServicePort {
-  abstract createFile(body: File): Promise<Omit<FileDto, ''>>;
-  abstract createFiles(body: File[]): Promise<Omit<FileDto, ''>[]>;
+  abstract createFile(body: File): Promise<PictureDto>;
+  abstract createFiles(body: File[]): Promise<PictureDto[]>;
 }

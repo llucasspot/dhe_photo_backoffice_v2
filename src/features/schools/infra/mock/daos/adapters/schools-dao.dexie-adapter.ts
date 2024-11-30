@@ -1,10 +1,10 @@
 import { inject, singleton } from '#di';
 import { SchoolsDaoPort } from '#features/schools/infra';
-import { DatabaseServiceDexieAdapter, DexieDao } from '#mock';
+import { DaoDexie, DatabaseServiceDexieAdapter } from '#mock/infra';
 
 @singleton()
 export class SchoolsDaoDexieAdapter
-  extends DexieDao<'schools'>
+  extends DaoDexie<'schools'>
   implements SchoolsDaoPort
 {
   constructor(

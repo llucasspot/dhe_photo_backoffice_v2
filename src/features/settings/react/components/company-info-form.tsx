@@ -6,7 +6,7 @@ export const CompanyInfoForm = () => {
   const { t } = useI18n();
 
   const onSubmit = (data: CompanyInfoDto) => {
-    console.log(data);
+    console.log('form data : ', data);
   };
 
   return (

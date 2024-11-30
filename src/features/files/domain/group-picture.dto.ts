@@ -1,12 +1,11 @@
 import { Type } from 'class-transformer';
 import { IsOptional, IsString, ValidateNested } from 'class-validator';
 
-import { HavePicture } from '../../students/domain/beans/have-picture.ts';
-
-import { FileDto } from './file.dto.ts';
+import { PictureDto } from './picture.dto';
 
 import { Dto } from '#core/domain';
 import { KlassDto } from '#features/klasses/domain';
+import { HavePicture } from '#features/students/domain';
 
 export class GroupPictureDto
   extends Dto<GroupPictureDto>
@@ -21,10 +20,10 @@ export class GroupPictureDto
 
   // HavePicture properties
   @IsString()
-  fileId!: string;
+  pictureId!: string;
 
   @IsOptional()
   @ValidateNested()
-  @Type(() => FileDto)
-  file?: FileDto;
+  @Type(() => PictureDto)
+  picture?: PictureDto;
 }
