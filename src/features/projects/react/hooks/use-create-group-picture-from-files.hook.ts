@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { KlassPictureDropzoneHandlerService } from '../components';
 
-import { projectsKeys } from './use-projects.hook';
+import { klassKeys } from './use-klass.hook.ts';
 
 import { useService } from '#di/react';
 import { ToastService } from '#toast/domain';
@@ -34,7 +34,7 @@ export const useCreateGroupPictureFromFiles = () => {
     onSuccess: (_res, body) => {
       queryClient.invalidateQueries({
         // TODO bug see
-        queryKey: projectsKeys.detail(body.projectId),
+        queryKey: klassKeys.detail(body.klassId),
         // queryKey: projectsKeys.all,
       });
     },

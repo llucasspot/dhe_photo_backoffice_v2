@@ -91,10 +91,26 @@ const KlassDetailContent = ({
           }}
         />
         <div className="mt-4">
-          {/* TODO: Add group photos list */}
           <p className="text-sm text-gray-500">
             {t('klasses.detail.groupPhoto.list.empty')}
           </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-6">
+            {klass.photos.map((picture) => (
+              <div
+                key={picture.pictureId}
+                className="bg-white p-4 rounded-lg shadow-sm border border-gray-200"
+              >
+                <div className="grid grid-cols-2 gap-2">
+                  <div
+                    key={picture.pictureId}
+                    className="aspect-square bg-gray-100 rounded-md flex items-center justify-center"
+                  >
+                    <BlobViewer pictureId={picture.picture?.id} />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
