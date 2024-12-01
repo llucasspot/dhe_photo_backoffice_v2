@@ -73,11 +73,7 @@ export class SchoolsServiceMockAdapter
   }
 
   private buildFinder(schoolId?: string) {
-    let finder = new Finder('schools');
-    if (schoolId) {
-      finder = finder.filtersWith(['id', '$equals', schoolId]);
-    }
-    return finder.populateManyWith(
+    const finder = new Finder('schools').populateManyWith(
       'schoolId',
       Populator.builder('projects', 'projects')
         .populateManyWith(
@@ -110,5 +106,9 @@ export class SchoolsServiceMockAdapter
         )
         .build(),
     );
+    if (schoolId) {
+      finder.filtersWith(['id', '$equals', schoolId]);
+    }
+    return finder;
   }
 }

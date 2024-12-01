@@ -9,17 +9,14 @@ import {
 import { operatorMapperDexie } from './operator-mapper.dexie';
 
 import { singleton } from '#di';
-import { Filter, Finder, Populator } from '#mock/domain';
-import { DatabaseServicePort } from '#mock/domain';
+import { DatabaseServicePort, Filter, Finder, Populator } from '#mock/domain';
 
 export type DexieConnexion = Dexie & {
   [K in DexieTableName]: EntityTable<DtoByDexieTableName[K], 'id'>;
 };
 
 @singleton()
-export class DatabaseServiceDexieAdapter
-  implements DatabaseServicePort<DexieConnexion>
-{
+export class DatabaseServiceDexieAdapter implements DatabaseServicePort {
   private db: DexieConnexion;
 
   constructor() {
@@ -34,6 +31,7 @@ export class DatabaseServiceDexieAdapter
       products: 'id, name, description, longSize, shortSize',
       projects:
         'id, schoolId, name, orderEndDate, shotDate, messageForClients, state',
+      projectProducts: 'id, productId, projectId, price',
       schools: 'id, name, currency, city',
       students: 'id, klassId, code',
       dexieFileData: 'id, pictureId, blob',
@@ -50,10 +48,6 @@ export class DatabaseServiceDexieAdapter
     if (!db.isOpen()) {
       db.open();
     }
-  }
-
-  getConnexion() {
-    return this.db;
   }
 
   async getAll<
@@ -75,9 +69,16 @@ export class DatabaseServiceDexieAdapter
 
   async getById<TTableName extends DexieTableName>(
     query: EntityTable<DtoByDexieTableName[TTableName], 'id'>,
-    id: string,
-  ): Promise<DtoByDexieTableName[TTableName] | undefined> {
-    return query.get({ id });
+    id: DtoByDexieTableName[TTableName]['id'],
+  ) {
+    return this.get(
+      query,
+      new Finder<
+        DtoByDexieTableName,
+        TTableName,
+        DtoByDexieTableName[TTableName]
+      >().filtersWith(['id', '$equals', id]),
+    );
   }
 
   async get<
@@ -103,10 +104,11 @@ export class DatabaseServiceDexieAdapter
   async save<TTableName extends DexieTableName>(
     query: EntityTable<DtoByDexieTableName[TTableName], 'id'>,
     body: Omit<DtoByDexieTableName[TTableName], 'id'>,
-  ): Promise<DtoByDexieTableName[TTableName]> {
-    const id = await query
+  ) {
+    const id: DtoByDexieTableName[TTableName]['id'] = await query.add(
       // @ts-expect-error save
-      .add(body);
+      body,
+    );
     const entity = await this.getById(query, id);
     return entity!;
   }
@@ -114,7 +116,7 @@ export class DatabaseServiceDexieAdapter
   async saveMany<TTableName extends DexieTableName>(
     query: EntityTable<DtoByDexieTableName[TTableName], 'id'>,
     entities: Omit<DtoByDexieTableName[TTableName], 'id'>[],
-  ): Promise<DtoByDexieTableName[TTableName][]> {
+  ) {
     const res: DtoByDexieTableName[TTableName][] = [];
     for (const entity of entities) {
       const newEntity = await this.save(query, entity);
@@ -125,9 +127,9 @@ export class DatabaseServiceDexieAdapter
 
   async update<TTableName extends DexieTableName>(
     query: EntityTable<DtoByDexieTableName[TTableName], 'id'>,
-    id: string,
+    id: DtoByDexieTableName[TTableName]['id'],
     body: Partial<DtoByDexieTableName[TTableName]>,
-  ): Promise<DtoByDexieTableName[TTableName] | undefined> {
+  ) {
     const updated = await query.update(
       // @ts-expect-error update with id
       id,
@@ -142,7 +144,7 @@ export class DatabaseServiceDexieAdapter
 
   async deleteById<TTableName extends DexieTableName>(
     query: EntityTable<DtoByDexieTableName[TTableName], 'id'>,
-    id: string,
+    id: DtoByDexieTableName[TTableName]['id'],
   ): Promise<boolean> {
     try {
       await query.delete(
@@ -156,7 +158,7 @@ export class DatabaseServiceDexieAdapter
   }
 
   getRelatedTable<TTableName extends DexieTableName>(tableName: TTableName) {
-    return this.db[tableName] as unknown as EntityTable<
+    return this.db[tableName] as EntityTable<
       DtoByDexieTableName[TTableName],
       'id'
     >;

@@ -40,23 +40,11 @@ export class DaoDexie<TTableName extends keyof DtoByDexieTableName>
     return this.databaseService.get(this.query, finder);
   }
 
-  // async getAll<TPopulatedEntity extends DtoByDexieTableName[TTableName]>(
-  //   finder?: Finder<DtoByDexieTableName, TTableName, TPopulatedEntity>,
-  // ) {
-  //   return this.databaseService.getAll(this.query, finder);
-  // }
-
   async getById(
-    id: string,
+    id: DtoByDexieTableName[TTableName]['id'],
   ): Promise<DtoByDexieTableName[TTableName] | undefined> {
     return this.databaseService.getById(this.query, id);
   }
-
-  // async get<TPopulatedEntity extends DtoByDexieTableName[TTableName]>(
-  //   finder?: Finder<DtoByDexieTableName, TTableName, TPopulatedEntity>,
-  // ): Promise<DtoByDexieTableName[TTableName] | TPopulatedEntity | undefined> {
-  //   return this.databaseService.get(this.query, finder);
-  // }
 
   async save(
     body: Omit<DtoByDexieTableName[TTableName], 'id'>,
@@ -71,7 +59,7 @@ export class DaoDexie<TTableName extends keyof DtoByDexieTableName>
   }
 
   async update(
-    id: string,
+    id: DtoByDexieTableName[TTableName]['id'],
     body: Partial<DtoByDexieTableName[TTableName]>,
   ): Promise<DtoByDexieTableName[TTableName] | undefined> {
     return this.databaseService.update(this.query, id, body);

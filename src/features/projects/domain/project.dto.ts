@@ -1,5 +1,7 @@
 import { IsOptional } from 'class-validator';
 
+import { ProjectProductDto } from './project-product.dto';
+
 import { OmitType } from '#@nestjs/mapped-types';
 import { plainToInstance } from '#class-transformer';
 import { Dto } from '#core/domain';
@@ -25,9 +27,14 @@ export class ProjectDto extends Dto<ProjectDto> {
   @IsOptional()
   school?: ProjectSchool;
   klasses: ProjectKlassDto[] = [];
+  products: ProjectProductDto[] = [];
 
   get klassIds(): string[] {
     return this.klasses.map((klass) => klass.id);
+  }
+
+  get productIds(): string[] {
+    return this.products.map((product) => product.id);
   }
 
   static build<TBody>(body: TBody[]): ProjectDto[];

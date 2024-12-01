@@ -6,10 +6,7 @@ import {
   WhereOptions,
 } from 'sequelize';
 
-import {
-  DatabaseServiceSequelizeAdapter,
-  SequelizeConnexion,
-} from '../service';
+import { DatabaseServiceSequelizeAdapter } from '../service';
 import { operatorMapperSequelize } from '../service/operator-mapper.sequelize';
 
 import {
@@ -28,14 +25,11 @@ export class DaoSequelize<TTableName extends keyof DtoBySequelizeTableName>
       Partial<DtoBySequelizeTableName[TTableName]>
     >
   >;
-  private connexion: SequelizeConnexion;
-
   constructor(
-    databaseService: DatabaseServiceSequelizeAdapter,
+    private readonly databaseService: DatabaseServiceSequelizeAdapter,
     modelName: TTableName,
   ) {
-    this.connexion = databaseService.getConnexion();
-    this.model = this.getRelatedModel(modelName);
+    this.model = databaseService.getRelatedModel(modelName);
   }
 
   getAll(): Promise<DtoBySequelizeTableName[TTableName][]>;
@@ -159,7 +153,7 @@ export class DaoSequelize<TTableName extends keyof DtoBySequelizeTableName>
   >(findOptions: FindOptions<TData>, populators: TPopulator[]) {
     findOptions.include = populators.map((populator) => {
       const include: IncludeOptions = {
-        model: this.getRelatedModel(populator.tableName),
+        model: this.databaseService.getRelatedModel(populator.tableName),
         as: populator.as,
       };
       if (populator.filters) {
@@ -170,11 +164,5 @@ export class DaoSequelize<TTableName extends keyof DtoBySequelizeTableName>
       }
       return include;
     });
-  }
-
-  private getRelatedModel<TTableName extends SequelizeTableName>(
-    tableName: TTableName,
-  ) {
-    return this.connexion.models[tableName];
   }
 }

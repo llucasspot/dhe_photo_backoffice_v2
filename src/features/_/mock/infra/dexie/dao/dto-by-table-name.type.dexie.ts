@@ -9,7 +9,7 @@ import { DtoByTableName } from '#mock/domain';
 // };
 
 export class DexieFileData extends Dto<DexieFileData> {
-  //properties
+  // properties
   id!: string;
   pictureId!: string;
   blob!: Blob;

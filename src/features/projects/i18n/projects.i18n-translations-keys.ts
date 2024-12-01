@@ -29,6 +29,20 @@ export type ProjectsI18nTranslationsKeys = {
       created: string;
       error: string;
     };
+    products: {
+      title: string;
+      select: string;
+      price: string;
+      add: string;
+      empty: string;
+      adding: string;
+      added: string;
+      error: string;
+      table: {
+        product: string;
+        price: string;
+      };
+    };
   };
   create: {
     title: string;

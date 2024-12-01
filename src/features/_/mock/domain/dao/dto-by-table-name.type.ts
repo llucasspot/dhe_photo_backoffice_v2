@@ -4,6 +4,7 @@ import {
   Picture,
   Product,
   Project,
+  ProjectProduct,
   School,
   Student,
   StudentPicture,
@@ -31,6 +32,7 @@ export type DtoByTableName = {
   schools: School;
   klasses: Klass;
   products: Product;
+  projectProducts: ProjectProduct;
   projects: Project;
   students: Student;
 };

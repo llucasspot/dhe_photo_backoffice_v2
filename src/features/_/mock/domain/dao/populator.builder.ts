@@ -171,7 +171,7 @@ export class Finder<
   TFilterOmitFields extends keyof TPopulatedEntity | '' = '',
 > {
   constructor(
-    public readonly tableName: TTableName,
+    public readonly tableName?: TTableName,
     public readonly populators: Populator<
       TDtoByTableName,
       TTableName,

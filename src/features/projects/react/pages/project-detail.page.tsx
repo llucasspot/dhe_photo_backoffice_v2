@@ -2,6 +2,7 @@ import { useParams } from '@tanstack/react-router';
 import { match } from 'ts-pattern';
 
 import { FolderDropzone, KlassDropzoneHandlerService } from '../components';
+import { ProjectProducts } from '../components/products/project-products';
 import { useCreateKlassesFromFiles, useProject } from '../hooks';
 
 import { useService } from '#di/react';
@@ -127,6 +128,8 @@ const ProjectDetailContent = ({ project }: { project: ProjectDto }) => {
           </dl>
         </div>
       </div>
+
+      <ProjectProducts project={project} />
 
       <div className="mt-8">
         <h3 className="text-lg font-medium text-gray-900 mb-4">

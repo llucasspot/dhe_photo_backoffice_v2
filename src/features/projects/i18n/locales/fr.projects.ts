@@ -23,6 +23,20 @@ export const frProjects: ProjectsI18nTranslationsKeys = {
       created: 'Classes créées avec succès !',
       error: 'Échec de la création des classes. Veuillez réessayer.',
     },
+    products: {
+      title: 'Produits',
+      select: 'Sélectionner un produit',
+      price: 'Prix',
+      add: 'Ajouter le produit',
+      empty: 'Aucun produit ajouté',
+      adding: 'Ajout du produit...',
+      added: 'Produit ajouté avec succès',
+      error: "Échec de l'ajout du produit",
+      table: {
+        product: 'Produit',
+        price: 'Prix',
+      },
+    },
     fields: {
       name: 'Nom du projet',
       school: 'École',

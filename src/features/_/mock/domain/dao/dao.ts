@@ -7,8 +7,6 @@ export abstract class Dao<
 > {
   abstract getAll(): Promise<TDtoByTableName[TTableName][]>;
   abstract getAll<
-    TDtoByTableName extends DtoByTableName,
-    TTableName extends keyof TDtoByTableName,
     TPopulatedEntity extends TDtoByTableName[TTableName],
     TFilterOmitFields extends keyof TPopulatedEntity | '' = '',
   >(
@@ -26,8 +24,6 @@ export abstract class Dao<
 
   abstract get(): Promise<TDtoByTableName[TTableName] | null>;
   abstract get<
-    TDtoByTableName extends DtoByTableName,
-    TTableName extends keyof TDtoByTableName,
     TPopulatedEntity extends TDtoByTableName[TTableName],
     TFilterOmitFields extends keyof TPopulatedEntity | '' = '',
   >(

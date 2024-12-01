@@ -1,3 +1,1 @@
-export abstract class DatabaseServicePort<TConnexion> {
-  abstract getConnexion(): TConnexion;
-}
+export abstract class DatabaseServicePort {}

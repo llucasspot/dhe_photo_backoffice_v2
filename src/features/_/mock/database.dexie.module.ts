@@ -1,3 +1,6 @@
+import { ProjectProductsDaoDexieAdapter } from '../../projects/infra/mock/daos/adapters/project-products-dao.dexie-adapter.ts';
+import { ProjectProductsDaoPort } from '../../projects/infra/mock/daos/ports/project-products-dao.port.ts';
+
 import { Module } from '#di';
 import {
   PicturesDaoDexieAdapter,
@@ -61,6 +64,10 @@ import {
     {
       token: GroupPicturesDaoPort,
       useToken: GroupPicturesDaoDexieAdapter,
+    },
+    {
+      token: ProjectProductsDaoPort,
+      useToken: ProjectProductsDaoDexieAdapter,
     },
   ],
 })

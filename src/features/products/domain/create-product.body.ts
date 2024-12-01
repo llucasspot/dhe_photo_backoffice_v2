@@ -6,7 +6,7 @@ import {
   Min,
 } from 'class-validator';
 
-import { Transform } from '#class-transformer';
+import { Transform, Type } from '#class-transformer';
 import { Dto } from '#core/domain';
 
 export class CreateProductBody extends Dto<CreateProductBody> {
@@ -25,11 +25,11 @@ export class CreateProductBody extends Dto<CreateProductBody> {
 
   @IsNumber({}, { message: 'products.create.validation.longSize.IsNumber' })
   @Min(1, { message: 'products.create.validation.longSize.Min' })
-  @Transform(({ value }) => Number(value))
+  @Type(() => Number)
   longSize!: number;
 
   @IsNumber({}, { message: 'products.create.validation.shortSize.IsNumber' })
   @Min(1, { message: 'products.create.validation.shortSize.Min' })
-  @Transform(({ value }) => Number(value))
+  @Type(() => Number)
   shortSize!: number;
 }

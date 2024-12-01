@@ -1,3 +1,4 @@
+import { AddProductBody } from '../add-product.body';
 import { CreateProjectBody } from '../create-project.body';
 import { ProjectDto } from '../project.dto';
 
@@ -16,4 +17,6 @@ export abstract class ProjectsControllerServicePort {
   abstract deleteProject(id: string): Promise<void>;
 
   abstract uploadPhoto(photo: File): Promise<string>;
+
+  abstract addProduct(body: AddProductBody): Promise<ProjectDto>;
 }

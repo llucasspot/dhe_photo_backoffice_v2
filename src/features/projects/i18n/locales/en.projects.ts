@@ -23,6 +23,20 @@ export const enProjects: ProjectsI18nTranslationsKeys = {
       created: 'Classes created successfully!',
       error: 'Failed to create classes. Please try again.',
     },
+    products: {
+      title: 'Products',
+      select: 'Select a Product',
+      price: 'Price',
+      add: 'Add Product',
+      empty: 'No products added yet',
+      adding: 'Adding product...',
+      added: 'Product added successfully',
+      error: 'Failed to add product',
+      table: {
+        product: 'Product',
+        price: 'Price',
+      },
+    },
     fields: {
       name: 'Project Name',
       school: 'School',

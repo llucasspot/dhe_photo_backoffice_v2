@@ -2,7 +2,7 @@ import { plainToInstance } from '#class-transformer';
 import { Dto } from '#core/domain';
 
 export class PictureDto extends Dto<PictureDto> {
-  //properties
+  // properties
   id!: string;
 
   get lala() {

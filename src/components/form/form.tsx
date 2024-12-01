@@ -4,7 +4,8 @@ import {
   SubmitHandler,
   useForm,
 } from 'react-hook-form';
-import { classValidatorResolver } from '@hookform/resolvers/class-validator';
+
+import { classValidatorResolver } from './class-validator';
 
 import { Dto } from '#core/domain';
 import { Type } from '#di/domain';
@@ -22,6 +23,7 @@ export function Form<TDto extends Dto<TDto>>({
   className = '',
 }: FormProps<TDto>) {
   const methods = useForm<TDto>({
+    // @ts-expect-error resolver: classValidatorResolver(dto),
     resolver: classValidatorResolver(dto),
   });
 

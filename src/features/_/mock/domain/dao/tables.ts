@@ -55,3 +55,10 @@ export class Student extends Dto<Student> {
   code!: string;
   klassId!: string;
 }
+
+export class ProjectProduct extends Dto<ProjectProduct> {
+  id!: string;
+  projectId!: string;
+  productId!: string;
+  price!: number;
+}
