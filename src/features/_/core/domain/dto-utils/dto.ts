@@ -1,4 +1,4 @@
-export class Dto<T extends Dto<T>> {
+export class Dto<T extends object> {
   constructor(instance: T) {
     Object.assign(this, instance);
   }

@@ -281,36 +281,6 @@ export class DatabaseServiceDexieAdapter
     const query = this.getRelatedTable(populator.tableName);
     for (const result of results) {
       await this.applyPopulatorForGet(result, populator, query);
-      // if (populator.isMany) {
-      //   // @ts-expect-error result[populator.as]
-      //   result[populator.as] = await this.getAll(
-      //     query,
-      //     new Finder(populator.tableName, populator.populators, [
-      //       // @ts-expect-error populator.foreignKey
-      //       [populator.foreignKey, '$equals', result.id],
-      //       ...populator.filters,
-      //     ]),
-      //   );
-      //   // @ts-expect-error result[populator.as]
-      //   result[populator.as] = await this.getAll(
-      //     query,
-      //     new Finder(populator.tableName, populator.populators, [
-      //       // @ts-expect-error populator.foreignKey
-      //       [populator.foreignKey, '$equals', result.id],
-      //       ...populator.filters,
-      //     ]),
-      //   );
-      // } else {
-      //   // @ts-expect-error result[populator.as]
-      //   result[populator.as] = await this.get(
-      //     query,
-      //     new Finder(populator.tableName, populator.populators, [
-      //       // @ts-expect-error populator.foreignKey
-      //       ['id', '$equals', result[populator.foreignKey]],
-      //       ...populator.filters,
-      //     ]),
-      //   );
-      // }
     }
   }
 }

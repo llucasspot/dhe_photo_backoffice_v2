@@ -45,7 +45,7 @@ export class ProjectsServiceMockAdapter
         school,
       });
     }
-    return res;
+    return ProjectDto.build(res);
   }
 
   @LogAction()
@@ -58,12 +58,12 @@ export class ProjectsServiceMockAdapter
     const klasses = await this.klassesControllerService.getKlasses(project.id);
     const klassIds = klasses.map((klass) => klass.id);
     const school = await this.schoolsService.getSchool(project.schoolId);
-    return {
+    return ProjectDto.build({
       ...project,
       klasses,
       klassIds,
       school,
-    };
+    });
   }
 
   @LogAction()
@@ -76,12 +76,12 @@ export class ProjectsServiceMockAdapter
     const klasses = await this.klassesControllerService.getKlasses(project.id);
     const klassIds = klasses.map((klass) => klass.id);
     const school = await this.schoolsService.getSchool(project.schoolId);
-    return {
+    return ProjectDto.build({
       ...project,
       klasses,
       klassIds,
       school,
-    };
+    });
   }
 
   @LogAction()
@@ -97,12 +97,12 @@ export class ProjectsServiceMockAdapter
     const klasses = await this.klassesControllerService.getKlasses(project.id);
     const klassIds = klasses.map((klass) => klass.id);
     const school = await this.schoolsService.getSchool(project.schoolId);
-    return {
+    return ProjectDto.build({
       ...project,
       klasses,
       klassIds,
       school,
-    };
+    });
   }
 
   @LogAction()

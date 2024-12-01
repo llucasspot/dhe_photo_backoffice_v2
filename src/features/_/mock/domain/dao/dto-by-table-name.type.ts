@@ -7,7 +7,7 @@ import {
   School,
   Student,
   StudentPicture,
-} from './tables.ts';
+} from './tables';
 
 import { Type } from '#di/domain';
 

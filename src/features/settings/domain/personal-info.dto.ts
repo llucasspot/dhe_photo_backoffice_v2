@@ -1,4 +1,3 @@
-import { Transform } from 'class-transformer';
 import {
   IsEmail,
   IsNotEmpty,
@@ -8,6 +7,7 @@ import {
   Matches,
 } from 'class-validator';
 
+import { plainToInstance, Transform } from '#class-transformer';
 import { Dto } from '#core/domain';
 
 export class PersonalInfoDto extends Dto<PersonalInfoDto> {
@@ -51,4 +51,10 @@ export class PersonalInfoDto extends Dto<PersonalInfoDto> {
     message: 'settings.personalInfo.validation.phoneNumber.IsNotEmpty',
   })
   phoneNumber!: string;
+
+  static build<TBody>(body: TBody[]): PersonalInfoDto[];
+  static build<TBody>(body: TBody): PersonalInfoDto;
+  static build(body: unknown): PersonalInfoDto | PersonalInfoDto[] {
+    return plainToInstance(this, body);
+  }
 }

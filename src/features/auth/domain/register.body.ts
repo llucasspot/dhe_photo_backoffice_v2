@@ -1,4 +1,3 @@
-import { Transform } from 'class-transformer';
 import {
   IsEmail,
   IsNotEmpty,
@@ -8,6 +7,7 @@ import {
   ValidateIf,
 } from 'class-validator';
 
+import { Transform } from '#class-transformer';
 import { Dto } from '#core/domain';
 
 export class RegisterBody extends Dto<RegisterBody> {

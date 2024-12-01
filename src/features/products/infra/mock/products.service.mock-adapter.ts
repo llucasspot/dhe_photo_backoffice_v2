@@ -33,15 +33,16 @@ export class ProductsServiceMockAdapter
     if (!product) {
       throw new Error('Product not found');
     }
-    return product;
+    return ProductDto.build(product);
   }
 
   @LogAction()
   async createProduct(body: CreateProductBody): Promise<ProductDto> {
     await this.delay();
-    return this.productsMockDao.save({
+    const product = await this.productsMockDao.save({
       ...body,
     });
+    return ProductDto.build(product);
   }
 
   @LogAction()
@@ -54,7 +55,7 @@ export class ProductsServiceMockAdapter
     if (!product) {
       throw new Error('Product not found');
     }
-    return product;
+    return ProductDto.build(product);
   }
 
   @LogAction()

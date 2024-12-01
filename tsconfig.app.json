@@ -70,7 +70,11 @@
       "#routing/domain": ["./src/features/_/routing/domain"],
       "#routing/react": ["./src/features/_/routing/react"],
       "#routing": ["./src/features/_/routing"],
+      "#class-transformer": ["./libs/class-transformer"],
+      "#@nestjs/common": ["./libs/@nestjs/common"],
+      "#@nestjs/mapped-types": ["./libs/@nestjs/mapped-types"],
       "#core/domain": ["./src/features/_/core/domain"],
+      "#core/infra": ["./src/features/_/core/infra"],
       "#core/react": ["./src/features/_/core/react"],
       "#toast/domain": ["./src/features/_/toast/domain"],
       "#toast/react": ["./src/features/_/toast/react"],
@@ -81,7 +85,7 @@
       "#api": ["./src/features/_/api"]
     },
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
   },
   "include": ["src"]
 }

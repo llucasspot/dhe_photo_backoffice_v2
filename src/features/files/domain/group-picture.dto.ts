@@ -1,8 +1,8 @@
-import { Type } from 'class-transformer';
 import { IsOptional, IsString, ValidateNested } from 'class-validator';
 
 import { PictureDto } from './picture.dto';
 
+import { plainToInstance, Type } from '#class-transformer';
 import { Dto } from '#core/domain';
 import { KlassDto } from '#features/klasses/domain';
 import { HavePicture } from '#features/students/domain';
@@ -26,4 +26,10 @@ export class GroupPictureDto
   @ValidateNested()
   @Type(() => PictureDto)
   picture?: PictureDto;
+
+  static build<TBody>(body: TBody[]): GroupPictureDto[];
+  static build<TBody>(body: TBody): GroupPictureDto;
+  static build(body: unknown): GroupPictureDto | GroupPictureDto[] {
+    return plainToInstance(this, body);
+  }
 }

@@ -25,7 +25,7 @@ export class FilesServiceMockAdapter
     // const fileBlob = new Blob([file], { type: file.type });
     const picture = await this.picturesDao.save({});
     await this.pictureControllerService.uploadPicture(picture.id, file);
-    return picture;
+    return PictureDto.build(picture);
   }
 
   @LogAction()

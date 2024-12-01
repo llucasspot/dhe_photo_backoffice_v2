@@ -1,6 +1,6 @@
-import { Transform } from 'class-transformer';
 import { IsDate, IsNotEmpty, IsString, MaxLength } from 'class-validator';
 
+import { Transform } from '#class-transformer';
 import { Dto } from '#core/domain';
 
 export class CreateProjectBody extends Dto<CreateProjectBody> {

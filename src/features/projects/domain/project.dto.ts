@@ -1,6 +1,8 @@
 import { IsOptional } from 'class-validator';
 
-import { Dto, OmitType } from '#core/domain';
+import { OmitType } from '#@nestjs/mapped-types';
+import { plainToInstance } from '#class-transformer';
+import { Dto } from '#core/domain';
 import { ProjectKlassDto } from '#features/klasses/domain';
 import { ProjectSchool } from '#features/schools/domain';
 
@@ -23,10 +25,20 @@ export class ProjectDto extends Dto<ProjectDto> {
   @IsOptional()
   school?: ProjectSchool;
   klasses: ProjectKlassDto[] = [];
-  klassIds: string[] = [];
+
+  get klassIds(): string[] {
+    return this.klasses.map((klass) => klass.id);
+  }
+
+  static build<TBody>(body: TBody[]): ProjectDto[];
+  static build<TBody>(body: TBody): ProjectDto;
+  static build(body: unknown): ProjectDto | ProjectDto[] {
+    return plainToInstance(this, body);
+  }
 }
 
 export class SchoolProject extends OmitType(ProjectDto, ['school']) {}
+
 export class KlassProject extends OmitType(ProjectDto, [
   'klasses',
   'klassIds',

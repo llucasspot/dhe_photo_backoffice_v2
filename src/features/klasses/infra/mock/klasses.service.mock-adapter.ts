@@ -1,5 +1,3 @@
-import { plainToInstance } from 'class-transformer';
-
 import { KlassesDaoPort } from './daos';
 
 import { ForMockControllerService, LogAction } from '#core/domain';
@@ -69,7 +67,7 @@ export class KlassesServiceMockAdapter
     if (!klass) {
       throw new Error('Klass not found');
     }
-    return plainToInstance(KlassDto, klass);
+    return KlassDto.build(klass);
   }
 
   @LogAction()
@@ -93,13 +91,12 @@ export class KlassesServiceMockAdapter
           photos: [file],
           klassId: klass.id,
         });
-        klasses.push({
-          ...klass,
-          students: [student],
-          studentIds: [student].map((student) => student.id),
-          photos: [],
-          photoIds: [],
-        });
+        klasses.push(
+          KlassDto.build({
+            ...klass,
+            students: [student],
+          }),
+        );
       }
     }
 
@@ -134,8 +131,6 @@ export class KlassesServiceMockAdapter
             .build(),
         ),
     );
-    return klasses.map((klass) => {
-      return plainToInstance(KlassDto, klass);
-    });
+    return KlassDto.build(klasses);
   }
 }

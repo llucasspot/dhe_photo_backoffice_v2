@@ -4,7 +4,7 @@ import { useService } from '#di/react';
 import { PictureControllerServicePort } from '#features/files/domain';
 
 type BlobViewerProps = {
-  pictureId?: string;
+  pictureId: string;
 };
 
 export const BlobViewer = ({ pictureId }: BlobViewerProps) => {
@@ -67,5 +67,3 @@ export const BlobViewer = ({ pictureId }: BlobViewerProps) => {
 
   return <p>Unsupported Blob type: {blob.type}</p>;
 };
-
-export default BlobViewer;

@@ -1,4 +1,3 @@
-import { Transform } from 'class-transformer';
 import {
   IsNotEmpty,
   IsNumber,
@@ -7,6 +6,7 @@ import {
   Min,
 } from 'class-validator';
 
+import { Transform } from '#class-transformer';
 import { Dto } from '#core/domain';
 
 export class CreateProductBody extends Dto<CreateProductBody> {

@@ -1,4 +1,3 @@
-import { Transform } from 'class-transformer';
 import {
   IsNotEmpty,
   IsPostalCode,
@@ -7,6 +6,7 @@ import {
   MaxLength,
 } from 'class-validator';
 
+import { plainToInstance, Transform } from '#class-transformer';
 import { Dto } from '#core/domain';
 
 export class AddressDto extends Dto<AddressDto> {
@@ -39,4 +39,10 @@ export class AddressDto extends Dto<AddressDto> {
   @MaxLength(50, { message: 'settings.address.validation.city.MaxLength' })
   @Transform(({ value }) => value?.trim())
   city!: string;
+
+  static build<TBody>(body: TBody[]): AddressDto[];
+  static build<TBody>(body: TBody): AddressDto;
+  static build(body: unknown): AddressDto | AddressDto[] {
+    return plainToInstance(this, body);
+  }
 }

@@ -34,21 +34,22 @@ export class FileStudentsServiceMockAdapter
     if (!student) {
       throw new Error('Student not found');
     }
-    const fileDtos = await this.filesService.createFiles(files);
-    const fileStudents = await this.studentPicturesDao.saveMany(
-      fileDtos.map((fileDto) => ({
+    const pictures = await this.filesService.createFiles(files);
+    const studentPictures = await this.studentPicturesDao.saveMany(
+      pictures.map((fileDto) => ({
         pictureId: fileDto.id,
         studentId,
       })),
     );
-    return fileStudents.map((fileStudent) => {
-      return {
-        ...fileStudent,
-        picture: fileDtos.find(
-          (fileDto) => fileDto.id == fileStudent.pictureId,
-        )!,
+    return studentPictures.map((studentPicture) => {
+      const picture = pictures.find(
+        (picture) => picture.id == studentPicture.pictureId,
+      );
+      return StudentPictureDto.build({
+        ...studentPicture,
+        picture,
         student,
-      };
+      });
     });
   }
 
@@ -61,15 +62,15 @@ export class FileStudentsServiceMockAdapter
     if (!student) {
       throw new Error('Student not found');
     }
-    const fileDto = await this.filesService.createFile(file);
-    const fileStudent = await this.studentPicturesDao.save({
-      pictureId: fileDto.id,
+    const picture = await this.filesService.createFile(file);
+    const studentPicture = await this.studentPicturesDao.save({
+      pictureId: picture.id,
       studentId,
     });
-    return {
-      ...fileStudent,
-      picture: fileDto,
+    return StudentPictureDto.build({
+      ...studentPicture,
+      picture,
       student,
-    };
+    });
   }
 }

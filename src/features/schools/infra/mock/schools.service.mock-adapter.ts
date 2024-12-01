@@ -1,5 +1,3 @@
-import { plainToInstance } from 'class-transformer';
-
 import { SchoolsDaoPort } from './daos';
 
 import { ForMockControllerService, LogAction } from '#core/domain';
@@ -9,7 +7,7 @@ import {
   SchoolDto,
   SchoolsServiceControllerServicePort,
 } from '#features/schools/domain';
-import { ExtractPopulatedEntity, Finder, Populator } from '#mock/domain';
+import { Finder, Populator } from '#mock/domain';
 
 @singleton()
 export class SchoolsServiceMockAdapter
@@ -28,10 +26,7 @@ export class SchoolsServiceMockAdapter
     await this.delay();
     const finder = this.buildFinder();
     const schools = await this.schoolsDao.getAll(finder);
-    return schools.map((school) => {
-      return plainToInstance(SchoolDto, school);
-      // return this.toDto(school)
-    });
+    return SchoolDto.build(schools);
   }
 
   @LogAction()
@@ -43,8 +38,7 @@ export class SchoolsServiceMockAdapter
       throw new Error('School not found');
     }
     console.log('[SchoolsServiceMockAdapter] [getSchool] [school] ', school);
-    return plainToInstance(SchoolDto, school);
-    // return this.toDto(school);
+    return SchoolDto.build(school);
   }
 
   @LogAction()
@@ -116,42 +110,5 @@ export class SchoolsServiceMockAdapter
         )
         .build(),
     );
-  }
-
-  // @ts-expect-error TODO
-  private toDto(
-    school: ExtractPopulatedEntity<ReturnType<typeof this.buildFinder>>,
-  ) {
-    return {
-      ...school,
-      projects: school.projects.map((project) => ({
-        ...project,
-        klasses: project.klasses.map((klass) => {
-          const photos = klass.photos
-            .filter((photo) => photo.picture !== undefined)
-            .map((photo) => photo.picture!);
-          return {
-            ...klass,
-            students: klass.students.map((student) => {
-              const photos = student.photos
-                .filter((photo) => photo.picture !== undefined)
-                .map((photo) => photo.picture!);
-              return {
-                ...student,
-                photos,
-                photoIds: photos.map((photo) => {
-                  return photo.id;
-                }),
-              };
-            }),
-            studentIds: klass.students.map((student) => student.id),
-            photos,
-            photoIds: photos.map((photo) => photo.id),
-          };
-        }),
-        klassIds: project.klasses.map((klass) => klass.id),
-      })),
-      projectIds: school.projects.map((project) => project.id),
-    };
   }
 }

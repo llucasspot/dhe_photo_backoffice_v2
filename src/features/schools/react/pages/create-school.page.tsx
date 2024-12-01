@@ -2,10 +2,7 @@ import { useCreateSchool } from '../hooks';
 
 import { Button, Form, Input, Select } from '#components';
 import { useService } from '#di/react';
-import {
-  availableCurrencyOptions,
-  CreateSchoolBody,
-} from '#features/schools/domain';
+import { CreateSchoolBody, SchoolDto } from '#features/schools/domain';
 import { useI18n } from '#i18n/react';
 import { RoutingServicePort } from '#routing/domain';
 import { Link } from '#routing/react';
@@ -38,7 +35,7 @@ export const CreateSchoolPage = () => {
           <Select
             formKey="currency"
             label="schools.create.form.currency"
-            options={availableCurrencyOptions}
+            options={SchoolDto.availableCurrencyOptions}
           />
           <Input formKey="city" label="schools.create.form.city" />
           <div className="flex justify-end space-x-4">

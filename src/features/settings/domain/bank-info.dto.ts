@@ -1,6 +1,6 @@
-import { Transform } from 'class-transformer';
 import { IsIBAN, IsNotEmpty, IsString, Matches } from 'class-validator';
 
+import { plainToInstance, Transform } from '#class-transformer';
 import { Dto } from '#core/domain';
 
 export class BankInfoDto extends Dto<BankInfoDto> {
@@ -17,4 +17,10 @@ export class BankInfoDto extends Dto<BankInfoDto> {
   })
   @Transform(({ value }) => value?.trim().toUpperCase())
   bicNumber!: string;
+
+  static build<TBody>(body: TBody[]): BankInfoDto[];
+  static build<TBody>(body: TBody): BankInfoDto;
+  static build(body: unknown): BankInfoDto | BankInfoDto[] {
+    return plainToInstance(this, body);
+  }
 }

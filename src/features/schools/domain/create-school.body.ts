@@ -1,8 +1,8 @@
-import { Transform } from 'class-transformer';
 import { IsEnum, IsNotEmpty, IsString, MaxLength } from 'class-validator';
 
 import { AvailableCurrency } from './school.dto';
 
+import { Transform } from '#class-transformer';
 import { Dto } from '#core/domain';
 
 export class CreateSchoolBody extends Dto<CreateSchoolBody> {

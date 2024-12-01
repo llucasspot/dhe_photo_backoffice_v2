@@ -38,9 +38,10 @@ export class GroupPicturesServiceMockAdapter
       klassId,
     );
     const fileDto = await this.filesService.createFile(photo);
-    return this.groupPictureDao.save({
+    const groupPicture = await this.groupPictureDao.save({
       pictureId: fileDto.id,
       klassId: klass.id,
     });
+    return GroupPictureDto.build(groupPicture);
   }
 }

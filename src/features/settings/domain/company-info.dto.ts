@@ -1,4 +1,3 @@
-import { Transform } from 'class-transformer';
 import {
   IsBoolean,
   IsNotEmpty,
@@ -8,6 +7,7 @@ import {
   MaxLength,
 } from 'class-validator';
 
+import { plainToInstance, Transform } from '#class-transformer';
 import { Dto } from '#core/domain';
 
 export class CompanyInfoDto extends Dto<CompanyInfoDto> {
@@ -33,4 +33,10 @@ export class CompanyInfoDto extends Dto<CompanyInfoDto> {
     message: 'settings.companyInfo.validation.subjectToVat.IsBoolean',
   })
   subjectToVat!: boolean;
+
+  static build<TBody>(body: TBody[]): CompanyInfoDto[];
+  static build<TBody>(body: TBody): CompanyInfoDto;
+  static build(body: unknown): CompanyInfoDto | CompanyInfoDto[] {
+    return plainToInstance(this, body);
+  }
 }
