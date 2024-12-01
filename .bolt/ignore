@@ -1,0 +1,5 @@
+libs/*
+libs/**/*
+
+src/lib/di/*
+src/lib/di/**/*
