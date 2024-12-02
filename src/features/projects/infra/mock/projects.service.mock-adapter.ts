@@ -1,5 +1,4 @@
-import { ProjectProductsDaoPort } from './daos/ports/project-products-dao.port.ts';
-import { ProjectsDaoPort } from './daos';
+import { ProjectProductsDaoPort, ProjectsDaoPort } from './daos';
 
 import { ForMockControllerService, LogAction } from '#core/domain';
 import { inject, singleton } from '#di';

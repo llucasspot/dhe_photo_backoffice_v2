@@ -1,4 +1,4 @@
-import { ProjectProductsDaoPort } from '../ports/project-products-dao.port.ts';
+import { ProjectProductsDaoPort } from '../ports';
 
 import { inject, singleton } from '#di';
 import { DaoDexie, DatabaseServiceDexieAdapter } from '#mock/infra';

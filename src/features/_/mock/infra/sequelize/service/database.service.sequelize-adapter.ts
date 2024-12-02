@@ -1,6 +1,6 @@
 import { Model, ModelStatic, Sequelize } from 'sequelize';
 
-import { SequelizeTableName } from '../dao/dto-by-table-name.type.sequelize.ts';
+import { SequelizeTableName } from '../dao/dto-by-table-name.type.sequelize';
 
 import { singleton } from '#di';
 import { DatabaseServicePort, DtoByTableName, TableName } from '#mock/domain';

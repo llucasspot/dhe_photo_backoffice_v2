@@ -1,6 +1,3 @@
-import { ProjectProductsDaoDexieAdapter } from '../../projects/infra/mock/daos/adapters/project-products-dao.dexie-adapter.ts';
-import { ProjectProductsDaoPort } from '../../projects/infra/mock/daos/ports/project-products-dao.port.ts';
-
 import { Module } from '#di';
 import {
   PicturesDaoDexieAdapter,
@@ -18,6 +15,8 @@ import {
   ProductsDaoDexieAdapter,
   ProductsDaoPort,
 } from '#features/products/infra';
+import { ProjectProductsDaoDexieAdapter } from '#features/projects/infra';
+import { ProjectProductsDaoPort } from '#features/projects/infra';
 import {
   ProjectsDaoDexieAdapter,
   ProjectsDaoPort,

@@ -1,12 +1,11 @@
 import { useState } from 'react';
 
-import { useAddProductToProject } from '../../hooks/use-add-product-to-project.hook';
-
 import { ProductSelector } from './product-selector';
 
 import { Button } from '#components';
 import { ProductDto } from '#features/products/domain';
 import { ProjectDto } from '#features/projects/domain';
+import { useAddProductToProject } from '#features/projects/react';
 import { useI18n } from '#i18n/react';
 
 interface ProjectProductsProps {
