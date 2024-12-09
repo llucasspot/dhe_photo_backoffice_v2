@@ -25,8 +25,8 @@ export class DatabaseServiceDexieAdapter implements DatabaseServicePort {
 
     db.version(1).stores({
       pictures: 'id',
-      studentPictures: 'id, fileId, studentId',
-      groupPictures: 'id, fileId, klassId',
+      studentPictures: 'id, pictureId, studentId',
+      groupPictures: 'id, pictureId, klassId',
       klasses: 'id, projectId, name',
       products: 'id, name, description, longSize, shortSize',
       projects:
