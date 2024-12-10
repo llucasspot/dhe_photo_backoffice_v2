@@ -1,8 +1,9 @@
+import { ComponentProps } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { useI18n } from '#i18n/react';
 
-type SelectProps = React.SelectHTMLAttributes<HTMLSelectElement> & {
+type SelectProps = ComponentProps<'select'> & {
   label: string;
   formKey: string;
   options: Array<{

@@ -1,8 +1,9 @@
+import { ComponentProps } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { useI18n } from '#i18n/react';
 
-type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
+type InputProps = Omit<ComponentProps<'input'>, 'hidden' | 'readOnly'> & {
   label: string;
   formKey: string;
 };
@@ -11,8 +12,6 @@ export function Input({
   label,
   formKey,
   className = '',
-  hidden,
-  readOnly = hidden,
   ...props
 }: InputProps) {
   const { t } = useI18n();
@@ -25,14 +24,10 @@ export function Input({
 
   return (
     <div className="space-y-1">
-      {!hidden && (
-        <label className="block text-sm font-medium text-gray-700">
-          {t(label)}
-        </label>
-      )}
+      <label className="block text-sm font-medium text-gray-700">
+        {t(label)}
+      </label>
       <input
-        hidden={hidden}
-        readOnly={readOnly}
         className={`
           w-full px-3 py-2 border rounded-lg shadow-sm
           focus:outline-none focus:ring-2 focus:ring-blue-500
@@ -42,7 +37,7 @@ export function Input({
         {...register(formKey)}
         {...props}
       />
-      {!hidden && error && <p className="text-sm text-red-600">{t(error)}</p>}
+      {error && <p className="text-sm text-red-600">{t(error)}</p>}
     </div>
   );
 }

@@ -1,9 +1,10 @@
+import { ComponentProps } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { classNames } from '#core/react';
 import { useI18n } from '#i18n/react';
 
-type CheckboxInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
+type CheckboxInputProps = ComponentProps<'input'> & {
   label: string;
   formKey: string;
 };

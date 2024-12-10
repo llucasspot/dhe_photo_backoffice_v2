@@ -28,10 +28,15 @@ export function Form<TDto extends Dto<TDto>>({
   });
 
   const errors = methods.formState.errors;
+  const values = methods.getValues();
 
   useEffect(() => {
     console.log('form errors : ', errors);
   }, [errors]);
+
+  useEffect(() => {
+    console.log('form values : ', values);
+  }, [values]);
 
   return (
     <RHFFormProvider {...methods}>
