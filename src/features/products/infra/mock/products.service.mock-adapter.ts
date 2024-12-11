@@ -23,7 +23,8 @@ export class ProductsServiceMockAdapter
   @LogAction()
   async getProducts(): Promise<ProductDto[]> {
     await this.delay();
-    return this.productsMockDao.getAll();
+    const products = await this.productsMockDao.getAll();
+    return ProductDto.build(products);
   }
 
   @LogAction()

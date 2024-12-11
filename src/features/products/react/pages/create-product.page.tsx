@@ -1,3 +1,4 @@
+import { TemplateInput } from '../components/template.input';
 import { useCreateProduct } from '../hooks';
 
 import { Button, Form, Input } from '#components';
@@ -46,6 +47,9 @@ export const CreateProductPage = () => {
             label="products.create.form.shortSize"
             type="number"
           />
+
+          <TemplateInput />
+
           <div className="flex justify-end space-x-4">
             <Link to="/products">
               <Button variant="secondary" type="button">

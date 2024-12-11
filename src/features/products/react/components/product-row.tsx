@@ -21,7 +21,7 @@ export const ProductRow = ({ product }: ProductRowProps) => {
                 {product.name}
               </h3>
               <p className="text-sm text-gray-500">
-                {product.description} • {product.longSize}x{product.shortSize}mm
+                {product.description} • {product.pictureFormat.cm}
               </p>
             </div>
           </div>

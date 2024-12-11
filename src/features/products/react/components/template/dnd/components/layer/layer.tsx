@@ -1,0 +1,118 @@
+import React, { useState } from 'react';
+import { useDraggable } from '@dnd-kit/core';
+
+import { LayerConfig as LayerType } from '../../../types';
+
+import { LayerControls } from './layer-controls';
+
+type LayerProps = {
+  layer: LayerType;
+  onUpdate: (updatedLayer: LayerType) => void;
+  onRemove: (layerId: string) => void;
+};
+
+export const Layer: React.FC<LayerProps> = ({ layer, onUpdate, onRemove }) => {
+  const [imageUrl] = useState(
+    'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1440&q=80',
+  );
+  // const layerRef = useRef<HTMLDivElement>(null);
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform: dragTransform,
+  } = useDraggable({
+    id: layer.id,
+  });
+
+  const style = {
+    transform: dragTransform
+      ? `translate(${dragTransform.x}px, ${dragTransform.y}px)`
+      : undefined,
+    width: `${layer.width}px`,
+    height: `${layer.height}px`,
+    left: `${layer.x}px`,
+    top: `${layer.y}px`,
+  } as const;
+
+  const handleResizeStart = (corner: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    const startX = e.clientX;
+    const startY = e.clientY;
+    const startWidth = layer.width;
+    const startHeight = layer.height;
+    const startLeft = layer.x;
+    const startTop = layer.y;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const deltaX = e.clientX - startX;
+      const deltaY = e.clientY - startY;
+
+      let newWidth = startWidth;
+      let newHeight = startHeight;
+      let newX = startLeft;
+      let newY = startTop;
+
+      if (corner.includes('right')) {
+        newWidth = Math.max(50, Math.min(500, startWidth + deltaX));
+      } else if (corner.includes('left')) {
+        const possibleWidth = Math.max(50, Math.min(500, startWidth - deltaX));
+        if (possibleWidth !== startWidth) {
+          newX = startLeft + (startWidth - possibleWidth);
+          newWidth = possibleWidth;
+        }
+      }
+
+      if (corner.includes('bottom')) {
+        newHeight = Math.max(50, Math.min(500, startHeight + deltaY));
+      } else if (corner.includes('top')) {
+        const possibleHeight = Math.max(
+          50,
+          Math.min(500, startHeight - deltaY),
+        );
+        if (possibleHeight !== startHeight) {
+          newY = startTop + (startHeight - possibleHeight);
+          newHeight = possibleHeight;
+        }
+      }
+
+      onUpdate({
+        ...layer,
+        width: newWidth,
+        height: newHeight,
+        x: newX,
+        y: newY,
+      });
+    };
+
+    const handleMouseUp = () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+  };
+
+  return (
+    <div
+      ref={setNodeRef}
+      {...attributes}
+      {...listeners}
+      style={style}
+      className="absolute bg-gray-200 border-2 border-blue-500 hover:border-blue-600 cursor-move group"
+    >
+      <LayerControls
+        handleResizeStart={handleResizeStart}
+        layer={layer}
+        onRemove={onRemove}
+      />
+
+      <img
+        src={imageUrl}
+        alt={`Layer ${layer.id}`}
+        className="w-full h-full object-cover"
+      />
+    </div>
+  );
+};
