@@ -1,5 +1,6 @@
 import { PropsWithChildren, useEffect } from 'react';
 import {
+  DefaultValues,
   FormProvider as RHFFormProvider,
   SubmitHandler,
   useForm,
@@ -14,6 +15,7 @@ export type FormProps<TDto extends Dto<TDto>> = PropsWithChildren<{
   dto: Type<TDto>;
   onSubmit: SubmitHandler<TDto>;
   className?: string;
+  defaultValues?: DefaultValues<TDto>;
 }>;
 
 export function Form<TDto extends Dto<TDto>>({
@@ -21,10 +23,12 @@ export function Form<TDto extends Dto<TDto>>({
   onSubmit,
   children,
   className = '',
+  defaultValues,
 }: FormProps<TDto>) {
   const methods = useForm<TDto>({
     // @ts-expect-error resolver: classValidatorResolver(dto),
     resolver: classValidatorResolver(dto),
+    defaultValues,
   });
 
   const errors = methods.formState.errors;

@@ -1,3 +1,4 @@
+import { AvailablePictureFormatName } from '../../domain/picture-formats.ts';
 import { TemplateInput } from '../components/template.input';
 import { useCreateProduct } from '../hooks';
 
@@ -7,6 +8,18 @@ import { CreateProductBody } from '#features/products/domain';
 import { useI18n } from '#i18n/react';
 import { RoutingServicePort } from '#routing/domain';
 import { Link } from '#routing/react';
+
+class Dim {
+  height: number;
+  width: number;
+  constructor(availablePictureFormatName: AvailablePictureFormatName) {
+    const [width, height] = availablePictureFormatName.split('x');
+    this.height = parseInt(height) * 10; // cm to mm
+    this.width = parseInt(width) * 10;
+  }
+}
+
+const defaultDim = new Dim('18x24');
 
 export const CreateProductPage = () => {
   const routingService = useService(RoutingServicePort);
@@ -31,7 +44,15 @@ export const CreateProductPage = () => {
       </div>
 
       <div className="bg-white shadow rounded-lg p-6">
-        <Form dto={CreateProductBody} onSubmit={onSubmit} className="space-y-6">
+        <Form
+          dto={CreateProductBody}
+          onSubmit={onSubmit}
+          className="space-y-6"
+          defaultValues={{
+            longSize: defaultDim.height,
+            shortSize: defaultDim.width,
+          }}
+        >
           <Input formKey="name" label="products.create.form.name" />
           <Input
             formKey="description"

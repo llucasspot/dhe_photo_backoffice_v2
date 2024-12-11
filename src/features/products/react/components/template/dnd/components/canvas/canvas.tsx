@@ -18,6 +18,8 @@ type CanvasProps = {
   onLayerRemove: (layerId: string) => void;
 };
 
+const FRONT_COEFF = 2;
+
 export const Canvas: React.FC<CanvasProps> = ({
   canvas,
   layers,
@@ -61,14 +63,13 @@ export const Canvas: React.FC<CanvasProps> = ({
 
   return (
     <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-      <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-auto">
+      <div className="bg-gray-100 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-auto">
         <div className="p-6">
           <div
             className="relative mx-auto"
             style={{
-              width: `${canvas.width}px`,
-              height: `${canvas.height}px`,
-              backgroundColor: '#f3f4f6',
+              width: `${canvas.width * FRONT_COEFF}px`,
+              height: `${canvas.height * FRONT_COEFF}px`,
             }}
           >
             {layers.map((layer) => (

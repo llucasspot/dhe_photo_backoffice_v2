@@ -61,6 +61,12 @@ export const availablePictureFormats = pick(pictureFormats, [
   '40x50',
   '50x70',
   '60x90',
+  // Formats pour cadres :
+  '7x9',
+  '11x15',
+  '18x24',
+  '24x30',
+  '30x45',
 ]);
 
 export type AvailablePictureFormatName = keyof typeof availablePictureFormats;

@@ -1,26 +1,40 @@
-import { DndKitTemplate } from './template/dnd/dnd-kit-template';
-import { CanvasConfig, LayerConfig } from './template/types';
+import { useFormContext } from 'react-hook-form';
+
+import { CanvasControls } from './template/dnd/components';
+import { DndKitTemplate } from './template/dnd/dnd-kit-template.tsx';
+import { LayerConfig, NewLayerDimensions } from './template/types';
 
 import { HiddenObjectInput } from '#components';
-import { useObjectArray, useValue } from '#core/react';
-
-const FRONT_COEFF = 2;
+import { useObjectArray } from '#core/react';
 
 export function TemplateInput() {
-  const canvas = useValue<CanvasConfig>({
-    width: 180 * FRONT_COEFF,
-    height: 240 * FRONT_COEFF,
-  });
+  const { watch } = useFormContext();
 
   const layers = useObjectArray<LayerConfig>();
 
+  const handleAddLayer = (dimensions: NewLayerDimensions) => {
+    console.log('handleAddLayer : ', dimensions);
+    layers.add({
+      width: dimensions.width,
+      height: dimensions.height,
+      x: 0,
+      y: 0,
+    });
+  };
+
+  const canvasConfig = {
+    height: watch('longSize'),
+    width: watch('shortSize'),
+  };
+
   return (
     <>
-      <DndKitTemplate canvas={canvas} layers={layers} />
+      <CanvasControls onAddLayer={handleAddLayer} />
+      <DndKitTemplate canvas={canvasConfig} layers={layers} />
       <HiddenObjectInput
         formKey={'template'}
         value={{
-          canvas: canvas.get(),
+          canvas: canvasConfig,
           layers: layers.getAll(),
         }}
       />
