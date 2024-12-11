@@ -1,12 +1,11 @@
 import { useCreateProject } from '../hooks';
 
-import { Button, Form, Input, Select } from '#components';
+import { Button, Form, FormButton, Input, Select } from '#components';
 import { useService } from '#di/react';
 import { CreateProjectBody } from '#features/projects/domain';
 import { useSchools } from '#features/schools/react';
 import { useI18n } from '#i18n/react';
 import { RoutingServicePort } from '#routing/domain';
-import { Link } from '#routing/react';
 
 export const CreateProjectPage = () => {
   const routingService = useService(RoutingServicePort);
@@ -60,14 +59,15 @@ export const CreateProjectPage = () => {
             type="text"
           />
           <div className="flex justify-end space-x-4">
-            <Link to="/projects">
-              <Button variant="secondary" type="button">
-                {t('common.actions.cancel')}
-              </Button>
-            </Link>
-            <Button type="submit" disabled={createProject.isPending}>
-              {t('projects.create.form.submit')}
+            <Button
+              variant="secondary"
+              link={{
+                to: '/projects',
+              }}
+            >
+              {t('common.actions.cancel')}
             </Button>
+            <FormButton>{t('projects.create.form.submit')}</FormButton>
           </div>
         </Form>
       </div>

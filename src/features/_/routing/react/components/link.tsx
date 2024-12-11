@@ -3,7 +3,7 @@ import { Link as TanstackLink } from '@tanstack/react-router';
 
 import { Route } from '#routing/domain';
 
-type LinkProps<TTPath extends Route> = PropsWithChildren<{
+export type LinkProps<TTPath extends Route = Route> = PropsWithChildren<{
   to: TTPath;
   params?: ExtractParams<TTPath>;
   className?: ComponentProps<typeof TanstackLink>['className'];

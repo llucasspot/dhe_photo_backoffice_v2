@@ -1,4 +1,4 @@
-import { Button, Form, Input } from '#components';
+import { Form, FormButton, Input } from '#components';
 import { AddressDto } from '#features/settings/domain';
 import { useI18n } from '#i18n/react';
 
@@ -18,7 +18,7 @@ export const AddressForm = () => {
       <Input formKey="address1" label={'settings.address.address1'} />
       <Input formKey="postalCode" label={'settings.address.postalCode'} />
       <Input formKey="city" label={'settings.address.city'} />
-      <Button type="submit">{t('settings.common.save')}</Button>
+      <FormButton>{t('settings.common.save')}</FormButton>
     </Form>
   );
 };

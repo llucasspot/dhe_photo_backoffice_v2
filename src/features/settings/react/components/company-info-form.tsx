@@ -1,4 +1,4 @@
-import { Button, CheckboxInput, Form, Input } from '#components';
+import { CheckboxInput, Form, FormButton, Input } from '#components';
 import { CompanyInfoDto } from '#features/settings/domain';
 import { useI18n } from '#i18n/react';
 
@@ -17,7 +17,7 @@ export const CompanyInfoForm = () => {
         formKey="subjectToVat"
         label={'settings.companyInfo.subjectToVat'}
       />
-      <Button type="submit">{t('settings.common.save')}</Button>
+      <FormButton type="submit">{t('settings.common.save')}</FormButton>
     </Form>
   );
 };

@@ -1,11 +1,10 @@
 import { useCreateSchool } from '../hooks';
 
-import { Button, Form, Input, Select } from '#components';
+import { Button, Form, FormButton, Input, Select } from '#components';
 import { useService } from '#di/react';
 import { CreateSchoolBody, SchoolDto } from '#features/schools/domain';
 import { useI18n } from '#i18n/react';
 import { RoutingServicePort } from '#routing/domain';
-import { Link } from '#routing/react';
 
 export const CreateSchoolPage = () => {
   const routingService = useService(RoutingServicePort);
@@ -39,14 +38,10 @@ export const CreateSchoolPage = () => {
           />
           <Input formKey="city" label="schools.create.form.city" />
           <div className="flex justify-end space-x-4">
-            <Link to="/schools">
-              <Button variant="secondary" type="button">
-                {t('common.actions.cancel')}
-              </Button>
-            </Link>
-            <Button type="submit" disabled={createSchool.isPending}>
-              {t('schools.create.form.submit')}
+            <Button variant="secondary" link={{ to: '/schools' }}>
+              {t('common.actions.cancel')}
             </Button>
+            <FormButton>{t('schools.create.form.submit')}</FormButton>
           </div>
         </Form>
       </div>

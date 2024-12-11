@@ -1,6 +1,6 @@
 import { useAuth } from '../hooks';
 
-import { Button, Form, Input } from '#components';
+import { Form, FormButton, Input } from '#components';
 import { useService } from '#di/react';
 import { LoginBody } from '#features/auth/domain';
 import { useI18n } from '#i18n/react';
@@ -20,9 +20,7 @@ export const LoginForm = () => {
     <Form dto={LoginBody} onSubmit={onSubmit} className="space-y-6">
       <Input formKey="email" label={'auth.login.email'} type="email" />
       <Input formKey="password" label={'auth.login.password'} type="password" />
-      <Button type="submit" className="w-full">
-        {t('auth.login.submit')}
-      </Button>
+      <FormButton className="w-full">{t('auth.login.submit')}</FormButton>
     </Form>
   );
 };

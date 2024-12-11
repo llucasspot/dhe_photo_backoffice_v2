@@ -1,4 +1,4 @@
-import { Button, Form, Input } from '#components';
+import { Form, FormButton, Input } from '#components';
 import { RegisterBody } from '#features/auth/domain';
 import { useI18n } from '#i18n/react';
 
@@ -22,9 +22,7 @@ export const RegisterForm = () => {
         label={'auth.register.confirmPassword'}
         type="password"
       />
-      <Button type="submit" className="w-full">
-        {t('auth.register.submit')}
-      </Button>
+      <FormButton className="w-full">{t('auth.register.submit')}</FormButton>
     </Form>
   );
 };

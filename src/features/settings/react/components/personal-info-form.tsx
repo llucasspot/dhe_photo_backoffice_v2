@@ -1,4 +1,4 @@
-import { Button, Form, Input } from '#components';
+import { Form, FormButton, Input } from '#components';
 import { PersonalInfoDto } from '#features/settings/domain';
 import { useI18n } from '#i18n/react';
 
@@ -16,7 +16,7 @@ export const PersonalInfoForm = () => {
       <Input formKey="lastName" label="settings.personalInfo.lastName" />
       <Input formKey="displayName" label="settings.personalInfo.displayName" />
       <Input formKey="phoneNumber" label="settings.personalInfo.phoneNumber" />
-      <Button type="submit">{t('settings.common.save')}</Button>
+      <FormButton>{t('settings.common.save')}</FormButton>
     </Form>
   );
 };

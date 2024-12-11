@@ -1,17 +1,17 @@
-import { AvailablePictureFormatName } from '../../domain/picture-formats.ts';
+import { AvailablePictureFormatName } from '../../domain/picture-formats';
 import { TemplateInput } from '../components/template.input';
 import { useCreateProduct } from '../hooks';
 
-import { Button, Form, Input } from '#components';
+import { Button, Form, FormButton, Input } from '#components';
 import { useService } from '#di/react';
 import { CreateProductBody } from '#features/products/domain';
 import { useI18n } from '#i18n/react';
 import { RoutingServicePort } from '#routing/domain';
-import { Link } from '#routing/react';
 
 class Dim {
   height: number;
   width: number;
+
   constructor(availablePictureFormatName: AvailablePictureFormatName) {
     const [width, height] = availablePictureFormatName.split('x');
     this.height = parseInt(height) * 10; // cm to mm
@@ -72,14 +72,10 @@ export const CreateProductPage = () => {
           <TemplateInput />
 
           <div className="flex justify-end space-x-4">
-            <Link to="/products">
-              <Button variant="secondary" type="button">
-                {t('common.actions.cancel')}
-              </Button>
-            </Link>
-            <Button type="submit" disabled={createProduct.isPending}>
-              {t('products.create.form.submit')}
+            <Button variant="secondary" link={{ to: '/products' }}>
+              {t('common.actions.cancel')}
             </Button>
+            <FormButton>{t('products.create.form.submit')}</FormButton>
           </div>
         </Form>
       </div>
