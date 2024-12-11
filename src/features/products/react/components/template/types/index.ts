@@ -1,10 +1,12 @@
-export type LayerConfig = {
-  id: string;
-  width: number;
-  height: number;
-  x: number;
-  y: number;
-};
+import { v4 as uuidv4 } from 'uuid';
+
+export class LayerConfig {
+  id: string = uuidv4();
+  width: number = 200;
+  height: number = 200;
+  x: number = 0;
+  y: number = 0;
+}
 
 export type CanvasConfig = {
   width: number;

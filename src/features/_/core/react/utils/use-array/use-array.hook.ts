@@ -1,5 +1,4 @@
 import { useCallback, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 import { StateArray } from './state-array';
 
@@ -17,10 +16,8 @@ export function useArray<TItem extends { id: string }>(
     [array],
   );
 
-  const add = useCallback((body: Omit<TItem, 'id'>) => {
-    const id = uuidv4();
-    const item = { ...body, id } as TItem;
-    setArray((prev) => [...prev, item]);
+  const add = useCallback((body: TItem) => {
+    setArray((prev) => [...prev, body]);
   }, []);
 
   const update = useCallback(
@@ -41,7 +38,6 @@ export function useArray<TItem extends { id: string }>(
   }, []);
 
   return {
-    observable: array,
     getAll,
     get,
     add,

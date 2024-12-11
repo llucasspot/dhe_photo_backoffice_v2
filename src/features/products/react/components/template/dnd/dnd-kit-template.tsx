@@ -4,11 +4,11 @@ import { CanvasConfig, LayerConfig } from '../types';
 
 import { Canvas, PreviewModal } from './components';
 
-import { StateArray } from '#core/react';
+import { useObjectArray } from '#core/react';
 
 type TemplateProps = {
   canvas: CanvasConfig;
-  layers: StateArray<LayerConfig>;
+  layers: ReturnType<typeof useObjectArray<LayerConfig>>;
 };
 
 export function DndKitTemplate({ canvas, layers: layersArray }: TemplateProps) {

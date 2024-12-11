@@ -1,5 +1,4 @@
 export type StateArray<TItem extends { id: string }> = {
-  observable: unknown;
   getAll(): TItem[];
   get(id: TItem['id']): TItem | undefined;
   add(body: Omit<TItem, 'id'>): void;
@@ -9,8 +8,6 @@ export type StateArray<TItem extends { id: string }> = {
 };
 
 export abstract class StateArrayy<TItem extends { id: string }> {
-  abstract observable: unknown;
-
   abstract getAll(): TItem[];
 
   abstract get(id: TItem['id']): TItem | undefined;

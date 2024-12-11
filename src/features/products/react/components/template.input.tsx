@@ -1,36 +1,15 @@
-import { useFormContext } from 'react-hook-form';
-
-import { CanvasControls } from './template/dnd/components';
-import { DndKitTemplate } from './template/dnd/dnd-kit-template.tsx';
-import { LayerConfig, NewLayerDimensions } from './template/types';
+import { Canvas, TemplateProvider, useTemplate } from './template/konva';
+import { LayerPanel } from './template/konva/components/layer-panel.tsx';
 
 import { HiddenObjectInput } from '#components';
-import { useObjectArray } from '#core/react';
 
-export function TemplateInput() {
-  const { watch } = useFormContext();
-
-  const layers = useObjectArray<LayerConfig>();
-
-  const handleAddLayer = (dimensions: NewLayerDimensions) => {
-    console.log('handleAddLayer : ', dimensions);
-    layers.add({
-      width: dimensions.width,
-      height: dimensions.height,
-      x: 0,
-      y: 0,
-    });
-  };
-
-  const canvasConfig = {
-    height: watch('longSize'),
-    width: watch('shortSize'),
-  };
+function TemplateContent() {
+  const { canvasConfig, layers } = useTemplate();
 
   return (
-    <>
-      <CanvasControls onAddLayer={handleAddLayer} />
-      <DndKitTemplate canvas={canvasConfig} layers={layers} />
+    <div className="relative flex justify-center min-h-[600px]">
+      <Canvas />
+      <LayerPanel />
       <HiddenObjectInput
         formKey={'template'}
         value={{
@@ -38,6 +17,14 @@ export function TemplateInput() {
           layers: layers.getAll(),
         }}
       />
-    </>
+    </div>
+  );
+}
+
+export function TemplateInput() {
+  return (
+    <TemplateProvider>
+      <TemplateContent />
+    </TemplateProvider>
   );
 }
