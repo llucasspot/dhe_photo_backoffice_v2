@@ -63,6 +63,7 @@ export const classValidatorResolver =
       };
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     options.shouldUseNativeValidation && validateFieldsNatively({}, options);
 
     return {

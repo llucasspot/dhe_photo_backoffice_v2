@@ -153,6 +153,7 @@ export class DatabaseServiceDexieAdapter implements DatabaseServicePort {
       );
       return true;
     } catch (err) {
+      console.log('DatabaseServiceDexieAdapter deleteById err : ', err);
       return false;
     }
   }

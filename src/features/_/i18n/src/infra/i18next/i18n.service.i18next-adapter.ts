@@ -37,7 +37,7 @@ export class I18nServiceI18nextAdapter extends I18nServicePort {
           fr,
         }),
         fallbackLng: 'en',
-        compatibilityJSON: 'v3',
+        compatibilityJSON: 'v4',
         supportedLngs: ['fr', 'en'],
         interpolation: {
           escapeValue: false,
