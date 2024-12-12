@@ -1,5 +1,6 @@
-import { Canvas, TemplateProvider, useTemplate } from './template/konva';
-import { LayerPanel } from './template/konva/components/layer-panel.tsx';
+import { TemplateProvider, useTemplate } from './template/context';
+import { Canvas } from './template/konva';
+import { LayerPanel } from './template/konva/components/layer-panel';
 
 import { HiddenObjectInput } from '#components';
 

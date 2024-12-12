@@ -1,7 +1,7 @@
 import { Plus } from 'lucide-react';
 
+import { useTemplate } from '../../context';
 import { LayerConfig } from '../../types';
-import { useTemplate } from '../context';
 
 export function LayerPanel() {
   const { layers } = useTemplate();

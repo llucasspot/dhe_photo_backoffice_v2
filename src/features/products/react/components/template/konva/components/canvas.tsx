@@ -1,12 +1,12 @@
+import { ComponentProps } from 'react';
 import { Layer, Rect, Stage } from 'react-konva';
 import { KonvaEventObject } from 'konva/lib/Node';
 
+import { useTemplate } from '../../context';
 import { LayerConfig } from '../../types';
-import { useTemplate } from '../context';
 
 export function Canvas() {
-  const { canvasConfig, layers, selectedLayer } = useTemplate();
-  const { width, height } = canvasConfig;
+  const { layers, selectedLayer, canvasConfigFront } = useTemplate();
 
   const handleStageClick = (e: KonvaEventObject<MouseEvent>) => {
     if (e.target === e.target.getStage()) {
@@ -17,8 +17,8 @@ export function Canvas() {
   return (
     <div className="relative">
       <Stage
-        width={width * 2}
-        height={height * 2}
+        height={canvasConfigFront.height}
+        width={canvasConfigFront.width}
         style={{ border: '1px solid #ccc' }}
         onClick={handleStageClick}
       >
@@ -27,10 +27,10 @@ export function Canvas() {
             <KonvaLayer
               key={layer.id}
               layer={layer}
-              isSelected={layer.id === selectedLayer.get()?.id}
+              state={
+                layer.id === selectedLayer.get()?.id ? 'selected' : 'unselected'
+              }
               onClick={() => selectedLayer.set(layer)}
-              stageWidth={width * 2}
-              stageHeight={height * 2}
             />
           ))}
         </Layer>
@@ -41,37 +41,53 @@ export function Canvas() {
 
 function KonvaLayer({
   layer,
-  isSelected,
+  state,
   onClick,
-  stageWidth,
-  stageHeight,
 }: {
   layer: LayerConfig;
-  isSelected: boolean;
+  state: 'selected' | 'unselected';
   onClick: () => void;
-  stageWidth: number;
-  stageHeight: number;
 }) {
+  const { canvasConfigFront } = useTemplate();
+
   const handleDragMove = (e: KonvaEventObject<DragEvent>) => {
     // Get the new position
     const node = e.target;
-    const newX = Math.max(0, Math.min(node.x(), stageWidth - layer.width));
-    const newY = Math.max(0, Math.min(node.y(), stageHeight - layer.height));
-
+    const newX = Math.max(
+      0,
+      Math.min(node.x(), canvasConfigFront.width - layer.width),
+    );
+    const newY = Math.max(
+      0,
+      Math.min(node.y(), canvasConfigFront.height - layer.height),
+    );
     // Update the position
     node.x(newX);
     node.y(newY);
   };
 
+  const styles = {
+    selected: {
+      stroke: '#00ff00',
+      strokeWidth: 2,
+      cornerRadius: 5,
+    },
+    unselected: {
+      stroke: '#999',
+      strokeWidth: 1,
+    },
+  } as const satisfies Record<typeof state, ComponentProps<typeof Rect>>;
+
+  const style = styles[state];
+
   return (
     <Rect
+      {...style}
       x={layer.x}
       y={layer.y}
       width={layer.width}
       height={layer.height}
       fill="#ddd"
-      stroke={isSelected ? '#00ff00' : '#999'}
-      strokeWidth={isSelected ? 2 : 1}
       onClick={onClick}
       draggable
       onDragMove={handleDragMove}
@@ -81,10 +97,6 @@ function KonvaLayer({
         layer.x = node.x();
         layer.y = node.y();
       }}
-      {...(isSelected && {
-        cornerRadius: 5,
-        strokeWidth: 2,
-      })}
     />
   );
 }

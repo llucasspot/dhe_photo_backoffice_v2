@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { TemplateContext } from './template.context.ts';
+import { TemplateContext } from './template.context';
 
 export function useTemplate() {
   const context = useContext(TemplateContext);

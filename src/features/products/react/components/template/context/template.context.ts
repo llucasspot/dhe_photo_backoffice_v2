@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-import { LayerConfig } from '../../types';
+import { LayerConfig } from '../types';
 
 import { StateValue, useObjectArray } from '#core/react';
 
@@ -11,6 +11,7 @@ type CanvasConfig = {
 
 type TemplateContextType = {
   canvasConfig: CanvasConfig;
+  canvasConfigFront: CanvasConfig;
   layers: ReturnType<typeof useObjectArray<LayerConfig>>;
   selectedLayer: StateValue<LayerConfig | null>;
 };
