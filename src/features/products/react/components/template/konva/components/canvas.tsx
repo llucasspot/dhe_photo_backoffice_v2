@@ -1,4 +1,4 @@
-import { ComponentProps } from 'react';
+import { ComponentProps, useCallback } from 'react';
 import { Layer, Rect, Stage } from 'react-konva';
 import { KonvaEventObject } from 'konva/lib/Node';
 
@@ -48,20 +48,83 @@ function KonvaLayer({
   state: 'selected' | 'unselected';
   onClick: () => void;
 }) {
-  const { canvasConfigFront } = useTemplate();
+  const { canvasConfigFront, layers } = useTemplate();
+
+  const findNearestPosition = useCallback(
+    (x: number, y: number) => {
+      const otherLayers = layers.getAll().filter((l) => l.id !== layer.id);
+      let finalX = x;
+      let finalY = y;
+
+      otherLayers.forEach((otherLayer) => {
+        // Check horizontal overlap
+        const horizontalOverlap =
+          x < otherLayer.x + otherLayer.width && x + layer.width > otherLayer.x;
+        // Check vertical overlap
+        const verticalOverlap =
+          y < otherLayer.y + otherLayer.height &&
+          y + layer.height > otherLayer.y;
+
+        if (horizontalOverlap && verticalOverlap) {
+          // Calculate distances to each edge of the other layer
+          const distToRight = Math.abs(otherLayer.x + otherLayer.width - x);
+          const distToLeft = Math.abs(x + layer.width - otherLayer.x);
+          const distToBottom = Math.abs(otherLayer.y + otherLayer.height - y);
+          const distToTop = Math.abs(y + layer.height - otherLayer.y);
+
+          // Find the smallest distance
+          const minDist = Math.min(
+            distToRight,
+            distToLeft,
+            distToBottom,
+            distToTop,
+          );
+
+          // Snap to the nearest edge
+          if (minDist === distToRight) {
+            finalX = otherLayer.x + otherLayer.width;
+          } else if (minDist === distToLeft) {
+            finalX = otherLayer.x - layer.width;
+          } else if (minDist === distToBottom) {
+            finalY = otherLayer.y + otherLayer.height;
+          } else if (minDist === distToTop) {
+            finalY = otherLayer.y - layer.height;
+          }
+        }
+      });
+
+      // Ensure we stay within canvas bounds
+      finalX = Math.max(
+        0,
+        Math.min(finalX, canvasConfigFront.width - layer.width),
+      );
+      finalY = Math.max(
+        0,
+        Math.min(finalY, canvasConfigFront.height - layer.height),
+      );
+
+      return { x: finalX, y: finalY };
+    },
+    [layers, canvasConfigFront, layer],
+  );
 
   const handleDragMove = (e: KonvaEventObject<DragEvent>) => {
-    // Get the new position
     const node = e.target;
-    const newX = Math.max(
+
+    // Get initial position within stage bounds
+    const rawX = Math.max(
       0,
       Math.min(node.x(), canvasConfigFront.width - layer.width),
     );
-    const newY = Math.max(
+    const rawY = Math.max(
       0,
       Math.min(node.y(), canvasConfigFront.height - layer.height),
     );
-    // Update the position
+
+    // Find nearest non-overlapping position
+    const { x: newX, y: newY } = findNearestPosition(rawX, rawY);
+
+    // Update position
     node.x(newX);
     node.y(newY);
   };
@@ -92,7 +155,6 @@ function KonvaLayer({
       draggable
       onDragMove={handleDragMove}
       onDragEnd={(e) => {
-        // Update layer position in state if needed
         const node = e.target;
         layer.x = node.x();
         layer.y = node.y();
