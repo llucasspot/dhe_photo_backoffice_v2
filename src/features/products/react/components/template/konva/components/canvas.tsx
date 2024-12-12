@@ -1,6 +1,14 @@
-import { ComponentProps, useCallback } from 'react';
-import { Layer, Rect, Stage } from 'react-konva';
+import {
+  ComponentProps,
+  RefObject,
+  useCallback,
+  useEffect,
+  useRef,
+} from 'react';
+import { Layer, Rect, Stage, Transformer } from 'react-konva';
+import Konva from 'konva';
 import { KonvaEventObject } from 'konva/lib/Node';
+import { Box } from 'konva/lib/shapes/Transformer';
 
 import { useTemplate } from '../../context';
 import { LayerConfig } from '../../types';
@@ -49,6 +57,7 @@ function KonvaLayer({
   onClick: () => void;
 }) {
   const { canvasConfigFront, layers } = useTemplate();
+  const shapeRef = useRef<Konva.Rect>(null);
 
   const findNearestPosition = useCallback(
     (x: number, y: number) => {
@@ -108,6 +117,14 @@ function KonvaLayer({
     [layers, canvasConfigFront, layer],
   );
 
+  const onDragEnd = (e: Konva.KonvaEventObject<DragEvent>) => {
+    const node = e.target;
+    layers.update(layer.id, {
+      x: node.x(),
+      y: node.y(),
+    });
+  };
+
   const handleDragMove = (e: KonvaEventObject<DragEvent>) => {
     const node = e.target;
 
@@ -129,6 +146,25 @@ function KonvaLayer({
     node.y(newY);
   };
 
+  const handleTransformEnd = () => {
+    if (!shapeRef.current) return;
+
+    const node = shapeRef.current;
+    const scaleX = node.scaleX();
+    const scaleY = node.scaleY();
+
+    // Reset scale to 1 and adjust width/height instead
+    node.scaleX(1);
+    node.scaleY(1);
+
+    layers.update(layer.id, {
+      // x: node.x(),
+      // y: node.y(),
+      width: Math.max(node.width() * scaleX, 50), // Minimum width of 50
+      height: Math.max(node.height() * scaleY, 50), // Minimum height of 50
+    });
+  };
+
   const styles = {
     selected: {
       stroke: '#00ff00',
@@ -144,21 +180,74 @@ function KonvaLayer({
   const style = styles[state];
 
   return (
-    <Rect
-      {...style}
-      x={layer.x}
-      y={layer.y}
-      width={layer.width}
-      height={layer.height}
-      fill="#ddd"
-      onClick={onClick}
-      draggable
-      onDragMove={handleDragMove}
-      onDragEnd={(e) => {
-        const node = e.target;
-        layer.x = node.x();
-        layer.y = node.y();
-      }}
-    />
+    <>
+      <Rect
+        {...style}
+        ref={shapeRef}
+        x={layer.x}
+        y={layer.y}
+        width={layer.width}
+        height={layer.height}
+        fill="#ddd"
+        onClick={onClick}
+        draggable
+        onDragMove={handleDragMove}
+        onDragEnd={onDragEnd}
+        onTransformEnd={handleTransformEnd}
+      />
+      <KonvaLayerResizingControl state={state} shapeRef={shapeRef} />
+    </>
   );
+}
+
+function KonvaLayerResizingControl({
+  state,
+  shapeRef,
+}: {
+  state: 'selected' | 'unselected';
+  shapeRef: RefObject<Konva.Rect | null>;
+}) {
+  const { canvasConfigFront } = useTemplate();
+  const transformerRef = useRef<Konva.Transformer>(null);
+
+  useEffect(() => {
+    if (state === 'selected' && transformerRef.current && shapeRef.current) {
+      transformerRef.current.nodes([shapeRef.current]);
+      transformerRef.current.getLayer()?.batchDraw();
+    }
+  }, [shapeRef, state]);
+
+  const boundBoxFunc: (oldBox: Box, newBox: Box) => Box = (_oldBox, newBox) => {
+    // Limit resize
+    const minWidth = 50;
+    const minHeight = 50;
+    const maxWidth = canvasConfigFront.width - newBox.x;
+    const maxHeight = canvasConfigFront.height - newBox.y;
+
+    // Calculate new dimensions
+    const width = Math.max(minWidth, Math.min(newBox.width, maxWidth));
+    const height = Math.max(minHeight, Math.min(newBox.height, maxHeight));
+
+    return {
+      ...newBox,
+      width,
+      height,
+    };
+  };
+
+  if (state === 'selected') {
+    return (
+      <Transformer
+        ref={transformerRef}
+        rotateEnabled={false}
+        boundBoxFunc={boundBoxFunc}
+        enabledAnchors={[
+          'top-left',
+          'top-right',
+          'bottom-left',
+          'bottom-right',
+        ]}
+      />
+    );
+  }
 }

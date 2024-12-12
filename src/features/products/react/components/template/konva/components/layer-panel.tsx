@@ -50,7 +50,10 @@ function LayerItem({
     <div className="flex items-center gap-2 p-2 hover:bg-gray-50 rounded-md group">
       <div className="flex-1">
         <div className="text-sm font-medium">Layer {index + 1}</div>
-        <div className="text-xs text-gray-500">{layer.id}</div>
+        <div className="text-xs text-gray-500">x : {layer.x}</div>
+        <div className="text-xs text-gray-500">y : {layer.y}</div>
+        <div className="text-xs text-gray-500">height : {layer.height}</div>
+        <div className="text-xs text-gray-500">width : {layer.width}</div>
       </div>
       <button
         type="button"
