@@ -4,7 +4,7 @@ import { CanvasConfig, LayerConfig } from '../types';
 
 import { Canvas, PreviewModal } from './components';
 
-import { useObjectArray } from '#core/react';
+import { ArrayStateController, useObjectArray } from '#core/react';
 
 type TemplateProps = {
   canvas: CanvasConfig;
@@ -14,18 +14,18 @@ type TemplateProps = {
 export function DndKitTemplate({ canvas, layers: layersArray }: TemplateProps) {
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
-  const layers = layersArray.getAll();
+  const layers = ArrayStateController.getAll(layersArray);
 
   // Example preview image URL - replace with your actual image
   const previewImage =
     'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1440&q=80';
 
   const handleLayerUpdate = (updatedLayer: LayerConfig) => {
-    layersArray.update(updatedLayer.id, updatedLayer);
+    ArrayStateController.update(layersArray, updatedLayer.id, updatedLayer);
   };
 
   const handleLayerRemove = (layerId: string) => {
-    layersArray.remove(layerId);
+    ArrayStateController.remove(layersArray, layerId);
   };
 
   return (

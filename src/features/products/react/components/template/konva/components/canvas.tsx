@@ -13,6 +13,8 @@ import { Box } from 'konva/lib/shapes/Transformer';
 import { useTemplate } from '../../context';
 import { LayerConfig } from '../../types';
 
+import { ArrayStateController } from '#core/react';
+
 export function Canvas() {
   const { layers, selectedLayer, canvasConfigFront } = useTemplate();
 
@@ -31,12 +33,12 @@ export function Canvas() {
         onClick={handleStageClick}
       >
         <Layer>
-          {layers.getAll().map((layer) => (
+          {ArrayStateController.getAll(layers).map((layer) => (
             <KonvaLayer
               key={layer.id}
               layer={layer}
               state={
-                layer.id === selectedLayer.get()?.id ? 'selected' : 'unselected'
+                layer.id === selectedLayer.get?.id ? 'selected' : 'unselected'
               }
               onClick={() => selectedLayer.set(layer)}
             />
@@ -61,7 +63,9 @@ function KonvaLayer({
 
   const findNearestPosition = useCallback(
     (x: number, y: number) => {
-      const otherLayers = layers.getAll().filter((l) => l.id !== layer.id);
+      const otherLayers = ArrayStateController.getAll(layers).filter(
+        (l) => l.id !== layer.id,
+      );
       let finalX = x;
       let finalY = y;
 
@@ -119,7 +123,7 @@ function KonvaLayer({
 
   const onDragEnd = (e: Konva.KonvaEventObject<DragEvent>) => {
     const node = e.target;
-    layers.update(layer.id, {
+    ArrayStateController.update(layers, layer.id, {
       x: node.x(),
       y: node.y(),
     });
@@ -157,7 +161,7 @@ function KonvaLayer({
     node.scaleX(1);
     node.scaleY(1);
 
-    layers.update(layer.id, {
+    ArrayStateController.update(layers, layer.id, {
       // x: node.x(),
       // y: node.y(),
       width: Math.max(node.width() * scaleX, 50), // Minimum width of 50

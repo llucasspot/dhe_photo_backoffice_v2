@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 import { LayerConfig } from '../types';
 
-import { StateValue, useObjectArray } from '#core/react';
+import { ObjectArrayState, StateValue } from '#core/react';
 
 type CanvasConfig = {
   width: number;
@@ -12,7 +12,7 @@ type CanvasConfig = {
 type TemplateContextType = {
   canvasConfig: CanvasConfig;
   canvasConfigFront: CanvasConfig;
-  layers: ReturnType<typeof useObjectArray<LayerConfig>>;
+  layers: ObjectArrayState<LayerConfig>;
   selectedLayer: StateValue<LayerConfig | null>;
 };
 

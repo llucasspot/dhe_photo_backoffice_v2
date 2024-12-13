@@ -3,6 +3,7 @@ import { Canvas } from './template/konva';
 import { LayerPanel } from './template/konva/components/layer-panel';
 
 import { HiddenObjectInput } from '#components';
+import { ArrayStateController } from '#core/react';
 
 function TemplateContent() {
   const { canvasConfig, layers } = useTemplate();
@@ -15,7 +16,7 @@ function TemplateContent() {
         formKey={'template'}
         value={{
           canvas: canvasConfig,
-          layers: layers.getAll(),
+          layers: ArrayStateController.getAll(layers),
         }}
       />
     </div>
