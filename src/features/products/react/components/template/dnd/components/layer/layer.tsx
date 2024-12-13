@@ -29,8 +29,8 @@ export const Layer: React.FC<LayerProps> = ({ layer, onUpdate, onRemove }) => {
     transform: dragTransform
       ? `translate(${dragTransform.x}px, ${dragTransform.y}px)`
       : undefined,
-    width: `${layer.width}px`,
-    height: `${layer.height}px`,
+    height: `${layer.frontHeight}px`,
+    width: `${layer.frontWidth}px`,
     left: `${layer.x}px`,
     top: `${layer.y}px`,
   } as const;
@@ -39,8 +39,8 @@ export const Layer: React.FC<LayerProps> = ({ layer, onUpdate, onRemove }) => {
     e.stopPropagation();
     const startX = e.clientX;
     const startY = e.clientY;
-    const startWidth = layer.width;
-    const startHeight = layer.height;
+    const startHeight = layer.frontHeight;
+    const startWidth = layer.frontWidth;
     const startLeft = layer.x;
     const startTop = layer.y;
 
@@ -48,8 +48,8 @@ export const Layer: React.FC<LayerProps> = ({ layer, onUpdate, onRemove }) => {
       const deltaX = e.clientX - startX;
       const deltaY = e.clientY - startY;
 
-      let newWidth = startWidth;
       let newHeight = startHeight;
+      let newWidth = startWidth;
       let newX = startLeft;
       let newY = startTop;
 
@@ -76,13 +76,12 @@ export const Layer: React.FC<LayerProps> = ({ layer, onUpdate, onRemove }) => {
         }
       }
 
-      onUpdate({
-        ...layer,
-        width: newWidth,
-        height: newHeight,
-        x: newX,
-        y: newY,
-      });
+      layer.frontHeight = newHeight;
+      layer.frontWidth = newWidth;
+      layer.x = newX;
+      layer.y = newY;
+
+      onUpdate(layer);
     };
 
     const handleMouseUp = () => {

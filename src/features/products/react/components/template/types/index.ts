@@ -1,21 +1,12 @@
-import { v4 as uuidv4 } from 'uuid';
+export * from './layer-config';
 
-export class LayerConfig {
-  id: string = uuidv4();
-  width: number = 200;
-  height: number = 200;
-  x: number = 0;
-  y: number = 0;
-}
+import { LayerConfig } from './layer-config';
 
-export type CanvasConfig = {
-  width: number;
-  height: number;
-};
+import { CanvasConfig } from '#features/products/react';
 
 export type NewLayerDimensions = {
-  width: number;
   height: number;
+  width: number;
 };
 
 export type TemplateConfig = {

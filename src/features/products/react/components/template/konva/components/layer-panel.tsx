@@ -3,7 +3,7 @@ import { Plus } from 'lucide-react';
 import { useTemplate } from '../../context';
 import { LayerConfig } from '../../types';
 
-import { ArrayStateController } from '#core/react';
+import { StateItemsController } from '#core/react';
 
 export function LayerPanel() {
   const { layers } = useTemplate();
@@ -16,7 +16,7 @@ export function LayerPanel() {
           <button
             type="button"
             onClick={() => {
-              ArrayStateController.add(layers, new LayerConfig());
+              StateItemsController.add(layers, new LayerConfig());
             }}
             className="p-1.5 hover:bg-gray-100 rounded-md"
             title="Add Layer"
@@ -26,12 +26,12 @@ export function LayerPanel() {
         </div>
       </div>
       <div className="p-2 space-y-1">
-        {ArrayStateController.getAll(layers).map((layer, index) => (
+        {StateItemsController.getAll(layers).map((layer, index) => (
           <LayerItem
             key={layer.id}
             layer={layer}
             index={index}
-            onDelete={() => ArrayStateController.remove(layers, layer.id)}
+            onDelete={() => StateItemsController.remove(layers, layer.id)}
           />
         ))}
       </div>

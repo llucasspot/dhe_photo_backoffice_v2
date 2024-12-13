@@ -8,8 +8,8 @@ type LayerFormProps = {
 
 export const LayerForm: React.FC<LayerFormProps> = ({ onAddLayer }) => {
   const [dimensions, setDimensions] = useState<NewLayerDimensions>({
-    width: 100,
     height: 100,
+    width: 100,
   });
   const [useConstraints, setUseConstraints] = useState(false);
   const [constraints, setConstraints] = useState({

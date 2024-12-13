@@ -3,30 +3,24 @@ import { useFormContext } from 'react-hook-form';
 
 import { LayerConfig } from '../types';
 
+import { CanvasConfig } from './canvas-config';
 import { TemplateContext } from './template.context';
 
-import { useObjectArray, useValue } from '#core/react';
+import { useItems, useValue } from '#core/react';
 
 export function TemplateProvider({ children }: { children: ReactNode }) {
   const { watch } = useFormContext();
-  const layers = useObjectArray<LayerConfig>();
-  const selectedLayer = useValue<LayerConfig | null>(null);
+  const layers = useItems(LayerConfig);
+  const selectedLayerId = useValue<LayerConfig['id'] | null>(null);
 
-  const canvasConfig = {
+  const canvasConfig = new CanvasConfig({
     height: watch('longSize') as number,
     width: watch('shortSize') as number,
-  } as const;
-
-  const canvasConfigFront = {
-    height: canvasConfig.height * 2,
-    width: canvasConfig.width * 2,
-  } as const;
+  });
 
   return (
-    <TemplateContext.Provider
-      value={{ canvasConfig, layers, selectedLayer, canvasConfigFront }}
-    >
+    <TemplateContext value={{ canvasConfig, layers, selectedLayerId }}>
       {children}
-    </TemplateContext.Provider>
+    </TemplateContext>
   );
 }

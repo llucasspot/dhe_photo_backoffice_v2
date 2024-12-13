@@ -2,18 +2,14 @@ import { createContext } from 'react';
 
 import { LayerConfig } from '../types';
 
-import { ObjectArrayState, StateValue } from '#core/react';
+import { CanvasConfig } from './canvas-config';
 
-type CanvasConfig = {
-  width: number;
-  height: number;
-};
+import { StateItems, StateValue } from '#core/react';
 
 type TemplateContextType = {
   canvasConfig: CanvasConfig;
-  canvasConfigFront: CanvasConfig;
-  layers: ObjectArrayState<LayerConfig>;
-  selectedLayer: StateValue<LayerConfig | null>;
+  layers: StateItems<LayerConfig>;
+  selectedLayerId: StateValue<LayerConfig['id'] | null>;
 };
 
 export const TemplateContext = createContext<TemplateContextType | null>(null);

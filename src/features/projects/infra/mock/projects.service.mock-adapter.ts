@@ -49,7 +49,6 @@ export class ProjectsServiceMockAdapter
   async getProject(projectId: string): Promise<ProjectDto> {
     await this.delay();
     const project = await this.projectsDao.get(this.buildFinder(projectId));
-    console.log(project);
     return ProjectDto.build(project);
   }
 

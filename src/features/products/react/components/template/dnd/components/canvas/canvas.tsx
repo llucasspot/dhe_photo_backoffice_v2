@@ -8,8 +8,10 @@ import {
   useSensors,
 } from '@dnd-kit/core';
 
-import { CanvasConfig, LayerConfig as LayerType } from '../../../types';
+import { LayerConfig as LayerType } from '../../../types';
 import { Layer } from '../layer';
+
+import { CanvasConfig } from '#features/products/react';
 
 type CanvasProps = {
   canvas: CanvasConfig;
@@ -17,8 +19,6 @@ type CanvasProps = {
   onLayerUpdate: (updatedLayer: LayerType) => void;
   onLayerRemove: (layerId: string) => void;
 };
-
-const FRONT_COEFF = 2;
 
 export const Canvas: React.FC<CanvasProps> = ({
   canvas,
@@ -50,14 +50,16 @@ export const Canvas: React.FC<CanvasProps> = ({
       let newY = layer.y + delta.y;
 
       // Apply canvas boundary constraints
-      newX = Math.max(0, Math.min(canvas.width - layer.width, newX));
-      newY = Math.max(0, Math.min(canvas.height - layer.height, newY));
+      newX = Math.max(0, Math.min(canvas.frontWidth - layer.frontWidth, newX));
+      newY = Math.max(
+        0,
+        Math.min(canvas.frontHeight - layer.frontHeight, newY),
+      );
 
-      onLayerUpdate({
-        ...layer,
-        x: newX,
-        y: newY,
-      });
+      layer.x = newX;
+      layer.y = newY;
+
+      onLayerUpdate(layer);
     }
   };
 
@@ -68,8 +70,8 @@ export const Canvas: React.FC<CanvasProps> = ({
           <div
             className="relative mx-auto"
             style={{
-              width: `${canvas.width * FRONT_COEFF}px`,
-              height: `${canvas.height * FRONT_COEFF}px`,
+              height: `${canvas.frontHeight}px`,
+              width: `${canvas.frontWidth}px`,
             }}
           >
             {layers.map((layer) => (

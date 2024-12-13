@@ -1,31 +1,32 @@
 import { useState } from 'react';
 
-import { CanvasConfig, LayerConfig } from '../types';
+import { LayerConfig } from '../types';
 
 import { Canvas, PreviewModal } from './components';
 
-import { ArrayStateController, useObjectArray } from '#core/react';
+import { StateItems, StateItemsController } from '#core/react';
+import { CanvasConfig } from '#features/products/react';
 
 type TemplateProps = {
   canvas: CanvasConfig;
-  layers: ReturnType<typeof useObjectArray<LayerConfig>>;
+  layers: StateItems<LayerConfig>;
 };
 
 export function DndKitTemplate({ canvas, layers: layersArray }: TemplateProps) {
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
-  const layers = ArrayStateController.getAll(layersArray);
+  const layers = StateItemsController.getAll(layersArray);
 
   // Example preview image URL - replace with your actual image
   const previewImage =
     'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1440&q=80';
 
   const handleLayerUpdate = (updatedLayer: LayerConfig) => {
-    ArrayStateController.update(layersArray, updatedLayer.id, updatedLayer);
+    StateItemsController.update(layersArray, updatedLayer.id, updatedLayer);
   };
 
   const handleLayerRemove = (layerId: string) => {
-    ArrayStateController.remove(layersArray, layerId);
+    StateItemsController.remove(layersArray, layerId);
   };
 
   return (

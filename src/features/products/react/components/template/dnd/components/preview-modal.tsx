@@ -1,7 +1,9 @@
 import React from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
-import { CanvasConfig, LayerConfig } from '../../types';
+import { LayerConfig } from '../../types';
+
+import { CanvasConfig } from '#features/products/react';
 
 type PreviewModalProps = {
   isOpen: boolean;
@@ -37,8 +39,8 @@ export const PreviewModal: React.FC<PreviewModalProps> = ({
           <div
             className="relative mx-auto"
             style={{
-              width: `${canvas.width}px`,
-              height: `${canvas.height}px`,
+              height: `${canvas.frontHeight}px`,
+              width: `${canvas.frontWidth}px`,
               backgroundColor: '#f3f4f6',
             }}
           >
@@ -47,8 +49,8 @@ export const PreviewModal: React.FC<PreviewModalProps> = ({
                 key={layer.id}
                 className="absolute border-2 border-blue-500 overflow-hidden"
                 style={{
-                  width: `${layer.width}px`,
-                  height: `${layer.height}px`,
+                  height: `${layer.frontHeight}px`,
+                  width: `${layer.frontWidth}px`,
                   left: `${layer.x}px`,
                   top: `${layer.y}px`,
                 }}
