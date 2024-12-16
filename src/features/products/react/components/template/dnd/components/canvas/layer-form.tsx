@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { NewLayerDimensions } from '../../../types';
+import { NewLayerDimensions } from '#features/products/react';
 
 type LayerFormProps = {
   onAddLayer: (dimensions: NewLayerDimensions) => void;

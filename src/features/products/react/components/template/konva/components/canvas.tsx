@@ -72,23 +72,23 @@ function KonvaLayer({
       otherLayers.forEach((otherLayer) => {
         // Check horizontal overlap
         const horizontalOverlap =
-          x < otherLayer.x + otherLayer.frontWidth &&
-          x + layer.frontWidth > otherLayer.x;
+          x < otherLayer.frontX + otherLayer.frontWidth &&
+          x + layer.frontWidth > otherLayer.frontX;
         // Check vertical overlap
         const verticalOverlap =
-          y < otherLayer.y + otherLayer.frontHeight &&
-          y + layer.frontHeight > otherLayer.y;
+          y < otherLayer.frontY + otherLayer.frontHeight &&
+          y + layer.frontHeight > otherLayer.frontY;
 
         if (horizontalOverlap && verticalOverlap) {
           // Calculate distances to each edge of the other layer
           const distToRight = Math.abs(
-            otherLayer.x + otherLayer.frontWidth - x,
+            otherLayer.frontX + otherLayer.frontWidth - x,
           );
-          const distToLeft = Math.abs(x + layer.frontWidth - otherLayer.x);
+          const distToLeft = Math.abs(x + layer.frontWidth - otherLayer.frontX);
           const distToBottom = Math.abs(
-            otherLayer.y + otherLayer.frontHeight - y,
+            otherLayer.frontY + otherLayer.frontHeight - y,
           );
-          const distToTop = Math.abs(y + layer.frontHeight - otherLayer.y);
+          const distToTop = Math.abs(y + layer.frontHeight - otherLayer.frontY);
 
           // Find the smallest distance
           const minDist = Math.min(
@@ -100,13 +100,13 @@ function KonvaLayer({
 
           // Snap to the nearest edge
           if (minDist === distToRight) {
-            finalX = otherLayer.x + otherLayer.frontWidth;
+            finalX = otherLayer.frontX + otherLayer.frontWidth;
           } else if (minDist === distToLeft) {
-            finalX = otherLayer.x - layer.frontWidth;
+            finalX = otherLayer.frontX - layer.frontWidth;
           } else if (minDist === distToBottom) {
-            finalY = otherLayer.y + otherLayer.frontHeight;
+            finalY = otherLayer.frontY + otherLayer.frontHeight;
           } else if (minDist === distToTop) {
-            finalY = otherLayer.y - layer.frontHeight;
+            finalY = otherLayer.frontY - layer.frontHeight;
           }
         }
       });
@@ -129,8 +129,8 @@ function KonvaLayer({
   const onDragEnd = (e: Konva.KonvaEventObject<DragEvent>) => {
     const node = e.target;
     StateItemsController.update(layers, layer.id, {
-      x: node.x(),
-      y: node.y(),
+      frontX: node.x(),
+      frontY: node.y(),
     });
   };
 
@@ -193,8 +193,8 @@ function KonvaLayer({
       <Rect
         {...style}
         ref={shapeRef}
-        x={layer.x}
-        y={layer.y}
+        x={layer.frontX}
+        y={layer.frontY}
         height={layer.frontHeight}
         width={layer.frontWidth}
         fill="#ddd"

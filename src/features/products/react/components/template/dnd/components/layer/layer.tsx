@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDraggable } from '@dnd-kit/core';
 
-import { LayerConfig as LayerType } from '../../../types';
-
 import { LayerControls } from './layer-controls';
+
+import { LayerConfig as LayerType } from '#features/products/react';
 
 type LayerProps = {
   layer: LayerType;
@@ -31,8 +31,8 @@ export const Layer: React.FC<LayerProps> = ({ layer, onUpdate, onRemove }) => {
       : undefined,
     height: `${layer.frontHeight}px`,
     width: `${layer.frontWidth}px`,
-    left: `${layer.x}px`,
-    top: `${layer.y}px`,
+    left: `${layer.frontX}px`,
+    top: `${layer.frontY}px`,
   } as const;
 
   const handleResizeStart = (corner: string, e: React.MouseEvent) => {
@@ -41,8 +41,8 @@ export const Layer: React.FC<LayerProps> = ({ layer, onUpdate, onRemove }) => {
     const startY = e.clientY;
     const startHeight = layer.frontHeight;
     const startWidth = layer.frontWidth;
-    const startLeft = layer.x;
-    const startTop = layer.y;
+    const startLeft = layer.frontX;
+    const startTop = layer.frontY;
 
     const handleMouseMove = (e: MouseEvent) => {
       const deltaX = e.clientX - startX;
@@ -78,8 +78,8 @@ export const Layer: React.FC<LayerProps> = ({ layer, onUpdate, onRemove }) => {
 
       layer.frontHeight = newHeight;
       layer.frontWidth = newWidth;
-      layer.x = newX;
-      layer.y = newY;
+      layer.frontX = newX;
+      layer.frontY = newY;
 
       onUpdate(layer);
     };

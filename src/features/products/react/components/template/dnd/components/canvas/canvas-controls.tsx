@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { NewLayerDimensions } from '../../../types';
-
 import { LayerForm } from './layer-form';
+
+import { NewLayerDimensions } from '#features/products/react';
 
 type CanvasControlsProps = {
   onAddLayer: (dimensions: NewLayerDimensions) => void;

@@ -51,8 +51,8 @@ export const PreviewModal: React.FC<PreviewModalProps> = ({
                 style={{
                   height: `${layer.frontHeight}px`,
                   width: `${layer.frontWidth}px`,
-                  left: `${layer.x}px`,
-                  top: `${layer.y}px`,
+                  left: `${layer.frontX}px`,
+                  top: `${layer.frontY}px`,
                 }}
               >
                 <img

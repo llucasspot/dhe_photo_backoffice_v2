@@ -1,7 +1,7 @@
 import React from 'react';
 import { TrashIcon } from '@heroicons/react/24/outline';
 
-import { LayerConfig } from '../../../types';
+import { LayerConfig } from '#features/products/react';
 
 type LayerControlsProps = {
   layer: LayerConfig;

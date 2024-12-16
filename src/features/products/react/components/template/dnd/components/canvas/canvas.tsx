@@ -8,9 +8,9 @@ import {
   useSensors,
 } from '@dnd-kit/core';
 
-import { LayerConfig as LayerType } from '../../../types';
 import { Layer } from '../layer';
 
+import { LayerConfig as LayerType } from '#features/products/react';
 import { CanvasConfig } from '#features/products/react';
 
 type CanvasProps = {
@@ -46,8 +46,8 @@ export const Canvas: React.FC<CanvasProps> = ({
     const layer = layers.find((l) => l.id === active.id);
 
     if (layer) {
-      let newX = layer.x + delta.x;
-      let newY = layer.y + delta.y;
+      let newX = layer.frontX + delta.x;
+      let newY = layer.frontY + delta.y;
 
       // Apply canvas boundary constraints
       newX = Math.max(0, Math.min(canvas.frontWidth - layer.frontWidth, newX));
@@ -56,8 +56,8 @@ export const Canvas: React.FC<CanvasProps> = ({
         Math.min(canvas.frontHeight - layer.frontHeight, newY),
       );
 
-      layer.x = newX;
-      layer.y = newY;
+      layer.frontX = newX;
+      layer.frontY = newY;
 
       onLayerUpdate(layer);
     }
