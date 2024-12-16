@@ -65,7 +65,8 @@ function LayerItem({
           {t('products.template.layers.dimensions.y')} : {layer.frontY}
         </div>
         <div className="text-xs text-gray-500">
-          {t('products.template.layers.dimensions.height')} : {layer.frontHeight}
+          {t('products.template.layers.dimensions.height')} :{' '}
+          {layer.frontHeight}
         </div>
         <div className="text-xs text-gray-500">
           {t('products.template.layers.dimensions.width')} : {layer.frontWidth}

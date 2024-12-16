@@ -1,10 +1,4 @@
-import {
-  ComponentProps,
-  RefObject,
-  useCallback,
-  useEffect,
-  useRef,
-} from 'react';
+import { ComponentProps, RefObject, useEffect, useRef } from 'react';
 import { Layer, Rect, Stage, Transformer } from 'react-konva';
 import Konva from 'konva';
 import { KonvaEventObject } from 'konva/lib/Node';
@@ -15,11 +9,25 @@ import { LayerConfig } from '../../types';
 
 import { StateItemsController } from '#core/react';
 
+type Positions = {
+  x: number;
+  y: number;
+};
+
+type Node = { x: () => number; y: () => number };
+
+function getPositions(node: Node): Positions {
+  return {
+    x: node.x(),
+    y: node.y(),
+  };
+}
+
 export function Canvas() {
   const { layers, selectedLayerId, canvasConfig } = useTemplate();
 
-  const handleStageClick = (e: KonvaEventObject<MouseEvent>) => {
-    if (e.target === e.target.getStage()) {
+  const handleStageClick = (event: KonvaEventObject<MouseEvent>) => {
+    if (event.target === event.target.getStage()) {
       selectedLayerId.set(null);
     }
   };
@@ -61,98 +69,96 @@ function KonvaLayer({
   const { canvasConfig, layers } = useTemplate();
   const shapeRef = useRef<Konva.Rect>(null);
 
-  const findNearestPosition = useCallback(
-    (x: number, y: number) => {
-      const otherLayers = StateItemsController.getAll(layers).filter(
-        (l) => l.id !== layer.id,
-      );
-      let finalX = x;
-      let finalY = y;
-
-      otherLayers.forEach((otherLayer) => {
-        // Check horizontal overlap
-        const horizontalOverlap =
-          x < otherLayer.frontX + otherLayer.frontWidth &&
-          x + layer.frontWidth > otherLayer.frontX;
-        // Check vertical overlap
-        const verticalOverlap =
-          y < otherLayer.frontY + otherLayer.frontHeight &&
-          y + layer.frontHeight > otherLayer.frontY;
-
-        if (horizontalOverlap && verticalOverlap) {
-          // Calculate distances to each edge of the other layer
-          const distToRight = Math.abs(
-            otherLayer.frontX + otherLayer.frontWidth - x,
-          );
-          const distToLeft = Math.abs(x + layer.frontWidth - otherLayer.frontX);
-          const distToBottom = Math.abs(
-            otherLayer.frontY + otherLayer.frontHeight - y,
-          );
-          const distToTop = Math.abs(y + layer.frontHeight - otherLayer.frontY);
-
-          // Find the smallest distance
-          const minDist = Math.min(
-            distToRight,
-            distToLeft,
-            distToBottom,
-            distToTop,
-          );
-
-          // Snap to the nearest edge
-          if (minDist === distToRight) {
-            finalX = otherLayer.frontX + otherLayer.frontWidth;
-          } else if (minDist === distToLeft) {
-            finalX = otherLayer.frontX - layer.frontWidth;
-          } else if (minDist === distToBottom) {
-            finalY = otherLayer.frontY + otherLayer.frontHeight;
-          } else if (minDist === distToTop) {
-            finalY = otherLayer.frontY - layer.frontHeight;
-          }
-        }
-      });
-
-      // Ensure we stay within canvas bounds
-      finalX = Math.max(
-        0,
-        Math.min(finalX, canvasConfig.frontWidth - layer.frontWidth),
-      );
-      finalY = Math.max(
-        0,
-        Math.min(finalY, canvasConfig.frontHeight - layer.frontHeight),
-      );
-
-      return { x: finalX, y: finalY };
+  const styles = {
+    selected: {
+      stroke: '#00ff00',
+      strokeWidth: 2,
+      cornerRadius: 5,
     },
-    [layers, canvasConfig, layer],
-  );
+    unselected: {
+      stroke: '#999',
+      strokeWidth: 1,
+    },
+  } as const satisfies Record<typeof state, ComponentProps<typeof Rect>>;
 
-  const onDragEnd = (e: Konva.KonvaEventObject<DragEvent>) => {
-    const node = e.target;
-    StateItemsController.update(layers, layer.id, {
-      frontX: node.x(),
-      frontY: node.y(),
+  const style = styles[state];
+
+  const findNearestPosition = (positions: Positions): Positions => {
+    const { x, y } = positions;
+
+    const otherLayers = StateItemsController.getAll(layers).filter(
+      (l) => l.id !== layer.id,
+    );
+    let finalX = x;
+    let finalY = y;
+
+    otherLayers.forEach((otherLayer) => {
+      // Check horizontal overlap
+      const horizontalOverlap =
+        x < otherLayer.frontX + otherLayer.frontWidth &&
+        x + layer.frontWidth > otherLayer.frontX;
+      // Check vertical overlap
+      const verticalOverlap =
+        y < otherLayer.frontY + otherLayer.frontHeight &&
+        y + layer.frontHeight > otherLayer.frontY;
+
+      if (horizontalOverlap && verticalOverlap) {
+        // Calculate distances to each edge of the other layer
+        const distToRight = Math.abs(
+          otherLayer.frontX + otherLayer.frontWidth - x,
+        );
+        const distToLeft = Math.abs(x + layer.frontWidth - otherLayer.frontX);
+        const distToBottom = Math.abs(
+          otherLayer.frontY + otherLayer.frontHeight - y,
+        );
+        const distToTop = Math.abs(y + layer.frontHeight - otherLayer.frontY);
+
+        // Find the smallest distance
+        const minDist = Math.min(
+          distToRight,
+          distToLeft,
+          distToBottom,
+          distToTop,
+        );
+
+        // Snap to the nearest edge
+        if (minDist === distToRight) {
+          finalX = otherLayer.frontX + otherLayer.frontWidth;
+        } else if (minDist === distToLeft) {
+          finalX = otherLayer.frontX - layer.frontWidth;
+        } else if (minDist === distToBottom) {
+          finalY = otherLayer.frontY + otherLayer.frontHeight;
+        } else if (minDist === distToTop) {
+          finalY = otherLayer.frontY - layer.frontHeight;
+        }
+      }
     });
+
+    return { x: finalX, y: finalY };
   };
 
-  const handleDragMove = (e: KonvaEventObject<DragEvent>) => {
-    const node = e.target;
+  function limitPositionsToCanvas(positions: Positions): Positions {
+    return {
+      x: Math.max(
+        0,
+        Math.min(positions.x, canvasConfig.frontWidth - layer.frontWidth),
+      ),
+      y: Math.max(
+        0,
+        Math.min(positions.y, canvasConfig.frontHeight - layer.frontHeight),
+      ),
+    };
+  }
 
-    // Get initial position within stage bounds
-    const rawX = Math.max(
-      0,
-      Math.min(node.x(), canvasConfig.frontWidth - layer.frontWidth),
+  const handleDragMove = (event: KonvaEventObject<DragEvent>) => {
+    const node = event.target;
+
+    const { x, y } = limitPositionsToCanvas(
+      findNearestPosition(getPositions(node)),
     );
-    const rawY = Math.max(
-      0,
-      Math.min(node.y(), canvasConfig.frontHeight - layer.frontHeight),
-    );
 
-    // Find nearest non-overlapping position
-    const { x: newX, y: newY } = findNearestPosition(rawX, rawY);
-
-    // Update position
-    node.x(newX);
-    node.y(newY);
+    node.x(x);
+    node.y(y);
   };
 
   const handleTransformEnd = () => {
@@ -174,19 +180,14 @@ function KonvaLayer({
     });
   };
 
-  const styles = {
-    selected: {
-      stroke: '#00ff00',
-      strokeWidth: 2,
-      cornerRadius: 5,
-    },
-    unselected: {
-      stroke: '#999',
-      strokeWidth: 1,
-    },
-  } as const satisfies Record<typeof state, ComponentProps<typeof Rect>>;
+  const onDragEnd = (event: Konva.KonvaEventObject<DragEvent>) => {
+    const node = event.target;
 
-  const style = styles[state];
+    StateItemsController.update(layers, layer.id, {
+      frontX: node.x(),
+      frontY: node.y(),
+    });
+  };
 
   return (
     <>
@@ -227,28 +228,30 @@ function KonvaLayerResizingControl({
     }
   }, [shapeRef, state]);
 
-  const checkCollision = useCallback(
-    (x: number, y: number, width: number, height: number) => {
-      const currentLayer = shapeRef.current;
-      if (!currentLayer) return true;
+  const checkCollision = (
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+  ) => {
+    const currentLayer = shapeRef.current;
+    if (!currentLayer) return true;
 
-      const currentLayerId = currentLayer.attrs['data-id'];
+    const currentLayerId = currentLayer.attrs['data-id'];
 
-      return StateItemsController.getAll(layers).some((otherLayer) => {
-        if (otherLayer.id === currentLayerId) return false;
+    return StateItemsController.getAll(layers).some((otherLayer) => {
+      if (otherLayer.id === currentLayerId) return false;
 
-        // Check if rectangles overlap
-        const noOverlap =
-          x + width <= otherLayer.frontX || // Current is left of other
-          x >= otherLayer.frontX + otherLayer.frontWidth || // Current is right of other
-          y + height <= otherLayer.frontY || // Current is above other
-          y >= otherLayer.frontY + otherLayer.frontHeight; // Current is below other
+      // Check if rectangles overlap
+      const noOverlap =
+        x + width <= otherLayer.frontX || // Current is left of other
+        x >= otherLayer.frontX + otherLayer.frontWidth || // Current is right of other
+        y + height <= otherLayer.frontY || // Current is above other
+        y >= otherLayer.frontY + otherLayer.frontHeight; // Current is below other
 
-        return !noOverlap;
-      });
-    },
-    [layers, shapeRef],
-  );
+      return !noOverlap;
+    });
+  };
 
   const boundBoxFunc: (oldBox: Box, newBox: Box) => Box = (oldBox, newBox) => {
     // Limit resize
