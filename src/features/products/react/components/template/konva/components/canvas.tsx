@@ -1,4 +1,4 @@
-import { ComponentProps, RefObject, useEffect, useRef } from 'react';
+import { ComponentProps, RefObject, useRef } from 'react';
 import { Layer, Rect, Stage, Transformer } from 'react-konva';
 import Konva from 'konva';
 import { KonvaEventObject } from 'konva/lib/Node';
@@ -59,6 +59,7 @@ function KonvaLayer({
 
   const { canvasConfig, layers } = useTemplate();
   const shapeRef = useRef<Konva.Rect>(null);
+  const transformerRef = useRef<Konva.Transformer>(null);
 
   const styles = {
     selected: {
@@ -97,6 +98,7 @@ function KonvaLayer({
   };
 
   const handleTransformEnd = () => {
+    transformerRef.current?.getLayer()?.batchDraw();
     if (!shapeRef.current) return;
 
     const node = shapeRef.current;
@@ -124,6 +126,39 @@ function KonvaLayer({
     });
   };
 
+  const onTransform = (event: Konva.KonvaEventObject<Event>) => {
+    const gridSize = 20;
+    const node = event.target;
+
+    // Get the current transformation
+    const scaleX = node.scaleX();
+    const scaleY = node.scaleY();
+    const width = Math.max(20, node.width() * scaleX); // Prevent too small size
+    const height = Math.max(20, node.height() * scaleY);
+
+    // Maintain aspect ratio
+    const aspectRatio = node.width() / node.height();
+    let newWidth = Math.round(width / gridSize) * gridSize; // Snap width to grid
+    let newHeight = Math.round(newWidth / aspectRatio); // Maintain aspect ratio
+
+    // Snap height to grid and re-calculate width for grid alignment
+    if (newHeight % gridSize !== 0) {
+      newHeight = Math.round(height / gridSize) * gridSize;
+      newWidth = Math.round(newHeight * aspectRatio);
+    }
+
+    // Apply snapped dimensions and reset scale to 1
+    node.width(newWidth);
+    node.height(newHeight);
+    node.scaleX(1);
+    node.scaleY(1);
+
+    // Snap position to grid
+    const newX = Math.round(node.x() / gridSize) * gridSize;
+    const newY = Math.round(node.y() / gridSize) * gridSize;
+    node.position({ x: newX, y: newY });
+  };
+
   return (
     <>
       <Rect
@@ -140,8 +175,13 @@ function KonvaLayer({
         onDragMove={handleDragMove}
         onDragEnd={onDragEnd}
         onTransformEnd={handleTransformEnd}
+        onTransform={onTransform}
       />
-      <KonvaLayerResizingControl state={state} shapeRef={shapeRef} />
+      <KonvaLayerResizingControl
+        state={state}
+        transformerRef={transformerRef}
+        shapeRef={shapeRef}
+      />
     </>
   );
 }
@@ -149,19 +189,13 @@ function KonvaLayer({
 function KonvaLayerResizingControl({
   state,
   shapeRef,
+  transformerRef,
 }: {
   state: 'selected' | 'unselected';
   shapeRef: RefObject<Konva.Rect | null>;
+  transformerRef: RefObject<Konva.Transformer | null>;
 }) {
   const { canvasConfig, layers } = useTemplate();
-  const transformerRef = useRef<Konva.Transformer>(null);
-
-  useEffect(() => {
-    if (state === 'selected' && transformerRef.current && shapeRef.current) {
-      transformerRef.current.nodes([shapeRef.current]);
-      transformerRef.current.getLayer()?.batchDraw();
-    }
-  }, [shapeRef, state]);
 
   const checkCollision = (
     x: number,
@@ -177,17 +211,18 @@ function KonvaLayerResizingControl({
     return StateItemsController.getAll(layers).some((otherLayer) => {
       if (otherLayer.id === currentLayerId) return false;
 
-      // Check if rectangles overlap
       const noOverlap =
-        x + width <= otherLayer.frontX || // Current is left of other
-        x >= otherLayer.frontX + otherLayer.frontWidth || // Current is right of other
-        y + height <= otherLayer.frontY || // Current is above other
-        y >= otherLayer.frontY + otherLayer.frontHeight; // Current is below other
+        x + width <= otherLayer.frontX ||
+        x >= otherLayer.frontX + otherLayer.frontWidth ||
+        y + height <= otherLayer.frontY ||
+        y >= otherLayer.frontY + otherLayer.frontHeight;
 
       return !noOverlap;
     });
   };
 
+  // @ts-expect-error eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const boundBoxFunc: (oldBox: Box, newBox: Box) => Box = (oldBox, newBox) => {
     // Limit resize
     const minHeight = 50;
@@ -218,8 +253,10 @@ function KonvaLayerResizingControl({
     return (
       <Transformer
         ref={transformerRef}
+        nodes={[shapeRef.current]}
+        keepRatio
         rotateEnabled={false}
-        boundBoxFunc={boundBoxFunc}
+        // boundBoxFunc={boundBoxFunc}
         enabledAnchors={[
           'top-left',
           'top-right',
