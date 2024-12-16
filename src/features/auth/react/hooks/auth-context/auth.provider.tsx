@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useState } from 'react';
+import { ReactNode, useState } from 'react';
 
 import { AuthContext } from './auth.context';
 
@@ -11,19 +11,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     authProvider.isAuthenticated(),
   );
 
-  const login = useCallback(
-    async (body: LoginBody) => {
-      const token = await authProvider.login(body);
-      setIsAuthenticated(true);
-      return token;
-    },
-    [authProvider],
-  );
+  const login = async (body: LoginBody) => {
+    const token = await authProvider.login(body);
+    setIsAuthenticated(true);
+    return token;
+  };
 
-  const logout = useCallback(async () => {
+  const logout = async () => {
     await authProvider.logout();
     setIsAuthenticated(false);
-  }, [authProvider]);
+  };
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, login, logout }}>

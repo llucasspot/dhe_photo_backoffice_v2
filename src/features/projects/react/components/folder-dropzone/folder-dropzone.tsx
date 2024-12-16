@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { FileError, FileRejection, useDropzone } from 'react-dropzone';
 
 import { useI18n } from '#i18n/react';
@@ -25,15 +24,15 @@ export const FolderDropzone = ({
 }: FolderDropzoneProps) => {
   const { t } = useI18n();
 
-  const onDropCallback = useCallback(
-    async (acceptedFiles: File[], rejectedFiles: FileRejection[]) => {
-      await onDrop({
-        acceptedFiles,
-        rejectedFiles,
-      });
-    },
-    [onDrop],
-  );
+  const onDropCallback = async (
+    acceptedFiles: File[],
+    rejectedFiles: FileRejection[],
+  ) => {
+    await onDrop({
+      acceptedFiles,
+      rejectedFiles,
+    });
+  };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: onDropCallback,
