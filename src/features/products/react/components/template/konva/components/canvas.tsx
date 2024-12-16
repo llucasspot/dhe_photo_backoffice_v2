@@ -77,14 +77,14 @@ function KonvaLayer({
 
   const applyHandlers = canvasService.buildLayerNodePipeline({
     canvas: canvasConfig,
-    layers,
-    layer,
+    layers: StateItemsController.getAll(layers),
   });
 
   const handleDragMove = (event: KonvaEventObject<DragEvent>) => {
     const node = event.target;
 
     const initLayerNode = LayerNode.build({
+      id: node.id(),
       x: node.x(),
       y: node.y(),
       height: node.height(),
@@ -97,11 +97,10 @@ function KonvaLayer({
     node.y(layerNode.y);
   };
 
-  const handleTransformEnd = () => {
+  const handleTransformEnd = (event: Konva.KonvaEventObject<Event>) => {
     transformerRef.current?.getLayer()?.batchDraw();
-    if (!shapeRef.current) return;
+    const node = event.target;
 
-    const node = shapeRef.current;
     const scaleX = node.scaleX();
     const scaleY = node.scaleY();
 
@@ -127,7 +126,7 @@ function KonvaLayer({
   };
 
   const onTransform = (event: Konva.KonvaEventObject<Event>) => {
-    const gridSize = 20;
+    const gridSize = CanvasService.GRID_SIZE;
     const node = event.target;
 
     // Get the current transformation
@@ -164,6 +163,7 @@ function KonvaLayer({
       <Rect
         {...style}
         ref={shapeRef}
+        id={layer.id}
         data-id={layer.id}
         x={layer.frontX}
         y={layer.frontY}
@@ -174,8 +174,8 @@ function KonvaLayer({
         draggable
         onDragMove={handleDragMove}
         onDragEnd={onDragEnd}
-        onTransformEnd={handleTransformEnd}
         onTransform={onTransform}
+        onTransformEnd={handleTransformEnd}
       />
       <KonvaLayerResizingControl
         state={state}

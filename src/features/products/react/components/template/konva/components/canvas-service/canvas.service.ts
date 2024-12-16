@@ -6,18 +6,18 @@ import { MagneticHandler } from './handlers/magnetic.handler';
 
 import { plainToInstance } from '#class-transformer';
 import { Dto } from '#core/domain';
-import { StateItems, StateItemsController } from '#core/react';
 import { singleton } from '#di';
 import { CanvasConfig, LayerConfig } from '#features/products/react';
 
 export class LayerNode extends Dto<LayerNode> {
+  id!: string;
   x!: number;
   y!: number;
   height!: number;
   width!: number;
 
-  static build<TBody>(body: TBody[]): LayerNode[];
-  static build<TBody>(body: TBody): LayerNode;
+  static build<TBody extends LayerNode>(body: TBody[]): LayerNode[];
+  static build<TBody extends LayerNode>(body: TBody): LayerNode;
   static build(body: unknown): LayerNode | LayerNode[] {
     return plainToInstance(this, body);
   }
@@ -27,14 +27,14 @@ export type LayerNodeHandler = (layerNode: LayerNode) => LayerNode;
 
 @singleton()
 export class CanvasService {
+  static GRID_SIZE = 10;
+
   buildLayerNodePipeline({
     canvas,
-    layer,
     layers,
   }: {
     canvas: CanvasConfig;
-    layers: StateItems<LayerConfig>;
-    layer: LayerConfig;
+    layers: LayerConfig[];
   }) {
     return this.createLayerNodePipeline([
       // First limit to canvas
@@ -42,12 +42,9 @@ export class CanvasService {
       // Then snap to grid if needed
       new GridSnapHandler(10),
       // Then handle magnetic snapping
-      new MagneticHandler(5),
+      new MagneticHandler(CanvasService.GRID_SIZE),
       // Finally handle layer collision
-      new FindNearestPositionHandler(
-        StateItemsController.getAll(layers),
-        layer,
-      ),
+      new FindNearestPositionHandler(layers),
     ]);
   }
 

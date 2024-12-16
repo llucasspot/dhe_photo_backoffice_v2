@@ -59,17 +59,16 @@ function LayerItem({
           {t('products.template.layers.layer')} {index + 1}
         </div>
         <div className="text-xs text-gray-500">
-          {t('products.template.layers.dimensions.x')} : {layer.frontX}
+          {t('products.template.layers.dimensions.x')} : {layer.x}
         </div>
         <div className="text-xs text-gray-500">
-          {t('products.template.layers.dimensions.y')} : {layer.frontY}
+          {t('products.template.layers.dimensions.y')} : {layer.y}
         </div>
         <div className="text-xs text-gray-500">
-          {t('products.template.layers.dimensions.height')} :{' '}
-          {layer.frontHeight}
+          {t('products.template.layers.dimensions.height')} : {layer.height}
         </div>
         <div className="text-xs text-gray-500">
-          {t('products.template.layers.dimensions.width')} : {layer.frontWidth}
+          {t('products.template.layers.dimensions.width')} : {layer.width}
         </div>
       </div>
       <button

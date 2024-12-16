@@ -6,42 +6,41 @@ import { LayerConfig } from '#features/products/react';
 
 export class FindNearestPositionHandler implements CanvasHandler {
   private layers: LayerConfig[];
-  private layer: LayerConfig;
 
-  constructor(layers: LayerConfig[], layer: LayerConfig) {
+  constructor(layers: LayerConfig[]) {
     this.layers = layers;
-    this.layer = layer;
   }
 
   handler = (layerNode: LayerNode) => {
-    const { x, y } = layerNode;
+    const otherLayers = this.layers.filter((l) => l.id !== layerNode.id);
 
-    const layer = this.layer;
-
-    const otherLayers = this.layers.filter((l) => l.id !== layer.id);
-    let finalX = x;
-    let finalY = y;
+    let finalX: number | null = null;
+    let finalY: number | null = null;
 
     otherLayers.forEach((otherLayer) => {
       // Check horizontal overlap
       const horizontalOverlap =
-        x < otherLayer.frontX + otherLayer.frontWidth &&
-        x + layer.frontWidth > otherLayer.frontX;
+        layerNode.x < otherLayer.frontX + otherLayer.frontWidth &&
+        layerNode.x + layerNode.width > otherLayer.frontX;
       // Check vertical overlap
       const verticalOverlap =
-        y < otherLayer.frontY + otherLayer.frontHeight &&
-        y + layer.frontHeight > otherLayer.frontY;
+        layerNode.y < otherLayer.frontY + otherLayer.frontHeight &&
+        layerNode.y + layerNode.height > otherLayer.frontY;
 
       if (horizontalOverlap && verticalOverlap) {
         // Calculate distances to each edge of the other layer
         const distToRight = Math.abs(
-          otherLayer.frontX + otherLayer.frontWidth - x,
+          otherLayer.frontX + otherLayer.frontWidth - layerNode.x,
         );
-        const distToLeft = Math.abs(x + layer.frontWidth - otherLayer.frontX);
+        const distToLeft = Math.abs(
+          layerNode.x + layerNode.width - otherLayer.frontX,
+        );
         const distToBottom = Math.abs(
-          otherLayer.frontY + otherLayer.frontHeight - y,
+          otherLayer.frontY + otherLayer.frontHeight - layerNode.y,
         );
-        const distToTop = Math.abs(y + layer.frontHeight - otherLayer.frontY);
+        const distToTop = Math.abs(
+          layerNode.y + layerNode.height - otherLayer.frontY,
+        );
 
         // Find the smallest distance
         const minDist = Math.min(
@@ -55,15 +54,18 @@ export class FindNearestPositionHandler implements CanvasHandler {
         if (minDist === distToRight) {
           finalX = otherLayer.frontX + otherLayer.frontWidth;
         } else if (minDist === distToLeft) {
-          finalX = otherLayer.frontX - layer.frontWidth;
+          finalX = otherLayer.frontX - layerNode.width;
         } else if (minDist === distToBottom) {
           finalY = otherLayer.frontY + otherLayer.frontHeight;
         } else if (minDist === distToTop) {
-          finalY = otherLayer.frontY - layer.frontHeight;
+          finalY = otherLayer.frontY - layerNode.height;
         }
       }
     });
 
-    return LayerNode.build({ ...layerNode, x: finalX, y: finalY });
+    if (finalX !== null && finalY !== null) {
+      return LayerNode.build({ ...layerNode, x: finalX, y: finalY });
+    }
+    return layerNode;
   };
 }
