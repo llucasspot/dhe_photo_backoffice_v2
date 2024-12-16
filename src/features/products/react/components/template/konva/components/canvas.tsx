@@ -128,22 +128,40 @@ function KonvaLayer({
   const onTransform = (event: Konva.KonvaEventObject<Event>) => {
     const gridSize = CanvasService.GRID_SIZE;
     const node = event.target;
+    const transformer = transformerRef.current;
+
+    // Get the active anchor (the one being dragged)
+    const activeAnchor = transformer?.getActiveAnchor();
+    const isCornerAnchor = [
+      'top-left',
+      'top-right',
+      'bottom-left',
+      'bottom-right',
+    ].includes(activeAnchor as string);
 
     // Get the current transformation
     const scaleX = node.scaleX();
     const scaleY = node.scaleY();
-    const width = Math.max(20, node.width() * scaleX); // Prevent too small size
+    const width = Math.max(20, node.width() * scaleX);
     const height = Math.max(20, node.height() * scaleY);
 
-    // Maintain aspect ratio
-    const aspectRatio = node.width() / node.height();
-    let newWidth = Math.round(width / gridSize) * gridSize; // Snap width to grid
-    let newHeight = Math.round(newWidth / aspectRatio); // Maintain aspect ratio
+    let newWidth: number;
+    let newHeight: number;
 
-    // Snap height to grid and re-calculate width for grid alignment
-    if (newHeight % gridSize !== 0) {
+    if (isCornerAnchor) {
+      // Maintain aspect ratio for corner anchors
+      const aspectRatio = node.width() / node.height();
+      newWidth = Math.round(width / gridSize) * gridSize;
+      newHeight = Math.round(newWidth / aspectRatio);
+
+      if (newHeight % gridSize !== 0) {
+        newHeight = Math.round(height / gridSize) * gridSize;
+        newWidth = Math.round(newHeight * aspectRatio);
+      }
+    } else {
+      // Don't maintain ratio for middle anchors
+      newWidth = Math.round(width / gridSize) * gridSize;
       newHeight = Math.round(height / gridSize) * gridSize;
-      newWidth = Math.round(newHeight * aspectRatio);
     }
 
     // Apply snapped dimensions and reset scale to 1
@@ -254,13 +272,14 @@ function KonvaLayerResizingControl({
       <Transformer
         ref={transformerRef}
         nodes={[shapeRef.current]}
-        keepRatio
-        rotateEnabled={false}
-        // boundBoxFunc={boundBoxFunc}
         enabledAnchors={[
           'top-left',
+          'top-center',
           'top-right',
+          'middle-right',
+          'middle-left',
           'bottom-left',
+          'bottom-center',
           'bottom-right',
         ]}
       />
