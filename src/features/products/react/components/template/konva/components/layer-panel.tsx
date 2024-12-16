@@ -4,22 +4,24 @@ import { useTemplate } from '../../context';
 import { LayerConfig } from '../../types';
 
 import { StateItemsController } from '#core/react';
+import { useI18n } from '#i18n/react';
 
 export function LayerPanel() {
   const { layers } = useTemplate();
+  const { t } = useI18n();
 
   return (
     <div className="absolute right-0 top-0 h-full w-64 bg-white shadow-lg border-l">
       <div className="p-4 border-b">
         <div className="flex items-center justify-between">
-          <h3 className="font-medium">Layers</h3>
+          <h3 className="font-medium">{t('products.template.layers.title')}</h3>
           <button
             type="button"
             onClick={() => {
               StateItemsController.add(layers, new LayerConfig());
             }}
             className="p-1.5 hover:bg-gray-100 rounded-md"
-            title="Add Layer"
+            title={t('products.template.layers.addLayer')}
           >
             <Plus size={20} />
           </button>
@@ -48,21 +50,33 @@ function LayerItem({
   index: number;
   onDelete: () => void;
 }) {
+  const { t } = useI18n();
+
   return (
     <div className="flex items-center gap-2 p-2 hover:bg-gray-50 rounded-md group">
       <div className="flex-1">
-        <div className="text-sm font-medium">Layer {index + 1}</div>
-        <div className="text-xs text-gray-500">x : {layer.x}</div>
-        <div className="text-xs text-gray-500">y : {layer.y}</div>
-        <div className="text-xs text-gray-500">height : {layer.height}</div>
-        <div className="text-xs text-gray-500">width : {layer.width}</div>
+        <div className="text-sm font-medium">
+          {t('products.template.layers.layer')} {index + 1}
+        </div>
+        <div className="text-xs text-gray-500">
+          {t('products.template.layers.dimensions.x')} : {layer.frontX}
+        </div>
+        <div className="text-xs text-gray-500">
+          {t('products.template.layers.dimensions.y')} : {layer.frontY}
+        </div>
+        <div className="text-xs text-gray-500">
+          {t('products.template.layers.dimensions.height')} : {layer.frontHeight}
+        </div>
+        <div className="text-xs text-gray-500">
+          {t('products.template.layers.dimensions.width')} : {layer.frontWidth}
+        </div>
       </div>
       <button
         type="button"
         onClick={onDelete}
         className="opacity-0 group-hover:opacity-100 p-1 hover:bg-gray-200 rounded"
       >
-        <span className="sr-only">Delete layer</span>
+        <span className="sr-only">{t('products.template.layers.delete')}</span>
         <svg className="w-4 h-4" viewBox="0 0 24 24">
           <path
             fill="currentColor"

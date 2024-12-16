@@ -48,4 +48,18 @@ export type ProductsI18nTranslationsKeys = {
       };
     };
   };
+  template: {
+    layers: {
+      title: string;
+      addLayer: string;
+      layer: string;
+      delete: string;
+      dimensions: {
+        x: string;
+        y: string;
+        height: string;
+        width: string;
+      };
+    };
+  };
 };

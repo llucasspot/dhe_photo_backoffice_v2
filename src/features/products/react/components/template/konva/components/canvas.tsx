@@ -193,6 +193,7 @@ function KonvaLayer({
       <Rect
         {...style}
         ref={shapeRef}
+        data-id={layer.id}
         x={layer.frontX}
         y={layer.frontY}
         height={layer.frontHeight}
@@ -216,7 +217,7 @@ function KonvaLayerResizingControl({
   state: 'selected' | 'unselected';
   shapeRef: RefObject<Konva.Rect | null>;
 }) {
-  const { canvasConfig } = useTemplate();
+  const { canvasConfig, layers } = useTemplate();
   const transformerRef = useRef<Konva.Transformer>(null);
 
   useEffect(() => {
@@ -226,7 +227,30 @@ function KonvaLayerResizingControl({
     }
   }, [shapeRef, state]);
 
-  const boundBoxFunc: (oldBox: Box, newBox: Box) => Box = (_oldBox, newBox) => {
+  const checkCollision = useCallback(
+    (x: number, y: number, width: number, height: number) => {
+      const currentLayer = shapeRef.current;
+      if (!currentLayer) return true;
+
+      const currentLayerId = currentLayer.attrs['data-id'];
+
+      return StateItemsController.getAll(layers).some((otherLayer) => {
+        if (otherLayer.id === currentLayerId) return false;
+
+        // Check if rectangles overlap
+        const noOverlap =
+          x + width <= otherLayer.frontX || // Current is left of other
+          x >= otherLayer.frontX + otherLayer.frontWidth || // Current is right of other
+          y + height <= otherLayer.frontY || // Current is above other
+          y >= otherLayer.frontY + otherLayer.frontHeight; // Current is below other
+
+        return !noOverlap;
+      });
+    },
+    [layers, shapeRef],
+  );
+
+  const boundBoxFunc: (oldBox: Box, newBox: Box) => Box = (oldBox, newBox) => {
     // Limit resize
     const minHeight = 50;
     const minWidth = 50;
@@ -236,6 +260,14 @@ function KonvaLayerResizingControl({
     // Calculate new dimensions
     const height = Math.max(minHeight, Math.min(newBox.height, maxHeight));
     const width = Math.max(minWidth, Math.min(newBox.width, maxWidth));
+
+    console.log(checkCollision(newBox.x, newBox.y, width, height));
+
+    // Check if new dimensions would cause overlap
+    if (checkCollision(newBox.x, newBox.y, width, height)) {
+      // If overlap detected, keep old dimensions
+      return oldBox;
+    }
 
     return {
       ...newBox,
@@ -259,4 +291,6 @@ function KonvaLayerResizingControl({
       />
     );
   }
+
+  return null;
 }

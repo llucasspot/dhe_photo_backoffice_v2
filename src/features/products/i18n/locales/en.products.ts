@@ -50,4 +50,18 @@ export const enProducts: ProductsI18nTranslationsKeys = {
       },
     },
   },
+  template: {
+    layers: {
+      title: 'Layers',
+      addLayer: 'Add Layer',
+      layer: 'Layer',
+      delete: 'Delete layer',
+      dimensions: {
+        x: 'X',
+        y: 'Y',
+        height: 'Height',
+        width: 'Width',
+      },
+    },
+  },
 };

@@ -50,4 +50,18 @@ export const frProducts: ProductsI18nTranslationsKeys = {
       },
     },
   },
+  template: {
+    layers: {
+      title: 'Calques',
+      addLayer: 'Ajouter un calque',
+      layer: 'Calque',
+      delete: 'Supprimer le calque',
+      dimensions: {
+        x: 'X',
+        y: 'Y',
+        height: 'Hauteur',
+        width: 'Largeur',
+      },
+    },
+  },
 };
