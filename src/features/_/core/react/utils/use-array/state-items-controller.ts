@@ -1,4 +1,4 @@
-import { StateItems } from './use-items.hook.ts';
+import { StateItems } from './use-items.hook';
 
 export class StateItemsController {
   static getAll<TItem extends { id: string }>(state: StateItems<TItem>) {
