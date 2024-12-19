@@ -2,13 +2,10 @@ import { IsEnum, IsString } from 'class-validator';
 
 import type { AvailableMediaType, AvailableMediaTypeName } from './media-types';
 import { availableMediaTypes, mediaTypes } from './media-types';
-import type {
-  AvailablePictureFormat,
-  AvailablePictureFormatName,
-} from './picture-formats';
+import type { AvailablePictureFormatName } from './picture-formats';
 import { availablePictureFormats } from './picture-formats';
 
-import { plainToInstance, Transform } from '#class-transformer';
+import { plainToInstance } from '#class-transformer';
 import { Dto } from '#core/domain';
 
 export class ProductDto extends Dto<ProductDto> {
@@ -25,24 +22,28 @@ export class ProductDto extends Dto<ProductDto> {
     message: 'products.fields.mediaTypeName.IsEnum',
   })
   mediaTypeName!: AvailableMediaTypeName;
-
-  @Transform(({ obj }: { obj: ProductDto }) => mediaTypes[obj.mediaTypeName])
-  mediaType!: AvailableMediaType;
-
   @IsEnum(Object.keys(availablePictureFormats), {
     message: 'products.fields.pictureFormatName.IsEnum',
   })
   pictureFormatName!: AvailablePictureFormatName;
 
-  @Transform(
-    ({ obj }: { obj: ProductDto }) =>
-      availablePictureFormats[obj.pictureFormatName],
-  )
-  pictureFormat!: AvailablePictureFormat;
-
-  static build<TBody>(body: TBody[]): ProductDto[];
-  static build<TBody>(body: TBody): ProductDto;
-  static build(body: unknown): ProductDto | ProductDto[] {
+  static buildMany<
+    TBody extends Omit<ProductDto, 'getMediaType' | 'getPictureFormat'>,
+  >(body: TBody[]): ProductDto[] {
     return plainToInstance(this, body);
+  }
+
+  static build<
+    TBody extends Omit<ProductDto, 'getMediaType' | 'getPictureFormat'>,
+  >(body: TBody): ProductDto {
+    return plainToInstance(this, body);
+  }
+
+  getMediaType(): AvailableMediaType {
+    return mediaTypes[this.mediaTypeName];
+  }
+
+  getPictureFormat() {
+    return availablePictureFormats[this.pictureFormatName];
   }
 }

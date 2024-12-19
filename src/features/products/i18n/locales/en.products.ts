@@ -14,8 +14,12 @@ export const enProducts: ProductsI18nTranslationsKeys = {
     fields: {
       name: 'Product Name',
       description: 'Description',
-      longSize: 'Long Size (mm)',
-      shortSize: 'Short Size (mm)',
+      template: {
+        canvas: {
+          height: 'Long Size (mm)',
+          width: 'Short Size (mm)',
+        },
+      },
     },
   },
   create: {
@@ -26,8 +30,12 @@ export const enProducts: ProductsI18nTranslationsKeys = {
     form: {
       name: 'Product Name',
       description: 'Description',
-      longSize: 'Long Size (mm)',
-      shortSize: 'Short Size (mm)',
+      template: {
+        canvas: {
+          height: 'Long Size (mm)',
+          width: 'Short Size (mm)',
+        },
+      },
       submit: 'Create Product',
     },
     validation: {
@@ -40,13 +48,46 @@ export const enProducts: ProductsI18nTranslationsKeys = {
         IsString: 'Description must be text',
         MaxLength: 'Description cannot exceed 200 characters',
       },
-      longSize: {
-        IsNumber: 'Long size must be a number',
-        Min: 'Long size must be greater than 0',
-      },
-      shortSize: {
-        IsNumber: 'Short size must be a number',
-        Min: 'Short size must be greater than 0',
+      template: {
+        canvas: {
+          ValidateNested: 'Template structure is invalid',
+          IsNumber: 'Canvas dimension must be a number',
+          Min: 'Canvas dimension must be greater than 0',
+          Required: 'Canvas dimensions are required',
+          height: {
+            IsNumber: 'Long size must be a number',
+            Min: 'Long size must be greater than 0',
+          },
+          width: {
+            IsNumber: 'Short size must be a number',
+            Min: 'Short size must be greater than 0',
+          },
+        },
+        layers: {
+          IsArray: 'Layers must be an array',
+          ValidateNested: 'Layer structure is invalid',
+          Required: 'Layers are required',
+          item: {
+            x: {
+              IsNumber: 'Layer X position must be a number',
+              Required: 'Layer X position is required',
+            },
+            y: {
+              IsNumber: 'Layer Y position must be a number',
+              Required: 'Layer Y position is required',
+            },
+            width: {
+              IsNumber: 'Layer width must be a number',
+              Min: 'Layer width must be greater than 0',
+              Required: 'Layer width is required',
+            },
+            height: {
+              IsNumber: 'Layer height must be a number',
+              Min: 'Layer height must be greater than 0',
+              Required: 'Layer height is required',
+            },
+          },
+        },
       },
     },
   },

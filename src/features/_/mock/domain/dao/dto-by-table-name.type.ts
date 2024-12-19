@@ -3,27 +3,15 @@ import {
   Klass,
   Picture,
   Product,
+  ProductTemplates,
   Project,
   ProjectProduct,
   School,
   Student,
   StudentPicture,
+  Template,
+  TemplateLayer,
 } from './tables';
-
-import { Type } from '#di/domain';
-
-export const dtoByTableName = {
-  pictures: Picture,
-  studentPictures: StudentPicture,
-  groupPictures: GroupPicture,
-  schools: School,
-  klasses: Klass,
-  products: Product,
-  projects: Project,
-  students: Student,
-} as const satisfies {
-  [K in string]: Type<{ id: string }>;
-};
 
 export type DtoByTableName = {
   pictures: Picture;
@@ -35,6 +23,11 @@ export type DtoByTableName = {
   projectProducts: ProjectProduct;
   projects: Project;
   students: Student;
+  // couche de coordination
+  coord_product_templates: ProductTemplates;
+  // template
+  tmplt_templates: Template;
+  tmplt_layers: TemplateLayer;
 };
 
 export type TableName = keyof DtoByTableName;

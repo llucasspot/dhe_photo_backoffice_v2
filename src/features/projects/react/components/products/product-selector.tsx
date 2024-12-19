@@ -34,8 +34,8 @@ export const ProductSelector = ({
         <option value="">{t('common.actions.select')}</option>
         {products.map((product) => (
           <option key={product.id} value={product.id}>
-            {product.name} ({product.pictureFormat.cm}{' '}
-            {product.pictureFormat.ratio})
+            {product.name} ({product.getPictureFormat().cm}{' '}
+            {product.getPictureFormat().ratio})
           </option>
         ))}
       </select>

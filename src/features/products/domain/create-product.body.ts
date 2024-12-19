@@ -1,10 +1,11 @@
 import {
   IsNotEmpty,
-  IsNumber,
   IsString,
   MaxLength,
-  Min,
+  ValidateNested,
 } from 'class-validator';
+
+import { TemplateBody } from './template.body';
 
 import { Transform, Type } from '#class-transformer';
 import { Dto } from '#core/domain';
@@ -23,13 +24,7 @@ export class CreateProductBody extends Dto<CreateProductBody> {
   @Transform(({ value }) => value?.trim())
   description!: string;
 
-  @IsNumber({}, { message: 'products.create.validation.longSize.IsNumber' })
-  @Min(1, { message: 'products.create.validation.longSize.Min' })
-  @Type(() => Number)
-  longSize!: number;
-
-  @IsNumber({}, { message: 'products.create.validation.shortSize.IsNumber' })
-  @Min(1, { message: 'products.create.validation.shortSize.Min' })
-  @Type(() => Number)
-  shortSize!: number;
+  @ValidateNested()
+  @Type(() => TemplateBody)
+  template!: TemplateBody;
 }

@@ -14,9 +14,11 @@ export function TemplateProvider({ children }: { children: ReactNode }) {
   const selectedLayerId = useValue<LayerConfig['id'] | null>(null);
 
   const canvasConfig = new CanvasConfig({
-    height: watch('longSize') as number,
-    width: watch('shortSize') as number,
+    height: watch('template.canvas.height') as number,
+    width: watch('template.canvas.width') as number,
   });
+
+  console.log('canvasConfig : ', canvasConfig);
 
   return (
     <TemplateContext value={{ canvasConfig, layers, selectedLayerId }}>

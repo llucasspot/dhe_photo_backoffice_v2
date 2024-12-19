@@ -9,19 +9,19 @@ export class LayerConfig {
   frontX: number = 0;
   frontY: number = 0;
 
-  get x() {
+  getX() {
     return this.frontX / CanvasConfig.FRONT_COEFFICIENT;
   }
 
-  get y() {
+  getY() {
     return this.frontY / CanvasConfig.FRONT_COEFFICIENT;
   }
 
-  get height() {
+  getHeight() {
     return this.frontHeight / CanvasConfig.FRONT_COEFFICIENT;
   }
 
-  get width() {
+  getWidth() {
     return this.frontWidth / CanvasConfig.FRONT_COEFFICIENT;
   }
 }

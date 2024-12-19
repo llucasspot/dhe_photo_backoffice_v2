@@ -21,25 +21,23 @@ export class GroupPicture extends Dto<GroupPicture> {
 
 export class Klass extends Dto<Klass> {
   id!: string;
-  name!: string;
   projectId!: string;
+  name!: string;
 }
 
 export class Product extends Dto<Product> {
   id!: string;
-  name!: string;
   description!: string;
-  longSize!: number;
-  shortSize!: number;
+  name!: string;
 }
 
 export class Project extends Dto<Project> {
   id!: string;
   schoolId!: string;
-  name!: string;
-  shotDate!: Date;
-  orderEndDate!: Date;
   messageForClients?: string;
+  name!: string;
+  orderEndDate!: Date;
+  shotDate!: Date;
   state!: ProjectState;
 }
 
@@ -52,13 +50,34 @@ export class School extends Dto<School> {
 
 export class Student extends Dto<Student> {
   id!: string;
-  code!: string;
   klassId!: string;
+  code!: string;
 }
 
 export class ProjectProduct extends Dto<ProjectProduct> {
   id!: string;
-  projectId!: string;
   productId!: string;
+  projectId!: string;
   price!: number;
+}
+
+export class Template extends Dto<Template> {
+  id!: string;
+  height!: number;
+  width!: number;
+}
+
+export class TemplateLayer extends Dto<TemplateLayer> {
+  id!: string;
+  templateId!: string;
+  height!: number;
+  width!: number;
+  x!: number;
+  y!: number;
+}
+
+export class ProductTemplates extends Dto<ProductTemplates> {
+  id!: string;
+  productId!: string;
+  templateId!: string;
 }

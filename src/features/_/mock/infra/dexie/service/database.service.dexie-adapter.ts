@@ -2,6 +2,21 @@ import Dexie, { Collection, EntityTable, IDType, InsertType } from 'dexie';
 import { v4 as uuidv4 } from 'uuid';
 
 import {
+  GroupPicture,
+  Klass,
+  Picture,
+  Product,
+  ProductTemplates,
+  Project,
+  ProjectProduct,
+  School,
+  Student,
+  StudentPicture,
+  Template,
+  TemplateLayer,
+} from '../../../domain/dao/tables';
+import {
+  DexieFileData,
   DexieTableName,
   DtoByDexieTableName,
 } from '../dao/dto-by-table-name.type.dexie';
@@ -9,6 +24,7 @@ import {
 import { operatorMapperDexie } from './operator-mapper.dexie';
 
 import { singleton } from '#di';
+import { Type } from '#di/domain';
 import { DatabaseServicePort, Filter, Finder, Populator } from '#mock/domain';
 
 export type DexieConnexion = Dexie & {
@@ -19,22 +35,32 @@ export type DexieConnexion = Dexie & {
 export class DatabaseServiceDexieAdapter implements DatabaseServicePort {
   private db: DexieConnexion;
 
+  private buildStoreString<T extends object>(tableDto: Type<T>) {
+    const instance = new tableDto();
+    const keys = Object.keys(instance) as Array<keyof T>;
+    return keys.join(', ');
+  }
+
   constructor() {
     const db: DexieConnexion = new Dexie('MyDatabase') as DexieConnexion;
     this.db = db;
 
     db.version(1).stores({
-      pictures: 'id',
-      studentPictures: 'id, pictureId, studentId',
-      groupPictures: 'id, pictureId, klassId',
-      klasses: 'id, projectId, name',
-      products: 'id, name, description, longSize, shortSize',
-      projects:
-        'id, schoolId, name, orderEndDate, shotDate, messageForClients, state',
-      projectProducts: 'id, productId, projectId, price',
-      schools: 'id, name, currency, city',
-      students: 'id, klassId, code',
-      dexieFileData: 'id, pictureId, blob',
+      pictures: this.buildStoreString(Picture),
+      studentPictures: this.buildStoreString(StudentPicture),
+      groupPictures: this.buildStoreString(GroupPicture),
+      klasses: this.buildStoreString(Klass),
+      products: this.buildStoreString(Product),
+      projects: this.buildStoreString(Project),
+      projectProducts: this.buildStoreString(ProjectProduct),
+      schools: this.buildStoreString(School),
+      students: this.buildStoreString(Student),
+      dexieFileData: this.buildStoreString(DexieFileData),
+      // couche de coordination
+      coord_product_templates: this.buildStoreString(ProductTemplates),
+      // template
+      tmplt_templates: this.buildStoreString(Template),
+      tmplt_layers: this.buildStoreString(TemplateLayer),
     } as const satisfies {
       [K in DexieTableName]: string;
     });

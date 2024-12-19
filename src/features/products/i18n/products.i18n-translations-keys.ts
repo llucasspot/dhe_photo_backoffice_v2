@@ -12,8 +12,12 @@ export type ProductsI18nTranslationsKeys = {
     fields: {
       name: string;
       description: string;
-      longSize: string;
-      shortSize: string;
+      template: {
+        canvas: {
+          height: string;
+          width: string;
+        };
+      };
     };
   };
   create: {
@@ -24,8 +28,12 @@ export type ProductsI18nTranslationsKeys = {
     form: {
       name: string;
       description: string;
-      longSize: string;
-      shortSize: string;
+      template: {
+        canvas: {
+          height: string;
+          width: string;
+        };
+      };
       submit: string;
     };
     validation: {
@@ -38,13 +46,46 @@ export type ProductsI18nTranslationsKeys = {
         IsString: string;
         MaxLength: string;
       };
-      longSize: {
-        IsNumber: string;
-        Min: string;
-      };
-      shortSize: {
-        IsNumber: string;
-        Min: string;
+      template: {
+        canvas: {
+          ValidateNested: string;
+          IsNumber: string;
+          Min: string;
+          Required: string;
+          height: {
+            IsNumber: string;
+            Min: string;
+          };
+          width: {
+            IsNumber: string;
+            Min: string;
+          };
+        };
+        layers: {
+          IsArray: string;
+          ValidateNested: string;
+          Required: string;
+          item: {
+            x: {
+              IsNumber: string;
+              Required: string;
+            };
+            y: {
+              IsNumber: string;
+              Required: string;
+            };
+            width: {
+              IsNumber: string;
+              Min: string;
+              Required: string;
+            };
+            height: {
+              IsNumber: string;
+              Min: string;
+              Required: string;
+            };
+          };
+        };
       };
     };
   };

@@ -252,8 +252,6 @@ function KonvaLayerResizingControl({
     const height = Math.max(minHeight, Math.min(newBox.height, maxHeight));
     const width = Math.max(minWidth, Math.min(newBox.width, maxWidth));
 
-    console.log(checkCollision(newBox.x, newBox.y, width, height));
-
     // Check if new dimensions would cause overlap
     if (checkCollision(newBox.x, newBox.y, width, height)) {
       // If overlap detected, keep old dimensions

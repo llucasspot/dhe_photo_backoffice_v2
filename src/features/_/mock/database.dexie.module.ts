@@ -12,12 +12,18 @@ import {
   KlassesDaoPort,
 } from '#features/klasses/infra';
 import {
+  CoordProductTemplatesDaoDexieAdapter,
+  CoordProductTemplatesDaoPort,
   ProductsDaoDexieAdapter,
   ProductsDaoPort,
+  TemplateLayersDaoDexieAdapter,
+  TemplateLayersDaoPort,
+  TemplatesDaoDexieAdapter,
+  TemplatesDaoPort,
 } from '#features/products/infra';
-import { ProjectProductsDaoDexieAdapter } from '#features/projects/infra';
-import { ProjectProductsDaoPort } from '#features/projects/infra';
 import {
+  ProjectProductsDaoDexieAdapter,
+  ProjectProductsDaoPort,
   ProjectsDaoDexieAdapter,
   ProjectsDaoPort,
 } from '#features/projects/infra';
@@ -67,6 +73,19 @@ import {
     {
       token: ProjectProductsDaoPort,
       useToken: ProjectProductsDaoDexieAdapter,
+    },
+    // templates
+    {
+      token: TemplatesDaoPort,
+      useToken: TemplatesDaoDexieAdapter,
+    },
+    {
+      token: TemplateLayersDaoPort,
+      useToken: TemplateLayersDaoDexieAdapter,
+    },
+    {
+      token: CoordProductTemplatesDaoPort,
+      useToken: CoordProductTemplatesDaoDexieAdapter,
     },
   ],
 })

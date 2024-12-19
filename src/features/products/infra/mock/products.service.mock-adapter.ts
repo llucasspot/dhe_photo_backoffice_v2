@@ -1,4 +1,9 @@
-import { ProductsDaoPort } from './daos';
+import {
+  CoordProductTemplatesDaoPort,
+  ProductsDaoPort,
+  TemplateLayersDaoPort,
+  TemplatesDaoPort,
+} from './daos';
 
 import { ForMockControllerService, LogAction } from '#core/domain';
 import { inject, singleton } from '#di';
@@ -15,7 +20,13 @@ export class ProductsServiceMockAdapter
 {
   constructor(
     @inject(ProductsDaoPort)
-    private readonly productsMockDao: ProductsDaoPort,
+    private readonly productsDaoPort: ProductsDaoPort,
+    @inject(TemplatesDaoPort)
+    private readonly templatesDaoPort: TemplatesDaoPort,
+    @inject(TemplateLayersDaoPort)
+    private readonly templateLayersDaoPort: TemplateLayersDaoPort,
+    @inject(CoordProductTemplatesDaoPort)
+    private readonly coordProductTemplatesDaoPort: CoordProductTemplatesDaoPort,
   ) {
     super();
   }
@@ -23,27 +34,62 @@ export class ProductsServiceMockAdapter
   @LogAction()
   async getProducts(): Promise<ProductDto[]> {
     await this.delay();
-    const products = await this.productsMockDao.getAll();
-    return ProductDto.build(products);
+    const products = await this.productsDaoPort.getAll();
+    return ProductDto.buildMany(
+      products.map((product) => {
+        return {
+          ...product,
+          // TODO
+          pictureFormatName: '18x24',
+          mediaTypeName: 'paper',
+        };
+      }),
+    );
   }
 
   @LogAction()
   async getProduct(id: string): Promise<ProductDto> {
     await this.delay();
-    const product = await this.productsMockDao.getById(id);
+    const product = await this.productsDaoPort.getById(id);
     if (!product) {
       throw new Error('Product not found');
     }
-    return ProductDto.build(product);
+    return ProductDto.build({
+      ...product,
+      // TODO
+      pictureFormatName: '18x24',
+      mediaTypeName: 'paper',
+    });
   }
 
   @LogAction()
-  async createProduct(body: CreateProductBody): Promise<ProductDto> {
+  async createProduct({
+    template: { layers: createTemplateLayerBodies, canvas: createTemplateBody },
+    ...body
+  }: CreateProductBody): Promise<ProductDto> {
     await this.delay();
-    const product = await this.productsMockDao.save({
+    const template = await this.templatesDaoPort.save(createTemplateBody);
+    await this.templateLayersDaoPort.saveMany(
+      createTemplateLayerBodies.map((createTemplateLayerBody) => {
+        return {
+          templateId: template.id,
+          ...createTemplateLayerBody,
+        };
+      }),
+    );
+    const product = await this.productsDaoPort.save({
       ...body,
     });
-    return ProductDto.build(product);
+    await this.coordProductTemplatesDaoPort.save({
+      productId: product.id,
+      templateId: template.id,
+    });
+    return ProductDto.build({
+      ...product,
+      // TODO
+      pictureFormatName: '18x24',
+      mediaTypeName: 'paper',
+    });
   }
 
   @LogAction()
@@ -52,17 +98,22 @@ export class ProductsServiceMockAdapter
     body: Partial<ProductDto>,
   ): Promise<ProductDto> {
     await this.delay();
-    const product = await this.productsMockDao.update(id, body);
+    const product = await this.productsDaoPort.update(id, body);
     if (!product) {
       throw new Error('Product not found');
     }
-    return ProductDto.build(product);
+    return ProductDto.build({
+      ...product,
+      // TODO
+      pictureFormatName: '18x24',
+      mediaTypeName: 'paper',
+    });
   }
 
   @LogAction()
   async deleteProduct(id: string): Promise<void> {
     await this.delay();
-    const product = this.productsMockDao.deleteById(id);
+    const product = this.productsDaoPort.deleteById(id);
     if (!product) {
       throw new Error('Product not found');
     }

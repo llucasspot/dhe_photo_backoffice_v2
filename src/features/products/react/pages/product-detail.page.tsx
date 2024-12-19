@@ -79,7 +79,7 @@ const ProductDetailContent = ({ product }: { product: ProductDto }) => {
                 {t('products.detail.fields.longSize')}
               </dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {product.pictureFormat.cm}
+                {product.getPictureFormat().cm}
               </dd>
             </div>
           </dl>

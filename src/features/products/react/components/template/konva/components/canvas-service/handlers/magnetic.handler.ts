@@ -7,7 +7,6 @@ export class MagneticHandler implements CanvasHandler {
 
   constructor(magnetStrength: number) {
     this.magnetStrength = magnetStrength;
-    console.log('magnetStrength : ', this.magnetStrength);
   }
 
   handler = (positions: LayerNode) => {
@@ -16,4 +15,8 @@ export class MagneticHandler implements CanvasHandler {
     // Implementation depends on your needs
     return LayerNode.build(positions);
   };
+
+  log() {
+    console.log('MagneticHandler : ', this.magnetStrength);
+  }
 }

@@ -49,8 +49,12 @@ export const CreateProductPage = () => {
           onSubmit={onSubmit}
           className="space-y-6"
           defaultValues={{
-            longSize: defaultDim.height,
-            shortSize: defaultDim.width,
+            template: {
+              canvas: {
+                height: defaultDim.height,
+                width: defaultDim.width,
+              },
+            },
           }}
         >
           <Input formKey="name" label="products.create.form.name" />
@@ -59,13 +63,13 @@ export const CreateProductPage = () => {
             label="products.create.form.description"
           />
           <Input
-            formKey="longSize"
-            label="products.create.form.longSize"
+            formKey="template.canvas.height"
+            label="products.create.form.template.canvas.height"
             type="number"
           />
           <Input
-            formKey="shortSize"
-            label="products.create.form.shortSize"
+            formKey="template.canvas.width"
+            label="products.create.form.template.canvas.width"
             type="number"
           />
 
