@@ -4,13 +4,13 @@ export const enProducts: ProductsI18nTranslationsKeys = {
   title: 'Products',
   addProduct: 'Add Product',
   list: {
-    error: 'Error loading products',
-    pending: 'Loading products..',
-    empty: 'No products found',
+    error: 'Error loading products.',
+    pending: 'Loading products...',
+    empty: 'No products found.',
   },
   detail: {
     title: 'Product Details',
-    subtitle: 'View detailed information about this product',
+    subtitle: 'View detailed information about this product.',
     fields: {
       name: 'Product Name',
       description: 'Description',
@@ -24,9 +24,9 @@ export const enProducts: ProductsI18nTranslationsKeys = {
   },
   create: {
     title: 'Create New Product',
-    pending: 'Creating product..',
+    pending: 'Creating product...',
     success: 'Product created successfully!',
-    error: 'Failed to create product. Please try again',
+    error: 'Failed to create product. Please try again.',
     form: {
       name: 'Product Name',
       description: 'Description',

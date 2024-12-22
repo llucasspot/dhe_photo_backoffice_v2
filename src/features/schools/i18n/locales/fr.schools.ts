@@ -4,13 +4,13 @@ export const frSchools: SchoolsI18nTranslationsKeys = {
   title: 'Écoles',
   addSchool: 'Ajouter une école',
   list: {
-    error: 'Erreur lors du chargement des écoles',
-    pending: 'Chargement des écoles...',
-    empty: 'Aucune école trouvée',
+    error: 'Erreur lors du chargement des écoles.',
+    pending: 'Chargement des écoles....',
+    empty: 'Aucune école trouvée.',
   },
   detail: {
     title: "Détails de l'école",
-    subtitle: 'Voir les informations détaillées de cette école',
+    subtitle: 'Voir les informations détaillées de cette école.',
     error: "Erreur lors du chargement des détails de l'école.",
     fields: {
       name: "Nom de l'école",

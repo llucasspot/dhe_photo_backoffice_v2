@@ -4,14 +4,14 @@ export const frKlasses: KlassesI18nTranslationsKeys = {
   title: 'CLasses',
   addClass: 'Ajouter une classe',
   list: {
-    error: 'Erreur lors du chargement des classes',
-    pending: 'Chargement des classes...',
-    empty: 'Aucune classe trouvée',
+    error: 'Erreur lors du chargement des classes.',
+    pending: 'Chargement des classes....',
+    empty: 'Aucune classe trouvée.',
   },
   detail: {
     title: 'Détails de la classe',
-    subtitle: 'Voir les informations détaillées de cette classe',
-    error: 'Erreur lors du chargement des détails de la classe',
+    subtitle: 'Voir les informations détaillées de cette classe.',
+    error: 'Erreur lors du chargement des détails de la classe.',
     fields: {
       name: 'Nom de la classe',
     },
@@ -29,8 +29,8 @@ export const frKlasses: KlassesI18nTranslationsKeys = {
   },
   create: {
     title: 'Créer une nouvelle classe',
-    pending: 'Création de la classe en cours..',
+    pending: 'Création de la classe en cours...',
     success: 'Classe créée avec succès !',
-    error: 'Échec de la création des classes. Veuillez réessayer',
+    error: 'Échec de la création des classes. Veuillez réessayer.',
   },
 } as const;

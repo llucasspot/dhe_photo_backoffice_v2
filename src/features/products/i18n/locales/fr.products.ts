@@ -1,16 +1,16 @@
 import { ProductsI18nTranslationsKeys } from '../products.i18n-translations-keys';
 
 export const frProducts: ProductsI18nTranslationsKeys = {
-  title: 'Produi',
+  title: 'Produits',
   addProduct: 'Ajouter un produit',
   list: {
-    error: 'Erreur lors du chargement des produits',
-    pending: 'Chargement des produits...',
-    empty: 'Aucune produit trouvé',
+    error: 'Erreur lors du chargement des produits.',
+    pending: 'Chargement des produits....',
+    empty: 'Aucune produit trouvé.',
   },
   detail: {
     title: 'Détails du produit',
-    subtitle: 'Voir les informations détaillées de ce produit',
+    subtitle: 'Voir les informations détaillées de ce produit.',
     fields: {
       name: 'Nom du produit',
       description: 'Description',
@@ -24,9 +24,9 @@ export const frProducts: ProductsI18nTranslationsKeys = {
   },
   create: {
     title: 'Créer un nouveau produit',
-    pending: 'Création du produit en cours..',
+    pending: 'Création du produit en cours...',
     success: 'Produit créé avec succès !',
-    error: 'Échec de la création du produit. Veuillez réessayer',
+    error: 'Échec de la création du produit. Veuillez réessayer.',
     form: {
       name: 'Nom du produit',
       description: 'Description',
