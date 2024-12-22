@@ -71,7 +71,11 @@ export default defineConfig({
       '#mock/domain': build('src/features/_/mock/domain'),
       '#mock/infra': build('src/features/_/mock/infra'),
       '#api': build('src/features/_/api'),
-      '#state': build('src/features/_/state'),
+      '#state/domain': build('src/features/_/state/domain'),
+      '#state/modules': build('src/features/_/state/modules'),
+      '#state/react': build('src/features/_/state/react'),
+      '#storage/domain': build('src/features/_/storage/domain'),
+      '#storage/modules': build('src/features/_/storage/modules'),
     },
   },
 });

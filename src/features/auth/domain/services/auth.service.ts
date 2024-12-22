@@ -6,6 +6,7 @@ import {
   LoginBody,
   RegisterBody,
 } from '#features/auth/domain';
+import { StorageServicePort } from '#storage/domain';
 
 @singleton()
 export class AuthService {
@@ -14,6 +15,8 @@ export class AuthService {
     private readonly authProvider: AuthProviderPort,
     @inject(AuthState)
     private readonly authState: AuthState,
+    @inject(StorageServicePort)
+    private readonly storageService: StorageServicePort,
   ) {}
 
   async login(body: LoginBody) {
@@ -21,8 +24,8 @@ export class AuthService {
     const photographer = await this.authProvider.getUserInfo(userId);
 
     this.authState.set({ currentUser: photographer });
-    localStorage.setItem('auth_token', authToken);
-    localStorage.setItem('auth_user_id', userId);
+    this.storageService.set(StorageServicePort.currentAccessToken, authToken);
+    this.storageService.set(StorageServicePort.currentUserId, userId);
   }
 
   async register(body: RegisterBody) {
@@ -30,22 +33,22 @@ export class AuthService {
     const photographer = await this.authProvider.getUserInfo(userId);
 
     this.authState.set({ currentUser: photographer });
-    localStorage.setItem('auth_token', authToken);
-    localStorage.setItem('auth_user_id', userId);
+    this.storageService.set(StorageServicePort.currentAccessToken, authToken);
+    this.storageService.set(StorageServicePort.currentUserId, userId);
   }
 
   async logout() {
     await this.authProvider.logout();
 
     this.authState.set({ currentUser: null });
-    localStorage.removeItem('auth_token');
-    localStorage.removeItem('auth_user_id');
+    this.storageService.remove(StorageServicePort.currentAccessToken);
+    this.storageService.remove(StorageServicePort.currentUserId);
   }
 
   isAuthenticated(): boolean {
     return (
-      localStorage.getItem('auth_token') !== null &&
-      localStorage.getItem('auth_user_id') !== null
+      this.storageService.get(StorageServicePort.currentAccessToken) !== null &&
+      this.storageService.get(StorageServicePort.currentUserId) !== null
     );
   }
 }

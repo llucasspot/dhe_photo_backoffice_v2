@@ -10,11 +10,13 @@ import { AuthProviderPort } from '#features/auth/domain';
 import { useI18n } from '#i18n/react';
 import { RoutingServicePort } from '#routing/domain';
 import { Link } from '#routing/react';
+import { StorageServicePort } from '#storage/domain';
 
 export const RootLayout = () => {
   const authService = useService(AuthService);
   const authProviderPort = useService(AuthProviderPort);
   const routingService = useService(RoutingServicePort);
+  const storageService = useService(StorageServicePort);
 
   const authState = useService(AuthState);
   const authStateValue = authState.use();
@@ -22,11 +24,11 @@ export const RootLayout = () => {
 
   useEffect(() => {
     authProviderPort
-      .getUserInfo(localStorage.getItem('auth_user_id') ?? '')
+      .getUserInfo(storageService.get(StorageServicePort.currentUserId) ?? '')
       .then((info) => {
         authState.set({ currentUser: info });
       });
-  }, [authProviderPort, authState]);
+  }, [authProviderPort, authState, storageService]);
 
   const { t, changeLanguage, currentLanguage } = useI18n();
 

@@ -129,6 +129,10 @@
     "#mock/domain": "./src/features/_/mock/domain",
     "#mock/infra": "./src/features/_/mock/infra",
     "#api": "./src/features/_/api",
-    "#state": "./src/features/_/state"
+    "#state/domain": "./src/features/_/state/domain",
+    "#state/modules": "./src/features/_/state/modules",
+    "#state/react": "./src/features/_/state/react",
+    "#storage/domain": "./src/features/_/storage/domain",
+    "#storage/modules": "./src/features/_/storage/modules"
   }
 }
