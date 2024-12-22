@@ -77,7 +77,7 @@ export const ProjectProducts = ({ project }: ProjectProductsProps) => {
           )}
         </div>
 
-        {project.products?.length > 0 ? (
+        {project.products.length > 0 ? (
           <div className="mt-6">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">

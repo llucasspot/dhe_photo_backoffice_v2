@@ -1,5 +1,5 @@
-import { LoginBody } from '../login.body';
-import { RegisterBody } from '../register.body';
+import { LoginBody } from '../dtos/bodies/login.body';
+import { RegisterBody } from '../dtos/bodies/register.body';
 
 export interface AuthUser {
   id: string;

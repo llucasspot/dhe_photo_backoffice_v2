@@ -4,13 +4,13 @@ export const frStudents: StudentsI18nTranslationsKeys = {
   title: 'Élèves',
   addStudent: 'Ajouter un élève',
   list: {
-    error: 'Erreur lors du chargement des élève.',
-    pending: 'Chargement des élèves....',
-    empty: 'Aucune élève trouvé.',
+    error: 'Erreur lors du chargement des élève',
+    pending: 'Chargement des élèves...',
+    empty: 'Aucune élève trouvé',
   },
   detail: {
     title: "Détails de l'élève",
-    subtitle: 'Voir les informations détaillées de cet élève.',
+    subtitle: 'Voir les informations détaillées de cet élève',
     error: "Erreur lors du chargement des détails de l'élève.",
     fields: {
       name: "Nom de l'élève",

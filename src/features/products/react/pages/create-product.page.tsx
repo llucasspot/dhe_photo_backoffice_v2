@@ -1,4 +1,4 @@
-import { AvailablePictureFormatName } from '../../domain/picture-formats';
+import { AvailablePictureFormatName } from '../../domain/dtos/picture-formats';
 import { TemplateInput } from '../components/template.input';
 import { useCreateProduct } from '../hooks';
 

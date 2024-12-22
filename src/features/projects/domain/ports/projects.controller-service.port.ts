@@ -1,6 +1,6 @@
-import { AddProductBody } from '../add-product.body';
-import { CreateProjectBody } from '../create-project.body';
-import { ProjectDto } from '../project.dto';
+import { AddProductBody } from '../dtos/bodies/add-product.body';
+import { CreateProjectBody } from '../dtos/bodies/create-project.body';
+import { ProjectDto } from '../dtos/project.dto';
 
 export abstract class ProjectsControllerServicePort {
   abstract getProjects(): Promise<ProjectDto[]>;

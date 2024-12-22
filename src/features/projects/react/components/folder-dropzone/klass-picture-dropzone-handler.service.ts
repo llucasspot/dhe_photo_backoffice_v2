@@ -72,7 +72,7 @@ export class KlassPictureDropzoneHandlerService
     }
     const [, fileName] = parts;
     // Skip hidden files
-    if (fileName.startsWith('.')) {
+    if (fileName.startsWith('')) {
       return {
         code: 'hidden-file',
         message: `File is an hidden file`,

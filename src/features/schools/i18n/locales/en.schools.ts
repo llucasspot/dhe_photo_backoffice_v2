@@ -4,14 +4,14 @@ export const enSchools: SchoolsI18nTranslationsKeys = {
   title: 'Schools',
   addSchool: 'Add School',
   list: {
-    error: 'Error loading schools.',
-    pending: 'Loading schools...',
-    empty: 'No schools found.',
+    error: 'Error loading schools',
+    pending: 'Loading schools..',
+    empty: 'No schools found',
   },
   detail: {
     title: 'School Details',
-    subtitle: 'View detailed information about this school.',
-    error: 'Error loading school details.',
+    subtitle: 'View detailed information about this school',
+    error: 'Error loading school details',
     fields: {
       name: 'School Name',
       currency: 'Currency',
@@ -20,9 +20,9 @@ export const enSchools: SchoolsI18nTranslationsKeys = {
   },
   create: {
     title: 'Create New School',
-    pending: 'Creating school...',
+    pending: 'Creating school..',
     success: 'School created successfully!',
-    error: 'Failed to create school. Please try again.',
+    error: 'Failed to create school. Please try again',
     form: {
       name: 'School Name',
       currency: 'Currency',

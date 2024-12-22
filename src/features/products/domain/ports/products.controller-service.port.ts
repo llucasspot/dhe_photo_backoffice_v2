@@ -1,5 +1,5 @@
-import { CreateProductBody } from '../create-product.body';
-import { ProductDto } from '../product.dto';
+import { CreateProductBody } from '../dtos/bodies/create-product.body';
+import { ProductDto } from '../dtos/product.dto';
 
 export abstract class ProductsControllerServicePort {
   abstract getProducts(): Promise<ProductDto[]>;

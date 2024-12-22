@@ -1,26 +1,26 @@
 import { StudentsI18nTranslationsKeys } from '../students.i18n-translations-keys';
 
 export const enStudents: StudentsI18nTranslationsKeys = {
-  title: 'Students',
+  title: 'Studen',
   addStudent: 'Add Student',
   list: {
-    error: 'Error loading students.',
-    pending: 'Loading students...',
-    empty: 'No students found.',
+    error: 'Error loading students',
+    pending: 'Loading students..',
+    empty: 'No students found',
   },
   detail: {
     title: 'Student Details',
-    subtitle: 'View detailed information about this student.',
-    error: 'Error loading student details.',
+    subtitle: 'View detailed information about this student',
+    error: 'Error loading student details',
     fields: {
       name: 'Student Name',
     },
   },
   create: {
     title: 'Create New Student',
-    pending: 'Creating student...',
+    pending: 'Creating student..',
     success: 'Student created successfully!',
-    error: 'Failed to create student. Please try again.',
+    error: 'Failed to create student. Please try again',
     form: {
       name: 'Student Name',
       submit: 'Create Student',

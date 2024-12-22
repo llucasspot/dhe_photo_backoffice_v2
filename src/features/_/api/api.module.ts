@@ -1,6 +1,5 @@
-import { ApiMockModule } from './api.mock.module';
-
 import { Module } from '#di';
+import { ApiMockModule } from '#mock';
 
 @Module({
   imports: [ApiMockModule],

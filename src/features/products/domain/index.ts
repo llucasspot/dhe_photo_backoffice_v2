@@ -1,4 +1,4 @@
-export * from './create-product.body';
+export * from './dtos/bodies/create-product.body';
+export * from './dtos/bodies/template.body';
+export * from './dtos/product.dto';
 export * from './ports';
-export * from './product.dto';
-export * from './template.body';

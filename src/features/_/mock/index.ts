@@ -1,1 +1,1 @@
-export * from './database.dexie.module';
+export * from './api/modules/api.mock.module';
