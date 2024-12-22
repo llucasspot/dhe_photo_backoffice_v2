@@ -4,6 +4,7 @@ import {
   redirect,
 } from '@tanstack/react-router';
 
+import { AuthService } from '#features/auth/domain';
 import { LoginPage, RegisterPage } from '#features/auth/react';
 import { DashboardPage } from '#features/dashboard/react';
 import {
@@ -24,9 +25,7 @@ import { OutletLayout, RootLayout } from '#layout';
 import { RoutingServicePort } from '#routing/domain';
 
 type Context = {
-  auth: {
-    isAuthenticated: boolean;
-  };
+  authService: AuthService;
   routingService: RoutingServicePort;
 };
 
@@ -41,7 +40,7 @@ export const authLayout = createRoute({
   path: '/auth',
   component: OutletLayout,
   beforeLoad: ({ context }) => {
-    if (context.auth.isAuthenticated) {
+    if (context.authService.isAuthenticated()) {
       throw redirect({ to: '/home' });
     }
   },
@@ -66,7 +65,7 @@ export const rootLayout = createRoute({
   path: '/',
   component: RootLayout,
   beforeLoad: ({ context }) => {
-    if (!context.auth.isAuthenticated) {
+    if (!context.authService.isAuthenticated()) {
       throw redirect({ to: '/auth/login' });
     }
   },

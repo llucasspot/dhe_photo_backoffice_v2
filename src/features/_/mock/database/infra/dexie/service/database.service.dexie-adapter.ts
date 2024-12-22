@@ -10,6 +10,7 @@ import {
 import {
   GroupPicture,
   Klass,
+  Photographer,
   Picture,
   Product,
   ProductTemplates,
@@ -51,6 +52,7 @@ export class DatabaseServiceDexieAdapter implements DatabaseServicePort {
     this.db = db;
 
     db.version(1).stores({
+      photographers: this.buildStoreString(Photographer),
       pictures: this.buildStoreString(Picture),
       studentPictures: this.buildStoreString(StudentPicture),
       groupPictures: this.buildStoreString(GroupPicture),

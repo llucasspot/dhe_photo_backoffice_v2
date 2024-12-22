@@ -1,68 +1,85 @@
-import { singleton } from '#di';
+import { Finder } from '../../../../database/domain';
+import { PhotographersDaoPort } from '../../../../database/modules/auth/domain/photographers-dao.port';
+import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
+
+import { inject, singleton } from '#di';
 import {
   AuthProviderPort,
+  AuthResponse,
   AuthUser,
   LoginBody,
   RegisterBody,
 } from '#features/auth/domain';
 
 @singleton()
-export class AuthProviderMockAdapter extends AuthProviderPort {
-  private mockUsers: AuthUser[] = [
-    {
-      id: '1',
-      email: 'john@example.com',
-      firstName: 'John',
-      lastName: 'Doe',
-    },
-  ];
+export class AuthProviderMockAdapter
+  extends ForMockControllerService
+  implements AuthProviderPort
+{
+  constructor(
+    @inject(PhotographersDaoPort)
+    private readonly photographersDao: PhotographersDaoPort,
+  ) {
+    super();
+  }
 
-  private currentUser: AuthUser | null = null;
-  private authToken: string | null = null;
+  async getUserInfo(userId: string): Promise<AuthUser> {
+    const photographer = await this.photographersDao.getById(userId);
 
-  async login({ email }: LoginBody): Promise<string> {
-    const user = this.mockUsers.find((u) => u.email === email);
-
-    if (!user) {
+    if (!photographer) {
       throw new Error('Invalid credentials');
     }
 
-    this.currentUser = user;
-    this.authToken = `mock_token_${user.id}`;
-    localStorage.setItem('auth_token', this.authToken);
-
-    return this.authToken;
+    return photographer;
   }
 
-  async register({ email }: RegisterBody): Promise<string> {
-    if (this.mockUsers.some((u) => u.email === email)) {
+  async login({ email, password }: LoginBody): Promise<AuthResponse> {
+    const photographer = await this.photographersDao.get(
+      this.buildPhotographerFinderByEmail(email, password),
+    );
+
+    if (!photographer) {
+      return this.register({ email, password, confirmPassword: password });
+    }
+
+    return {
+      authToken: `mock_token_${photographer.id}`,
+      userId: photographer.id,
+    };
+  }
+
+  async register({ email, password }: RegisterBody): Promise<AuthResponse> {
+    const photographer = await this.photographersDao.get(
+      this.buildPhotographerFinderByEmail(email),
+    );
+    if (photographer) {
       throw new Error('User already exis');
     }
 
-    const newUser: AuthUser = {
-      id: (this.mockUsers.length + 1).toString(),
+    const newPhotographer: AuthUser = await this.photographersDao.save({
       email,
+      password,
+    });
+
+    return {
+      authToken: `mock_token_${newPhotographer.id}`,
+      userId: newPhotographer.id,
     };
-
-    this.mockUsers.push(newUser);
-    this.currentUser = newUser;
-    this.authToken = `mock_token_${newUser.id}`;
-    localStorage.setItem('auth_token', this.authToken);
-
-    return this.authToken;
   }
 
-  async logout(): Promise<void> {
-    this.currentUser = null;
-    this.authToken = null;
-    localStorage.removeItem('auth_token');
-  }
+  async logout(): Promise<void> {}
 
-  async getCurrentUser(): Promise<AuthUser | null> {
-    return this.currentUser;
-  }
-
-  isAuthenticated(): boolean {
-    return localStorage.getItem('auth_token') !== null;
+  private buildPhotographerFinderByEmail(
+    photographerEmail?: string,
+    password?: string,
+  ) {
+    const finder = new Finder('photographers');
+    if (photographerEmail) {
+      finder.filtersWith(['email', '$equals', photographerEmail]);
+    }
+    if (password) {
+      finder.filtersWith(['password', '$equals', password]);
+    }
+    return finder;
   }
 }

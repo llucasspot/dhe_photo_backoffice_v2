@@ -2,8 +2,13 @@ import { Dto } from '#core/domain';
 import { ProjectState } from '#features/projects/domain';
 import { AvailableCurrency } from '#features/schools/domain';
 
+export class Photographer extends Dto<Photographer> {
+  id!: string;
+  email!: string;
+  password!: string;
+}
+
 export class Picture extends Dto<Picture> {
-  //properties
   id!: string;
 }
 

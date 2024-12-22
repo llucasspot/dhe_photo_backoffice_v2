@@ -1,21 +1,21 @@
-import { LoginBody } from '../dtos/bodies/login.body';
-import { RegisterBody } from '../dtos/bodies/register.body';
+import { LoginBody, RegisterBody } from '../dtos';
 
 export interface AuthUser {
   id: string;
   email: string;
-  firstName?: string;
-  lastName?: string;
+}
+
+export interface AuthResponse {
+  userId: string;
+  authToken: string;
 }
 
 export abstract class AuthProviderPort {
-  abstract login(body: LoginBody): Promise<string>;
+  abstract getUserInfo(userId: string): Promise<AuthUser>;
 
-  abstract register(body: RegisterBody): Promise<string>;
+  abstract login(body: LoginBody): Promise<AuthResponse>;
+
+  abstract register(body: RegisterBody): Promise<AuthResponse>;
 
   abstract logout(): Promise<void>;
-
-  abstract getCurrentUser(): Promise<AuthUser | null>;
-
-  abstract isAuthenticated(): boolean;
 }

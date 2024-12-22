@@ -8,6 +8,9 @@ function build(relativePath: string) {
 
 export default defineConfig({
   plugins: [react()],
+  server: {
+    port: 3001,
+  },
   resolve: {
     alias: {
       '#lib': build('src/lib'),
@@ -68,6 +71,7 @@ export default defineConfig({
       '#mock/domain': build('src/features/_/mock/domain'),
       '#mock/infra': build('src/features/_/mock/infra'),
       '#api': build('src/features/_/api'),
+      '#state': build('src/features/_/state'),
     },
   },
 });

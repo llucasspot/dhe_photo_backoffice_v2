@@ -1,19 +1,37 @@
+import { useEffect } from 'react';
+
 import { OutletLayout } from './outlet.layout';
 
 import { Sidebar } from '#components';
 import { useService } from '#di/react';
-import { useAuth } from '#features/auth/react';
+import { AuthService } from '#features/auth/domain';
+import { AuthState } from '#features/auth/domain';
+import { AuthProviderPort } from '#features/auth/domain';
 import { useI18n } from '#i18n/react';
 import { RoutingServicePort } from '#routing/domain';
 import { Link } from '#routing/react';
 
 export const RootLayout = () => {
+  const authService = useService(AuthService);
+  const authProviderPort = useService(AuthProviderPort);
   const routingService = useService(RoutingServicePort);
-  const { isAuthenticated, logout } = useAuth();
+
+  const authState = useService(AuthState);
+  const authStateValue = authState.use();
+  const isAuthenticated = authStateValue.currentUser;
+
+  useEffect(() => {
+    authProviderPort
+      .getUserInfo(localStorage.getItem('auth_user_id') ?? '')
+      .then((info) => {
+        authState.set({ currentUser: info });
+      });
+  }, [authProviderPort, authState]);
+
   const { t, changeLanguage, currentLanguage } = useI18n();
 
   const handleLogout = async () => {
-    logout();
+    authService.logout();
     await routingService.redirect('/auth/login');
   };
 

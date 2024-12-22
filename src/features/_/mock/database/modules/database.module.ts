@@ -1,3 +1,4 @@
+import { AuthDatabaseModule } from './auth/auth.database.module';
 import { KlassesDatabaseModule } from './klasses/klasses.database.module';
 import { PicturesDatabaseModule } from './pictures/pictures.database.module';
 import { ProductsDatabaseModule } from './products/products.database.module';
@@ -17,6 +18,7 @@ import { Module } from '#di';
     SchoolsDatabaseModule,
     StudentsDatabaseModule,
     TemplatesDexieModule,
+    AuthDatabaseModule,
   ],
 })
 export class DatabaseModule {}

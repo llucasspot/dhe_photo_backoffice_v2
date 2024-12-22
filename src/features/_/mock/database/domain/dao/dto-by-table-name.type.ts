@@ -1,6 +1,7 @@
 import {
   GroupPicture,
   Klass,
+  Photographer,
   Picture,
   Product,
   ProductTemplates,
@@ -14,6 +15,7 @@ import {
 } from './tables';
 
 export type DtoByTableName = {
+  photographers: Photographer;
   pictures: Picture;
   studentPictures: StudentPicture;
   groupPictures: GroupPicture;

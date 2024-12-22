@@ -81,7 +81,8 @@
       "#mock": ["./src/features/_/mock"],
       "#mock/domain": ["./src/features/_/mock/domain"],
       "#mock/infra": ["./src/features/_/mock/infra"],
-      "#api": ["./src/features/_/api"]
+      "#api": ["./src/features/_/api"],
+      "#state": ["./src/features/_/state"]
     },
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,

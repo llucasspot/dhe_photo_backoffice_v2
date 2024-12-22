@@ -21,7 +21,7 @@ export const frSettings: SettingsI18nTranslationsKeys = {
         IsString: 'Le prénom doit être du texte',
         Length: 'Le prénom doit contenir entre 2 et 50 caractères',
         Matches:
-            'Le prénom ne peut contenir que des lettres, espaces et tirets',
+          'Le prénom ne peut contenir que des lettres, espaces et tirets',
       },
       lastName: {
         IsString: 'Le nom doit être du texte',
