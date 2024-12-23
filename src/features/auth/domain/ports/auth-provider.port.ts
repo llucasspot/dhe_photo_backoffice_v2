@@ -7,7 +7,7 @@ export interface AuthUser {
 
 export interface AuthResponse {
   userId: string;
-  authToken: string;
+  accessToken: string;
 }
 
 export abstract class AuthProviderPort {

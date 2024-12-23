@@ -20,20 +20,20 @@ export class AuthService {
   ) {}
 
   async login(body: LoginBody) {
-    const { authToken, userId } = await this.authProvider.login(body);
+    const { accessToken, userId } = await this.authProvider.login(body);
     const photographer = await this.authProvider.getUserInfo(userId);
 
     this.authState.set({ currentUser: photographer });
-    this.storageService.set(StorageServicePort.currentAccessToken, authToken);
+    this.storageService.set(StorageServicePort.currentAccessToken, accessToken);
     this.storageService.set(StorageServicePort.currentUserId, userId);
   }
 
   async register(body: RegisterBody) {
-    const { authToken, userId } = await this.authProvider.register(body);
+    const { accessToken, userId } = await this.authProvider.register(body);
     const photographer = await this.authProvider.getUserInfo(userId);
 
     this.authState.set({ currentUser: photographer });
-    this.storageService.set(StorageServicePort.currentAccessToken, authToken);
+    this.storageService.set(StorageServicePort.currentAccessToken, accessToken);
     this.storageService.set(StorageServicePort.currentUserId, userId);
   }
 

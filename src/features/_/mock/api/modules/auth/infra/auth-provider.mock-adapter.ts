@@ -43,7 +43,7 @@ export class AuthProviderMockAdapter
     }
 
     return {
-      authToken: `mock_token_${photographer.id}`,
+      accessToken: `mock_token_${photographer.id}`,
       userId: photographer.id,
     };
   }
@@ -62,7 +62,7 @@ export class AuthProviderMockAdapter
     });
 
     return {
-      authToken: `mock_token_${newPhotographer.id}`,
+      accessToken: `mock_token_${newPhotographer.id}`,
       userId: newPhotographer.id,
     };
   }
