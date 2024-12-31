@@ -1,4 +1,5 @@
 import {
+  Customer,
   GroupPicture,
   Klass,
   Photographer,
@@ -30,6 +31,8 @@ export type DtoByTableName = {
   // template
   tmplt_templates: Template;
   tmplt_layers: TemplateLayer;
+  // customer
+  customers: Customer;
 };
 
 export type TableName = keyof DtoByTableName;

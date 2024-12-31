@@ -86,3 +86,8 @@ export class ProductTemplates extends Dto<ProductTemplates> {
   productId!: string;
   templateId!: string;
 }
+
+export class Customer extends Dto<Customer> {
+  id!: string;
+  email!: string;
+}
