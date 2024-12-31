@@ -23,6 +23,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "dexie": "^4.0.10",
+    "dotenv": "^16.4.7",
     "fabric": "^6.5.3",
     "i18next": "^24.1.0",
     "i18next-browser-languagedetector": "^8.0.2",

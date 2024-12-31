@@ -15,8 +15,14 @@ declare module '@tanstack/react-router' {
 export function TanstackRouter() {
   const authService = useService(AuthService);
   const routingService = useService(RoutingServicePort);
+
+  // TODO
+  const basepath = import.meta.env.VITE_BASE_PATH ?? '/';
+  console.log('basepath : ', basepath);
+
   return (
     <RouterProvider
+      basepath={basepath}
       router={RoutingServiceTanstackAdapter.router}
       context={{
         routingService,
