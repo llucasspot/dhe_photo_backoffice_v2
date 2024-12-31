@@ -73,13 +73,13 @@ export class KlassDropzoneHandlerService
     }
     const [, subFolderName, fileName] = parts;
     // Skip files (those with extensions) and hidden folders
-    if (subFolderName.includes('')) {
+    if (subFolderName.includes('.')) {
       return {
         code: 'hidden-folder',
         message: `File is an hidden folder`,
       };
     }
-    if (fileName.startsWith('')) {
+    if (fileName.startsWith('.')) {
       return {
         code: 'hidden-file',
         message: `File is an hidden file`,
