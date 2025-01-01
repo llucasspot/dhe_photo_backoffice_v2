@@ -1,7 +1,7 @@
 import {
   StorageItem,
   StorageServicePort,
-} from '../../domain/storage.service.port.ts';
+} from '../../domain/storage.service.port';
 
 import { adapter } from '#di';
 

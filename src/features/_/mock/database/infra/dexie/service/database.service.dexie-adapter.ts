@@ -23,7 +23,7 @@ import {
   DtoByDexieTableName,
 } from '../dao/dto-by-table-name.type.dexie';
 
-import { DatabaseServiceDexieAdapterAbstract } from './database.service.dexie-adapter.abstract.ts';
+import { DatabaseServiceDexieAdapterAbstract } from './database.service.dexie-adapter.abstract';
 
 import { singleton } from '#di';
 import { Type } from '#di/domain';

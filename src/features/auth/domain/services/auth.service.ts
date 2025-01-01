@@ -3,6 +3,7 @@ import { AuthState } from '../states';
 import { inject, singleton } from '#di';
 import {
   AuthProviderPort,
+  AuthResponse,
   LoginBody,
   RegisterBody,
 } from '#features/auth/domain';
@@ -20,21 +21,11 @@ export class AuthService {
   ) {}
 
   async login(body: LoginBody) {
-    const { accessToken, userId } = await this.authProvider.login(body);
-    const photographer = await this.authProvider.getUserInfo(userId);
-
-    this.authState.set({ currentUser: photographer });
-    this.storageService.set(StorageServicePort.currentAccessToken, accessToken);
-    this.storageService.set(StorageServicePort.currentUserId, userId);
+    await this.authenticateInApp(() => this.authProvider.login(body));
   }
 
   async register(body: RegisterBody) {
-    const { accessToken, userId } = await this.authProvider.register(body);
-    const photographer = await this.authProvider.getUserInfo(userId);
-
-    this.authState.set({ currentUser: photographer });
-    this.storageService.set(StorageServicePort.currentAccessToken, accessToken);
-    this.storageService.set(StorageServicePort.currentUserId, userId);
+    await this.authenticateInApp(() => this.authProvider.register(body));
   }
 
   async logout() {
@@ -50,5 +41,24 @@ export class AuthService {
       this.storageService.get(StorageServicePort.currentAccessToken) !== null &&
       this.storageService.get(StorageServicePort.currentUserId) !== null
     );
+  }
+
+  async getUserInfo() {
+    const userId = this.storageService.get(StorageServicePort.currentUserId);
+    if (!userId) {
+      throw new Error('user not login');
+    }
+    const photographer = await this.authProvider.getUserInfo(userId);
+    this.authState.set({ currentUser: photographer });
+    return photographer;
+  }
+
+  private async authenticateInApp(cb: () => Promise<AuthResponse>) {
+    const { accessToken, userId } = await cb();
+    this.storageService.set(StorageServicePort.currentUserId, userId);
+    this.storageService.set(StorageServicePort.currentAccessToken, accessToken);
+
+    const photographer = await this.authProvider.getUserInfo(userId);
+    this.authState.set({ currentUser: photographer });
   }
 }

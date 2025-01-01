@@ -1,4 +1,4 @@
-import { StorageServiceLocalStorageAdapter } from '../infra/local-storage/storage.service.local-storage-adapter.ts';
+import { StorageServiceLocalStorageAdapter } from '../infra/local-storage/storage.service.local-storage-adapter';
 
 import { Module } from '#di';
 

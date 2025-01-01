@@ -5,10 +5,6 @@ export class PictureDto extends Dto<PictureDto> {
   // properties
   id!: string;
 
-  get lala() {
-    return 'laz';
-  }
-
   static build<TBody>(body: TBody[]): PictureDto[];
   static build<TBody>(body: TBody): PictureDto;
   static build(body: unknown): PictureDto | PictureDto[] {
