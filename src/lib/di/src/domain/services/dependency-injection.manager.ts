@@ -17,9 +17,20 @@ export class DependencyInjectionManager {
     dependencyInjectionService: DependencyInjectionServicePort,
   ) {
     return {
-      singleton: this.buildSingletonDecorator(dependencyInjectionService),
+      singleton: <T>(options?: { token?: Token<T>; scope?: Scope }) =>
+        this.buildSingletonDecorator<T>(dependencyInjectionService)(options),
       inject: this.buildInjectDecorator(dependencyInjectionService),
       Module: this.buildModuleDecorator(dependencyInjectionService),
+      adapter: <T>(
+        port: Token<T>,
+        options?: {
+          scope?: Scope;
+        },
+      ) =>
+        this.buildAdapterDecorator<T>(dependencyInjectionService)(
+          port,
+          options,
+        ),
     };
   }
 
@@ -41,12 +52,39 @@ export class DependencyInjectionManager {
   private static buildSingletonDecorator<T>(
     dependencyInjectionService: DependencyInjectionServicePort,
   ) {
-    return (token?: Token<T>) =>
+    return (options?: { token?: Token<T>; scope?: Scope }) =>
       (target: Type<T>): void => {
-        const _token = dependencyInjectionService.getToken(token ?? target);
-        console.log('singleton register : ', _token);
+        const token = dependencyInjectionService.getToken(
+          options?.token ?? target,
+        );
+        console.log('singleton register : ', token);
         injectable()(target);
-        dependencyInjectionService.registerByClass(_token, target);
+        dependencyInjectionService.registerByClass(
+          token,
+          target,
+          options?.scope,
+        );
+      };
+  }
+
+  private static buildAdapterDecorator<T>(
+    dependencyInjectionService: DependencyInjectionServicePort,
+  ) {
+    return (
+        port: Token<T>,
+        options?: {
+          scope?: Scope;
+        },
+      ) =>
+      (target: Type<T>): void => {
+        const token = dependencyInjectionService.getToken(port);
+        console.log('adapter register : ', token);
+        injectable()(target);
+        dependencyInjectionService.registerByClass(
+          token,
+          target,
+          options?.scope,
+        );
       };
   }
 
@@ -60,14 +98,23 @@ export class DependencyInjectionManager {
         imports = [],
       }: {
         imports?: Type[];
-        providers?: ({
-          token: Token;
-          scope?: Scope;
-        } & Provider)[];
+        providers?: (
+          | ({
+              token: Token;
+              scope?: Scope;
+            } & Provider)
+          | Type
+        )[];
       }) =>
       (target: Type<T>): void => {
         console.log('module register start : ', target.name);
         providers.forEach((provider) => {
+          if (this.isInLineProvider(provider)) {
+            // do nothing because the register is done in singleton or adapter decorators
+            // class need to be load too
+            return;
+          }
+
           const _token = dependencyInjectionService.getToken(provider.token);
           const scope = provider.scope ?? Scope.Singleton;
 
@@ -102,5 +149,17 @@ export class DependencyInjectionManager {
         });
         console.log('module register end : ', target.name);
       };
+  }
+
+  private static isInLineProvider(
+    provider:
+      | ({
+          token: Token;
+          scope?: Scope;
+        } & Provider)
+      | Type,
+  ): provider is Type {
+    // @ts-expect-error isInLineProvider
+    return !provider.token;
   }
 }

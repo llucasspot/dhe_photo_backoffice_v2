@@ -4,31 +4,13 @@ import { GroupPicturesServiceMockAdapter } from './infra/group-pictures.service.
 import { PictureControllerServiceDexieAdapter } from './infra/picture.controller-service.dexie-adapter';
 
 import { Module } from '#di';
-import {
-  FilesCreatorControllerServicePort,
-  FileStudentsCreatorControllerServicePort,
-  PictureControllerServicePort,
-} from '#features/files/domain';
-import { GroupPicturesCreatorControllerServicePort } from '#features/klasses/domain';
 
 @Module({
   providers: [
-    {
-      token: GroupPicturesCreatorControllerServicePort,
-      useToken: GroupPicturesServiceMockAdapter,
-    },
-    {
-      token: FileStudentsCreatorControllerServicePort,
-      useToken: FileStudentsServiceMockAdapter,
-    },
-    {
-      token: FilesCreatorControllerServicePort,
-      useToken: FilesServiceMockAdapter,
-    },
-    {
-      token: PictureControllerServicePort,
-      useToken: PictureControllerServiceDexieAdapter,
-    },
+    GroupPicturesServiceMockAdapter,
+    FileStudentsServiceMockAdapter,
+    FilesServiceMockAdapter,
+    PictureControllerServiceDexieAdapter,
   ],
 })
 export class PicturesMockApiModule {}

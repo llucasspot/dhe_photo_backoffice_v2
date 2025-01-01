@@ -3,11 +3,6 @@ import { DatabaseServiceDexieAdapter } from './service';
 import { Module } from '#di';
 
 @Module({
-  providers: [
-    {
-      token: DatabaseServiceDexieAdapter,
-      useToken: DatabaseServiceDexieAdapter,
-    },
-  ],
+  providers: [DatabaseServiceDexieAdapter],
 })
 export class DatabaseDexieModule {}

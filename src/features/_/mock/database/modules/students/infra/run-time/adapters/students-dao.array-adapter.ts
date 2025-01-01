@@ -2,9 +2,9 @@ import { DtoByTableName } from '../../../../../domain';
 import { DaoRunTime } from '../../../../../infra/run-time';
 import { StudentsDaoPort } from '../../../domain/students-dao.port';
 
-import { singleton } from '#di';
+import { adapter } from '#di';
 
-@singleton()
+@adapter(StudentsDaoPort)
 export class StudentsDaoArrayAdapter
   extends DaoRunTime<DtoByTableName, 'students'>
   implements StudentsDaoPort

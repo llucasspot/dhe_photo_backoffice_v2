@@ -2,13 +2,13 @@ import { StudentsDaoPort } from '../../../../database/modules/students/domain/st
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
 
 import { LogAction } from '#core/domain';
-import { inject, singleton } from '#di';
+import { adapter, inject } from '#di';
 import { FileStudentsCreatorControllerServicePort } from '#features/files/domain';
 import { StudentsCreatorControllerServicePort } from '#features/students/domain';
 import { StudentsGetterControllerServicePort } from '#features/students/domain';
 import { CreateStudentBody, StudentDto } from '#features/students/domain';
 
-@singleton()
+@adapter(StudentsCreatorControllerServicePort)
 export class StudentsCreatorMockAdapter
   extends ForMockControllerService
   implements StudentsCreatorControllerServicePort

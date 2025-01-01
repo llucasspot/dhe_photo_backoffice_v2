@@ -2,10 +2,10 @@ import { toast, ToastOptions } from 'react-toastify';
 
 import { ToastServicePort } from '../domain';
 
-import { inject, singleton } from '#di';
+import { adapter, inject } from '#di';
 import { I18nServicePort } from '#i18n/domain';
 
-@singleton()
+@adapter(ToastServicePort)
 export class ToastServiceToastifyAdapter extends ToastServicePort {
   constructor(
     @inject(I18nServicePort)

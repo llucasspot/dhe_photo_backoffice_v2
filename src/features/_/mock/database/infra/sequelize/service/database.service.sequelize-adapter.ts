@@ -7,15 +7,12 @@ import {
 
 import { SequelizeTableName } from '../dao/dto-by-table-name.type.sequelize';
 
-import { singleton } from '#di';
-
 export type SequelizeConnexion = Sequelize & {
   [TTableName in TableName]: ModelStatic<
     Model<DtoByTableName[TTableName], Partial<DtoByTableName[TTableName]>>
   >;
 };
 
-@singleton()
 export class DatabaseServiceSequelizeAdapter implements DatabaseServicePort {
   private db: SequelizeConnexion;
 

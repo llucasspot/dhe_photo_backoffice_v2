@@ -5,13 +5,12 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import { en } from './locales/en';
 import { fr } from './locales/fr';
 
-import { singleton } from '#di';
+import { adapter } from '#di';
 import { I18nServicePort, TranslateOptions, Translations } from '#i18n/domain';
 
-@singleton()
-export class I18nServiceI18nextAdapter extends I18nServicePort {
+@adapter(I18nServicePort)
+export class I18nServiceI18nextAdapter implements I18nServicePort {
   constructor() {
-    super();
     this.initializeI18n();
   }
 

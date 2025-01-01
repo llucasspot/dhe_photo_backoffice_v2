@@ -4,9 +4,9 @@ import {
 } from '../../../../../infra/dexie';
 import { PicturesDaoPort } from '../../../domain/pictures-dao.port';
 
-import { inject, singleton } from '#di';
+import { adapter, inject } from '#di';
 
-@singleton()
+@adapter(PicturesDaoPort)
 export class PicturesDaoDexieAdapter
   extends DaoDexie<'pictures'>
   implements PicturesDaoPort

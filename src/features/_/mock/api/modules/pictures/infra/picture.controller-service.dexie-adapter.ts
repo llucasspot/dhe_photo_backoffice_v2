@@ -3,10 +3,10 @@ import { FileDataDexieDao } from '../../../../database/infra';
 import { DtoByDexieTableName } from '../../../../database/infra/dexie';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
 
-import { inject, singleton } from '#di';
+import { adapter, inject } from '#di';
 import { PictureControllerServicePort } from '#features/files/domain';
 
-@singleton()
+@adapter(PictureControllerServicePort)
 export class PictureControllerServiceDexieAdapter
   extends ForMockControllerService
   implements PictureControllerServicePort

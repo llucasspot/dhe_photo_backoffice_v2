@@ -4,9 +4,9 @@ import {
 } from '../../../../../infra/dexie';
 import { ProjectsDaoPort } from '../../../domain/projects-dao.port';
 
-import { inject, singleton } from '#di';
+import { adapter, inject } from '#di';
 
-@singleton()
+@adapter(ProjectsDaoPort)
 export class ProjectsDaoDexieAdapter
   extends DaoDexie<'projects'>
   implements ProjectsDaoPort

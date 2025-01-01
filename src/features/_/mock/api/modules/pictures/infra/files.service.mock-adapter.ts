@@ -2,14 +2,14 @@ import { PicturesDaoPort } from '../../../../database/modules/pictures/domain/pi
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
 
 import { LogAction } from '#core/domain';
-import { inject, singleton } from '#di';
+import { adapter, inject } from '#di';
 import {
   FilesCreatorControllerServicePort,
   PictureDto,
 } from '#features/files/domain';
 import { PictureControllerServicePort } from '#features/files/domain';
 
-@singleton()
+@adapter(FilesCreatorControllerServicePort)
 export class FilesServiceMockAdapter
   extends ForMockControllerService
   implements FilesCreatorControllerServicePort

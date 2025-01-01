@@ -3,7 +3,7 @@ import { KlassesDaoPort } from '../../../../database/modules/klasses/domain/klas
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
 
 import { LogAction } from '#core/domain';
-import { inject, singleton } from '#di';
+import { adapter, inject } from '#di';
 import {
   KlassDto,
   KlassesControllerServicePort,
@@ -11,7 +11,7 @@ import {
 import { CreateKlassesBody } from '#features/projects/domain';
 import { StudentsCreatorControllerServicePort } from '#features/students/domain';
 
-@singleton()
+@adapter(KlassesControllerServicePort)
 export class KlassesServiceMockAdapter
   extends ForMockControllerService
   implements KlassesControllerServicePort

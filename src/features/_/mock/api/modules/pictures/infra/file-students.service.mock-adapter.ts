@@ -2,7 +2,7 @@ import { StudentPicturesDaoPort } from '../../../../database/modules/pictures/do
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
 
 import { LogAction } from '#core/domain';
-import { inject, singleton } from '#di';
+import { adapter, inject } from '#di';
 import { FilesCreatorControllerServicePort } from '#features/files/domain';
 import { CreateFileStudentBody } from '#features/files/domain';
 import { CreateStudentFilesBody } from '#features/files/domain';
@@ -10,7 +10,7 @@ import { StudentPictureDto } from '#features/files/domain';
 import { FileStudentsCreatorControllerServicePort } from '#features/files/domain';
 import { StudentsGetterControllerServicePort } from '#features/students/domain';
 
-@singleton()
+@adapter(FileStudentsCreatorControllerServicePort)
 export class FileStudentsServiceMockAdapter
   extends ForMockControllerService
   implements FileStudentsCreatorControllerServicePort

@@ -4,9 +4,9 @@ import {
 } from '../../../../../infra/dexie';
 import { TemplatesDaoPort } from '../../../domain/templates-dao.port';
 
-import { inject, singleton } from '#di';
+import { adapter, inject } from '#di';
 
-@singleton()
+@adapter(TemplatesDaoPort)
 export class TemplatesDaoDexieAdapter
   extends DaoDexie<'tmplt_templates'>
   implements TemplatesDaoPort

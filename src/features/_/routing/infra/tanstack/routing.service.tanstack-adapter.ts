@@ -3,10 +3,10 @@ import { createRouter, useLocation } from '@tanstack/react-router';
 
 import { routeTree } from './route-tree';
 
-import { singleton } from '#di';
+import { adapter } from '#di';
 import { RoutingServicePort } from '#routing/domain';
 
-@singleton()
+@adapter(RoutingServicePort)
 export class RoutingServiceTanstackAdapter extends RoutingServicePort {
   public static readonly router = createRouter({
     routeTree,

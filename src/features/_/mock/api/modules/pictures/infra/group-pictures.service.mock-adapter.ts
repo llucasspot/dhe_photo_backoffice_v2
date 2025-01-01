@@ -1,7 +1,7 @@
 import { GroupPicturesDaoPort } from '../../../../database/modules/pictures/domain/group-pictures-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
 
-import { inject, singleton } from '#di';
+import { adapter, inject } from '#di';
 import {
   FilesCreatorControllerServicePort,
   GroupPictureDto,
@@ -12,7 +12,7 @@ import {
   KlassesControllerServicePort,
 } from '#features/klasses/domain';
 
-@singleton()
+@adapter(GroupPicturesCreatorControllerServicePort)
 export class GroupPicturesServiceMockAdapter
   extends ForMockControllerService
   implements GroupPicturesCreatorControllerServicePort

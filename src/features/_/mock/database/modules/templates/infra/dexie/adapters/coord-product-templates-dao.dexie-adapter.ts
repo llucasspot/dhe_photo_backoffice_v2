@@ -4,9 +4,9 @@ import {
 } from '../../../../../infra/dexie';
 import { CoordProductTemplatesDaoPort } from '../../../domain/coord-product-templates-dao.port';
 
-import { inject, singleton } from '#di';
+import { adapter, inject } from '#di';
 
-@singleton()
+@adapter(CoordProductTemplatesDaoPort)
 export class CoordProductTemplatesDaoDexieAdapter
   extends DaoDexie<'coord_product_templates'>
   implements CoordProductTemplatesDaoPort

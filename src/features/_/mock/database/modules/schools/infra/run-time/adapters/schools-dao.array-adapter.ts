@@ -2,10 +2,10 @@ import { DtoByTableName } from '../../../../../domain';
 import { DaoRunTime } from '../../../../../infra/run-time';
 import { SchoolsDaoPort } from '../../../domain/schools-dao.port';
 
-import { singleton } from '#di';
+import { adapter } from '#di';
 import { AvailableCurrency } from '#features/schools/domain';
 
-@singleton()
+@adapter(SchoolsDaoPort)
 export class SchoolsDaoArrayAdapter
   extends DaoRunTime<DtoByTableName, 'schools'>
   implements SchoolsDaoPort
