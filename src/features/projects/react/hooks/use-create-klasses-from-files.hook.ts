@@ -3,9 +3,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { KlassDropzoneHandlerService } from '../components';
 
-import { projectsKeys } from './use-projects.hook';
-
 import { useService } from '#di/react';
+import { projectsKeys } from '#features/projects/use-cases';
 import { ToastService } from '#toast/domain';
 
 export const useCreateKlassesFromFiles = () => {

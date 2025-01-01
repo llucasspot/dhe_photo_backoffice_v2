@@ -1,9 +1,9 @@
 import { useParams } from '@tanstack/react-router';
 import { match } from 'ts-pattern';
 
-import { useProduct } from '../hooks';
-
+import { useGetter } from '#action/react';
 import { ProductDto } from '#features/products/domain';
+import { ProductGetter } from '#features/products/use-cases';
 import { useI18n } from '#i18n/react';
 import { Link } from '#routing/react';
 
@@ -91,7 +91,11 @@ const ProductDetailContent = ({ product }: { product: ProductDto }) => {
 
 export const ProductDetailPage = () => {
   const { productId } = useParams({ from: '/products/$productId' });
-  const { data: product, isLoading, error } = useProduct(productId);
+  const {
+    data: product,
+    isLoading,
+    error,
+  } = useGetter(ProductGetter, productId);
 
   return match({ product, isLoading, error })
     .with({ isLoading: true }, ProductDetailLoading)

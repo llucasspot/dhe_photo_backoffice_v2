@@ -1,12 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { schoolsKeys } from './use-schools.hook';
-
 import { useService } from '#di/react';
 import {
   CreateSchoolBody,
   SchoolsServiceControllerServicePort,
 } from '#features/schools/domain';
+import { schoolsKeys } from '#features/schools/use-cases';
 import { ToastService } from '#toast/domain';
 
 export const useCreateSchool = () => {

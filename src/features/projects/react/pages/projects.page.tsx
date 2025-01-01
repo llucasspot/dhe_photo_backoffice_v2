@@ -1,12 +1,13 @@
 import { ProjectList } from '../components';
-import { useProjects } from '../hooks';
 
+import { useGetter } from '#action/react';
 import { Button } from '#components';
+import { ProjectsGetter } from '#features/projects/use-cases';
 import { useI18n } from '#i18n/react';
 
 export const ProjectsPage = () => {
   const { t } = useI18n();
-  const { data: projects = [], isLoading, error } = useProjects();
+  const { data: projects = [], isLoading, error } = useGetter(ProjectsGetter);
 
   return (
     <div className="p-8">

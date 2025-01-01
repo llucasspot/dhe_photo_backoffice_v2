@@ -3,9 +3,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { KlassPictureDropzoneHandlerService } from '../components';
 
-import { klassKeys } from './use-klass.hook';
-
 import { useService } from '#di/react';
+import { klassKeys } from '#features/projects/use-cases';
 import { ToastService } from '#toast/domain';
 
 export const useCreateGroupPictureFromFiles = () => {

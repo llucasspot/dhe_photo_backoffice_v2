@@ -1,5 +1,6 @@
+import { useGetter } from '#action/react';
 import { ProductDto } from '#features/products/domain';
-import { useProducts } from '#features/products/react';
+import { ProductsGetter } from '#features/products/use-cases';
 import { useI18n } from '#i18n/react';
 
 interface ProductSelectorProps {
@@ -12,7 +13,7 @@ export const ProductSelector = ({
   onSelectProduct,
 }: ProductSelectorProps) => {
   const { t } = useI18n();
-  const { data: products = [], isLoading } = useProducts();
+  const { data: products = [], isLoading } = useGetter(ProductsGetter);
 
   if (isLoading) {
     return <div className="animate-pulse h-10 bg-gray-200 rounded"></div>;

@@ -1,12 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { productsKeys } from './use-products.hook';
-
 import { useService } from '#di/react';
 import {
   CreateProductBody,
   ProductsControllerServicePort,
 } from '#features/products/domain';
+import { productsKeys } from '#features/products/use-cases';
 import { ToastService } from '#toast/domain';
 
 export const useCreateProduct = () => {

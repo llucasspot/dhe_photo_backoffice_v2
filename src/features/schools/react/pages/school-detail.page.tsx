@@ -1,9 +1,9 @@
 import { useParams } from '@tanstack/react-router';
 import { match } from 'ts-pattern';
 
-import { useSchool } from '../hooks';
-
+import { useGetter } from '#action/react';
 import { SchoolDto } from '#features/schools/domain';
+import { SchoolGetter } from '#features/schools/use-cases';
 import { useI18n } from '#i18n/react';
 import { Link } from '#routing/react';
 
@@ -91,7 +91,7 @@ const SchoolDetailContent = ({ school }: { school: SchoolDto }) => {
 
 export const SchoolDetailPage = () => {
   const { schoolId } = useParams({ from: '/schools/$schoolId' });
-  const { data: school, isLoading, error } = useSchool(schoolId);
+  const { data: school, isLoading, error } = useGetter(SchoolGetter, schoolId);
 
   return match({ school, isLoading, error })
     .with({ isLoading: true }, SchoolDetailLoading)

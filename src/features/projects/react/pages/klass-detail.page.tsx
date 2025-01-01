@@ -5,12 +5,13 @@ import {
   FolderDropzone,
   KlassPictureDropzoneHandlerService,
 } from '../components';
-import { useKlass } from '../hooks';
 import { useCreateGroupPictureFromFiles } from '../hooks';
 
+import { useGetter } from '#action/react';
 import { BlobViewer } from '#components';
 import { useService } from '#di/react';
 import { KlassDto } from '#features/klasses/domain';
+import { KlassGetter } from '#features/projects/use-cases';
 import { useI18n } from '#i18n/react';
 import { Link } from '#routing/react';
 
@@ -149,7 +150,11 @@ export const KlassDetailPage = () => {
   const { klassId, projectId } = useParams({
     from: '/projects/$projectId/klasses/$klassId',
   });
-  const { data: klass, isLoading, error } = useKlass(projectId, klassId);
+  const {
+    data: klass,
+    isLoading,
+    error,
+  } = useGetter(KlassGetter, { projectId, klassId });
 
   return match({ klass, isLoading, error })
     .with({ isLoading: true }, KlassDetailLoading)

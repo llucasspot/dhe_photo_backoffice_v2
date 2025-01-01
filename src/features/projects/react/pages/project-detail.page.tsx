@@ -3,11 +3,13 @@ import { match } from 'ts-pattern';
 
 import { FolderDropzone, KlassDropzoneHandlerService } from '../components';
 import { ProjectProducts } from '../components/products/project-products';
-import { useCreateKlassesFromFiles, useProject } from '../hooks';
+import { useCreateKlassesFromFiles } from '../hooks';
 
+import { useGetter } from '#action/react';
 import { useService } from '#di/react';
 import { KlassGrid } from '#features/klasses/react';
 import { ProjectDto } from '#features/projects/domain';
+import { ProjectGetter } from '#features/projects/use-cases';
 import { useI18n } from '#i18n/react';
 import { Link } from '#routing/react';
 
@@ -160,7 +162,11 @@ const ProjectDetailContent = ({ project }: { project: ProjectDto }) => {
 
 export const ProjectDetailPage = () => {
   const { projectId } = useParams({ from: '/projects/$projectId' });
-  const { data: project, isLoading, error } = useProject(projectId);
+  const {
+    data: project,
+    isLoading,
+    error,
+  } = useGetter(ProjectGetter, projectId);
 
   return match({ project, isLoading, error })
     .with({ isLoading: true }, ProjectDetailLoading)

@@ -1,12 +1,13 @@
 import { ProductList } from '../components';
-import { useProducts } from '../hooks';
 
+import { useGetter } from '#action/react';
 import { Button } from '#components';
+import { ProductsGetter } from '#features/products/use-cases';
 import { useI18n } from '#i18n/react';
 
 export const ProductsPage = () => {
   const { t } = useI18n();
-  const { data: products = [], isLoading, error } = useProducts();
+  const { data: products = [], isLoading, error } = useGetter(ProductsGetter);
 
   return (
     <div className="p-8">

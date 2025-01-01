@@ -1,12 +1,13 @@
 import { SchoolList } from '../components';
-import { useSchools } from '../hooks';
 
+import { useGetter } from '#action/react';
 import { Button } from '#components';
+import { SchoolsGetter } from '#features/schools/use-cases';
 import { useI18n } from '#i18n/react';
 
 export const SchoolsPage = () => {
   const { t } = useI18n();
-  const { data: schools = [], isLoading, error } = useSchools();
+  const { data: schools = [], isLoading, error } = useGetter(SchoolsGetter);
 
   return (
     <div className="p-8">
