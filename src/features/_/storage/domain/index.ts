@@ -1,1 +1,1 @@
-export * from './storage.service.port';
+export * from './storage.service';

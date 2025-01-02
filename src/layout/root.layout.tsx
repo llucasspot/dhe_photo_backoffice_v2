@@ -10,13 +10,13 @@ import { AuthProviderPort } from '#features/auth/domain';
 import { useI18n } from '#i18n/react';
 import { RoutingServicePort } from '#routing/domain';
 import { Link } from '#routing/react';
-import { StorageServicePort } from '#storage/domain';
+import { StorageService } from '#storage/domain';
 
 export const RootLayout = () => {
   const authService = useService(AuthService);
   const authProviderPort = useService(AuthProviderPort);
   const routingService = useService(RoutingServicePort);
-  const storageService = useService(StorageServicePort);
+  const storageService = useService(StorageService);
 
   const authState = useService(AuthState);
   const authStateValue = authState.use();
@@ -24,7 +24,7 @@ export const RootLayout = () => {
 
   useEffect(() => {
     authProviderPort
-      .getUserInfo(storageService.get(StorageServicePort.currentUserId) ?? '')
+      .getUserInfo(storageService.get(StorageService.currentUserId) ?? '')
       .then((info) => {
         authState.set({ currentUser: info });
       });

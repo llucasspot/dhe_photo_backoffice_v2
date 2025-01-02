@@ -7,7 +7,7 @@ import {
   LoginBody,
   RegisterBody,
 } from '#features/auth/domain';
-import { StorageServicePort } from '#storage/domain';
+import { StorageService } from '#storage/domain';
 
 @singleton()
 export class AuthService {
@@ -16,8 +16,8 @@ export class AuthService {
     private readonly authProvider: AuthProviderPort,
     @inject(AuthState)
     private readonly authState: AuthState,
-    @inject(StorageServicePort)
-    private readonly storageService: StorageServicePort,
+    @inject(StorageService)
+    private readonly storageService: StorageService,
   ) {}
 
   async login(body: LoginBody) {
@@ -32,19 +32,19 @@ export class AuthService {
     await this.authProvider.logout();
 
     this.authState.set({ currentUser: null });
-    this.storageService.remove(StorageServicePort.currentAccessToken);
-    this.storageService.remove(StorageServicePort.currentUserId);
+    this.storageService.remove(StorageService.currentAccessToken);
+    this.storageService.remove(StorageService.currentUserId);
   }
 
   isAuthenticated(): boolean {
     return (
-      this.storageService.get(StorageServicePort.currentAccessToken) !== null &&
-      this.storageService.get(StorageServicePort.currentUserId) !== null
+      this.storageService.get(StorageService.currentAccessToken) !== null &&
+      this.storageService.get(StorageService.currentUserId) !== null
     );
   }
 
   async getUserInfo() {
-    const userId = this.storageService.get(StorageServicePort.currentUserId);
+    const userId = this.storageService.get(StorageService.currentUserId);
     if (!userId) {
       throw new Error('user not login');
     }
@@ -55,8 +55,8 @@ export class AuthService {
 
   private async authenticateInApp(cb: () => Promise<AuthResponse>) {
     const { accessToken, userId } = await cb();
-    this.storageService.set(StorageServicePort.currentUserId, userId);
-    this.storageService.set(StorageServicePort.currentAccessToken, accessToken);
+    this.storageService.set(StorageService.currentUserId, userId);
+    this.storageService.set(StorageService.currentAccessToken, accessToken);
 
     const photographer = await this.authProvider.getUserInfo(userId);
     this.authState.set({ currentUser: photographer });
