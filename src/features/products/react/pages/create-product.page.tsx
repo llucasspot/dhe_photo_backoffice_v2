@@ -1,10 +1,11 @@
 import { AvailablePictureFormatName } from '../../domain/dtos/picture-formats';
 import { TemplateInput } from '../components/template.input';
-import { useCreateProduct } from '../hooks';
 
+import { useAction } from '#action/react';
 import { Button, Form, FormButton, Input } from '#components';
 import { useService } from '#di/react';
 import { CreateProductBody } from '#features/products/domain';
+import { CreateProductAction } from '#features/products/use-cases';
 import { useI18n } from '#i18n/react';
 import { RoutingServicePort } from '#routing/domain';
 
@@ -24,7 +25,7 @@ const defaultDim = new Dim('18x24');
 export const CreateProductPage = () => {
   const routingService = useService(RoutingServicePort);
   const { t } = useI18n();
-  const createProduct = useCreateProduct();
+  const createProduct = useAction(CreateProductAction);
 
   const onSubmit = async (data: CreateProductBody) => {
     try {

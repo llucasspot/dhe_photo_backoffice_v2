@@ -1,4 +1,4 @@
-import { useQuery as tsuseQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { GetterI } from '#action/domain';
 import { Token } from '#di/domain';
@@ -10,7 +10,7 @@ export function useGetter<
   TArgs extends unknown[],
 >(Getter: Token<GetterI<TCacheTags, TData, TArgs>>, ...args: TArgs) {
   const getter = useService(Getter);
-  return tsuseQuery({
+  return useQuery({
     queryKey: getter.cacheTags(...args),
     queryFn: () => getter.get(...args),
   });

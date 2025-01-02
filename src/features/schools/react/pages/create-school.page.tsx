@@ -1,15 +1,15 @@
-import { useCreateSchool } from '../hooks';
-
+import { useAction } from '#action/react';
 import { Button, Form, FormButton, Input, Select } from '#components';
 import { useService } from '#di/react';
 import { CreateSchoolBody, SchoolDto } from '#features/schools/domain';
+import { CreateSchoolAction } from '#features/schools/use-cases';
 import { useI18n } from '#i18n/react';
 import { RoutingServicePort } from '#routing/domain';
 
 export const CreateSchoolPage = () => {
   const routingService = useService(RoutingServicePort);
   const { t } = useI18n();
-  const createSchool = useCreateSchool();
+  const createSchool = useAction(CreateSchoolAction);
 
   const onSubmit = async (data: CreateSchoolBody) => {
     try {

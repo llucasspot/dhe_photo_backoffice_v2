@@ -3,12 +3,12 @@ import { match } from 'ts-pattern';
 
 import { FolderDropzone, KlassDropzoneHandlerService } from '../components';
 import { ProjectProducts } from '../components/products/project-products';
-import { useCreateKlassesFromFiles } from '../hooks';
 
-import { useGetter } from '#action/react';
+import { useAction, useGetter } from '#action/react';
 import { useService } from '#di/react';
 import { KlassGrid } from '#features/klasses/react';
 import { ProjectDto } from '#features/projects/domain';
+import { CreateKlassesFromFilesAction } from '#features/projects/use-cases';
 import { ProjectGetter } from '#features/projects/use-cases';
 import { useI18n } from '#i18n/react';
 import { Link } from '#routing/react';
@@ -38,7 +38,7 @@ const ProjectDetailError = ({ error }: { error: Error | null }) => {
 const ProjectDetailContent = ({ project }: { project: ProjectDto }) => {
   const { t } = useI18n();
   const folderDropzoneService = useService(KlassDropzoneHandlerService);
-  const createKlassesFromFiles = useCreateKlassesFromFiles();
+  const createKlassesFromFiles = useAction(CreateKlassesFromFilesAction);
 
   const projectId = project.id;
   const school = project.school;

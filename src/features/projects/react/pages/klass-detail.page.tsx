@@ -5,12 +5,12 @@ import {
   FolderDropzone,
   KlassPictureDropzoneHandlerService,
 } from '../components';
-import { useCreateGroupPictureFromFiles } from '../hooks';
 
-import { useGetter } from '#action/react';
+import { useAction, useGetter } from '#action/react';
 import { BlobViewer } from '#components';
 import { useService } from '#di/react';
 import { KlassDto } from '#features/klasses/domain';
+import { CreateGroupPictureFromFilesAction } from '#features/projects/use-cases';
 import { KlassGetter } from '#features/projects/use-cases';
 import { useI18n } from '#i18n/react';
 import { Link } from '#routing/react';
@@ -46,7 +46,9 @@ const KlassDetailContent = ({
   const klassPictureDropzoneHandlerService = useService(
     KlassPictureDropzoneHandlerService,
   );
-  const createGroupPictureFromFiles = useCreateGroupPictureFromFiles();
+  const createGroupPictureFromFiles = useAction(
+    CreateGroupPictureFromFilesAction,
+  );
   const klassId = klass.id;
   const projectId = klass.projectId;
 

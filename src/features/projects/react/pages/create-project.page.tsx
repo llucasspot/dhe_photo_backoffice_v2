@@ -1,9 +1,8 @@
-import { useCreateProject } from '../hooks';
-
-import { useGetter } from '#action/react';
+import { useAction, useGetter } from '#action/react';
 import { Button, Form, FormButton, Input, Select } from '#components';
 import { useService } from '#di/react';
 import { CreateProjectBody } from '#features/projects/domain';
+import { CreateProjectAction } from '#features/projects/use-cases';
 import { SchoolsGetter } from '#features/schools/use-cases';
 import { useI18n } from '#i18n/react';
 import { RoutingServicePort } from '#routing/domain';
@@ -11,7 +10,7 @@ import { RoutingServicePort } from '#routing/domain';
 export const CreateProjectPage = () => {
   const routingService = useService(RoutingServicePort);
   const { t } = useI18n();
-  const createProject = useCreateProject();
+  const createProject = useAction(CreateProjectAction);
 
   const { data: schools = [] } = useGetter(SchoolsGetter);
   const schoolOptions = schools.map((school) => ({

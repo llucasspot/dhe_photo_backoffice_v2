@@ -23,7 +23,7 @@ export abstract class Action<TData, Body> implements ActionI<TData, Body> {
 
   abstract execute(body: Body): Promise<TData>;
 
-  abstract onSuccess(data: TData): void;
+  abstract onSuccess(data: TData, body: Body): void;
 
   abstract onError(error: Error): void;
 }

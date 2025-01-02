@@ -2,10 +2,11 @@ import { useState } from 'react';
 
 import { ProductSelector } from './product-selector';
 
+import { useAction } from '#action/react';
 import { Button } from '#components';
 import { ProductDto } from '#features/products/domain';
 import { ProjectDto } from '#features/projects/domain';
-import { useAddProductToProject } from '#features/projects/react';
+import { AddProductToProjectAction } from '#features/projects/use-cases';
 import { useI18n } from '#i18n/react';
 
 interface ProjectProductsProps {
@@ -18,7 +19,7 @@ export const ProjectProducts = ({ project }: ProjectProductsProps) => {
     null,
   );
   const [price, setPrice] = useState<string>('');
-  const addProduct = useAddProductToProject();
+  const addProduct = useAction(AddProductToProjectAction);
 
   const handleAddProduct = async () => {
     if (!selectedProduct || !price) return;
