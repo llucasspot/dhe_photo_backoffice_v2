@@ -1,4 +1,8 @@
-// @ts-expect-error window.__STACKBLITZ__
-export const isRunInStackblitzWebContainer = window.__STACKBLITZ__ === true;
+export const isRunInStackblitzWebContainer = () =>
+  // @ts-expect-error window.__STACKBLITZ__
+  window.__STACKBLITZ__ === true;
 
-console.log('isRunInStackblitzWebContainer : ', isRunInStackblitzWebContainer);
+console.log(
+  'isRunInStackblitzWebContainer : ',
+  isRunInStackblitzWebContainer(),
+);

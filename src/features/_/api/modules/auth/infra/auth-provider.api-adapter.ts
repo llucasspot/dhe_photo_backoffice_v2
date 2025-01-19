@@ -10,7 +10,7 @@ import {
 } from '#features/auth/domain';
 import { isRunInStackblitzWebContainer } from '#mock';
 
-@adapter(AuthProviderPort, { use: !isRunInStackblitzWebContainer })
+@adapter(AuthProviderPort, { use: !isRunInStackblitzWebContainer() })
 export class AuthProviderApiAdapter implements AuthProviderPort {
   constructor(
     @inject(HttpClient)

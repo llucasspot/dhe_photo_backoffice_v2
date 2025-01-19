@@ -13,7 +13,7 @@ import {
 import { isRunInStackblitzWebContainer } from '#mock';
 import { StorageService } from '#storage/domain';
 
-@adapter(AuthProviderPort, { use: isRunInStackblitzWebContainer })
+@adapter(AuthProviderPort, { use: isRunInStackblitzWebContainer() })
 export class AuthProviderMockAdapter
   extends ForMockControllerService
   implements AuthProviderPort
