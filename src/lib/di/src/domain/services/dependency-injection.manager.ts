@@ -24,6 +24,7 @@ export class DependencyInjectionManager {
       adapter: <T>(
         port: Token<T>,
         options?: {
+          use?: boolean;
           scope?: Scope;
         },
       ) =>
@@ -73,10 +74,14 @@ export class DependencyInjectionManager {
     return (
         port: Token<T>,
         options?: {
+          use?: boolean;
           scope?: Scope;
         },
       ) =>
       (target: Type<T>): void => {
+        if (options && options.use === false) {
+          return;
+        }
         const token = dependencyInjectionService.getToken(port);
         console.log('adapter register : ', token);
         injectable()(target);
