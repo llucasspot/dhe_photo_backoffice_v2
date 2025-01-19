@@ -1,1 +1,1 @@
-export * from './create-school.action.ts';
+export * from './create-school.action';

@@ -5,7 +5,9 @@ import { Token } from '#di/domain';
 import { useService } from '#di/react';
 import { ToastService } from '#toast/domain';
 
-export function useAction<TData, TBody>(Action: Token<ActionI<TData, TBody>>) {
+export function useAction<TData = void, TBody = void>(
+  Action: Token<ActionI<TData, TBody>>,
+) {
   const action = useService(Action);
   const toastService = useService(ToastService);
 

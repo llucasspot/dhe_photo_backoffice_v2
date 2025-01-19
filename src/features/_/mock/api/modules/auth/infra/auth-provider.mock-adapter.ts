@@ -10,8 +10,10 @@ import {
   LoginBody,
   RegisterBody,
 } from '#features/auth/domain';
+import { isRunInStackblitzWebContainer } from '#mock';
+import { StorageService } from '#storage/domain';
 
-@adapter(AuthProviderPort)
+@adapter(AuthProviderPort, { use: isRunInStackblitzWebContainer })
 export class AuthProviderMockAdapter
   extends ForMockControllerService
   implements AuthProviderPort
@@ -19,11 +21,17 @@ export class AuthProviderMockAdapter
   constructor(
     @inject(PhotographersDaoPort)
     private readonly photographersDao: PhotographersDaoPort,
+    @inject(StorageService)
+    private readonly storageService: StorageService,
   ) {
     super();
   }
 
-  async getUserInfo(userId: string): Promise<AuthUser> {
+  async getUserInfo(): Promise<AuthUser> {
+    const userId = this.storageService.get(StorageService.currentUserId);
+    if (!userId) {
+      throw new Error('User not sign in');
+    }
     const photographer = await this.photographersDao.getById(userId);
 
     if (!photographer) {

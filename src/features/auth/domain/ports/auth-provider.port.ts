@@ -11,7 +11,7 @@ export interface AuthResponse {
 }
 
 export abstract class AuthProviderPort {
-  abstract getUserInfo(userId: string): Promise<AuthUser>;
+  abstract getUserInfo(): Promise<AuthUser>;
 
   abstract login(body: LoginBody): Promise<AuthResponse>;
 
