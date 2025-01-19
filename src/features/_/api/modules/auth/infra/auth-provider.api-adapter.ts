@@ -8,9 +8,8 @@ import {
   LoginBody,
   RegisterBody,
 } from '#features/auth/domain';
-import { isRunInStackblitzWebContainer } from '#mock';
 
-@adapter(AuthProviderPort, { use: !isRunInStackblitzWebContainer() })
+@adapter(AuthProviderPort, { use: !window.__STACKBLITZ__ })
 export class AuthProviderApiAdapter implements AuthProviderPort {
   constructor(
     @inject(HttpClient)

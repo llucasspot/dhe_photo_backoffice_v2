@@ -10,10 +10,9 @@ import {
   LoginBody,
   RegisterBody,
 } from '#features/auth/domain';
-import { isRunInStackblitzWebContainer } from '#mock';
 import { StorageService } from '#storage/domain';
 
-@adapter(AuthProviderPort, { use: isRunInStackblitzWebContainer() })
+@adapter(AuthProviderPort, { use: !!window.__STACKBLITZ__ })
 export class AuthProviderMockAdapter
   extends ForMockControllerService
   implements AuthProviderPort

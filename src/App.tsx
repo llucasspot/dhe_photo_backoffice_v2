@@ -9,6 +9,7 @@ import { Router } from '#routing/react';
 declare global {
   interface Window {
     services: object;
+    __STACKBLITZ__?: boolean;
   }
 }
 
