@@ -2,7 +2,7 @@ import { Getter } from '#action/domain';
 import { inject, singleton } from '#di';
 import {
   SchoolDto,
-  SchoolsServiceControllerServicePort,
+  SchoolsControllerServicePort,
 } from '#features/schools/domain';
 
 export const schoolsKeys = {
@@ -20,13 +20,13 @@ export class SchoolGetter extends Getter<
   [string]
 > {
   constructor(
-    @inject(SchoolsServiceControllerServicePort)
-    private readonly schoolsServiceControllerService: SchoolsServiceControllerServicePort,
+    @inject(SchoolsControllerServicePort)
+    private readonly schoolsControllerService: SchoolsControllerServicePort,
   ) {
     super((id) => schoolsKeys.detail(id));
   }
 
   get(id: string) {
-    return this.schoolsServiceControllerService.getSchool(id);
+    return this.schoolsControllerService.getSchool(id);
   }
 }

@@ -1,4 +1,4 @@
-import { SchoolsServiceControllerServicePort } from '../../domain/ports';
+import { SchoolsControllerServicePort } from '../../domain/ports';
 
 import { schoolsKeys } from './school.getter';
 
@@ -13,13 +13,13 @@ export class SchoolsGetter extends Getter<
   []
 > {
   constructor(
-    @inject(SchoolsServiceControllerServicePort)
-    private readonly schoolsServiceControllerService: SchoolsServiceControllerServicePort,
+    @inject(SchoolsControllerServicePort)
+    private readonly schoolsControllerService: SchoolsControllerServicePort,
   ) {
     super(() => schoolsKeys.lists());
   }
 
   get() {
-    return this.schoolsServiceControllerService.getSchools();
+    return this.schoolsControllerService.getSchools();
   }
 }

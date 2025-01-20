@@ -5,16 +5,16 @@ import { ProjectDto } from '../dtos/project.dto';
 export abstract class ProjectsControllerServicePort {
   abstract getProjects(): Promise<ProjectDto[]>;
 
-  abstract getProject(id: string): Promise<ProjectDto>;
+  abstract getProject(projectId: string): Promise<ProjectDto>;
 
-  abstract createProject(project: CreateProjectBody): Promise<ProjectDto>;
+  abstract createProject(projectId: CreateProjectBody): Promise<ProjectDto>;
 
   abstract updateProject(
-    id: string,
+    projectId: string,
     project: Partial<ProjectDto>,
   ): Promise<ProjectDto>;
 
-  abstract deleteProject(id: string): Promise<void>;
+  abstract deleteProject(projectId: string): Promise<void>;
 
   abstract uploadPhoto(photo: File): Promise<string>;
 

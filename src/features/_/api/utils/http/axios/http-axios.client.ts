@@ -71,7 +71,7 @@ export class HttpAxiosClient {
     return this.client.post<T, R, D>(url, data, config);
   }
 
-  put<T = never, R = AxiosResponse<T>, D = never>(
+  put<T = unknown, R = AxiosResponse<T>, D = unknown>(
     url: string,
     data?: D,
     config?: AxiosRequestConfig<D>,
@@ -79,7 +79,7 @@ export class HttpAxiosClient {
     return this.client.put<T, R, D>(url, data, config);
   }
 
-  patch<T = never, R = AxiosResponse<T>, D = never>(
+  patch<T = unknown, R = AxiosResponse<T>, D = unknown>(
     url: string,
     data?: D,
     config?: AxiosRequestConfig<D>,
@@ -87,7 +87,7 @@ export class HttpAxiosClient {
     return this.client.patch<T, R, D>(url, data, config);
   }
 
-  postForm<T = never, R = AxiosResponse<T>, D = never>(
+  postForm<T = unknown, R = AxiosResponse<T>, D = unknown>(
     url: string,
     data?: D,
     config?: AxiosRequestConfig<D>,
@@ -95,7 +95,7 @@ export class HttpAxiosClient {
     return this.client.postForm<T, R, D>(url, data, config);
   }
 
-  putForm<T = never, R = AxiosResponse<T>, D = never>(
+  putForm<T = unknown, R = AxiosResponse<T>, D = unknown>(
     url: string,
     data?: D,
     config?: AxiosRequestConfig<D>,
@@ -103,7 +103,7 @@ export class HttpAxiosClient {
     return this.client.putForm<T, R, D>(url, data, config);
   }
 
-  patchForm<T = never, R = AxiosResponse<T>, D = never>(
+  patchForm<T = unknown, R = AxiosResponse<T>, D = unknown>(
     url: string,
     data?: D,
     config?: AxiosRequestConfig<D>,

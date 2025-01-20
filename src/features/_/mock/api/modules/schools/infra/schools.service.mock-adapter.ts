@@ -7,13 +7,13 @@ import { adapter, inject } from '#di';
 import {
   CreateSchoolBody,
   SchoolDto,
-  SchoolsServiceControllerServicePort,
+  SchoolsControllerServicePort,
 } from '#features/schools/domain';
 
-@adapter(SchoolsServiceControllerServicePort)
+@adapter(SchoolsControllerServicePort, { use: !!window.__STACKBLITZ__ })
 export class SchoolsServiceMockAdapter
   extends ForMockControllerService
-  implements SchoolsServiceControllerServicePort
+  implements SchoolsControllerServicePort
 {
   constructor(
     @inject(SchoolsDaoPort)

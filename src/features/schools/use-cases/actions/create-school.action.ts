@@ -6,14 +6,14 @@ import { inject, singleton } from '#di';
 import {
   CreateSchoolBody,
   SchoolDto,
-  SchoolsServiceControllerServicePort,
+  SchoolsControllerServicePort,
 } from '#features/schools/domain';
 
 @singleton()
 export class CreateSchoolAction extends Action<SchoolDto, CreateSchoolBody> {
   constructor(
-    @inject(SchoolsServiceControllerServicePort)
-    private readonly schoolsServiceControllerService: SchoolsServiceControllerServicePort,
+    @inject(SchoolsControllerServicePort)
+    private readonly schoolsControllerService: SchoolsControllerServicePort,
     @inject(CacheServicePort)
     private readonly cacheService: CacheServicePort,
   ) {
@@ -25,7 +25,7 @@ export class CreateSchoolAction extends Action<SchoolDto, CreateSchoolBody> {
   }
 
   async execute(body: CreateSchoolBody) {
-    return this.schoolsServiceControllerService.createSchool(body);
+    return this.schoolsControllerService.createSchool(body);
   }
 
   onSuccess(): void {

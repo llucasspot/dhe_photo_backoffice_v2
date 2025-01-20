@@ -5,4 +5,4 @@ import { Module } from '#di';
 @Module({
   providers: [AuthProviderApiAdapter],
 })
-export class AuthApiHttpModule {}
+export class AuthHttpApiModule {}
