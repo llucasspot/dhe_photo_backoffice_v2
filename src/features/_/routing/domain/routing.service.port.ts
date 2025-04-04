@@ -23,7 +23,7 @@ export abstract class RoutingServicePort {
   abstract redirect(
     path: Route,
     params?: Record<string, string>,
-  ): Promise<void>;
+  ): Promise<void> | void;
 
   abstract usePathname(): string;
 }

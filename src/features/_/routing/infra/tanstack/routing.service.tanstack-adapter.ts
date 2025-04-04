@@ -20,7 +20,10 @@ export class RoutingServiceTanstackAdapter extends RoutingServicePort {
     super();
   }
 
-  redirect(path: string, params?: Record<string, string>): Promise<void> {
+  redirect(
+    path: string,
+    params?: Record<string, string>,
+  ): Promise<void> | void {
     return RoutingServiceTanstackAdapter.router.navigate({ to: path, params });
   }
 
