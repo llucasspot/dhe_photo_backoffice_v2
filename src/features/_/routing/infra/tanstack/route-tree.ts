@@ -4,6 +4,8 @@ import {
   redirect,
 } from '@tanstack/react-router';
 
+import { OAuthCallbackPage } from '../../../../auth/react/pages/oauth-callback.page.tsx';
+
 import { AuthService } from '#features/auth/domain';
 import { LoginPage, RegisterPage } from '#features/auth/react';
 import { DashboardPage } from '#features/dashboard/react';
@@ -50,6 +52,12 @@ export const signInRoute = createRoute({
   getParentRoute: () => authLayout,
   path: '/login',
   component: LoginPage,
+});
+
+export const oauthCallbackRoute = createRoute({
+  getParentRoute: () => authLayout,
+  path: '/oauth-callback',
+  component: OAuthCallbackPage,
 });
 
 export const signUpRoute = createRoute({
@@ -146,7 +154,7 @@ export const settingsRoute = createRoute({
 // ----- routeTree -----
 
 export const routeTree = rootRoute.addChildren([
-  authLayout.addChildren([signInRoute, signUpRoute]),
+  authLayout.addChildren([signInRoute, signUpRoute, oauthCallbackRoute]),
   rootLayout.addChildren([
     dashboardRoute,
     projectsRoute,

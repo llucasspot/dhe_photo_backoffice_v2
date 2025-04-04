@@ -10,7 +10,7 @@ import {
   SchoolsControllerServicePort,
 } from '#features/schools/domain';
 
-@adapter(SchoolsControllerServicePort, { use: !!window.__STACKBLITZ__ })
+@adapter(SchoolsControllerServicePort)
 export class SchoolsServiceMockAdapter
   extends ForMockControllerService
   implements SchoolsControllerServicePort

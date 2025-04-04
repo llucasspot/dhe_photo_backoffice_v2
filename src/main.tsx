@@ -8,6 +8,7 @@ import { App } from './App';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './index.css';
+import '@radix-ui/themes/styles.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

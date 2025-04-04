@@ -1,22 +1,20 @@
+import { AuthenticateAction } from './authenticate.action.ts';
+
 import { Action } from '#action/domain';
 import { inject, singleton } from '#di';
 import {
   AuthProviderPort,
   AuthResponse,
-  AuthState,
   RegisterBody,
 } from '#features/auth/domain';
-import { StorageService } from '#storage/domain';
 
 @singleton()
 export class SignUpAction extends Action<AuthResponse, RegisterBody> {
   constructor(
     @inject(AuthProviderPort)
     private readonly authProvider: AuthProviderPort,
-    @inject(AuthState)
-    private readonly authState: AuthState,
-    @inject(StorageService)
-    private readonly storageService: StorageService,
+    @inject(AuthenticateAction)
+    private readonly authenticateAction: AuthenticateAction,
   ) {
     super({
       pending: 'auth.sign-up.pending',
@@ -26,13 +24,8 @@ export class SignUpAction extends Action<AuthResponse, RegisterBody> {
   }
 
   async execute(body: RegisterBody) {
-    const { accessToken, userId } = await this.authProvider.register(body);
-    this.storageService.set(StorageService.currentUserId, userId);
-    this.storageService.set(StorageService.currentAccessToken, accessToken);
-
-    const photographer = await this.authProvider.getUserInfo();
-    this.authState.set({ currentUser: photographer });
-    return { accessToken, userId };
+    const authResponse = await this.authProvider.register(body);
+    return this.authenticateAction.execute(authResponse);
   }
 
   onSuccess(): void {}

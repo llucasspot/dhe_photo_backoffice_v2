@@ -7,7 +7,7 @@ import {
   SchoolsControllerServicePort,
 } from '#features/schools/domain';
 
-@adapter(SchoolsControllerServicePort, { use: !window.__STACKBLITZ__ })
+@adapter(SchoolsControllerServicePort)
 export class SchoolsServiceApiAdapter implements SchoolsControllerServicePort {
   constructor(
     @inject(HttpClient)

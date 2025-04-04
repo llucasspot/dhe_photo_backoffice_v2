@@ -21,6 +21,10 @@ export class StorageService {
     'currentAccessToken',
     new StringStorageItemSerializer(null),
   );
+  static currentRefreshToken = new StorageItem(
+    'currentRefreshToken',
+    new StringStorageItemSerializer(null),
+  );
 
   constructor(
     @inject(BrowserStorageServicePort)

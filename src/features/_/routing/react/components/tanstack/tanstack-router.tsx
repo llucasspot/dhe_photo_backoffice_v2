@@ -16,7 +16,7 @@ export function TanstackRouter() {
   const authService = useService(AuthService);
   const routingService = useService(RoutingServicePort);
 
-  // TODO
+  // TODO import.meta.env
   const basepath = import.meta.env.VITE_BASE_PATH ?? '/';
   console.log('basepath : ', basepath);
 

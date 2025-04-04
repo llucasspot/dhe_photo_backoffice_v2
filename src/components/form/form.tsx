@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect } from 'react';
+import { PropsWithChildren } from 'react';
 import {
   DefaultValues,
   FormProvider as RHFFormProvider,
@@ -25,22 +25,11 @@ export function Form<TDto extends Dto<TDto>>({
   className = '',
   defaultValues,
 }: FormProps<TDto>) {
-  const methods = useForm<TDto>({
+  const methods = useForm<TDto, unknown, TDto>({
     // @ts-expect-error resolver: classValidatorResolver(dto),
     resolver: classValidatorResolver(dto),
     defaultValues,
   });
-
-  const errors = methods.formState.errors;
-  const values = methods.getValues();
-
-  useEffect(() => {
-    console.log('form errors : ', errors);
-  }, [errors]);
-
-  useEffect(() => {
-    console.log('form values : ', values);
-  }, [values]);
 
   return (
     <RHFFormProvider {...methods}>

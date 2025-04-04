@@ -31,7 +31,7 @@ export const useI18n = () => {
   useService(I18nServicePort);
   const {
     t,
-    i18n: { changeLanguage, language: currentLanguage },
+    i18n: { changeLanguage, language: currentLanguage, languages },
   } = useTranslation();
 
   return {
@@ -43,5 +43,6 @@ export const useI18n = () => {
     },
     changeLanguage,
     currentLanguage,
+    languages,
   };
 };

@@ -70,7 +70,6 @@ const KlassDetailContent = ({
         </div>
       </div>
 
-      {/* Group Photos Section */}
       <div className="mb-8">
         <h3 className="text-lg font-medium text-gray-900 mb-4">
           {t('klasses.detail.groupPhoto.title')}
@@ -117,7 +116,6 @@ const KlassDetailContent = ({
         </div>
       </div>
 
-      {/* Students Section */}
       <div className="bg-white shadow overflow-hidden sm:rounded-lg">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-6">
           {klass.students.map((student) => (

@@ -9,7 +9,7 @@ import {
   RegisterBody,
 } from '#features/auth/domain';
 
-@adapter(AuthProviderPort, { use: !window.__STACKBLITZ__ })
+@adapter(AuthProviderPort)
 export class AuthProviderApiAdapter implements AuthProviderPort {
   constructor(
     @inject(HttpClient)

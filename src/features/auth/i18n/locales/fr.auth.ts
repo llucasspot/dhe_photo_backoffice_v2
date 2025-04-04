@@ -2,20 +2,31 @@ import { AuthI18nTranslationsKeys } from '../auth.i18n-translations-keys';
 
 export const frAuth: AuthI18nTranslationsKeys = {
   login: {
-    title: 'Bon retour',
-    subtitle: 'Veuillez vous connecter à votre compte',
-    email: 'Email',
-    password: 'Mot de passe',
-    submit: 'Se connecter',
-    validation: {
-      email: {
-        IsEmail: 'Adresse email invalide',
-        IsNotEmpty: "L'email est requis",
+    title: 'Connexion',
+    subtitle: 'Bon retour, veuillez vous connecter à votre compte',
+    oauthSeparatorLabel: 'Ou continuer avec',
+    notAClientQuestion: 'Pas client chez nous ?',
+    notAClientButtonLabel: 'Contactez nous ici',
+    form: {
+      submitButton: {
+        label: 'Se connecter',
       },
-      password: {
-        IsString: 'Le mot de passe doit être du texte',
-        Length: 'Le mot de passe doit contenir au moins 8 caractères',
-        IsNotEmpty: 'Le mot de passe est requis',
+      input: {
+        email: {
+          label: 'Email',
+          validation: {
+            IsEmail: 'Adresse email invalide',
+            IsNotEmpty: "L'email est requis",
+          },
+        },
+        password: {
+          label: 'Mot de passe',
+          validation: {
+            IsString: 'Le mot de passe doit être du texte',
+            Length: 'Le mot de passe doit contenir au moins 8 caractères',
+            IsNotEmpty: 'Le mot de passe est requis',
+          },
+        },
       },
     },
   },

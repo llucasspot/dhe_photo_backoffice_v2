@@ -12,7 +12,7 @@ import {
 } from '#features/auth/domain';
 import { StorageService } from '#storage/domain';
 
-@adapter(AuthProviderPort, { use: !!window.__STACKBLITZ__ })
+@adapter(AuthProviderPort)
 export class AuthProviderMockAdapter
   extends ForMockControllerService
   implements AuthProviderPort

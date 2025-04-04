@@ -13,7 +13,7 @@ import {
   ProjectState,
 } from '#features/projects/domain';
 
-@adapter(ProjectsControllerServicePort, { use: !!window.__STACKBLITZ__ })
+@adapter(ProjectsControllerServicePort)
 export class ProjectsServiceMockAdapter
   extends ForMockControllerService
   implements ProjectsControllerServicePort
