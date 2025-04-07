@@ -1,18 +1,17 @@
 import { GroupPicturesDaoPort } from '../../../../database/modules/pictures/domain/group-pictures-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
 
-import { adapter, inject } from '#di';
+import { inject } from '#di';
 import {
   FilesCreatorControllerServicePort,
   GroupPictureDto,
 } from '#features/files/domain';
-import { CreateGroupPictureBody } from '#features/klasses/domain';
 import {
+  CreateGroupPictureBody,
   GroupPicturesCreatorControllerServicePort,
   KlassesControllerServicePort,
 } from '#features/klasses/domain';
 
-@adapter(GroupPicturesCreatorControllerServicePort)
 export class GroupPicturesServiceMockAdapter
   extends ForMockControllerService
   implements GroupPicturesCreatorControllerServicePort

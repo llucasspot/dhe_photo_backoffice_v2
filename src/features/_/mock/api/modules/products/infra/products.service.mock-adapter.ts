@@ -5,14 +5,13 @@ import { TemplatesDaoPort } from '../../../../database/modules/templates/domain/
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
 
 import { LogAction } from '#core/domain';
-import { adapter, inject } from '#di';
+import { inject } from '#di';
 import {
   CreateProductBody,
   ProductDto,
   ProductsControllerServicePort,
 } from '#features/products/domain';
 
-@adapter(ProductsControllerServicePort)
 export class ProductsServiceMockAdapter
   extends ForMockControllerService
   implements ProductsControllerServicePort

@@ -2,14 +2,13 @@ import { Finder, Populator } from '../../../../database/domain';
 import { StudentsDaoPort } from '../../../../database/modules/students/domain/students-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
 
-import { adapter, inject } from '#di';
+import { inject } from '#di';
 import { KlassDto } from '#features/klasses/domain';
 import {
   KlassStudentsGetterControllerServicePort,
   StudentDto,
 } from '#features/students/domain';
 
-@adapter(KlassStudentsGetterControllerServicePort)
 export class KlassStudentsServiceMockAdapter
   extends ForMockControllerService
   implements KlassStudentsGetterControllerServicePort

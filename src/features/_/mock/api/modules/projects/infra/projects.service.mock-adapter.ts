@@ -4,7 +4,7 @@ import { ProjectsDaoPort } from '../../../../database/modules/projects/domain/pr
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
 
 import { LogAction } from '#core/domain';
-import { adapter, inject } from '#di';
+import { inject } from '#di';
 import {
   AddProductBody,
   CreateProjectBody,
@@ -13,7 +13,6 @@ import {
   ProjectState,
 } from '#features/projects/domain';
 
-@adapter(ProjectsControllerServicePort)
 export class ProjectsServiceMockAdapter
   extends ForMockControllerService
   implements ProjectsControllerServicePort

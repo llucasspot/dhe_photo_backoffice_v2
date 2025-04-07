@@ -2,7 +2,7 @@ import { Finder } from '../../../../database/domain';
 import { PhotographersDaoPort } from '../../../../database/modules/auth/domain/photographers-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
 
-import { adapter, inject } from '#di';
+import { inject } from '#di';
 import {
   AuthProviderPort,
   AuthResponse,
@@ -12,7 +12,6 @@ import {
 } from '#features/auth/domain';
 import { StorageService } from '#storage/domain';
 
-@adapter(AuthProviderPort)
 export class AuthProviderMockAdapter
   extends ForMockControllerService
   implements AuthProviderPort
