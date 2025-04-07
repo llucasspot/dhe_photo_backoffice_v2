@@ -22,6 +22,10 @@ export const RootLayout = () => {
   const authStateValue = authState.use();
   const isAuthenticated = authStateValue.currentUser;
 
+  if (!isAuthenticated) {
+    routingService.redirect('/auth/login');
+  }
+
   const signOutAction = useAction(SignOutAction);
 
   useEffect(() => {
@@ -90,8 +94,8 @@ export const RootLayout = () => {
         </div>
       </nav>
       <div className="flex pt-16">
-        {isAuthenticated && <Sidebar />}
-        <div className={`flex-1 ${isAuthenticated ? 'pl-64' : ''}`}>
+        <Sidebar />
+        <div className="flex-1 pl-64">
           <OutletLayout />
         </div>
       </div>

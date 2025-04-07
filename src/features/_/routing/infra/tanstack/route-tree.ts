@@ -1,9 +1,9 @@
 import {
   createRootRouteWithContext,
   createRoute,
-  redirect,
 } from '@tanstack/react-router';
 
+import { AuthLayout } from '../../../../../layout/auth.layout.tsx';
 import { OAuthCallbackPage } from '../../../../auth/react/pages/oauth-callback.page.tsx';
 
 import { AuthService } from '#features/auth/domain';
@@ -20,8 +20,11 @@ import {
   ProjectDetailPage,
   ProjectsPage,
 } from '#features/projects/react';
-import { SchoolDetailPage } from '#features/schools/react';
-import { CreateSchoolPage, SchoolsPage } from '#features/schools/react';
+import {
+  CreateSchoolPage,
+  SchoolDetailPage,
+  SchoolsPage,
+} from '#features/schools/react';
 import { SettingsPage } from '#features/settings/react';
 import { OutletLayout, RootLayout } from '#layout';
 import { RoutingServicePort } from '#routing/domain';
@@ -40,12 +43,7 @@ export const rootRoute = createRootRouteWithContext<Context>()({
 export const authLayout = createRoute({
   getParentRoute: () => rootRoute,
   path: '/auth',
-  component: OutletLayout,
-  beforeLoad: ({ context }) => {
-    if (context.authService.isAuthenticated()) {
-      throw redirect({ to: '/home' });
-    }
-  },
+  component: AuthLayout,
 });
 
 export const signInRoute = createRoute({
@@ -72,11 +70,6 @@ export const rootLayout = createRoute({
   getParentRoute: () => rootRoute,
   path: '/',
   component: RootLayout,
-  beforeLoad: ({ context }) => {
-    if (!context.authService.isAuthenticated()) {
-      throw redirect({ to: '/auth/login' });
-    }
-  },
 });
 
 export const dashboardRoute = createRoute({
