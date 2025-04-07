@@ -17,12 +17,7 @@ export const SettingsPage = () => {
       </h1>
 
       <div className="space-y-8">
-        <div className="bg-white shadow rounded-lg p-6">
-          <h2 className="text-lg font-medium text-gray-900 mb-6">
-            {t('settings.personalInfo.title')}
-          </h2>
-          <PersonalInfoForm />
-        </div>
+        <PersonalInfoForm />
 
         <div className="bg-white shadow rounded-lg p-6">
           <h2 className="text-lg font-medium text-gray-900 mb-6">
@@ -31,12 +26,7 @@ export const SettingsPage = () => {
           <CompanyInfoForm />
         </div>
 
-        <div className="bg-white shadow rounded-lg p-6">
-          <h2 className="text-lg font-medium text-gray-900 mb-6">
-            {t('settings.address.title')}
-          </h2>
-          <AddressForm />
-        </div>
+        <AddressForm />
 
         <div className="bg-white shadow rounded-lg p-6">
           <h2 className="text-lg font-medium text-gray-900 mb-6">

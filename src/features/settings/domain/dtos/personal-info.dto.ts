@@ -7,54 +7,60 @@ import {
   Matches,
 } from 'class-validator';
 
-import { plainToInstance, Transform } from '#class-transformer';
+import { Transform } from '#class-transformer';
 import { Dto } from '#core/domain';
 
 export class PersonalInfoDto extends Dto<PersonalInfoDto> {
-  @IsEmail({}, { message: 'settings.personalInfo.validation.email.IsEmail' })
-  @IsNotEmpty({ message: 'settings.personalInfo.validation.email.IsNotEmpty' })
+  @IsEmail(
+    {},
+    { message: 'settings.personalInfo.form.input.email.validation.IsEmail' },
+  )
+  @IsNotEmpty({
+    message:
+      'settings.personalInfo.form.input.email.validation.email.IsNotEmpty',
+  })
   email!: string;
 
-  @IsString({ message: 'settings.personalInfo.validation.firstName.IsString' })
+  @IsString({
+    message: 'settings.personalInfo.form.input.firstName.validation.IsString',
+  })
   @Length(2, 50, {
-    message: 'settings.personalInfo.validation.firstName.Length',
+    message: 'settings.personalInfo.form.input.firstName.validation.Length',
   })
   @Matches(/^[a-zA-Z\s-]+$/, {
-    message: 'settings.personalInfo.validation.firstName.Matches',
+    message: 'settings.personalInfo.form.input.firstName.validation.Matches',
   })
   @Transform(({ value }) => value?.trim())
   firstName!: string;
 
-  @IsString({ message: 'settings.personalInfo.validation.lastName.IsString' })
+  @IsString({
+    message: 'settings.personalInfo.form.input.lastName.validation.IsString',
+  })
   @Length(2, 50, {
-    message: 'settings.personalInfo.validation.lastName.Length',
+    message: 'settings.personalInfo.form.input.lastName.validation.Length',
   })
   @Matches(/^[a-zA-Z\s-]+$/, {
-    message: 'settings.personalInfo.validation.lastName.Matches',
+    message: 'settings.personalInfo.form.input.lastName.validation.Matches',
   })
   @Transform(({ value }) => value?.trim())
   lastName!: string;
 
   @IsString({
-    message: 'settings.personalInfo.validation.displayName.IsString',
+    message: 'settings.personalInfo.form.input.displayName.validation.IsString',
   })
   @Length(2, 50, {
-    message: 'settings.personalInfo.validation.displayName.Length',
+    message: 'settings.personalInfo.form.input.displayName.validation.Length',
   })
   @Transform(({ value }) => value?.trim())
   displayName!: string;
 
   @IsPhoneNumber(undefined, {
-    message: 'settings.personalInfo.validation.phoneNumber.IsPhoneNumber',
+    message:
+      'settings.personalInfo.form.input.phoneNumber.validation.IsPhoneNumber',
   })
   @IsNotEmpty({
-    message: 'settings.personalInfo.validation.phoneNumber.IsNotEmpty',
+    message:
+      'settings.personalInfo.form.input.phoneNumber.validation.IsNotEmpty',
   })
   phoneNumber!: string;
-
-  static build<TBody>(body: TBody[]): PersonalInfoDto[];
-  static build<TBody>(body: TBody): PersonalInfoDto;
-  static build(body: unknown): PersonalInfoDto | PersonalInfoDto[] {
-    return plainToInstance(this, body);
-  }
 }

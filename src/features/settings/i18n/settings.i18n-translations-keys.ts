@@ -1,37 +1,51 @@
 export type SettingsI18nTranslationsKeys = {
   title: string;
   common: {
+    cancel: string;
     save: string;
   };
   personalInfo: {
-    title: string;
-    email: string;
-    firstName: string;
-    lastName: string;
+    form: {
+      title: string;
+      input: {
+        email: {
+          label: string;
+          validation: {
+            IsEmail: string;
+            IsNotEmpty: string;
+          };
+        };
+        firstName: {
+          label: string;
+          validation: {
+            IsString: string;
+            Length: string;
+            Matches: string;
+          };
+        };
+        lastName: {
+          label: string;
+          validation: {
+            IsString: string;
+            Length: string;
+            Matches: string;
+          };
+        };
+        phoneNumber: {
+          label: string;
+          validation: {
+            IsNotEmpty: string;
+            IsPhoneNumber: string;
+          };
+        };
+      };
+    };
+
     displayName: string;
-    phoneNumber: string;
     validation: {
-      email: {
-        IsEmail: string;
-        IsNotEmpty: string;
-      };
-      firstName: {
-        IsString: string;
-        Length: string;
-        Matches: string;
-      };
-      lastName: {
-        IsString: string;
-        Length: string;
-        Matches: string;
-      };
       displayName: {
         IsString: string;
         Length: string;
-      };
-      phoneNumber: {
-        IsNotEmpty: string;
-        IsPhoneNumber: string;
       };
     };
   };
@@ -56,7 +70,43 @@ export type SettingsI18nTranslationsKeys = {
     };
   };
   address: {
-    title: string;
+    form: {
+      title: string;
+      submitButton: {
+        label: string;
+      };
+      input: {
+        street: {
+          label: string;
+          validation: {
+            IsNotEmpty: string;
+          };
+        };
+        city: {
+          label: string;
+          validation: {
+            IsString: string;
+            IsNotEmpty: string;
+            MaxLength: string;
+          };
+        };
+        state: {
+          label: string;
+          validation: {
+            IsNotEmpty: string;
+          };
+        };
+        postalCode: {
+          label: string;
+          validation: {
+            IsString: string;
+            IsNotEmpty: string;
+            IsPostalCode: string;
+          };
+        };
+      };
+    };
+
     countryIsoCode: string;
     address1: string;
     postalCode: string;
@@ -68,16 +118,6 @@ export type SettingsI18nTranslationsKeys = {
         IsNotEmpty: string;
       };
       address1: {
-        IsString: string;
-        IsNotEmpty: string;
-        MaxLength: string;
-      };
-      postalCode: {
-        IsString: string;
-        IsNotEmpty: string;
-        IsPostalCode: string;
-      };
-      city: {
         IsString: string;
         IsNotEmpty: string;
         MaxLength: string;

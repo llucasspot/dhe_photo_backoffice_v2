@@ -1,4 +1,4 @@
-import { HttpClient } from '../../../utils/http';
+import { HttpClient } from '../../_/api/utils/http';
 
 import { adapter, inject } from '#di';
 import {
@@ -17,6 +17,10 @@ export class AuthProviderApiAdapter implements AuthProviderPort {
   ) {}
 
   async getUserInfo(): Promise<AuthUser> {
+    return {
+      id: '1',
+      email: 'lala',
+    } as AuthUser;
     const response = await this.httpClient.get<AuthUser>(`/user`);
     return response.data;
   }

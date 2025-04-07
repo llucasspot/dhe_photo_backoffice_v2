@@ -10,7 +10,12 @@ export const BankInfoForm = () => {
   };
 
   return (
-    <Form dto={BankInfoDto} onSubmit={onSubmit} className="space-y-6">
+    <Form
+      i18nPrefix="settings.bankInfo"
+      dto={BankInfoDto}
+      onSubmit={onSubmit}
+      className="space-y-6"
+    >
       <Input formKey="iban" label={'settings.bankInfo.iban'} />
       <Input formKey="bicNumber" label={'settings.bankInfo.bicNumber'} />
       <FormButton>{t('settings.common.save')}</FormButton>

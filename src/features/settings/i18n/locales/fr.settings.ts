@@ -3,38 +3,53 @@ import { SettingsI18nTranslationsKeys } from '../settings.i18n-translations-keys
 export const frSettings: SettingsI18nTranslationsKeys = {
   title: 'Paramètres',
   common: {
-    save: 'Enregistrer les modifications',
+    cancel: 'Annuler',
+    save: 'Enregistrer',
   },
   personalInfo: {
-    title: 'Informations personnelles',
-    email: 'Adresse email',
-    firstName: 'Prénom',
-    lastName: 'Nom',
+    form: {
+      title: 'Informations personnelles',
+      input: {
+        email: {
+          label: 'Adresse email',
+          validation: {
+            IsEmail: 'Format email invalide',
+            IsNotEmpty: "L'email est requis",
+          },
+        },
+        firstName: {
+          label: 'Prénom',
+          validation: {
+            IsString: 'Le prénom doit être du texte',
+            Length: 'Le prénom doit contenir entre 2 et 50 caractères',
+            Matches:
+              'Le prénom ne peut contenir que des lettres, espaces et tirets',
+          },
+        },
+        lastName: {
+          label: 'Nom',
+          validation: {
+            IsString: 'Le nom doit être du texte',
+            Length: 'Le nom doit contenir entre 2 et 50 caractères',
+            Matches:
+              'Le nom ne peut contenir que des lettres, espaces et tirets',
+          },
+        },
+        phoneNumber: {
+          label: 'Numéro de téléphone',
+          validation: {
+            IsNotEmpty: 'Le numéro de téléphone est requis',
+            IsPhoneNumber: 'Format de numéro de téléphone invalide',
+          },
+        },
+      },
+    },
+
     displayName: "Nom d'affichage",
-    phoneNumber: 'Numéro de téléphone',
     validation: {
-      email: {
-        IsEmail: 'Format email invalide',
-        IsNotEmpty: "L'email est requis",
-      },
-      firstName: {
-        IsString: 'Le prénom doit être du texte',
-        Length: 'Le prénom doit contenir entre 2 et 50 caractères',
-        Matches:
-          'Le prénom ne peut contenir que des lettres, espaces et tirets',
-      },
-      lastName: {
-        IsString: 'Le nom doit être du texte',
-        Length: 'Le nom doit contenir entre 2 et 50 caractères',
-        Matches: 'Le nom ne peut contenir que des lettres, espaces et tirets',
-      },
       displayName: {
         IsString: "Le nom d'affichage doit être du texte",
         Length: "Le nom d'affichage doit contenir entre 2 et 50 caractères",
-      },
-      phoneNumber: {
-        IsNotEmpty: 'Le numéro de téléphone est requis',
-        IsPhoneNumber: 'Format de numéro de téléphone invalide',
       },
     },
   },
@@ -59,7 +74,42 @@ export const frSettings: SettingsI18nTranslationsKeys = {
     },
   },
   address: {
-    title: 'Adresse',
+    form: {
+      title: 'Adresse',
+      submitButton: {
+        label: 'Enregistrer',
+      },
+      input: {
+        street: {
+          label: 'Rue',
+          validation: {
+            IsNotEmpty: 'La rue est requise',
+          },
+        },
+        city: {
+          label: 'Ville',
+          validation: {
+            IsString: 'La ville doit être du texte',
+            IsNotEmpty: 'La ville est requise',
+            MaxLength: 'Le nom de la ville ne peut pas dépasser 50 caractères',
+          },
+        },
+        state: {
+          label: 'Region / Province',
+          validation: {
+            IsNotEmpty: 'La région est requise',
+          },
+        },
+        postalCode: {
+          label: 'ZIP / Code postal',
+          validation: {
+            IsString: 'Le code postal doit être du texte',
+            IsNotEmpty: 'Le code postal est requis',
+            IsPostalCode: 'Le format du code postal est invalide',
+          },
+        },
+      },
+    },
     countryIsoCode: 'Code pays',
     address1: 'Adresse',
     postalCode: 'Code postal',
@@ -74,16 +124,6 @@ export const frSettings: SettingsI18nTranslationsKeys = {
         IsString: "L'adresse doit être du texte",
         IsNotEmpty: "L'adresse est requise",
         MaxLength: "L'adresse ne peut pas dépasser 100 caractères",
-      },
-      postalCode: {
-        IsString: 'Le code postal doit être du texte',
-        IsNotEmpty: 'Le code postal est requis',
-        IsPostalCode: 'Format de code postal invalide',
-      },
-      city: {
-        IsString: 'La ville doit être du texte',
-        IsNotEmpty: 'La ville est requise',
-        MaxLength: 'Le nom de la ville ne peut pas dépasser 50 caractères',
       },
     },
   },

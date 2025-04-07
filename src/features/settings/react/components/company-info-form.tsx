@@ -10,7 +10,12 @@ export const CompanyInfoForm = () => {
   };
 
   return (
-    <Form dto={CompanyInfoDto} onSubmit={onSubmit} className="space-y-6">
+    <Form
+      i18nPrefix="settings.companyInfo"
+      dto={CompanyInfoDto}
+      onSubmit={onSubmit}
+      className="space-y-6"
+    >
       <Input formKey="companyName" label={'settings.companyInfo.companyName'} />
       <Input formKey="vatNumber" label={'settings.companyInfo.vatNumber'} />
       <CheckboxInput

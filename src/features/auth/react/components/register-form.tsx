@@ -10,7 +10,13 @@ export const RegisterForm = () => {
   };
 
   return (
-    <Form dto={RegisterBody} onSubmit={onSubmit} className="space-y-6">
+    <Form
+      // TODO Form i18nPrefix
+      i18nPrefix="RegisterBody"
+      dto={RegisterBody}
+      onSubmit={onSubmit}
+      className="space-y-6"
+    >
       <Input formKey="email" label={'auth.register.email'} type="email" />
       <Input
         formKey="password"

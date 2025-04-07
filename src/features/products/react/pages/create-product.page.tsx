@@ -46,6 +46,8 @@ export const CreateProductPage = () => {
 
       <div className="bg-white shadow rounded-lg p-6">
         <Form
+          // TODO Form i18nPrefix
+          i18nPrefix="CreateProductBody"
           dto={CreateProductBody}
           onSubmit={onSubmit}
           className="space-y-6"

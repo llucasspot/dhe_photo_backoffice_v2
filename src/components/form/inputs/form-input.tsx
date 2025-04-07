@@ -25,6 +25,8 @@ export function FormInput<TFormBody extends FieldValues>({
     <input
       {...register(formKey)}
       {...props}
+      id={formKey}
+      name={formKey}
       className={classNames(className, error ? classNameOnError : '')}
       aria-invalid={error ? 'true' : 'false'}
       aria-describedby={`${formKey}-error`}

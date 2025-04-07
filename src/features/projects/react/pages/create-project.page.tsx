@@ -36,7 +36,13 @@ export const CreateProjectPage = () => {
       </div>
 
       <div className="bg-white shadow rounded-lg p-6">
-        <Form dto={CreateProjectBody} onSubmit={onSubmit} className="space-y-6">
+        <Form
+          // TODO Form i18nPrefix
+          i18nPrefix="CreateProjectBody"
+          dto={CreateProjectBody}
+          onSubmit={onSubmit}
+          className="space-y-6"
+        >
           <Input formKey="name" label="projects.create.form.name" />
           <Select
             formKey="schoolId"

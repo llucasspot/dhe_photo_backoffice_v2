@@ -29,7 +29,13 @@ export const CreateSchoolPage = () => {
       </div>
 
       <div className="bg-white shadow rounded-lg p-6">
-        <Form dto={CreateSchoolBody} onSubmit={onSubmit} className="space-y-6">
+        <Form
+          // TODO Form i18nPrefix
+          i18nPrefix="CreateSchoolBody"
+          dto={CreateSchoolBody}
+          onSubmit={onSubmit}
+          className="space-y-6"
+        >
           <Input formKey="name" label="schools.create.form.name" />
           <Select
             formKey="currency"
