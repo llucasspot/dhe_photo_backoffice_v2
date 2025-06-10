@@ -23,13 +23,14 @@ export class DependencyInjectionManager {
       Module: this.buildModuleDecorator(dependencyInjectionService),
       adapter: <T>(
         port: Token<T>,
+        env: ('production' | 'development' | 'mock')[] = [],
         options?: {
-          use?: boolean;
           scope?: Scope;
         },
       ) =>
         this.buildAdapterDecorator<T>(dependencyInjectionService)(
           port,
+          env,
           options,
         ),
     };
@@ -73,13 +74,18 @@ export class DependencyInjectionManager {
   ) {
     return (
         port: Token<T>,
+        env: ('production' | 'development' | 'mock')[] = [],
         options?: {
-          use?: boolean;
           scope?: Scope;
         },
       ) =>
       (target: Type<T>): void => {
-        if (options && options.use === false) {
+        if (
+          env.length &&
+          !env.includes(
+            process.env.NODE_ENV as 'production' | 'development' | 'mock',
+          )
+        ) {
           return;
         }
         const token = dependencyInjectionService.getToken(port);

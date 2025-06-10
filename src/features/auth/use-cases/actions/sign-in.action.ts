@@ -1,4 +1,4 @@
-import { AuthenticateAction } from './authenticate.action.ts';
+import { AuthenticateAction } from './authenticate.action';
 
 import { Action } from '#action/domain';
 import { inject, singleton } from '#di';

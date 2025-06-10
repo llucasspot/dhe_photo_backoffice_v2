@@ -6,7 +6,7 @@ import { GroupPicturesDaoPort } from '../../../domain/group-pictures-dao.port';
 
 import { adapter, inject } from '#di';
 
-@adapter(GroupPicturesDaoPort)
+@adapter(GroupPicturesDaoPort, ['mock'])
 export class GroupPicturesDaoDexieAdapter
   extends DaoDexie<'groupPictures'>
   implements GroupPicturesDaoPort

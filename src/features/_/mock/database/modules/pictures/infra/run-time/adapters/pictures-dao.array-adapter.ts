@@ -4,7 +4,7 @@ import { PicturesDaoPort } from '../../../domain/pictures-dao.port';
 
 import { adapter } from '#di';
 
-@adapter(PicturesDaoPort)
+@adapter(PicturesDaoPort, ['mock'])
 export class PicturesDaoArrayAdapter
   extends DaoRunTime<DtoByTableName, 'pictures'>
   implements PicturesDaoPort

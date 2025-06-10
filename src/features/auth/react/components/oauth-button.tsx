@@ -1,7 +1,7 @@
 import { PropsWithChildren, useEffect } from 'react';
 
-import { Utils } from '../../../_/core/utils.ts';
-import { AuthenticateAction } from '../../use-cases/actions/authenticate.action.ts';
+import { Utils } from '../../../_/core/utils';
+import { AuthenticateAction } from '../../use-cases/actions/authenticate.action';
 
 import { useAction } from '#action/react';
 

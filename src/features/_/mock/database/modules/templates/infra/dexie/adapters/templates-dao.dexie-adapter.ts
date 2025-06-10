@@ -6,7 +6,7 @@ import { TemplatesDaoPort } from '../../../domain/templates-dao.port';
 
 import { adapter, inject } from '#di';
 
-@adapter(TemplatesDaoPort)
+@adapter(TemplatesDaoPort, ['mock'])
 export class TemplatesDaoDexieAdapter
   extends DaoDexie<'tmplt_templates'>
   implements TemplatesDaoPort

@@ -1,4 +1,4 @@
-import { SchoolsServiceApiAdapter } from './infra/schools.service.api-adapter.ts';
+import { SchoolsServiceApiAdapter } from './infra/schools.service.api-adapter';
 
 import { Module } from '#di';
 

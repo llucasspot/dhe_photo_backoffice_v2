@@ -6,7 +6,7 @@ import { ForMockControllerService } from '../../../domain/for-mock-controller-se
 import { adapter, inject } from '#di';
 import { PictureControllerServicePort } from '#features/files/domain';
 
-@adapter(PictureControllerServicePort)
+@adapter(PictureControllerServicePort, ['mock'])
 export class PictureControllerServiceDexieAdapter
   extends ForMockControllerService
   implements PictureControllerServicePort

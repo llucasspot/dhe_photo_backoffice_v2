@@ -6,7 +6,7 @@ import { ProductsDaoPort } from '../../../domain/products-dao.port';
 
 import { adapter, inject } from '#di';
 
-@adapter(ProductsDaoPort)
+@adapter(ProductsDaoPort, ['mock'])
 export class ProductsDaoDexieAdapter
   extends DaoDexie<'products'>
   implements ProductsDaoPort

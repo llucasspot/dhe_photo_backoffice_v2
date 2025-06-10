@@ -6,7 +6,7 @@ import { CoordProductTemplatesDaoPort } from '../../../domain/coord-product-temp
 
 import { adapter, inject } from '#di';
 
-@adapter(CoordProductTemplatesDaoPort)
+@adapter(CoordProductTemplatesDaoPort, ['mock'])
 export class CoordProductTemplatesDaoDexieAdapter
   extends DaoDexie<'coord_product_templates'>
   implements CoordProductTemplatesDaoPort

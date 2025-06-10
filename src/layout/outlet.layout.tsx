@@ -1,15 +1,19 @@
+import { useEffect } from 'react';
 import { Outlet } from '@tanstack/react-router';
 
 import { useService } from '#di/react';
 import { AuthState } from '#features/auth/domain';
 import { RoutingServicePort } from '#routing/domain';
-import { useStateValue } from '#state/react';
 
 export const OutletLayout = () => {
   const routingService = useService(RoutingServicePort);
-  const authState = useStateValue(AuthState);
-  if (authState.currentUser) {
-    routingService.redirect('/home');
-  }
+  const authState = useService(AuthState);
+  const authStateValue = authState.use();
+  const isAuthenticated = authStateValue.currentUser;
+  useEffect(() => {
+    if (isAuthenticated && !isAuthenticated) {
+      routingService.redirect('/home');
+    }
+  }, [isAuthenticated, routingService]);
   return <Outlet />;
 };

@@ -7,7 +7,7 @@ import { KlassesDaoPort } from '../../../domain/klasses-dao.port';
 
 import { adapter, inject } from '#di';
 
-@adapter(KlassesDaoPort)
+@adapter(KlassesDaoPort, ['mock'])
 export class KlassesDaoDexieAdapter
   extends DaoDexie<'klasses'>
   implements KlassesDaoPort

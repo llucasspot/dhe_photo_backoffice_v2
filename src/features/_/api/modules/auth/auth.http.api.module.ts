@@ -1,4 +1,4 @@
-import { AuthProviderApiAdapter } from '../../../../auth/secondary-adapter/auth-provider.api-adapter.ts';
+import { AuthProviderApiAdapter } from '../../../../auth/secondary-adapter/auth-provider.api-adapter';
 
 import { Module } from '#di';
 

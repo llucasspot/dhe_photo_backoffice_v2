@@ -22,10 +22,6 @@ export const RootLayout = () => {
   const authStateValue = authState.use();
   const isAuthenticated = authStateValue.currentUser;
 
-  if (!isAuthenticated) {
-    routingService.redirect('/auth/login');
-  }
-
   const signOutAction = useAction(SignOutAction);
 
   useEffect(() => {
@@ -34,6 +30,12 @@ export const RootLayout = () => {
     });
   }, [authProviderPort, authState, storageService]);
 
+  useEffect(() => {
+    if (isAuthenticated && !isAuthenticated) {
+      routingService.redirect('/auth/login');
+    }
+  }, [isAuthenticated, routingService]);
+
   const { t, changeLanguage, currentLanguage } = useI18n();
 
   const handleLogout = async () => {
@@ -41,9 +43,9 @@ export const RootLayout = () => {
     await routingService.redirect('/auth/login');
   };
 
-  const toggleLanguage = () => {
+  const toggleLanguage = async () => {
     const newLang = currentLanguage === 'en' ? 'fr' : 'en';
-    changeLanguage(newLang);
+    await changeLanguage(newLang);
   };
 
   return (

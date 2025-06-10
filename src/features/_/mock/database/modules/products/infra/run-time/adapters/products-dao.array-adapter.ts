@@ -4,7 +4,7 @@ import { ProductsDaoPort } from '../../../domain/products-dao.port';
 
 import { adapter } from '#di';
 
-@adapter(ProductsDaoPort)
+@adapter(ProductsDaoPort, ['mock'])
 export class ProductsDaoArrayAdapter
   extends DaoRunTime<DtoByTableName, 'products'>
   implements ProductsDaoPort

@@ -6,7 +6,7 @@ import { TemplateLayersDaoPort } from '../../../domain/template-layers-dao.port'
 
 import { adapter, inject } from '#di';
 
-@adapter(TemplateLayersDaoPort)
+@adapter(TemplateLayersDaoPort, ['mock'])
 export class TemplateLayersDaoDexieAdapter
   extends DaoDexie<'tmplt_layers'>
   implements TemplateLayersDaoPort

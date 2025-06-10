@@ -4,7 +4,7 @@ import { StudentsDaoPort } from '../../../domain/students-dao.port';
 
 import { adapter } from '#di';
 
-@adapter(StudentsDaoPort)
+@adapter(StudentsDaoPort, ['mock'])
 export class StudentsDaoArrayAdapter
   extends DaoRunTime<DtoByTableName, 'students'>
   implements StudentsDaoPort

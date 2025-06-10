@@ -5,7 +5,7 @@ import { SchoolsDaoPort } from '../../../domain/schools-dao.port';
 import { adapter } from '#di';
 import { AvailableCurrency } from '#features/schools/domain';
 
-@adapter(SchoolsDaoPort)
+@adapter(SchoolsDaoPort, ['mock'])
 export class SchoolsDaoArrayAdapter
   extends DaoRunTime<DtoByTableName, 'schools'>
   implements SchoolsDaoPort

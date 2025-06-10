@@ -5,7 +5,7 @@ import { ProjectsDaoPort } from '../../../domain/projects-dao.port';
 import { adapter } from '#di';
 import { ProjectState } from '#features/projects/domain';
 
-@adapter(ProjectsDaoPort)
+@adapter(ProjectsDaoPort, ['mock'])
 export class ProjectsDaoArrayAdapter
   extends DaoRunTime<DtoByTableName, 'projects'>
   implements ProjectsDaoPort

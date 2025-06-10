@@ -1,4 +1,4 @@
-import { ProjectsServiceApiAdapter } from './infra/projects.service.api-adapter.ts';
+import { ProjectsServiceApiAdapter } from './infra/projects.service.api-adapter';
 
 import { Module } from '#di';
 
