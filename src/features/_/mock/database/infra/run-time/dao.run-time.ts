@@ -1,3 +1,4 @@
+import { HttpError } from '../../../api/domain/http-error.ts';
 import { Dao, DtoByTableName, Finder } from '../../domain';
 
 export abstract class DaoRunTime<
@@ -36,7 +37,7 @@ export abstract class DaoRunTime<
     TDtoByTableName[TTableName] | TPopulatedEntity | null | undefined
   > {
     console.log('[DaoRunTime] [get] ', finder);
-    throw new Error('Method not implemented');
+    throw new HttpError(501, 'Method not implemented');
   }
 
   async save(

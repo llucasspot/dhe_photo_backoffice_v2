@@ -1,5 +1,6 @@
 import { StudentPicturesDaoPort } from '../../../../database/modules/pictures/domain/student-pictures-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
+import { HttpError } from '../../../domain/http-error.ts';
 
 import { LogAction } from '#core/domain';
 import { adapter, inject } from '#di';
@@ -34,7 +35,7 @@ export class FileStudentsServiceMockAdapter
   }: CreateStudentFilesBody): Promise<StudentPictureDto[]> {
     const student = await this.studentsGetter.getStudent(studentId);
     if (!student) {
-      throw new Error('Student not found');
+      throw new HttpError(404, 'Student not found');
     }
     const pictures = await this.filesService.createFiles(files);
     const studentPictures = await this.studentPicturesDao.saveMany(
@@ -62,7 +63,7 @@ export class FileStudentsServiceMockAdapter
   }: CreateFileStudentBody): Promise<StudentPictureDto> {
     const student = await this.studentsGetter.getStudent(studentId);
     if (!student) {
-      throw new Error('Student not found');
+      throw new HttpError(404, 'Student not found');
     }
     const picture = await this.filesService.createFile(file);
     const studentPicture = await this.studentPicturesDao.save({

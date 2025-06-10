@@ -1,42 +1,35 @@
 import { useEffect } from 'react';
 
+import { UserInfoGetter } from '../features/auth/use-cases/getter/user-info.getter';
+
 import { OutletLayout } from './outlet.layout';
 
-import { useAction } from '#action/react';
+import { useAction, useGetter } from '#action/react';
 import { Sidebar } from '#components';
 import { useService } from '#di/react';
-import { AuthState } from '#features/auth/domain';
-import { AuthProviderPort } from '#features/auth/domain';
 import { SignOutAction } from '#features/auth/use-cases';
 import { useI18n } from '#i18n/react';
 import { RoutingServicePort } from '#routing/domain';
 import { Link } from '#routing/react';
-import { StorageService } from '#storage/domain';
 
 export const RootLayout = () => {
-  const authProviderPort = useService(AuthProviderPort);
+  const { t, changeLanguage, currentLanguage } = useI18n();
   const routingService = useService(RoutingServicePort);
-  const storageService = useService(StorageService);
 
-  const authState = useService(AuthState);
-  const authStateValue = authState.use();
-  const isAuthenticated = authStateValue.currentUser;
+  const { data, isLoading, isError } = useGetter(UserInfoGetter);
+  const isAuthenticated = data!;
+
+  useEffect(() => {
+    if (isError) {
+      routingService.redirect('/auth/login');
+    }
+  }, [isError, routingService]);
 
   const signOutAction = useAction(SignOutAction);
 
-  useEffect(() => {
-    authProviderPort.getUserInfo().then((info) => {
-      authState.set({ currentUser: info });
-    });
-  }, [authProviderPort, authState, storageService]);
-
-  useEffect(() => {
-    if (isAuthenticated && !isAuthenticated) {
-      routingService.redirect('/auth/login');
-    }
-  }, [isAuthenticated, routingService]);
-
-  const { t, changeLanguage, currentLanguage } = useI18n();
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   const handleLogout = async () => {
     await signOutAction.mutateAsync();

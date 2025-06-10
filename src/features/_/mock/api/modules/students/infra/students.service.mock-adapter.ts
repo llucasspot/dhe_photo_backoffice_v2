@@ -1,5 +1,6 @@
 import { StudentsDaoPort } from '../../../../database/modules/students/domain/students-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
+import { HttpError } from '../../../domain/http-error.ts';
 
 import { LogAction } from '#core/domain';
 import { adapter, inject } from '#di';
@@ -31,7 +32,7 @@ export class StudentsServiceMockAdapter
     await this.delay();
     const student = await this.studentsDao.update(studentId, body);
     if (!student) {
-      throw new Error('Student not found');
+      throw new HttpError(404, 'Student not found');
     }
     return this.studentsGetter.getStudent(studentId);
   }
@@ -41,7 +42,7 @@ export class StudentsServiceMockAdapter
     await this.delay();
     const student = this.studentsDao.deleteById(studentId);
     if (!student) {
-      throw new Error('Student not found');
+      throw new HttpError(404, 'Student not found');
     }
   }
 }

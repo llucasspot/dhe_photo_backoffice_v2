@@ -2,6 +2,7 @@ import { Finder, Populator } from '../../../../database/domain';
 import { ProjectProductsDaoPort } from '../../../../database/modules/products/domain/project-products-dao.port';
 import { ProjectsDaoPort } from '../../../../database/modules/projects/domain/projects-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
+import { HttpError } from '../../../domain/http-error.ts';
 
 import { LogAction } from '#core/domain';
 import { adapter, inject } from '#di';
@@ -73,7 +74,7 @@ export class ProjectsServiceMockAdapter
     await this.delay();
     const updatedProject = await this.projectsDao.update(id, body);
     if (!updatedProject) {
-      throw new Error('Project not found');
+      throw new HttpError(404, 'Project not found');
     }
     const project = this.getProject(updatedProject.id);
     return ProjectDto.build(project);
@@ -84,7 +85,7 @@ export class ProjectsServiceMockAdapter
     await this.delay();
     const project = this.projectsDao.deleteById(id);
     if (!project) {
-      throw new Error('Project not found');
+      throw new HttpError(404, 'Project not found');
     }
   }
 

@@ -3,6 +3,7 @@ import { CoordProductTemplatesDaoPort } from '../../../../database/modules/templ
 import { TemplateLayersDaoPort } from '../../../../database/modules/templates/domain/template-layers-dao.port';
 import { TemplatesDaoPort } from '../../../../database/modules/templates/domain/templates-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
+import { HttpError } from '../../../domain/http-error.ts';
 
 import { LogAction } from '#core/domain';
 import { adapter, inject } from '#di';
@@ -51,7 +52,7 @@ export class ProductsServiceMockAdapter
     await this.delay();
     const product = await this.productsDaoPort.getById(id);
     if (!product) {
-      throw new Error('Product not found');
+      throw new HttpError(404, 'Product not found');
     }
     return ProductDto.build({
       ...product,
@@ -99,7 +100,7 @@ export class ProductsServiceMockAdapter
     await this.delay();
     const product = await this.productsDaoPort.update(id, body);
     if (!product) {
-      throw new Error('Product not found');
+      throw new HttpError(404, 'Product not found');
     }
     return ProductDto.build({
       ...product,
@@ -114,7 +115,7 @@ export class ProductsServiceMockAdapter
     await this.delay();
     const product = this.productsDaoPort.deleteById(id);
     if (!product) {
-      throw new Error('Product not found');
+      throw new HttpError(404, 'Product not found');
     }
   }
 }

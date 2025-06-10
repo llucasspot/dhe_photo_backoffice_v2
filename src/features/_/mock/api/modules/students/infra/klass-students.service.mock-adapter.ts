@@ -1,6 +1,7 @@
 import { Finder, Populator } from '../../../../database/domain';
 import { StudentsDaoPort } from '../../../../database/modules/students/domain/students-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
+import { HttpError } from '../../../domain/http-error.ts';
 
 import { adapter, inject } from '#di';
 import { KlassDto } from '#features/klasses/domain';
@@ -57,7 +58,7 @@ export class KlassStudentsServiceMockAdapter
         ),
     );
     if (!student) {
-      throw new Error('Student not found');
+      throw new HttpError(404, 'Student not found');
     }
     return StudentDto.build(student);
   }

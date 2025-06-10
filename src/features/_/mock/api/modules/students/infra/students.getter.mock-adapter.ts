@@ -1,6 +1,7 @@
 import { Finder, Populator } from '../../../../database/domain';
 import { StudentsDaoPort } from '../../../../database/modules/students/domain/students-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
+import { HttpError } from '../../../domain/http-error.ts';
 
 import { LogAction } from '#core/domain';
 import { adapter, inject } from '#di';
@@ -35,7 +36,7 @@ export class StudentsGetterPortMockAdapter
     const finder = this.buildFinder(studentId);
     const student = await this.studentsDao.get(finder);
     if (!student) {
-      throw new Error('Student not found');
+      throw new HttpError(404, 'Student not found');
     }
     return StudentDto.build(student);
   }

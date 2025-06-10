@@ -1,3 +1,4 @@
+import { HttpError } from '../../../../mock/api/domain/http-error.ts';
 import { HttpClient } from '../../../utils/http';
 
 import { adapter, inject } from '#di';
@@ -57,7 +58,7 @@ export class ProjectsServiceApiAdapter
 
   async uploadPhoto(file: File): Promise<string> {
     console.log(file.name);
-    throw new Error('Method not implemented.');
+    throw new HttpError(501, 'Method not implemented.');
   }
 
   async addProduct({

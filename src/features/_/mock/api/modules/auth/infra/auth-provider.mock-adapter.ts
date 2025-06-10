@@ -1,6 +1,7 @@
 import { Finder } from '../../../../database/domain';
 import { PhotographersDaoPort } from '../../../../database/modules/auth/domain/photographers-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
+import { HttpError } from '../../../domain/http-error.ts';
 
 import { adapter, inject } from '#di';
 import {
@@ -29,12 +30,12 @@ export class AuthProviderMockAdapter
   async getUserInfo(): Promise<AuthUser> {
     const userId = this.storageService.get(StorageService.currentUserId);
     if (!userId) {
-      throw new Error('User not sign in');
+      throw new HttpError(401, 'User not sign in');
     }
     const photographer = await this.photographersDao.getById(userId);
 
     if (!photographer) {
-      throw new Error('Invalid credentials');
+      throw new HttpError(401, 'Invalid credentials');
     }
 
     return photographer;
@@ -60,7 +61,7 @@ export class AuthProviderMockAdapter
       this.buildPhotographerFinderByEmail(email),
     );
     if (photographer) {
-      throw new Error('User already exis');
+      throw new HttpError(400, 'User already exis');
     }
 
     const newPhotographer: AuthUser = await this.photographersDao.save({

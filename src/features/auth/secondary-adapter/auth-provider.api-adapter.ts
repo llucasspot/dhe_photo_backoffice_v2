@@ -17,10 +17,6 @@ export class AuthProviderApiAdapter implements AuthProviderPort {
   ) {}
 
   async getUserInfo(): Promise<AuthUser> {
-    return {
-      id: '1',
-      email: 'lala',
-    } as AuthUser;
     const response = await this.httpClient.get<AuthUser>(`/user`);
     return response.data;
   }

@@ -1,6 +1,9 @@
+import { UserInfoGetter } from '../getter/user-info.getter';
+
 import { Action } from '#action/domain';
+import { CacheServicePort } from '#cache/domain';
 import { inject, singleton } from '#di';
-import { AuthProviderPort, AuthState } from '#features/auth/domain';
+import { AuthProviderPort } from '#features/auth/domain';
 import { StorageService } from '#storage/domain';
 
 @singleton()
@@ -8,10 +11,12 @@ export class SignOutAction extends Action {
   constructor(
     @inject(AuthProviderPort)
     private readonly authProvider: AuthProviderPort,
-    @inject(AuthState)
-    private readonly authState: AuthState,
     @inject(StorageService)
     private readonly storageService: StorageService,
+    @inject(CacheServicePort)
+    private readonly cacheService: CacheServicePort,
+    @inject(UserInfoGetter)
+    private readonly userInfoGetter: UserInfoGetter,
   ) {
     super({
       pending: 'auth.sign-out.pending',
@@ -23,7 +28,7 @@ export class SignOutAction extends Action {
   async execute() {
     await this.authProvider.logout();
 
-    this.authState.set({ currentUser: null });
+    await this.cacheService.clean(this.userInfoGetter);
     this.storageService.remove(StorageService.currentAccessToken);
     this.storageService.remove(StorageService.currentUserId);
   }

@@ -6,7 +6,6 @@ import {
 import { AuthLayout } from '../../../../../layout/auth.layout.tsx';
 import { OAuthCallbackPage } from '../../../../auth/react/pages/oauth-callback.page.tsx';
 
-import { AuthService } from '#features/auth/domain';
 import { LoginPage, RegisterPage } from '#features/auth/react';
 import { DashboardPage } from '#features/dashboard/react';
 import {
@@ -30,7 +29,6 @@ import { OutletLayout, RootLayout } from '#layout';
 import { RoutingServicePort } from '#routing/domain';
 
 type Context = {
-  authService: AuthService;
   routingService: RoutingServicePort;
 };
 

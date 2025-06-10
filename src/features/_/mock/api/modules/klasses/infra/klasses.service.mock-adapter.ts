@@ -1,6 +1,7 @@
 import { Finder, Populator } from '../../../../database/domain';
 import { KlassesDaoPort } from '../../../../database/modules/klasses/domain/klasses-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
+import { HttpError } from '../../../domain/http-error.ts';
 
 import { LogAction } from '#core/domain';
 import { adapter, inject } from '#di';
@@ -66,7 +67,7 @@ export class KlassesServiceMockAdapter
         ),
     );
     if (!klass) {
-      throw new Error('Klass not found');
+      throw new HttpError(404, 'Klass not found');
     }
     return KlassDto.build(klass);
   }

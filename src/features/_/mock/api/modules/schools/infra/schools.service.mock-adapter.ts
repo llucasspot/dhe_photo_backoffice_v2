@@ -1,6 +1,7 @@
 import { Finder, Populator } from '../../../../database/domain';
 import { SchoolsDaoPort } from '../../../../database/modules/schools/domain/schools-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
+import { HttpError } from '../../../domain/http-error.ts';
 
 import { LogAction } from '#core/domain';
 import { adapter, inject } from '#di';
@@ -36,7 +37,7 @@ export class SchoolsServiceMockAdapter
     const finder = this.buildFinder(schoolId);
     const school = await this.schoolsDao.get(finder);
     if (!school) {
-      throw new Error('School not found');
+      throw new HttpError(404, 'School not found');
     }
     console.log('[SchoolsServiceMockAdapter] [getSchool] [school] ', school);
     return SchoolDto.build(school);
@@ -59,7 +60,7 @@ export class SchoolsServiceMockAdapter
     await this.delay();
     const school = await this.schoolsDao.update(schoolId, body);
     if (!school) {
-      throw new Error('School not found');
+      throw new HttpError(404, 'School not found');
     }
     return this.getSchool(school.id);
   }
@@ -69,7 +70,7 @@ export class SchoolsServiceMockAdapter
     await this.delay();
     const school = this.schoolsDao.deleteById(id);
     if (!school) {
-      throw new Error('School not found');
+      throw new HttpError(404, 'School not found');
     }
   }
 

@@ -2,6 +2,7 @@ import { Finder } from '../../../../database/domain';
 import { FileDataDexieDao } from '../../../../database/infra';
 import { DtoByDexieTableName } from '../../../../database/infra/dexie';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
+import { HttpError } from '../../../domain/http-error.ts';
 
 import { adapter, inject } from '#di';
 import { PictureControllerServicePort } from '#features/files/domain';
@@ -27,7 +28,7 @@ export class PictureControllerServiceDexieAdapter
       >('dexieFileData').filtersWith(['pictureId', '$equals', pictureId]),
     );
     if (!file) {
-      throw new Error('Picture not found');
+      throw new HttpError(404, 'Picture not found');
     }
     return file;
   }

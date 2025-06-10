@@ -14,12 +14,25 @@ export class CacheServiceReactQueryAdapter extends CacheServicePort {
 
   async revalidateTag(...tags: string[][]) {
     if (tags.filter(Array.isArray).length > 0) {
-      tags.forEach((key) => {
-        this.queryClient.invalidateQueries({ queryKey: key });
-      });
+      await Promise.all(
+        tags.map((key) =>
+          this.queryClient.invalidateQueries({ queryKey: key }),
+        ),
+      );
       return;
     }
     await this.queryClient.invalidateQueries({ queryKey: tags });
+    return;
+  }
+
+  async cleanTag(...tags: string[][]) {
+    if (tags.filter(Array.isArray).length > 0) {
+      await Promise.all(
+        tags.map((key) => this.queryClient.removeQueries({ queryKey: key })),
+      );
+      return;
+    }
+    this.queryClient.removeQueries({ queryKey: tags });
     return;
   }
 }
