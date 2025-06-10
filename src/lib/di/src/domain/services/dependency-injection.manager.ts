@@ -1,5 +1,3 @@
-import { inject as tsinject, injectable } from 'tsyringe';
-
 import {
   DependencyInjectionServicePort,
   isClassProvider,
@@ -39,28 +37,21 @@ export class DependencyInjectionManager {
   private static buildInjectDecorator<T>(
     dependencyInjectionService: DependencyInjectionServicePort,
   ) {
-    return (token?: Token<T>) =>
-      (
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        target: any,
-        propertyKey: string | symbol | undefined,
-        parameterIndex: number,
-      ): void => {
-        const _token = dependencyInjectionService.getToken(token ?? target);
-        tsinject(_token)(target, propertyKey, parameterIndex);
-      };
+    return dependencyInjectionService.buildInjectDecorator<T>();
   }
 
   private static buildSingletonDecorator<T>(
     dependencyInjectionService: DependencyInjectionServicePort,
   ) {
-    return (options?: { token?: Token<T>; scope?: Scope }) =>
+    return (options?: { scope?: Scope }) =>
       (target: Type<T>): void => {
-        const token = dependencyInjectionService.getToken(
-          options?.token ?? target,
-        );
+        const token = DependencyInjectionManager.getToken(target);
+        if (dependencyInjectionService.isRegistered(token)) {
+          console.log(`adapter ${token} is already registered`);
+          return;
+        }
         console.log('singleton register : ', token);
-        injectable()(target);
+        dependencyInjectionService.makeTargetInjectable(target);
         dependencyInjectionService.registerByClass(
           token,
           target,
@@ -88,9 +79,14 @@ export class DependencyInjectionManager {
         ) {
           return;
         }
-        const token = dependencyInjectionService.getToken(port);
-        console.log('adapter register : ', token);
-        injectable()(target);
+        const token = DependencyInjectionManager.getToken(port);
+        if (dependencyInjectionService.isRegistered(token)) {
+          console.log(`adapter ${token} is already registered`);
+          return;
+        }
+        const withProvider = DependencyInjectionManager.getToken(target);
+        console.log(`adapter register ${token} with provider ${withProvider}`);
+        dependencyInjectionService.makeTargetInjectable(target);
         dependencyInjectionService.registerByClass(
           token,
           target,
@@ -126,7 +122,7 @@ export class DependencyInjectionManager {
             return;
           }
 
-          const _token = dependencyInjectionService.getToken(provider.token);
+          const _token = DependencyInjectionManager.getToken(provider.token);
           const scope = provider.scope ?? Scope.Singleton;
 
           if (isFactoryProvider(provider)) {
@@ -172,5 +168,12 @@ export class DependencyInjectionManager {
   ): provider is Type {
     // @ts-expect-error isInLineProvider
     return !provider.token;
+  }
+
+  static getToken<T>(token: Token<T>) {
+    if (typeof token === 'string') {
+      return token;
+    }
+    return token.name;
   }
 }

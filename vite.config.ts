@@ -13,6 +13,10 @@ dotenv.config();
 const basepath = process.env.VITE_BASE_PATH ?? '/';
 console.log('basepath : ', basepath);
 
+// TODO
+const nodeenv = process.env.NODE_ENV;
+console.log('nodeenv : ', nodeenv);
+
 export default defineConfig({
   plugins: [react()],
   base: basepath,

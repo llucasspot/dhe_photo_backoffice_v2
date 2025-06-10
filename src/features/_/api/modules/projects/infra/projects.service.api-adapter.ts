@@ -8,7 +8,7 @@ import {
   ProjectsControllerServicePort,
 } from '#features/projects/domain';
 
-@adapter(ProjectsControllerServicePort)
+@adapter(ProjectsControllerServicePort, ['development'])
 export class ProjectsServiceApiAdapter
   implements ProjectsControllerServicePort
 {

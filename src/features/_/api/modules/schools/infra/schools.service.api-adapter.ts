@@ -7,7 +7,7 @@ import {
   SchoolsControllerServicePort,
 } from '#features/schools/domain';
 
-@adapter(SchoolsControllerServicePort)
+@adapter(SchoolsControllerServicePort, ['development'])
 export class SchoolsServiceApiAdapter implements SchoolsControllerServicePort {
   constructor(
     @inject(HttpClient)

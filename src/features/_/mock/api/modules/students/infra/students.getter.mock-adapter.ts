@@ -3,12 +3,13 @@ import { StudentsDaoPort } from '../../../../database/modules/students/domain/st
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
 
 import { LogAction } from '#core/domain';
-import { inject } from '#di';
+import { adapter, inject } from '#di';
 import {
   StudentDto,
   StudentsGetterControllerServicePort,
 } from '#features/students/domain';
 
+@adapter(StudentsGetterControllerServicePort, ['mock'])
 export class StudentsGetterPortMockAdapter
   extends ForMockControllerService
   implements StudentsGetterControllerServicePort

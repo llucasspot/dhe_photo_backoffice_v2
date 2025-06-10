@@ -1,21 +1,16 @@
-import { inject as tsinject, injectable } from 'tsyringe';
-
 import { Scope } from '../beans';
 import {
   ClassProvider,
   FactoryProvider,
-  isClassProvider,
-  isFactoryProvider,
-  isTokenProvider,
-  isValueProvider,
-  Provider,
   TokenProvider,
   ValueProvider,
 } from '../providers';
-import { Token, Type } from '../types';
+import { Token } from '../types';
 
 export abstract class DependencyInjectionServicePort {
   abstract getInstance<T>(token: Token<T>): T;
+
+  abstract isRegistered<T>(token: Token<T>): boolean;
 
   abstract registerByValue<T>(
     token: Token<T>,
@@ -41,77 +36,14 @@ export abstract class DependencyInjectionServicePort {
     scope?: Scope,
   ): void;
 
-  public getToken<T>(token: Token<T>) {
-    if (typeof token === 'string') {
-      return token;
-    }
-    return token.name;
-  }
+  abstract makeTargetInjectable<T>(
+    provider: ClassProvider<T>['useClass'],
+  ): void;
 
-  buildDecorators() {
-    return {
-      singleton: this.buildSingletonDecorator(),
-      inject: this.buildInjectDecorator(),
-      Module: this.buildModuleDecorator(),
-    };
-  }
-
-  private buildInjectDecorator<T>() {
-    return (token?: Token<T>) =>
-      (
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        target: any,
-        propertyKey: string | symbol | undefined,
-        parameterIndex: number,
-      ): void => {
-        const _token = this.getToken(token ?? target);
-        tsinject(_token)(target, propertyKey, parameterIndex);
-      };
-  }
-
-  private buildSingletonDecorator<T>() {
-    return (token?: Token<T>) =>
-      (target: Type<T>): void => {
-        const _token = this.getToken(token ?? target);
-        console.log('singleton register : ', _token);
-        injectable()(target);
-        this.registerByClass(_token, target);
-      };
-  }
-
-  private buildModuleDecorator<T>() {
-    return ({
-        providers = [],
-        // @ts-expect-error @typescript-eslint/no-unused-vars
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        imports = [],
-      }: {
-        imports?: Type[];
-        providers?: ({
-          token: Token;
-          scope?: Scope;
-        } & Provider)[];
-      }) =>
-      (target: Type<T>): void => {
-        console.log('module register start : ', target.name);
-        providers.forEach((provider) => {
-          const _token = this.getToken(provider.token);
-          const scope = provider.scope ?? Scope.Singleton;
-
-          if (isFactoryProvider(provider)) {
-            this.registerByFactory(_token, provider.useFactory, scope);
-          }
-          if (isTokenProvider(provider)) {
-            this.registerByToken(_token, provider.useToken, scope);
-          }
-          if (isValueProvider(provider)) {
-            this.registerByValue(_token, provider.useValue, scope);
-          }
-          if (isClassProvider(provider)) {
-            this.registerByClass(_token, provider.useClass, scope);
-          }
-        });
-        console.log('module register end : ', target.name);
-      };
-  }
+  abstract buildInjectDecorator<T>(): (token?: Token<T>) => (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    target: any,
+    propertyKey: string | symbol | undefined,
+    parameterIndex: number,
+  ) => void;
 }

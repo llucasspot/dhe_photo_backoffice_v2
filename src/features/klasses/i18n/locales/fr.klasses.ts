@@ -1,7 +1,7 @@
 import { KlassesI18nTranslationsKeys } from '../klasses.i18n-translations-keys';
 
 export const frKlasses: KlassesI18nTranslationsKeys = {
-  title: 'CLasses',
+  title: 'Classes',
   addClass: 'Ajouter une classe',
   list: {
     error: 'Erreur lors du chargement des classes.',

@@ -2,7 +2,7 @@ import { StudentPicturesDaoPort } from '../../../../database/modules/pictures/do
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
 
 import { LogAction } from '#core/domain';
-import { inject } from '#di';
+import { adapter, inject } from '#di';
 import {
   CreateFileStudentBody,
   CreateStudentFilesBody,
@@ -12,6 +12,7 @@ import {
 } from '#features/files/domain';
 import { StudentsGetterControllerServicePort } from '#features/students/domain';
 
+@adapter(FileStudentsCreatorControllerServicePort, ['mock'])
 export class FileStudentsServiceMockAdapter
   extends ForMockControllerService
   implements FileStudentsCreatorControllerServicePort

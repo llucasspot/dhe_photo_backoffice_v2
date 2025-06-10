@@ -9,7 +9,7 @@ import {
   RegisterBody,
 } from '#features/auth/domain';
 
-@adapter(AuthProviderPort)
+@adapter(AuthProviderPort, ['development'])
 export class AuthProviderApiAdapter implements AuthProviderPort {
   constructor(
     @inject(HttpClient)
