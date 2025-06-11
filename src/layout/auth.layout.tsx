@@ -9,8 +9,7 @@ import { RoutingServicePort } from '#routing/domain';
 
 export const AuthLayout = () => {
   const routingService = useService(RoutingServicePort);
-  const { data, isLoading, isError, error } = useGetter(UserInfoGetter);
-  console.log(data, isLoading, isError, error);
+  const { data, isLoading } = useGetter(UserInfoGetter);
 
   useEffect(() => {
     if (data) {

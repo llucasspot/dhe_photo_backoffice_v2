@@ -1,4 +1,4 @@
-import { HttpError } from '../../../api/domain/http-error.ts';
+import { HttpError } from '../../../api/domain/http-error';
 import { Dao, DtoByTableName, Finder } from '../../domain';
 
 export abstract class DaoRunTime<

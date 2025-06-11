@@ -35,9 +35,9 @@ export const useI18n = () => {
   } = useTranslation();
 
   return {
-    t: (key?: string) => {
+    t: (key?: string, options?: Record<string, string | undefined>) => {
       if (key) {
-        return t(key);
+        return t(key, options);
       }
       return key;
     },

@@ -3,7 +3,7 @@ import { CoordProductTemplatesDaoPort } from '../../../../database/modules/templ
 import { TemplateLayersDaoPort } from '../../../../database/modules/templates/domain/template-layers-dao.port';
 import { TemplatesDaoPort } from '../../../../database/modules/templates/domain/templates-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
-import { HttpError } from '../../../domain/http-error.ts';
+import { HttpError } from '../../../domain/http-error';
 
 import { LogAction } from '#core/domain';
 import { adapter, inject } from '#di';

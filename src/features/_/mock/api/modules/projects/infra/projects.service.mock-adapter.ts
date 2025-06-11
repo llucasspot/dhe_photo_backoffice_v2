@@ -2,7 +2,7 @@ import { Finder, Populator } from '../../../../database/domain';
 import { ProjectProductsDaoPort } from '../../../../database/modules/products/domain/project-products-dao.port';
 import { ProjectsDaoPort } from '../../../../database/modules/projects/domain/projects-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
-import { HttpError } from '../../../domain/http-error.ts';
+import { HttpError } from '../../../domain/http-error';
 
 import { LogAction } from '#core/domain';
 import { adapter, inject } from '#di';

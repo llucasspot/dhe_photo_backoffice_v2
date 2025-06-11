@@ -1,4 +1,4 @@
-import { HttpError } from '../../../../mock/api/domain/http-error.ts';
+import { HttpError } from '../../../../mock/api/domain/http-error';
 import { HttpClient } from '../../../utils/http';
 
 import { adapter, inject } from '#di';

@@ -1,7 +1,7 @@
 import { Finder } from '../../../../database/domain';
 import { PhotographersDaoPort } from '../../../../database/modules/auth/domain/photographers-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
-import { HttpError } from '../../../domain/http-error.ts';
+import { HttpError } from '../../../domain/http-error';
 
 import { adapter, inject } from '#di';
 import {

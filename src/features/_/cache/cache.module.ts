@@ -1,6 +1,6 @@
 import { QueryClient } from '@tanstack/react-query';
 
-import { HttpError } from '../mock/api/domain/http-error.ts';
+import { HttpError } from '../mock/api/domain/http-error';
 
 import { CacheServiceReactQueryAdapter } from './infra/cache.service.react-query-adapter';
 
