@@ -1,4 +1,24 @@
 export type AuthI18nTranslationsKeys = {
+  'sign-in': {
+    pending: string;
+    success: string;
+    error: string;
+  };
+  'sign-up': {
+    pending: string;
+    success: string;
+    error: string;
+  };
+  'sign-out': {
+    pending: string;
+    success: string;
+    error: string;
+  };
+  authenticate: {
+    pending: string;
+    success: string;
+    error: string;
+  };
   login: {
     title: string;
     subtitle: string;

@@ -1,6 +1,26 @@
 import { AuthI18nTranslationsKeys } from '../auth.i18n-translations-keys';
 
 export const frAuth: AuthI18nTranslationsKeys = {
+  'sign-in': {
+    pending: 'Connexion en cours...',
+    success: 'Connexion réussie !',
+    error: 'Échec de la connexion',
+  },
+  'sign-up': {
+    pending: 'Création du compte en cours...',
+    success: 'Compte créé avec succès !',
+    error: 'Échec de la création du compte',
+  },
+  'sign-out': {
+    pending: 'Déconnexion en cours...',
+    success: 'Déconnexion réussie',
+    error: 'Échec de la déconnexion',
+  },
+  authenticate: {
+    pending: 'Authentification en cours...',
+    success: 'Authentification réussie',
+    error: "Échec de l'authentification",
+  },
   login: {
     title: 'Connexion',
     subtitle: 'Bon retour, veuillez vous connecter à votre compte',
