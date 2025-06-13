@@ -46,12 +46,21 @@ export class Project extends Dto<Project> {
   state!: ProjectState;
 }
 
+// schools
+
 export class School extends Dto<School> {
   id!: string;
   name!: string;
   currency!: AvailableCurrency;
   city!: string;
 }
+
+export class SchoolBankAccount extends Dto<SchoolBankAccount> {
+  schoolId!: string;
+  bankAccountId!: string;
+}
+
+// students
 
 export class Student extends Dto<Student> {
   id!: string;
@@ -90,4 +99,10 @@ export class ProductTemplates extends Dto<ProductTemplates> {
 export class Customer extends Dto<Customer> {
   id!: string;
   email!: string;
+}
+
+export class BankAccount extends Dto<BankAccount> {
+  id!: string;
+  iban!: string;
+  bic!: string;
 }

@@ -30,6 +30,8 @@ export type Translations = {
       cancel: string;
       select: string;
       back: string;
+      edit: string;
+      save: string;
     };
     status: {
       active: string;

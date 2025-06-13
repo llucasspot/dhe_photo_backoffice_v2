@@ -2,6 +2,7 @@ import Dexie, { EntityTable } from 'dexie';
 
 import { DatabaseServicePort } from '../../../domain';
 import {
+  BankAccount,
   Customer,
   GroupPicture,
   Klass,
@@ -12,6 +13,7 @@ import {
   Project,
   ProjectProduct,
   School,
+  SchoolBankAccount,
   Student,
   StudentPicture,
   Template,
@@ -47,7 +49,12 @@ export class DatabaseServiceDexieAdapter
       products: Product,
       projects: Project,
       projectProducts: ProjectProduct,
+      // bank accounts
+      bankAccounts: BankAccount,
+      // schools
       schools: School,
+      schoolBankAccounts: SchoolBankAccount,
+      // klasses
       students: Student,
       dexieFileData: DexieFileData,
       // couche de coordination

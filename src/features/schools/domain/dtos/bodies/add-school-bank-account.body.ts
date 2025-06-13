@@ -1,12 +1,9 @@
 import { IsIBAN, IsNotEmpty, IsString, Matches } from 'class-validator';
 
-import { plainToInstance, Transform } from '#class-transformer';
+import { Transform } from '#class-transformer';
 import { Dto } from '#core/domain';
 
-export class BankInfoDto extends Dto<BankInfoDto> {
-  @IsString()
-  id!: string;
-
+export class AddSchoolBankAccountBody extends Dto<AddSchoolBankAccountBody> {
   @IsString({ message: 'settings.bankInfo.validation.ibanRequired' })
   @IsIBAN({ message: 'settings.bankInfo.validation.ibanInvalid' })
   @IsNotEmpty({ message: 'settings.bankInfo.validation.ibanRequired' })
@@ -19,11 +16,5 @@ export class BankInfoDto extends Dto<BankInfoDto> {
     message: 'settings.bankInfo.validation.bicInvalid',
   })
   @Transform(({ value }) => value?.trim().toUpperCase())
-  bicNumber!: string;
-
-  static build<TBody>(body: TBody[]): BankInfoDto[];
-  static build<TBody>(body: TBody): BankInfoDto;
-  static build(body: unknown): BankInfoDto | BankInfoDto[] {
-    return plainToInstance(this, body);
-  }
+  bic!: string;
 }

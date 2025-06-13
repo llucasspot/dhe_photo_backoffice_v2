@@ -3,8 +3,8 @@ import {
   createRoute,
 } from '@tanstack/react-router';
 
-import { AuthLayout } from '../../../../../layout/auth.layout.tsx';
-import { OAuthCallbackPage } from '../../../../auth/react/pages/oauth-callback.page.tsx';
+import { AuthLayout } from '../../../../../layout/auth.layout';
+import { OAuthCallbackPage } from '../../../../auth/react/pages/oauth-callback.page';
 
 import { LoginPage, RegisterPage } from '#features/auth/react';
 import { DashboardPage } from '#features/dashboard/react';

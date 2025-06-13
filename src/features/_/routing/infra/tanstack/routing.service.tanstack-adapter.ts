@@ -12,7 +12,6 @@ export class RoutingServiceTanstackAdapter extends RoutingServicePort {
     routeTree,
     context: {
       routingService: undefined!,
-      authService: undefined!,
     },
   });
 

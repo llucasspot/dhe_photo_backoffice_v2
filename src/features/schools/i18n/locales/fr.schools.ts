@@ -9,13 +9,35 @@ export const frSchools: SchoolsI18nTranslationsKeys = {
     empty: 'Aucune école trouvée.',
   },
   detail: {
-    title: "Détails de l'école",
-    subtitle: 'Voir les informations détaillées de cette école.',
+    title: "Informations de l'école",
+    subtitle: 'Informations générales sur cette école',
     error: "Erreur lors du chargement des détails de l'école.",
     fields: {
       name: "Nom de l'école",
       currency: 'Devise',
       city: 'Ville',
+    },
+    bankAccounts: {
+      title: 'Comptes bancaires',
+      add: 'Ajouter un compte',
+      editTitle: 'Modifier le compte bancaire',
+      default: 'Par défaut',
+      empty: {
+        title: 'Aucun compte bancaire',
+        description: 'Ajoutez un compte bancaire pour cette école',
+      },
+      fields: {
+        iban: 'IBAN',
+        bic: 'BIC/SWIFT',
+        isDefault: 'Définir comme compte par défaut',
+        isDefaultHelp: 'Ce compte sera utilisé par défaut pour les paiements',
+      },
+      formDescription: 'Renseignez les informations bancaires de ce compte',
+      validation: {
+        required: 'Ce champ est requis',
+        invalidIban: 'IBAN invalide',
+        invalidBic: 'BIC/SWIFT invalide',
+      },
     },
   },
   create: {

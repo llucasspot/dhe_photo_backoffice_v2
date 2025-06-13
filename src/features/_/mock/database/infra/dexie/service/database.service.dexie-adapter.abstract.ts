@@ -167,7 +167,7 @@ export class DatabaseServiceDexieAdapterAbstract
   private buildStoreString<T extends object>(tableDto: Type<T>) {
     const instance = new tableDto();
     const keys = Object.keys(instance) as Array<keyof T>;
-    return keys.join(', ');
+    return ['id', ...keys].join(', ');
   }
 
   private rebuildWithFilters<

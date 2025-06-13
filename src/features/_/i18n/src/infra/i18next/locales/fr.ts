@@ -31,6 +31,8 @@ export const fr: Translations = {
       cancel: 'Annuler',
       select: 'Sélectionner une option',
       back: 'Retour',
+      edit: 'Modifier',
+      save: 'Sauvegarder',
     },
     status: {
       active: 'Actif',

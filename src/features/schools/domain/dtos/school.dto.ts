@@ -1,3 +1,5 @@
+import { BankAccountDto } from './bank-account.dto';
+
 import { OmitType } from '#@nestjs/mapped-types';
 import { plainToInstance } from '#class-transformer';
 import { Dto } from '#core/domain';
@@ -15,6 +17,7 @@ export class SchoolDto extends Dto<SchoolDto> {
   city!: string;
   // relationships
   projects: SchoolProject[] = [];
+  bankAccounts: BankAccountDto[] = [];
 
   get projectIds(): string[] {
     return this.projects.map((project) => project.id);

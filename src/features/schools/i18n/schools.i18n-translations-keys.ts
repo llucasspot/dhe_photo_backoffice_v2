@@ -15,6 +15,28 @@ export type SchoolsI18nTranslationsKeys = {
       currency: string;
       city: string;
     };
+    bankAccounts: {
+      title: string;
+      add: string;
+      editTitle: string;
+      default: string;
+      empty: {
+        title: string;
+        description: string;
+      };
+      fields: {
+        iban: string;
+        bic: string;
+        isDefault: string;
+        isDefaultHelp: string;
+      };
+      formDescription: string;
+      validation: {
+        required: string;
+        invalidIban: string;
+        invalidBic: string;
+      };
+    };
   };
   create: {
     title: string;

@@ -1,8 +1,8 @@
 import { FieldValues, Path } from 'react-hook-form';
 
-import { FormInput } from '../../../../components/form/inputs/form-input.tsx';
-import { FormInputErrorMessage } from '../../../../components/form/inputs/form-input-error-message.tsx';
-import { OAuthButton } from '../components/oauth-button.tsx';
+import { FormInput } from '../../../../components/form/inputs/form-input';
+import { FormInputErrorMessage } from '../../../../components/form/inputs/form-input-error-message';
+import { OAuthButton } from '../components/oauth-button';
 
 import { useAction } from '#action/react';
 import { Form } from '#components';

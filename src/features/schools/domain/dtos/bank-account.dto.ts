@@ -3,7 +3,7 @@ import { IsIBAN, IsNotEmpty, IsString, Matches } from 'class-validator';
 import { plainToInstance, Transform } from '#class-transformer';
 import { Dto } from '#core/domain';
 
-export class BankInfoDto extends Dto<BankInfoDto> {
+export class BankAccountDto extends Dto<BankAccountDto> {
   @IsString()
   id!: string;
 
@@ -19,11 +19,11 @@ export class BankInfoDto extends Dto<BankInfoDto> {
     message: 'settings.bankInfo.validation.bicInvalid',
   })
   @Transform(({ value }) => value?.trim().toUpperCase())
-  bicNumber!: string;
+  bic!: string;
 
-  static build<TBody>(body: TBody[]): BankInfoDto[];
-  static build<TBody>(body: TBody): BankInfoDto;
-  static build(body: unknown): BankInfoDto | BankInfoDto[] {
+  static build<TBody>(body: TBody[]): BankAccountDto[];
+  static build<TBody>(body: TBody): BankAccountDto;
+  static build(body: unknown): BankAccountDto | BankAccountDto[] {
     return plainToInstance(this, body);
   }
 }

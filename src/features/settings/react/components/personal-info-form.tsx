@@ -1,4 +1,4 @@
-import { form } from '../../../../components/form/ui/form.tsx';
+import { form } from '../../../../components/form/ui/form';
 
 import { classNames } from '#core/react';
 import { PersonalInfoDto } from '#features/settings/domain';

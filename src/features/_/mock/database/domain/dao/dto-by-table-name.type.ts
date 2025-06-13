@@ -1,4 +1,5 @@
 import {
+  BankAccount,
   Customer,
   GroupPicture,
   Klass,
@@ -9,6 +10,7 @@ import {
   Project,
   ProjectProduct,
   School,
+  SchoolBankAccount,
   Student,
   StudentPicture,
   Template,
@@ -20,7 +22,12 @@ export type DtoByTableName = {
   pictures: Picture;
   studentPictures: StudentPicture;
   groupPictures: GroupPicture;
+  // bank accounts
+  bankAccounts: BankAccount;
+  // schools
   schools: School;
+  schoolBankAccounts: SchoolBankAccount;
+  // klasses
   klasses: Klass;
   products: Product;
   projectProducts: ProjectProduct;

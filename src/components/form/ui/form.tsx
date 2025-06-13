@@ -1,7 +1,7 @@
 import { FieldValues, Path, useFormContext } from 'react-hook-form';
 
-import { FormInput } from '../inputs/form-input.tsx';
-import { FormInputErrorMessage } from '../inputs/form-input-error-message.tsx';
+import { FormInput } from '../inputs/form-input';
+import { FormInputErrorMessage } from '../inputs/form-input-error-message';
 
 import { Form, useFormOtherContext } from '#components';
 import { classNames } from '#core/react';

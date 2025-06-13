@@ -2,6 +2,7 @@ import { ToastContainer } from 'react-toastify';
 import { Theme } from '@radix-ui/themes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+import { ModalProvider } from './features/schools/react/components/modal/modal.provider';
 import { ReactQueryDevtools } from './ReactQueryDevtools';
 
 import { useService } from '#di/react';
@@ -12,7 +13,9 @@ export const App = () => {
   return (
     <Theme>
       <QueryClientProvider client={queryClient}>
-        <Router />
+        <ModalProvider>
+          <Router />
+        </ModalProvider>
         <ToastContainer
           style={{ zIndex: 10000 }}
           position="bottom-right"
