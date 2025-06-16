@@ -1,4 +1,4 @@
-import { adapter, inject } from '@mygoodstack/di-react/dist';
+import { adapter, inject } from '@mygoodstack/di-react';
 
 import { HttpError } from '../../../../mock/api/domain/http-error';
 import { HttpClient } from '../../../utils/http';

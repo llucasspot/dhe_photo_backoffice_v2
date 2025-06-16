@@ -1,4 +1,4 @@
-import { inject, singleton } from '@mygoodstack/di-react/dist';
+import { inject, singleton } from '@mygoodstack/di-react';
 
 import { UserInfoGetter } from '../getter/user-info.getter';
 

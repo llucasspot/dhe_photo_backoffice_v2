@@ -1,4 +1,4 @@
-import { useInstance } from '@mygoodstack/di-react/dist';
+import { useInstance } from '@mygoodstack/di-react';
 
 import { AvailablePictureFormatName } from '../../domain/dtos/picture-formats';
 import { TemplateInput } from '../components/template.input';

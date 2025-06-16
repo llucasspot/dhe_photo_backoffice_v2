@@ -1,4 +1,4 @@
-import { inject, singleton } from '@mygoodstack/di-react/dist';
+import { inject, singleton } from '@mygoodstack/di-react';
 
 import { LocalGetter } from '#action/domain';
 import { StorageService } from '#storage/domain';

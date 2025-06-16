@@ -1,4 +1,4 @@
-import { inject, singleton } from '@mygoodstack/di-react/dist';
+import { inject, singleton } from '@mygoodstack/di-react';
 
 import { HttpAxiosClient } from './axios/http-axios.client';
 import { AuthorizationBearerGetter } from './authorization-bearer.getter';

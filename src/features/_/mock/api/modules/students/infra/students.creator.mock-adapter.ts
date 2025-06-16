@@ -1,4 +1,4 @@
-import { adapter, inject } from '@mygoodstack/di-react/dist';
+import { adapter, inject } from '@mygoodstack/di-react';
 
 import { StudentsDaoPort } from '../../../../database/modules/students/domain/students-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';

@@ -1,4 +1,4 @@
-import { inject, singleton } from '@mygoodstack/di-react/dist';
+import { inject, singleton } from '@mygoodstack/di-react';
 
 import { Getter } from '#action/domain';
 import { AuthProviderPort, AuthUser } from '#features/auth/domain';

@@ -1,4 +1,4 @@
-import { adapter, inject } from '@mygoodstack/di-react/dist';
+import { adapter, inject } from '@mygoodstack/di-react';
 
 import { Finder } from '../../../../database/domain';
 import { PhotographersDaoPort } from '../../../../database/modules/auth/domain/photographers-dao.port';

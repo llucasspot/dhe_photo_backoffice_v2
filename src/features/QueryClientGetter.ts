@@ -1,4 +1,4 @@
-import { singleton } from '@mygoodstack/di-react/dist';
+import { singleton } from '@mygoodstack/di-react';
 import { QueryClient } from '@tanstack/react-query';
 
 import { HttpError } from './_/mock/api/domain/http-error';

@@ -1,4 +1,4 @@
-import { adapter } from '@mygoodstack/di-react/dist';
+import { adapter } from '@mygoodstack/di-react';
 
 import { DtoByTableName } from '../../../../../domain';
 import { DaoRunTime } from '../../../../../infra/run-time';

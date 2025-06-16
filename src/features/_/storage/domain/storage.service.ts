@@ -1,4 +1,4 @@
-import { inject, singleton } from '@mygoodstack/di-react/dist';
+import { inject, singleton } from '@mygoodstack/di-react';
 
 import { StorageItemSerializer } from './storage-item-serializers/storage-item-serializer.abstract';
 import { StringStorageItemSerializer } from './storage-item-serializers/string-storage-item-serializer';

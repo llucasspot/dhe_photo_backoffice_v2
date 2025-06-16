@@ -1,4 +1,4 @@
-import { Module } from '@mygoodstack/di-react/dist';
+import { Module } from '@mygoodstack/di-react';
 
 import { FileStudentsServiceMockAdapter } from './infra/file-students.service.mock-adapter';
 import { FilesServiceMockAdapter } from './infra/files.service.mock-adapter';

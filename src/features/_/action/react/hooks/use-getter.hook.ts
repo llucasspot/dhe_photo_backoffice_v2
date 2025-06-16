@@ -1,4 +1,4 @@
-import { useInstance } from '@mygoodstack/di-react/dist';
+import { useInstance } from '@mygoodstack/di-react';
 import { useQuery } from '@tanstack/react-query';
 
 import { GetterI } from '#action/domain';

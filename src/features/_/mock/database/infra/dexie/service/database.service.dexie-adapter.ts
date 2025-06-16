@@ -1,4 +1,4 @@
-import { singleton } from '@mygoodstack/di-react/dist';
+import { singleton } from '@mygoodstack/di-react';
 import Dexie, { EntityTable } from 'dexie';
 
 import { DatabaseServicePort } from '../../../domain';

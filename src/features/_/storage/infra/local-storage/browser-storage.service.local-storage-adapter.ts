@@ -1,4 +1,4 @@
-import { adapter } from '@mygoodstack/di-react/dist';
+import { adapter } from '@mygoodstack/di-react';
 
 import { BrowserStorageServicePort } from '../../domain/browser-storage.service.port';
 

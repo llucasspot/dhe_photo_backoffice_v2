@@ -1,4 +1,4 @@
-import { Module } from '@mygoodstack/di-react/dist';
+import { Module } from '@mygoodstack/di-react';
 
 import { KlassesServiceMockAdapter } from './infra/klasses.service.mock-adapter';
 

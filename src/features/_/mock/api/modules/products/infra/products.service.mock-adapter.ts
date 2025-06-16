@@ -1,4 +1,4 @@
-import { adapter, inject } from '@mygoodstack/di-react/dist';
+import { adapter, inject } from '@mygoodstack/di-react';
 
 import { ProductsDaoPort } from '../../../../database/modules/products/domain/products-dao.port';
 import { CoordProductTemplatesDaoPort } from '../../../../database/modules/templates/domain/coord-product-templates-dao.port';

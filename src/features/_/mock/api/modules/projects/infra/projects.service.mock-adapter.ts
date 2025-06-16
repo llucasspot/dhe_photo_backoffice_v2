@@ -1,4 +1,4 @@
-import { adapter, inject } from '@mygoodstack/di-react/dist';
+import { adapter, inject } from '@mygoodstack/di-react';
 
 import { Finder, Populator } from '../../../../database/domain';
 import { ProjectProductsDaoPort } from '../../../../database/modules/products/domain/project-products-dao.port';

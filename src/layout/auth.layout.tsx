@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useInstance } from '@mygoodstack/di-react/dist';
+import { useInstance } from '@mygoodstack/di-react';
 import { Outlet } from '@tanstack/react-router';
 
 import { UserInfoGetter } from '../features/auth/use-cases/getter/user-info.getter';

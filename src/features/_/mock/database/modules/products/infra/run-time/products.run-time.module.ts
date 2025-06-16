@@ -1,4 +1,4 @@
-import { Module } from '@mygoodstack/di-react/dist';
+import { Module } from '@mygoodstack/di-react';
 
 import { ProductsDaoArrayAdapter } from './adapters/products-dao.array-adapter';
 

@@ -1,4 +1,4 @@
-import { adapter, inject } from '@mygoodstack/di-react/dist';
+import { adapter, inject } from '@mygoodstack/di-react';
 
 import { Finder } from '../../../../database/domain';
 import { FileDataDexieDao } from '../../../../database/infra';

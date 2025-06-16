@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { useInstance } from '@mygoodstack/di-react/dist';
+import { useInstance } from '@mygoodstack/di-react';
 
 import { I18nServicePort } from '#i18n/domain';
 

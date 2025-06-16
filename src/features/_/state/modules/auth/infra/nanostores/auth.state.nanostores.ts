@@ -1,4 +1,4 @@
-import { adapter } from '@mygoodstack/di-react/dist';
+import { adapter } from '@mygoodstack/di-react';
 
 import { ForNanostoresStateValue } from '../../../../infra/nanostores/for-nanostores-state-value';
 

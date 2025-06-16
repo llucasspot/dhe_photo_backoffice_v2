@@ -1,5 +1,5 @@
 import { initReactI18next } from 'react-i18next';
-import { adapter } from '@mygoodstack/di-react/dist';
+import { adapter } from '@mygoodstack/di-react';
 import i18next, { Resource } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 

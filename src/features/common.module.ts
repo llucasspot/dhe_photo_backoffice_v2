@@ -1,4 +1,4 @@
-import { Module } from '@mygoodstack/di-react/dist';
+import { Module } from '@mygoodstack/di-react';
 
 import { I18nModule } from './_/i18n/i18n.module';
 import { QueryClientGetter } from './QueryClientGetter';

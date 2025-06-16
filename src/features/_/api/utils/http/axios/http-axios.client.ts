@@ -1,4 +1,4 @@
-import { singleton } from '@mygoodstack/di-react/dist';
+import { singleton } from '@mygoodstack/di-react';
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import { logDataRequestMiddleware } from './middlewares/log-data-request-middleware';

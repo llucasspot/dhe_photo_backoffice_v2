@@ -1,4 +1,4 @@
-import { singleton } from '@mygoodstack/di-react/dist';
+import { singleton } from '@mygoodstack/di-react';
 
 import { CanvasHandler } from './handlers/canvas.handler';
 import { FindNearestPositionHandler } from './handlers/find-nearest-position.handler';

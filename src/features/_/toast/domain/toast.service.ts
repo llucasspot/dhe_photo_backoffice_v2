@@ -1,5 +1,5 @@
 import { ToastOptions } from 'react-toastify';
-import { inject, singleton } from '@mygoodstack/di-react/dist';
+import { inject, singleton } from '@mygoodstack/di-react';
 
 import { ToastServicePort } from './toast.service.port';
 

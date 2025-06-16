@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useInstance } from '@mygoodstack/di-react/dist';
+import { useInstance } from '@mygoodstack/di-react';
 
 import { PictureControllerServicePort } from '#features/files/domain';
 

@@ -1,4 +1,4 @@
-import { Module } from '@mygoodstack/di-react/dist';
+import { Module } from '@mygoodstack/di-react';
 
 import { AuthDatabaseModule } from './auth/auth.database.module';
 import { KlassesDatabaseModule } from './klasses/klasses.database.module';

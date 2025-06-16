@@ -1,4 +1,4 @@
-import { useInstance } from '@mygoodstack/di-react/dist';
+import { useInstance } from '@mygoodstack/di-react';
 import { useParams } from '@tanstack/react-router';
 import { match } from 'ts-pattern';
 

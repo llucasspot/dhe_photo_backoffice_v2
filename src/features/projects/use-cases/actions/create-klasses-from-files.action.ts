@@ -1,5 +1,5 @@
 import { FileRejection } from 'react-dropzone';
-import { inject, singleton } from '@mygoodstack/di-react/dist';
+import { inject, singleton } from '@mygoodstack/di-react';
 
 import { projectsKeys } from '../getters';
 

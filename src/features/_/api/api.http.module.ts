@@ -1,4 +1,4 @@
-import { Module } from '@mygoodstack/di-react/dist';
+import { Module } from '@mygoodstack/di-react';
 
 import { AuthHttpApiModule } from './modules/auth/auth.http.api.module';
 import { ProjectsHttpApiModule } from './modules/projects/projects.http.api.module';

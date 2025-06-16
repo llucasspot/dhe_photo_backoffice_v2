@@ -1,5 +1,5 @@
 import { toast, ToastOptions } from 'react-toastify';
-import { adapter, inject } from '@mygoodstack/di-react/dist';
+import { adapter, inject } from '@mygoodstack/di-react';
 
 import { ToastServicePort } from '../domain';
 

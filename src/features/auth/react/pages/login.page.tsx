@@ -1,5 +1,5 @@
 import { FieldValues, Path } from 'react-hook-form';
-import { useInstance } from '@mygoodstack/di-react/dist';
+import { useInstance } from '@mygoodstack/di-react';
 
 import { FormInput } from '../../../../components/form/inputs/form-input';
 import { FormInputErrorMessage } from '../../../../components/form/inputs/form-input-error-message';

@@ -1,6 +1,6 @@
 import { ToastContainer } from 'react-toastify';
 import { containerByEnv } from '@mygoodstack/di-core';
-import { DIProvider, useInstance } from '@mygoodstack/di-react/dist';
+import { DIProvider, useInstance } from '@mygoodstack/di-react';
 import { Theme } from '@radix-ui/themes';
 import { QueryClientProvider } from '@tanstack/react-query';
 

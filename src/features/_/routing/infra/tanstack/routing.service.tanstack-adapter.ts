@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { adapter } from '@mygoodstack/di-react/dist';
+import { adapter } from '@mygoodstack/di-react';
 import { createRouter, useLocation } from '@tanstack/react-router';
 
 import { routeTree } from './route-tree';

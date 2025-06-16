@@ -1,4 +1,4 @@
-import { Module } from '@mygoodstack/di-react/dist';
+import { Module } from '@mygoodstack/di-react';
 
 import { ProjectsServiceApiAdapter } from './infra/projects.service.api-adapter';
 

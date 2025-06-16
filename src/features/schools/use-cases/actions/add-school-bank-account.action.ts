@@ -1,4 +1,4 @@
-import { inject, singleton } from '@mygoodstack/di-react/dist';
+import { inject, singleton } from '@mygoodstack/di-react';
 
 import { AddSchoolBankAccountBody } from '../../domain/dtos/bodies/add-school-bank-account.body';
 import { schoolsKeys } from '../getters';

@@ -1,4 +1,4 @@
-import { useInstance } from '@mygoodstack/di-react/dist';
+import { useInstance } from '@mygoodstack/di-react';
 
 import { useAction } from '#action/react';
 import { Button, Form, FormButton, Input, Select } from '#components';

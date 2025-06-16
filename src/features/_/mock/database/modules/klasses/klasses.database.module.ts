@@ -1,4 +1,4 @@
-import { Module } from '@mygoodstack/di-react/dist';
+import { Module } from '@mygoodstack/di-react';
 
 import { KlassesDexieModule } from './infra/dexie/klasses.dexie.module';
 

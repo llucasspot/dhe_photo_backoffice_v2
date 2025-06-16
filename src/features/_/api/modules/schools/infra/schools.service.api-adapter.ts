@@ -1,4 +1,4 @@
-import { adapter, inject } from '@mygoodstack/di-react/dist';
+import { adapter, inject } from '@mygoodstack/di-react';
 
 import { AddSchoolBankAccountBody } from '../../../../../schools/domain/dtos/bodies/add-school-bank-account.body';
 import { HttpClient } from '../../../utils/http';

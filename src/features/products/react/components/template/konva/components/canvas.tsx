@@ -1,6 +1,6 @@
 import { ComponentProps, RefObject, useRef } from 'react';
 import { Layer, Rect, Stage, Transformer } from 'react-konva';
-import { useInstance } from '@mygoodstack/di-react/dist';
+import { useInstance } from '@mygoodstack/di-react';
 import Konva from 'konva';
 import { KonvaEventObject } from 'konva/lib/Node';
 import { Box } from 'konva/lib/shapes/Transformer';
