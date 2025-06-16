@@ -1,16 +1,17 @@
+import { adapter, inject } from '@mygoodstack/di-react/dist';
+
 import { Finder, Populator } from '../../../../database/domain';
 import { StudentsDaoPort } from '../../../../database/modules/students/domain/students-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
 import { HttpError } from '../../../domain/http-error';
 
-import { adapter, inject } from '#di';
 import { KlassDto } from '#features/klasses/domain';
 import {
   KlassStudentsGetterControllerServicePort,
   StudentDto,
 } from '#features/students/domain';
 
-@adapter(KlassStudentsGetterControllerServicePort, ['mock'])
+@adapter(KlassStudentsGetterControllerServicePort, 'mock')
 export class KlassStudentsServiceMockAdapter
   extends ForMockControllerService
   implements KlassStudentsGetterControllerServicePort

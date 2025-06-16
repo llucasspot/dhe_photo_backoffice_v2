@@ -1,9 +1,10 @@
+import { useInstance } from '@mygoodstack/di-react/dist';
+
 import { AvailablePictureFormatName } from '../../domain/dtos/picture-formats';
 import { TemplateInput } from '../components/template.input';
 
 import { useAction } from '#action/react';
 import { Button, Form, FormButton, Input } from '#components';
-import { useService } from '#di/react';
 import { CreateProductBody } from '#features/products/domain';
 import { CreateProductAction } from '#features/products/use-cases';
 import { useI18n } from '#i18n/react';
@@ -23,7 +24,7 @@ class Dim {
 const defaultDim = new Dim('18x24');
 
 export const CreateProductPage = () => {
-  const routingService = useService(RoutingServicePort);
+  const routingService = useInstance(RoutingServicePort);
   const { t } = useI18n();
   const createProduct = useAction(CreateProductAction);
 

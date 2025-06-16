@@ -1,3 +1,5 @@
+import { Module } from '@mygoodstack/di-react/dist';
+
 import { DatabaseModule } from '../../database/modules/database.module';
 
 import { AuthApiMockModule } from './auth/auth.api.mock.module';
@@ -8,10 +10,8 @@ import { ProjectsMockApiModule } from './projects/projects.mock.api.module';
 import { SchoolsMockApiModule } from './schools/schools.mock.api.module';
 import { StudentsMockApiModule } from './students/students.mock.api.module';
 
-import { Module } from '#di';
-
 @Module({
-  imports: [
+  providers: [
     DatabaseModule,
     AuthApiMockModule,
     KlassesMockApiModule,

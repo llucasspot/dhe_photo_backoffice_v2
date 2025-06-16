@@ -1,7 +1,8 @@
+import { adapter, inject } from '@mygoodstack/di-react/dist';
+
 import { HttpError } from '../../../../mock/api/domain/http-error';
 import { HttpClient } from '../../../utils/http';
 
-import { adapter, inject } from '#di';
 import {
   AddProductBody,
   CreateProjectBody,
@@ -9,7 +10,7 @@ import {
   ProjectsControllerServicePort,
 } from '#features/projects/domain';
 
-@adapter(ProjectsControllerServicePort, ['development'])
+@adapter(ProjectsControllerServicePort)
 export class ProjectsServiceApiAdapter
   implements ProjectsControllerServicePort
 {

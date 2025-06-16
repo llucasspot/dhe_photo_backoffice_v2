@@ -1,18 +1,32 @@
 import { ToastContainer } from 'react-toastify';
+import { containerByEnv } from '@mygoodstack/di-core';
+import { DIProvider, useInstance } from '@mygoodstack/di-react/dist';
 import { Theme } from '@radix-ui/themes';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 
+import { QueryClientGetter } from './features/QueryClientGetter';
 import { ModalProvider } from './features/schools/react/components/modal/modal.provider';
 import { ReactQueryDevtools } from './ReactQueryDevtools';
 
-import { useService } from '#di/react';
 import { Router } from '#routing/react';
 
 export const App = () => {
-  const queryClient = useService(QueryClient);
+  const nodeEnv = process.env.NODE_ENV as keyof typeof containerByEnv;
+  console.log(`process.env.NODE_ENV : ${nodeEnv}`);
+
+  const container = containerByEnv[nodeEnv];
+  return (
+    <DIProvider container={container}>
+      <AppContent />
+    </DIProvider>
+  );
+};
+
+const AppContent = () => {
+  const queryClientGetter = useInstance(QueryClientGetter);
   return (
     <Theme>
-      <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClientGetter.get()}>
         <ModalProvider>
           <Router />
         </ModalProvider>

@@ -1,10 +1,10 @@
 import { FileRejection } from 'react-dropzone';
+import { inject, singleton } from '@mygoodstack/di-react/dist';
 
 import { projectsKeys } from '../getters';
 
 import { Action } from '#action/domain';
 import { CacheServicePort } from '#cache/domain';
-import { inject, singleton } from '#di';
 import { KlassDropzoneHandlerService } from '#features/projects/react';
 
 type Body = {

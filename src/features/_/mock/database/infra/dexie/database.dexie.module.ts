@@ -1,6 +1,6 @@
-import { DatabaseServiceDexieAdapter } from './service';
+import { Module } from '@mygoodstack/di-react/dist';
 
-import { Module } from '#di';
+import { DatabaseServiceDexieAdapter } from './service';
 
 @Module({
   providers: [DatabaseServiceDexieAdapter],

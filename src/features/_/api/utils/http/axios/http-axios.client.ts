@@ -1,3 +1,4 @@
+import { singleton } from '@mygoodstack/di-react/dist';
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import { logDataRequestMiddleware } from './middlewares/log-data-request-middleware';
@@ -9,7 +10,6 @@ import { AxiosInstanceBuilder } from './axios-instance.builder';
 
 import { LocalGetter } from '#action/domain';
 import { LoggerI } from '#core/domain';
-import { singleton } from '#di';
 
 @singleton()
 export class HttpAxiosClient {

@@ -1,3 +1,4 @@
+import { useInstance } from '@mygoodstack/di-react/dist';
 import { useParams } from '@tanstack/react-router';
 import { match } from 'ts-pattern';
 
@@ -8,7 +9,6 @@ import {
 
 import { useAction, useGetter } from '#action/react';
 import { BlobViewer } from '#components';
-import { useService } from '#di/react';
 import { KlassDto } from '#features/klasses/domain';
 import { CreateGroupPictureFromFilesAction } from '#features/projects/use-cases';
 import { KlassGetter } from '#features/projects/use-cases';
@@ -43,7 +43,7 @@ const KlassDetailContent = ({
   klass: Omit<KlassDto, 'project'>;
 }) => {
   const { t } = useI18n();
-  const klassPictureDropzoneHandlerService = useService(
+  const klassPictureDropzoneHandlerService = useInstance(
     KlassPictureDropzoneHandlerService,
   );
   const createGroupPictureFromFiles = useAction(

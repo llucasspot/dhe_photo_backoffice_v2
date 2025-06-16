@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useInstance } from '@mygoodstack/di-react/dist';
 
 import { UserInfoGetter } from '../features/auth/use-cases/getter/user-info.getter';
 
@@ -6,7 +7,6 @@ import { OutletLayout } from './outlet.layout';
 
 import { useAction, useGetter } from '#action/react';
 import { Sidebar } from '#components';
-import { useService } from '#di/react';
 import { SignOutAction } from '#features/auth/use-cases';
 import { useI18n } from '#i18n/react';
 import { RoutingServicePort } from '#routing/domain';
@@ -14,7 +14,7 @@ import { Link } from '#routing/react';
 
 export const RootLayout = () => {
   const { t, changeLanguage, currentLanguage } = useI18n();
-  const routingService = useService(RoutingServicePort);
+  const routingService = useInstance(RoutingServicePort);
 
   const { data, isLoading, isError } = useGetter(UserInfoGetter);
   const isAuthenticated = data!;

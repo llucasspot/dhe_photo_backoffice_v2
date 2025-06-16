@@ -1,4 +1,5 @@
 import { FieldValues, Path } from 'react-hook-form';
+import { useInstance } from '@mygoodstack/di-react/dist';
 
 import { FormInput } from '../../../../components/form/inputs/form-input';
 import { FormInputErrorMessage } from '../../../../components/form/inputs/form-input-error-message';
@@ -6,7 +7,6 @@ import { OAuthButton } from '../components/oauth-button';
 
 import { useAction } from '#action/react';
 import { Form } from '#components';
-import { useService } from '#di/react';
 import { LoginBody } from '#features/auth/domain';
 import { SignInAction } from '#features/auth/use-cases';
 import { useI18n } from '#i18n/react';
@@ -65,7 +65,7 @@ const Input = <TFormBody extends FieldValues>({
 
 const SignInForm = () => {
   const { t } = useI18n();
-  const routingService = useService(RoutingServicePort);
+  const routingService = useInstance(RoutingServicePort);
   const signInAction = useAction(SignInAction);
 
   const onSubmit = async (data: LoginBody) => {

@@ -1,8 +1,8 @@
+import { inject, singleton } from '@mygoodstack/di-react/dist';
+
 import { StorageItemSerializer } from './storage-item-serializers/storage-item-serializer.abstract';
 import { StringStorageItemSerializer } from './storage-item-serializers/string-storage-item-serializer';
 import { BrowserStorageServicePort } from './browser-storage.service.port';
-
-import { inject, singleton } from '#di';
 
 export class StorageItem<TData, TDefaultValue> {
   constructor(

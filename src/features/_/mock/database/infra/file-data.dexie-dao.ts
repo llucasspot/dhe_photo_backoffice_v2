@@ -1,6 +1,6 @@
-import { DaoDexie, DatabaseServiceDexieAdapter } from './dexie';
+import { inject, singleton } from '@mygoodstack/di-react/dist';
 
-import { inject, singleton } from '#di';
+import { DaoDexie, DatabaseServiceDexieAdapter } from './dexie';
 
 @singleton()
 export class FileDataDexieDao extends DaoDexie<'dexieFileData'> {

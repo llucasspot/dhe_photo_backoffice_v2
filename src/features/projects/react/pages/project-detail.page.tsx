@@ -1,3 +1,4 @@
+import { useInstance } from '@mygoodstack/di-react/dist';
 import { useParams } from '@tanstack/react-router';
 import { match } from 'ts-pattern';
 
@@ -5,7 +6,6 @@ import { FolderDropzone, KlassDropzoneHandlerService } from '../components';
 import { ProjectProducts } from '../components/products/project-products';
 
 import { useAction, useGetter } from '#action/react';
-import { useService } from '#di/react';
 import { KlassGrid } from '#features/klasses/react';
 import { ProjectDto } from '#features/projects/domain';
 import { CreateKlassesFromFilesAction } from '#features/projects/use-cases';
@@ -37,7 +37,7 @@ const ProjectDetailError = ({ error }: { error: Error | null }) => {
 
 const ProjectDetailContent = ({ project }: { project: ProjectDto }) => {
   const { t } = useI18n();
-  const folderDropzoneService = useService(KlassDropzoneHandlerService);
+  const folderDropzoneService = useInstance(KlassDropzoneHandlerService);
   const createKlassesFromFiles = useAction(CreateKlassesFromFilesAction);
 
   const projectId = project.id;

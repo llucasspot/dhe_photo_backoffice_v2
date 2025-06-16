@@ -1,6 +1,6 @@
-import { StudentsDaoArrayAdapter } from './adapters/students-dao.array-adapter';
+import { Module } from '@mygoodstack/di-react/dist';
 
-import { Module } from '#di';
+import { StudentsDaoArrayAdapter } from './adapters/students-dao.array-adapter';
 
 @Module({
   providers: [StudentsDaoArrayAdapter],

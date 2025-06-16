@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { adapter } from '@mygoodstack/di-react/dist';
 import { createRouter, useLocation } from '@tanstack/react-router';
 
 import { routeTree } from './route-tree';
 
-import { adapter } from '#di';
 import { RoutingServicePort } from '#routing/domain';
 
 @adapter(RoutingServicePort)

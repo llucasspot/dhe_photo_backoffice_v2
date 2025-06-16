@@ -1,9 +1,10 @@
+import { adapter, inject } from '@mygoodstack/di-react/dist';
+
 import { Finder } from '../../../../database/domain';
 import { PhotographersDaoPort } from '../../../../database/modules/auth/domain/photographers-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
 import { HttpError } from '../../../domain/http-error';
 
-import { adapter, inject } from '#di';
 import {
   AuthProviderPort,
   AuthResponse,
@@ -13,7 +14,7 @@ import {
 } from '#features/auth/domain';
 import { StorageService } from '#storage/domain';
 
-@adapter(AuthProviderPort, ['mock'])
+@adapter(AuthProviderPort, 'mock')
 export class AuthProviderMockAdapter
   extends ForMockControllerService
   implements AuthProviderPort

@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next';
+import { useInstance } from '@mygoodstack/di-react/dist';
 
-import { useService } from '#di/react';
 import { I18nServicePort } from '#i18n/domain';
 
 export const useI18n = () => {
-  // const i18nService = useService(I18nServicePort);
+  // const i18nService = useInstance(I18nServicePort);
   // const [currentLanguage, setCurrentLanguage] = useState(
   //     i18nService.getCurrentLanguage(),
   // );
@@ -28,7 +28,7 @@ export const useI18n = () => {
   //   [i18nService],
   // );
 
-  useService(I18nServicePort);
+  useInstance(I18nServicePort);
   const {
     t,
     i18n: { changeLanguage, language: currentLanguage, languages },

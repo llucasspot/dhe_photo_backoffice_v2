@@ -1,9 +1,10 @@
+import { Module } from '@mygoodstack/di-react/dist';
+
 import { ApiHttpModule } from './api.http.module';
 
-import { Module } from '#di';
 import { ApiMockModule } from '#mock';
 
 @Module({
-  imports: [ApiMockModule, ApiHttpModule],
+  providers: [ApiMockModule, ApiHttpModule],
 })
 export class ApiModule {}

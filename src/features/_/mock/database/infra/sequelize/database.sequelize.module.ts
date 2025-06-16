@@ -1,4 +1,4 @@
-import { Module } from '#di';
+import { Module } from '@mygoodstack/di-react/dist';
 
 @Module({
   providers: [],

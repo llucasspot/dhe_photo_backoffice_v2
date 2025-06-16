@@ -1,6 +1,6 @@
-import { KlassesDaoArrayAdapter } from './adapters/klasses-dao.array-adapter';
+import { Module } from '@mygoodstack/di-react/dist';
 
-import { Module } from '#di';
+import { KlassesDaoArrayAdapter } from './adapters/klasses-dao.array-adapter';
 
 @Module({
   providers: [KlassesDaoArrayAdapter],

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useInstance } from '@mygoodstack/di-react/dist';
 
-import { useService } from '#di/react';
 import { PictureControllerServicePort } from '#features/files/domain';
 
 type BlobViewerProps = {
@@ -12,7 +12,7 @@ export const BlobViewer = ({ pictureId }: BlobViewerProps) => {
   const [content, setContent] = useState<string | null>(null);
   const [url, setUrl] = useState<string | null>(null);
 
-  const pictureControllerService = useService(PictureControllerServicePort);
+  const pictureControllerService = useInstance(PictureControllerServicePort);
 
   useEffect(() => {
     if (!pictureId) {

@@ -1,6 +1,7 @@
+import { adapter, inject } from '@mygoodstack/di-react/dist';
+
 import { HttpClient } from '../../_/api/utils/http';
 
-import { adapter, inject } from '#di';
 import {
   AuthProviderPort,
   AuthResponse,
@@ -9,7 +10,7 @@ import {
   RegisterBody,
 } from '#features/auth/domain';
 
-@adapter(AuthProviderPort, ['development'])
+@adapter(AuthProviderPort)
 export class AuthProviderApiAdapter implements AuthProviderPort {
   constructor(
     @inject(HttpClient)

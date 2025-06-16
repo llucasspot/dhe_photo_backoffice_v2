@@ -1,8 +1,8 @@
+import { Module } from '@mygoodstack/di-react/dist';
+
 import { AuthStateModule } from './auth/auth.state.module';
 
-import { Module } from '#di';
-
 @Module({
-  imports: [AuthStateModule],
+  providers: [AuthStateModule],
 })
 export class StateModule {}

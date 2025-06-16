@@ -1,8 +1,8 @@
 import { FileRejection } from 'react-dropzone';
+import { inject, singleton } from '@mygoodstack/di-react/dist';
 
 import { ForDropzone } from './for-dropzone';
 
-import { inject, singleton } from '#di';
 import { GroupPicturesCreatorControllerServicePort } from '#features/klasses/domain';
 
 @singleton()

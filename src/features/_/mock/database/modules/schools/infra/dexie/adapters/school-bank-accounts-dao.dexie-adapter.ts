@@ -1,12 +1,12 @@
+import { adapter, inject } from '@mygoodstack/di-react/dist';
+
 import {
   DaoDexie,
   DatabaseServiceDexieAdapter,
 } from '../../../../../infra/dexie';
 import { SchoolBankAccountsDaoPort } from '../../../domain/school-bank-accounts-dao.port';
 
-import { adapter, inject } from '#di';
-
-@adapter(SchoolBankAccountsDaoPort, ['mock'])
+@adapter(SchoolBankAccountsDaoPort, 'mock')
 export class SchoolBankAccountsDaoDexieAdapter
   extends DaoDexie<'schoolBankAccounts'>
   implements SchoolBankAccountsDaoPort

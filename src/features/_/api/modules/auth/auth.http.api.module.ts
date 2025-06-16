@@ -1,6 +1,6 @@
-import { AuthProviderApiAdapter } from '../../../../auth/secondary-adapter/auth-provider.api-adapter';
+import { Module } from '@mygoodstack/di-react/dist';
 
-import { Module } from '#di';
+import { AuthProviderApiAdapter } from '../../../../auth/secondary-adapter/auth-provider.api-adapter';
 
 @Module({
   providers: [AuthProviderApiAdapter],

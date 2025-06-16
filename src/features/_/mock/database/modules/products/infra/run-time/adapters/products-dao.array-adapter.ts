@@ -1,10 +1,10 @@
+import { adapter } from '@mygoodstack/di-react/dist';
+
 import { DtoByTableName } from '../../../../../domain';
 import { DaoRunTime } from '../../../../../infra/run-time';
 import { ProductsDaoPort } from '../../../domain/products-dao.port';
 
-import { adapter } from '#di';
-
-@adapter(ProductsDaoPort, ['mock'])
+@adapter(ProductsDaoPort, 'mock')
 export class ProductsDaoArrayAdapter
   extends DaoRunTime<DtoByTableName, 'products'>
   implements ProductsDaoPort

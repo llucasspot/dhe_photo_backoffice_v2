@@ -1,3 +1,5 @@
+import { singleton } from '@mygoodstack/di-react/dist';
+
 import { CanvasHandler } from './handlers/canvas.handler';
 import { FindNearestPositionHandler } from './handlers/find-nearest-position.handler';
 import { GridSnapHandler } from './handlers/grid-snap.handler';
@@ -6,7 +8,6 @@ import { MagneticHandler } from './handlers/magnetic.handler';
 
 import { plainToInstance } from '#class-transformer';
 import { Dto } from '#core/domain';
-import { singleton } from '#di';
 import { CanvasConfig, LayerConfig } from '#features/products/react';
 
 export class LayerNode extends Dto<LayerNode> {

@@ -1,6 +1,6 @@
-import { ProjectsServiceApiAdapter } from './infra/projects.service.api-adapter';
+import { Module } from '@mygoodstack/di-react/dist';
 
-import { Module } from '#di';
+import { ProjectsServiceApiAdapter } from './infra/projects.service.api-adapter';
 
 @Module({
   providers: [ProjectsServiceApiAdapter],

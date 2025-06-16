@@ -1,5 +1,6 @@
 import { ComponentProps, RefObject, useRef } from 'react';
 import { Layer, Rect, Stage, Transformer } from 'react-konva';
+import { useInstance } from '@mygoodstack/di-react/dist';
 import Konva from 'konva';
 import { KonvaEventObject } from 'konva/lib/Node';
 import { Box } from 'konva/lib/shapes/Transformer';
@@ -10,7 +11,6 @@ import { LayerConfig } from '../../types';
 import { CanvasService, LayerNode } from './canvas-service/canvas.service';
 
 import { StateItemsController } from '#core/react';
-import { useService } from '#di/react';
 
 export function Canvas() {
   const { layers, selectedLayerId, canvasConfig } = useTemplate();
@@ -55,7 +55,7 @@ function KonvaLayer({
   state: 'selected' | 'unselected';
   onClick: () => void;
 }) {
-  const canvasService = useService(CanvasService);
+  const canvasService = useInstance(CanvasService);
 
   const { canvasConfig, layers } = useTemplate();
   const shapeRef = useRef<Konva.Rect>(null);

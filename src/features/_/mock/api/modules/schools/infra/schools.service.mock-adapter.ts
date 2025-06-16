@@ -1,3 +1,5 @@
+import { adapter, inject } from '@mygoodstack/di-react/dist';
+
 import { AddSchoolBankAccountBody } from '../../../../../../schools/domain/dtos/bodies/add-school-bank-account.body';
 import { Finder, Populator } from '../../../../database/domain';
 import { BankAccountsDaoPort } from '../../../../database/modules/schools/domain/bank-accounts-dao.port';
@@ -7,7 +9,6 @@ import { ForMockControllerService } from '../../../domain/for-mock-controller-se
 import { HttpError } from '../../../domain/http-error';
 
 import { LogAction } from '#core/domain';
-import { adapter, inject } from '#di';
 import {
   BankAccountDto,
   CreateSchoolBody,
@@ -15,7 +16,7 @@ import {
   SchoolsControllerServicePort,
 } from '#features/schools/domain';
 
-@adapter(SchoolsControllerServicePort, ['mock'])
+@adapter(SchoolsControllerServicePort, 'mock')
 export class SchoolsServiceMockAdapter
   extends ForMockControllerService
   implements SchoolsControllerServicePort

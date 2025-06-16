@@ -1,3 +1,5 @@
+import { adapter, inject } from '@mygoodstack/di-react/dist';
+
 import { ProductsDaoPort } from '../../../../database/modules/products/domain/products-dao.port';
 import { CoordProductTemplatesDaoPort } from '../../../../database/modules/templates/domain/coord-product-templates-dao.port';
 import { TemplateLayersDaoPort } from '../../../../database/modules/templates/domain/template-layers-dao.port';
@@ -6,14 +8,13 @@ import { ForMockControllerService } from '../../../domain/for-mock-controller-se
 import { HttpError } from '../../../domain/http-error';
 
 import { LogAction } from '#core/domain';
-import { adapter, inject } from '#di';
 import {
   CreateProductBody,
   ProductDto,
   ProductsControllerServicePort,
 } from '#features/products/domain';
 
-@adapter(ProductsControllerServicePort, ['mock'])
+@adapter(ProductsControllerServicePort, 'mock')
 export class ProductsServiceMockAdapter
   extends ForMockControllerService
   implements ProductsControllerServicePort

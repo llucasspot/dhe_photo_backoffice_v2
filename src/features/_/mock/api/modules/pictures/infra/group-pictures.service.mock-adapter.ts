@@ -1,7 +1,8 @@
+import { adapter, inject } from '@mygoodstack/di-react/dist';
+
 import { GroupPicturesDaoPort } from '../../../../database/modules/pictures/domain/group-pictures-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
 
-import { adapter, inject } from '#di';
 import {
   FilesCreatorControllerServicePort,
   GroupPictureDto,
@@ -12,7 +13,7 @@ import {
   KlassesControllerServicePort,
 } from '#features/klasses/domain';
 
-@adapter(GroupPicturesCreatorControllerServicePort, ['mock'])
+@adapter(GroupPicturesCreatorControllerServicePort, 'mock')
 export class GroupPicturesServiceMockAdapter
   extends ForMockControllerService
   implements GroupPicturesCreatorControllerServicePort

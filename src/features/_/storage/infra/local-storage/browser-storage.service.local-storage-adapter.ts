@@ -1,6 +1,6 @@
-import { BrowserStorageServicePort } from '../../domain/browser-storage.service.port';
+import { adapter } from '@mygoodstack/di-react/dist';
 
-import { adapter } from '#di';
+import { BrowserStorageServicePort } from '../../domain/browser-storage.service.port';
 
 @adapter(BrowserStorageServicePort)
 export class BrowserStorageServiceLocalStorageAdapter

@@ -1,11 +1,10 @@
+import { Module } from '@mygoodstack/di-react/dist';
+
 import { I18nModule } from '../i18n/i18n.module';
 
 import { ToastServiceToastifyAdapter } from './infra';
 
-import { Module } from '#di';
-
 @Module({
-  imports: [I18nModule],
-  providers: [ToastServiceToastifyAdapter],
+  providers: [I18nModule, ToastServiceToastifyAdapter],
 })
 export class ToastModule {}

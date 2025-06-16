@@ -1,10 +1,11 @@
+import { adapter, inject } from '@mygoodstack/di-react/dist';
+
 import { Finder, Populator } from '../../../../database/domain';
 import { KlassesDaoPort } from '../../../../database/modules/klasses/domain/klasses-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
 import { HttpError } from '../../../domain/http-error';
 
 import { LogAction } from '#core/domain';
-import { adapter, inject } from '#di';
 import {
   KlassDto,
   KlassesControllerServicePort,
@@ -12,7 +13,7 @@ import {
 import { CreateKlassesBody } from '#features/projects/domain';
 import { StudentsCreatorControllerServicePort } from '#features/students/domain';
 
-@adapter(KlassesControllerServicePort, ['mock'])
+@adapter(KlassesControllerServicePort, 'mock')
 export class KlassesServiceMockAdapter
   extends ForMockControllerService
   implements KlassesControllerServicePort

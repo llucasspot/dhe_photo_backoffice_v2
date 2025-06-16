@@ -1,6 +1,7 @@
+import { useInstance } from '@mygoodstack/di-react/dist';
+
 import { useAction, useGetter } from '#action/react';
 import { Button, Form, FormButton, Input, Select } from '#components';
-import { useService } from '#di/react';
 import { CreateProjectBody } from '#features/projects/domain';
 import { CreateProjectAction } from '#features/projects/use-cases';
 import { SchoolsGetter } from '#features/schools/use-cases';
@@ -8,7 +9,7 @@ import { useI18n } from '#i18n/react';
 import { RoutingServicePort } from '#routing/domain';
 
 export const CreateProjectPage = () => {
-  const routingService = useService(RoutingServicePort);
+  const routingService = useInstance(RoutingServicePort);
   const { t } = useI18n();
   const createProject = useAction(CreateProjectAction);
 

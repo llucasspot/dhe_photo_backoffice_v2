@@ -1,15 +1,15 @@
+import { useInstance } from '@mygoodstack/di-react/dist';
 import { useMutation } from '@tanstack/react-query';
 
 import { ActionI } from '#action/domain';
 import { Token } from '#di/domain';
-import { useService } from '#di/react';
 import { ToastService } from '#toast/domain';
 
 export function useAction<TData = void, TBody = void>(
   Action: Token<ActionI<TData, TBody>>,
 ) {
-  const action = useService(Action);
-  const toastService = useService(ToastService);
+  const action = useInstance(Action);
+  const toastService = useInstance(ToastService);
 
   return useMutation({
     mutationFn: async (body: TBody) => {

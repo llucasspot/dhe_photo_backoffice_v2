@@ -1,6 +1,6 @@
-import { ProductsServiceMockAdapter } from './infra/products.service.mock-adapter';
+import { Module } from '@mygoodstack/di-react/dist';
 
-import { Module } from '#di';
+import { ProductsServiceMockAdapter } from './infra/products.service.mock-adapter';
 
 @Module({
   providers: [ProductsServiceMockAdapter],

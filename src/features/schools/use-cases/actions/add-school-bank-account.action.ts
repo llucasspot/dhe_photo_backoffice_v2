@@ -1,9 +1,10 @@
+import { inject, singleton } from '@mygoodstack/di-react/dist';
+
 import { AddSchoolBankAccountBody } from '../../domain/dtos/bodies/add-school-bank-account.body';
 import { schoolsKeys } from '../getters';
 
 import { Action } from '#action/domain';
 import { CacheServicePort } from '#cache/domain';
-import { inject, singleton } from '#di';
 import {
   BankAccountDto,
   SchoolsControllerServicePort,

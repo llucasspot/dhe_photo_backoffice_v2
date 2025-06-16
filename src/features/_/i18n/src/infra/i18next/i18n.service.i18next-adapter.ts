@@ -1,10 +1,10 @@
 import { initReactI18next } from 'react-i18next';
+import { adapter } from '@mygoodstack/di-react/dist';
 import i18next, { Resource } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 import { fr } from './locales/fr';
 
-import { adapter } from '#di';
 import { I18nServicePort, TranslateOptions, Translations } from '#i18n/domain';
 
 @adapter(I18nServicePort)

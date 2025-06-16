@@ -1,6 +1,6 @@
-import { AuthProviderMockAdapter } from './infra/auth-provider.mock-adapter';
+import { Module } from '@mygoodstack/di-react/dist';
 
-import { Module } from '#di';
+import { AuthProviderMockAdapter } from './infra/auth-provider.mock-adapter';
 
 @Module({
   providers: [AuthProviderMockAdapter],

@@ -1,6 +1,6 @@
-import { ProjectsDaoArrayAdapter } from './adapters/projects-dao.array-adapter';
+import { Module } from '@mygoodstack/di-react/dist';
 
-import { Module } from '#di';
+import { ProjectsDaoArrayAdapter } from './adapters/projects-dao.array-adapter';
 
 @Module({
   providers: [ProjectsDaoArrayAdapter],

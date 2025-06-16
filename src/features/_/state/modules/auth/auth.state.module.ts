@@ -1,6 +1,6 @@
-import { AuthStateNanostores } from './infra/nanostores/auth.state.nanostores';
+import { Module } from '@mygoodstack/di-react/dist';
 
-import { Module } from '#di';
+import { AuthStateNanostores } from './infra/nanostores/auth.state.nanostores';
 
 @Module({
   providers: [AuthStateNanostores],

@@ -1,8 +1,9 @@
+import { inject, singleton } from '@mygoodstack/di-react/dist';
+
 import { productsKeys } from '../getters';
 
 import { Action } from '#action/domain';
 import { CacheServicePort } from '#cache/domain';
-import { inject, singleton } from '#di';
 import {
   CreateProductBody,
   ProductDto,

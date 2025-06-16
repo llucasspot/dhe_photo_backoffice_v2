@@ -1,9 +1,10 @@
+import { inject, singleton } from '@mygoodstack/di-react/dist';
+
 import { SchoolsControllerServicePort } from '../../domain/ports';
 
 import { schoolsKeys } from './school.getter';
 
 import { Getter } from '#action/domain';
-import { inject, singleton } from '#di';
 import { SchoolDto } from '#features/schools/domain';
 
 @singleton()

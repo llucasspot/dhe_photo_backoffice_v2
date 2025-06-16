@@ -1,8 +1,9 @@
+import { inject, singleton } from '@mygoodstack/di-react/dist';
+
 import { HttpAxiosClient } from './axios/http-axios.client';
 import { AuthorizationBearerGetter } from './authorization-bearer.getter';
 
 import { ConsoleLogger } from '#core/domain';
-import { inject, singleton } from '#di';
 
 @singleton()
 export class HttpClient extends HttpAxiosClient {

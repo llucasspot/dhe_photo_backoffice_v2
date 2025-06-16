@@ -1,7 +1,8 @@
+import { inject, singleton } from '@mygoodstack/di-react/dist';
+
 import { SchoolsControllerServicePort } from '../../domain/ports';
 
 import { Getter } from '#action/domain';
-import { inject, singleton } from '#di';
 import { BankAccountDto } from '#features/schools/domain';
 
 export const bankAccountsKeys = {

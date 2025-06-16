@@ -1,8 +1,9 @@
+import { adapter, inject } from '@mygoodstack/di-react/dist';
+
 import { StudentsDaoPort } from '../../../../database/modules/students/domain/students-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
 
 import { LogAction } from '#core/domain';
-import { adapter, inject } from '#di';
 import { FileStudentsCreatorControllerServicePort } from '#features/files/domain';
 import {
   CreateStudentBody,
@@ -11,7 +12,7 @@ import {
   StudentsGetterControllerServicePort,
 } from '#features/students/domain';
 
-@adapter(StudentsCreatorControllerServicePort, ['mock'])
+@adapter(StudentsCreatorControllerServicePort, 'mock')
 export class StudentsCreatorMockAdapter
   extends ForMockControllerService
   implements StudentsCreatorControllerServicePort

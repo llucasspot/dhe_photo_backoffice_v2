@@ -1,8 +1,8 @@
+import { Module } from '@mygoodstack/di-react/dist';
+
 import { ProductsDexieModule } from './infra/dexie/products.dexie.module';
 
-import { Module } from '#di';
-
 @Module({
-  imports: [ProductsDexieModule],
+  providers: [ProductsDexieModule],
 })
 export class ProductsDatabaseModule {}

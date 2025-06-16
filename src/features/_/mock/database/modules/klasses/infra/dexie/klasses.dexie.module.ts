@@ -1,11 +1,10 @@
+import { Module } from '@mygoodstack/di-react/dist';
+
 import { DatabaseDexieModule } from '../../../../infra/dexie/database.dexie.module';
 
 import { KlassesDaoDexieAdapter } from './adapters/klasses-dao.dexie-adapter';
 
-import { Module } from '#di';
-
 @Module({
-  imports: [DatabaseDexieModule],
-  providers: [KlassesDaoDexieAdapter],
+  providers: [DatabaseDexieModule, KlassesDaoDexieAdapter],
 })
 export class KlassesDexieModule {}

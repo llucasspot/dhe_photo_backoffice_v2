@@ -1,8 +1,8 @@
 import { toast, ToastOptions } from 'react-toastify';
+import { adapter, inject } from '@mygoodstack/di-react/dist';
 
 import { ToastServicePort } from '../domain';
 
-import { adapter, inject } from '#di';
 import { I18nServicePort } from '#i18n/domain';
 
 @adapter(ToastServicePort)

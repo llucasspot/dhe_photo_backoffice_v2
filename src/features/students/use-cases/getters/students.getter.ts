@@ -1,5 +1,6 @@
+import { inject, singleton } from '@mygoodstack/di-react/dist';
+
 import { Getter } from '#action/domain';
-import { inject, singleton } from '#di';
 import {
   KlassStudentsGetterControllerServicePort,
   StudentDto,

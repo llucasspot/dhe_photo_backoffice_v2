@@ -1,3 +1,4 @@
+import { singleton } from '@mygoodstack/di-react/dist';
 import Dexie, { EntityTable } from 'dexie';
 
 import { DatabaseServicePort } from '../../../domain';
@@ -27,7 +28,6 @@ import {
 
 import { DatabaseServiceDexieAdapterAbstract } from './database.service.dexie-adapter.abstract';
 
-import { singleton } from '#di';
 import { Type } from '#di/domain';
 
 export type DexieConnexion = Dexie & {

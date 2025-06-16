@@ -1,7 +1,8 @@
+import { adapter, inject } from '@mygoodstack/di-react/dist';
+
 import { AddSchoolBankAccountBody } from '../../../../../schools/domain/dtos/bodies/add-school-bank-account.body';
 import { HttpClient } from '../../../utils/http';
 
-import { adapter, inject } from '#di';
 import {
   BankAccountDto,
   CreateSchoolBody,
@@ -9,7 +10,7 @@ import {
   SchoolsControllerServicePort,
 } from '#features/schools/domain';
 
-@adapter(SchoolsControllerServicePort, ['development'])
+@adapter(SchoolsControllerServicePort)
 export class SchoolsServiceApiAdapter implements SchoolsControllerServicePort {
   constructor(
     @inject(HttpClient)

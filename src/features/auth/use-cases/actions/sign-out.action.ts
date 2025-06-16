@@ -1,8 +1,9 @@
+import { inject, singleton } from '@mygoodstack/di-react/dist';
+
 import { UserInfoGetter } from '../getter/user-info.getter';
 
 import { Action } from '#action/domain';
 import { CacheServicePort } from '#cache/domain';
-import { inject, singleton } from '#di';
 import { AuthProviderPort } from '#features/auth/domain';
 import { StorageService } from '#storage/domain';
 

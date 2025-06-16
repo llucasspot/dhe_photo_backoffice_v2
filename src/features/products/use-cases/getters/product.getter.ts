@@ -1,7 +1,8 @@
+import { inject, singleton } from '@mygoodstack/di-react/dist';
+
 import { ProductsControllerServicePort } from '../../domain/ports';
 
 import { Getter } from '#action/domain';
-import { inject, singleton } from '#di';
 import { ProductDto } from '#features/products/domain';
 
 export const productsKeys = {

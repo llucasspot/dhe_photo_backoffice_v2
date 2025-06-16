@@ -1,12 +1,12 @@
+import { adapter, inject } from '@mygoodstack/di-react/dist';
+
 import {
   DaoDexie,
   DatabaseServiceDexieAdapter,
 } from '../../../../../infra/dexie';
 import { PhotographersDaoPort } from '../../../domain/photographers-dao.port';
 
-import { adapter, inject } from '#di';
-
-@adapter(PhotographersDaoPort, ['mock'])
+@adapter(PhotographersDaoPort, 'mock')
 export class PhotographersDaoDexieAdapter
   extends DaoDexie<'photographers'>
   implements PhotographersDaoPort

@@ -1,9 +1,10 @@
+import { inject, singleton } from '@mygoodstack/di-react/dist';
+
 import { ProjectsControllerServicePort } from '../../domain/ports';
 
 import { projectsKeys } from './project.getter';
 
 import { Getter } from '#action/domain';
-import { inject, singleton } from '#di';
 import { ProjectDto } from '#features/projects/domain';
 
 @singleton()

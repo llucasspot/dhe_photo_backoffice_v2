@@ -1,3 +1,5 @@
+import { adapter, inject } from '@mygoodstack/di-react/dist';
+
 import { Finder, Populator } from '../../../../database/domain';
 import { ProjectProductsDaoPort } from '../../../../database/modules/products/domain/project-products-dao.port';
 import { ProjectsDaoPort } from '../../../../database/modules/projects/domain/projects-dao.port';
@@ -5,7 +7,6 @@ import { ForMockControllerService } from '../../../domain/for-mock-controller-se
 import { HttpError } from '../../../domain/http-error';
 
 import { LogAction } from '#core/domain';
-import { adapter, inject } from '#di';
 import {
   AddProductBody,
   CreateProjectBody,
@@ -14,7 +15,7 @@ import {
   ProjectState,
 } from '#features/projects/domain';
 
-@adapter(ProjectsControllerServicePort, ['mock'])
+@adapter(ProjectsControllerServicePort, 'mock')
 export class ProjectsServiceMockAdapter
   extends ForMockControllerService
   implements ProjectsControllerServicePort

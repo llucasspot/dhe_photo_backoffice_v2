@@ -1,13 +1,14 @@
-import { QueryClient } from '@tanstack/react-query';
+import { adapter, inject } from '@mygoodstack/di-react/dist';
+
+import { QueryClientGetter } from '../../../QueryClientGetter';
 
 import { CacheServicePort } from '#cache/domain';
-import { inject, singleton } from '#di';
 
-@singleton()
+@adapter(CacheServicePort)
 export class CacheServiceReactQueryAdapter extends CacheServicePort {
   constructor(
-    @inject(QueryClient)
-    private readonly queryClient: QueryClient,
+    @inject(QueryClientGetter)
+    private readonly gueryClientGetter: QueryClientGetter,
   ) {
     super();
   }
@@ -16,23 +17,25 @@ export class CacheServiceReactQueryAdapter extends CacheServicePort {
     if (tags.filter(Array.isArray).length > 0) {
       await Promise.all(
         tags.map((key) =>
-          this.queryClient.invalidateQueries({ queryKey: key }),
+          this.gueryClientGetter.get().invalidateQueries({ queryKey: key }),
         ),
       );
       return;
     }
-    await this.queryClient.invalidateQueries({ queryKey: tags });
+    await this.gueryClientGetter.get().invalidateQueries({ queryKey: tags });
     return;
   }
 
   async cleanTag(...tags: string[][]) {
     if (tags.filter(Array.isArray).length > 0) {
       await Promise.all(
-        tags.map((key) => this.queryClient.removeQueries({ queryKey: key })),
+        tags.map((key) =>
+          this.gueryClientGetter.get().removeQueries({ queryKey: key }),
+        ),
       );
       return;
     }
-    this.queryClient.removeQueries({ queryKey: tags });
+    this.gueryClientGetter.get().removeQueries({ queryKey: tags });
     return;
   }
 }

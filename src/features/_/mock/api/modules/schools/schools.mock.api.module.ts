@@ -1,6 +1,6 @@
-import { SchoolsServiceMockAdapter } from './infra/schools.service.mock-adapter';
+import { Module } from '@mygoodstack/di-react/dist';
 
-import { Module } from '#di';
+import { SchoolsServiceMockAdapter } from './infra/schools.service.mock-adapter';
 
 @Module({
   providers: [SchoolsServiceMockAdapter],
