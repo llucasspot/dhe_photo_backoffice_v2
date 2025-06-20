@@ -1,4 +1,4 @@
-import { adapter, inject } from '@mygoodstack/di-react';
+import { adapter, inject, Scope } from '@mygoodstack/di-react';
 
 import { GroupPicturesDaoPort } from '../../../../database/modules/pictures/domain/group-pictures-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
@@ -13,7 +13,7 @@ import {
   KlassesControllerServicePort,
 } from '#features/klasses/domain';
 
-@adapter(GroupPicturesCreatorControllerServicePort, 'mock')
+@adapter(GroupPicturesCreatorControllerServicePort, Scope.Singleton, 'mock')
 export class GroupPicturesServiceMockAdapter
   extends ForMockControllerService
   implements GroupPicturesCreatorControllerServicePort

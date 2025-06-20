@@ -1,4 +1,4 @@
-import { adapter, inject } from '@mygoodstack/di-react';
+import { adapter, inject, Scope } from '@mygoodstack/di-react';
 
 import { Finder } from '../../../../database/domain';
 import { FileDataDexieDao } from '../../../../database/infra';
@@ -8,7 +8,7 @@ import { HttpError } from '../../../domain/http-error';
 
 import { PictureControllerServicePort } from '#features/files/domain';
 
-@adapter(PictureControllerServicePort, 'mock')
+@adapter(PictureControllerServicePort, Scope.Singleton, 'mock')
 export class PictureControllerServiceDexieAdapter
   extends ForMockControllerService
   implements PictureControllerServicePort

@@ -1,4 +1,4 @@
-import { adapter, inject } from '@mygoodstack/di-react';
+import { adapter, inject, Scope } from '@mygoodstack/di-react';
 
 import { Finder } from '../../../../database/domain';
 import { PhotographersDaoPort } from '../../../../database/modules/auth/domain/photographers-dao.port';
@@ -14,7 +14,7 @@ import {
 } from '#features/auth/domain';
 import { StorageService } from '#storage/domain';
 
-@adapter(AuthProviderPort, 'mock')
+@adapter(AuthProviderPort, Scope.Singleton, 'mock')
 export class AuthProviderMockAdapter
   extends ForMockControllerService
   implements AuthProviderPort

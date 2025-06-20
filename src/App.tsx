@@ -1,4 +1,5 @@
 import { ToastContainer } from 'react-toastify';
+import { containerByEnv as containerByEnvCore } from '@mygoodstack/di-core';
 import { containerByEnv } from '@mygoodstack/di-react';
 import { DIProvider, useInstance } from '@mygoodstack/di-react';
 import { Theme } from '@radix-ui/themes';
@@ -15,6 +16,7 @@ export const App = () => {
   console.log(`process.env.NODE_ENV : ${nodeEnv}`);
 
   const container = containerByEnv[nodeEnv];
+  console.log(containerByEnvCore === containerByEnv);
   return (
     <DIProvider container={container}>
       <AppContent />

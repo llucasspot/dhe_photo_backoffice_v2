@@ -1,4 +1,4 @@
-import { adapter, inject } from '@mygoodstack/di-react';
+import { adapter, inject, Scope } from '@mygoodstack/di-react';
 
 import { DtoByTableName } from '../../../../../domain';
 import {
@@ -7,7 +7,7 @@ import {
 } from '../../../../../infra/dexie';
 import { KlassesDaoPort } from '../../../domain/klasses-dao.port';
 
-@adapter(KlassesDaoPort, 'mock')
+@adapter(KlassesDaoPort, Scope.Singleton, 'mock')
 export class KlassesDaoDexieAdapter
   extends DaoDexie<'klasses'>
   implements KlassesDaoPort

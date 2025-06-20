@@ -4,7 +4,7 @@ import { DtoByTableName } from '../../../../../domain';
 import { DaoRunTime } from '../../../../../infra/run-time';
 import { PicturesDaoPort } from '../../../domain/pictures-dao.port';
 
-@adapter(PicturesDaoPort, 'mock')
+@adapter(PicturesDaoPort, Scope.Singleton, 'mock')
 export class PicturesDaoArrayAdapter
   extends DaoRunTime<DtoByTableName, 'pictures'>
   implements PicturesDaoPort

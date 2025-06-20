@@ -1,4 +1,4 @@
-import { adapter, inject } from '@mygoodstack/di-react';
+import { adapter, inject, Scope } from '@mygoodstack/di-react';
 
 import {
   DaoDexie,
@@ -6,7 +6,7 @@ import {
 } from '../../../../../infra/dexie';
 import { CoordProductTemplatesDaoPort } from '../../../domain/coord-product-templates-dao.port';
 
-@adapter(CoordProductTemplatesDaoPort, 'mock')
+@adapter(CoordProductTemplatesDaoPort, Scope.Singleton, 'mock')
 export class CoordProductTemplatesDaoDexieAdapter
   extends DaoDexie<'coord_product_templates'>
   implements CoordProductTemplatesDaoPort

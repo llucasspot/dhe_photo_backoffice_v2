@@ -1,4 +1,4 @@
-import { adapter, inject } from '@mygoodstack/di-react';
+import { adapter, inject, Scope } from '@mygoodstack/di-react';
 
 import { StudentsDaoPort } from '../../../../database/modules/students/domain/students-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
@@ -11,7 +11,7 @@ import {
   StudentsGetterControllerServicePort,
 } from '#features/students/domain';
 
-@adapter(StudentsControllerServicePort, 'mock')
+@adapter(StudentsControllerServicePort, Scope.Singleton, 'mock')
 export class StudentsServiceMockAdapter
   extends ForMockControllerService
   implements StudentsControllerServicePort

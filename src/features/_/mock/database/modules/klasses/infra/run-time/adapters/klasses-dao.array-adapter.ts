@@ -4,7 +4,7 @@ import { DtoByTableName } from '../../../../../domain';
 import { DaoRunTime } from '../../../../../infra/run-time';
 import { KlassesDaoPort } from '../../../domain/klasses-dao.port';
 
-@adapter(KlassesDaoPort, 'mock')
+@adapter(KlassesDaoPort, Scope.Singleton, 'mock')
 export class KlassesDaoArrayAdapter
   extends DaoRunTime<DtoByTableName, 'klasses'>
   implements KlassesDaoPort

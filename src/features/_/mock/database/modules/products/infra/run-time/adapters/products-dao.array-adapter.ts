@@ -4,7 +4,7 @@ import { DtoByTableName } from '../../../../../domain';
 import { DaoRunTime } from '../../../../../infra/run-time';
 import { ProductsDaoPort } from '../../../domain/products-dao.port';
 
-@adapter(ProductsDaoPort, 'mock')
+@adapter(ProductsDaoPort, Scope.Singleton, 'mock')
 export class ProductsDaoArrayAdapter
   extends DaoRunTime<DtoByTableName, 'products'>
   implements ProductsDaoPort
