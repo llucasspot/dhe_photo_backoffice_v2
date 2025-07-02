@@ -1,12 +1,9 @@
-import { FieldValues, Path } from 'react-hook-form';
 import { useInstance } from '@mygoodstack/di-react';
 
-import { FormInput } from '../../../../components/form/inputs/form-input';
-import { FormInputErrorMessage } from '../../../../components/form/inputs/form-input-error-message';
 import { OAuthButton } from '../components/oauth-button';
 
 import { useAction } from '#action/react';
-import { Form } from '#components';
+import { form } from '#components';
 import { LoginBody } from '#features/auth/domain';
 import { SignInAction } from '#features/auth/use-cases';
 import { useI18n } from '#i18n/react';
@@ -22,49 +19,7 @@ export const LoginPage = () => {
   );
 };
 
-type InputProps<TFormBody> = {
-  formKey: Path<TFormBody>;
-  type: string;
-};
-
-const Input = <TFormBody extends FieldValues>({
-  formKey,
-  type,
-}: InputProps<TFormBody>) => {
-  const { t } = useI18n();
-  return (
-    <div>
-      <label
-        htmlFor={formKey}
-        className="block text-sm font-medium text-gray-700"
-      >
-        {t(`auth.login.form.input.${formKey}.label`)}
-      </label>
-      <div className="mt-1">
-        <FormInput<TFormBody>
-          formKey={formKey}
-          type={type}
-          className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-          classNameOnError="border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500"
-        />
-      </div>
-      <FormInputErrorMessage<TFormBody>
-        formKey={formKey}
-        className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
-        render={(error) => {
-          return (
-            <p id={`${formKey}-error`} className="mt-2 text-sm text-red-600">
-              {t(error)}
-            </p>
-          );
-        }}
-      />
-    </div>
-  );
-};
-
 const SignInForm = () => {
-  const { t } = useI18n();
   const routingService = useInstance(RoutingServicePort);
   const signInAction = useAction(SignInAction);
 
@@ -74,23 +29,26 @@ const SignInForm = () => {
   };
 
   return (
-    <Form
-      i18nPrefix="auth.login"
+    <form.Form
+      formName="SignInForm"
       dto={LoginBody}
       onSubmit={onSubmit}
       className="space-y-6"
     >
-      <Input<LoginBody> formKey="email" type="email" />
-      <Input<LoginBody> formKey="password" type="password" />
-      <div>
-        <button
-          type="submit"
-          className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-        >
-          {t('auth.login.form.submitButton.label')}
-        </button>
-      </div>
-    </Form>
+      <form.InputContainer>
+        <form.Label formKey="email" />
+        <form.Input formKey="email" type="email" />
+        <form.ErrorLabel formKey="email" />
+      </form.InputContainer>
+
+      <form.InputContainer>
+        <form.Label formKey="password" />
+        <form.Input formKey="password" type="password" />
+        <form.ErrorLabel formKey="password" />
+      </form.InputContainer>
+
+      <form.SubmitButton className="w-full" />
+    </form.Form>
   );
 };
 
@@ -110,10 +68,10 @@ const LeftSide = () => {
             <path d="M20 4h-3.17l-1.24-1.35A1.99 1.99 0 0 0 14.12 2H9.88c-.56 0-1.1.24-1.48.65L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-8 13c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" />
           </svg>
           <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-900">
-            {t('auth.login.title')}
+            {t('form.SignInForm.title')}
           </h2>
           <h3 className="mt-6 text-3l tracking-tight text-gray-800">
-            {t('auth.login.subtitle')}
+            {t('form.SignInForm.subtitle')}
           </h3>
         </div>
 

@@ -18,11 +18,7 @@ export class AuthenticateAction extends Action<AuthResponse, AuthResponse> {
     @inject(StorageService)
     private readonly storageService: StorageService,
   ) {
-    super({
-      pending: 'auth.authenticate.pending',
-      success: 'auth.authenticate.success',
-      error: 'auth.authenticate.error',
-    });
+    super();
   }
 
   async execute(authResponse: AuthResponse) {

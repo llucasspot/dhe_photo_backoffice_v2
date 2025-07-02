@@ -11,27 +11,19 @@ import { plainToInstance, Transform } from '#class-transformer';
 import { Dto } from '#core/domain';
 
 export class CompanyInfoDto extends Dto<CompanyInfoDto> {
-  @IsString({ message: 'settings.companyInfo.validation.companyName.IsString' })
-  @IsNotEmpty({
-    message: 'settings.companyInfo.validation.companyName.IsNotEmpty',
-  })
-  @MaxLength(100, {
-    message: 'settings.companyInfo.validation.companyName.MaxLength',
-  })
+  @IsString()
+  @IsNotEmpty()
+  @MaxLength(100)
   @Transform(({ value }) => value?.trim())
   companyName!: string;
 
   @IsOptional()
-  @IsString({ message: 'settings.companyInfo.validation.vatNumber.IsString' })
-  @Matches(/^[A-Z]{2}[0-9A-Z]+$/, {
-    message: 'settings.companyInfo.validation.vatNumber.Matches',
-  })
+  @IsString()
+  @Matches(/^[A-Z]{2}[0-9A-Z]+$/)
   @Transform(({ value }) => value?.trim().toUpperCase())
   vatNumber?: string;
 
-  @IsBoolean({
-    message: 'settings.companyInfo.validation.subjectToVat.IsBoolean',
-  })
+  @IsBoolean()
   subjectToVat!: boolean;
 
   static build<TBody>(body: TBody[]): CompanyInfoDto[];

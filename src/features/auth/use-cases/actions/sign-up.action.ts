@@ -17,11 +17,7 @@ export class SignUpAction extends Action<AuthResponse, RegisterBody> {
     @inject(AuthenticateAction)
     private readonly authenticateAction: AuthenticateAction,
   ) {
-    super({
-      pending: 'auth.sign-up.pending',
-      success: 'auth.sign-up.success',
-      error: 'auth.sign-up.error',
-    });
+    super();
   }
 
   async execute(body: RegisterBody) {

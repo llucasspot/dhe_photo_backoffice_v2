@@ -7,6 +7,10 @@ import { SettingsI18nTranslationsKeys } from '#features/settings/i18n';
 import { StudentsI18nTranslationsKeys } from '#features/students/i18n';
 
 export type Translations = {
+  dto: object;
+  form: object;
+  action: object;
+  getter: object;
   auth: AuthI18nTranslationsKeys;
   settings: SettingsI18nTranslationsKeys;
   projects: ProjectsI18nTranslationsKeys;

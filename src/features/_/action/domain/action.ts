@@ -15,13 +15,19 @@ export abstract class ActionI<TData = void, Body = void> {
 export abstract class Action<TData = void, Body = void>
   implements ActionI<TData, Body>
 {
-  constructor(
-    public readonly i18nKeys: {
-      success: string;
-      pending: string;
-      error: string;
-    },
-  ) {}
+  public readonly i18nKeys: {
+    success: string;
+    pending: string;
+    error: string;
+  };
+
+  constructor() {
+    this.i18nKeys = {
+      success: `action.${this.constructor.name}.success.label`,
+      pending: `action.${this.constructor.name}.pending.label`,
+      error: `action.${this.constructor.name}.error.label`,
+    };
+  }
 
   abstract execute(body: Body): Promise<TData>;
 

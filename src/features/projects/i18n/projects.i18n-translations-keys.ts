@@ -1,23 +1,33 @@
+import { I18nAction, I18nDto, I18nForm } from '../../../i18n.types';
+
+import {
+  AddProductBody,
+  CreateKlassesBody,
+  CreateProjectBody,
+  ProjectDto,
+} from '#features/projects/domain';
+
 export type ProjectsI18nTranslationsKeys = {
+  dto: {
+    AddProductBody: I18nDto<AddProductBody>;
+    CreateKlassesBody: I18nDto<CreateKlassesBody>;
+    CreateProjectBody: I18nDto<CreateProjectBody>;
+    ProjectDto: I18nDto<ProjectDto>;
+  };
+  action: {
+    AddProductToProjectAction: I18nAction;
+    CreateGroupPictureFromFilesAction: I18nAction;
+    CreateKlassesFromFilesAction: I18nAction;
+    CreateProjectAction: I18nAction;
+  };
+  form: {
+    CreateProjectForm: I18nForm;
+  };
   title: string;
   addProject: string;
-  list: {
-    error: string;
-    pending: string;
-    empty: string;
-  };
   detail: {
     title: string;
     subtitle: string;
-    error: string;
-    fields: {
-      name: string;
-      school: string;
-      shotDate: string;
-      orderEndDate: string;
-      status: string;
-      messageForClients: string;
-    };
     dropzone: {
       instructions: string;
       hint: string;
@@ -25,9 +35,6 @@ export type ProjectsI18nTranslationsKeys = {
     };
     klasses: {
       title: string;
-      creating: string;
-      created: string;
-      error: string;
     };
     products: {
       title: string;
@@ -35,9 +42,6 @@ export type ProjectsI18nTranslationsKeys = {
       price: string;
       add: string;
       empty: string;
-      adding: string;
-      added: string;
-      error: string;
       table: {
         product: string;
         price: string;
@@ -46,44 +50,5 @@ export type ProjectsI18nTranslationsKeys = {
   };
   create: {
     title: string;
-    pending: string;
-    success: string;
-    error: string;
-    form: {
-      name: string;
-      school: string;
-      shotDate: string;
-      orderEndDate: string;
-      messageForClients: string;
-      state: string;
-      submit: string;
-    };
-    validation: {
-      name: {
-        IsString: string;
-        IsNotEmpty: string;
-        MaxLength: string;
-      };
-      schoolId: {
-        IsString: string;
-        IsNotEmpty: string;
-      };
-      shotDate: {
-        IsDate: string;
-        IsNotEmpty: string;
-      };
-      orderEndDate: {
-        IsDate: string;
-        IsNotEmpty: string;
-      };
-      messageForClients: {
-        IsString: string;
-        MaxLength: string;
-      };
-      state: {
-        IsEnum: string;
-        IsNotEmpty: string;
-      };
-    };
   };
 };

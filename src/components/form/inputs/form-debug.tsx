@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { useForm } from '@mygoodstack/form-react';
 
 export function FormDebug() {
   const {
-    formState: { errors },
-  } = useFormContext();
+    form: {
+      formState: { errors },
+    },
+  } = useForm();
 
   useEffect(() => {
     console.log('errors : ', errors);

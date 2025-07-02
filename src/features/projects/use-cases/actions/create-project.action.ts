@@ -18,11 +18,7 @@ export class CreateProjectAction extends Action<ProjectDto, CreateProjectBody> {
     @inject(CacheServicePort)
     private readonly cacheService: CacheServicePort,
   ) {
-    super({
-      success: 'projects.create.success',
-      pending: 'projects.create.pending',
-      error: 'projects.create.error',
-    });
+    super();
   }
 
   async execute(body: CreateProjectBody) {

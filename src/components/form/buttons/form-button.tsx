@@ -1,4 +1,4 @@
-import { useFormContext } from 'react-hook-form';
+import { useForm } from '@mygoodstack/form-react';
 
 import { Button, ButtonProps } from '#components';
 
@@ -12,8 +12,10 @@ export const FormButton = ({
   ...props
 }: FormButton) => {
   const {
-    formState: { isSubmitting },
-  } = useFormContext();
+    form: {
+      formState: { isSubmitting },
+    },
+  } = useForm();
 
   return (
     <Button type={type} disabled={isSubmitting} {...props}>

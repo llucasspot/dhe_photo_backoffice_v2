@@ -1,7 +1,8 @@
 import { useInstance } from '@mygoodstack/di-react';
 
 import { useAction } from '#action/react';
-import { Button, Form, FormButton, Input, Select } from '#components';
+import { form } from '#components';
+import { Button, FormButton } from '#components';
 import { CreateSchoolBody, SchoolDto } from '#features/schools/domain';
 import { CreateSchoolAction } from '#features/schools/use-cases';
 import { useI18n } from '#i18n/react';
@@ -30,27 +31,40 @@ export const CreateSchoolPage = () => {
       </div>
 
       <div className="bg-white shadow rounded-lg p-6">
-        <Form
-          // TODO Form i18nPrefix
-          i18nPrefix="CreateSchoolBody"
+        <form.Form
+          formName="CreateSchoolForm"
           dto={CreateSchoolBody}
           onSubmit={onSubmit}
           className="space-y-6"
         >
-          <Input formKey="name" label="schools.create.form.name" />
-          <Select
-            formKey="currency"
-            label="schools.create.form.currency"
-            options={SchoolDto.availableCurrencyOptions}
-          />
-          <Input formKey="city" label="schools.create.form.city" />
+          <form.InputContainer>
+            <form.Label formKey="name" />
+            <form.Input formKey="name" />
+            <form.ErrorLabel formKey="name" />
+          </form.InputContainer>
+
+          <form.InputContainer>
+            <form.Label formKey="currency" />
+            <form.Select
+              formKey="currency"
+              options={SchoolDto.availableCurrencyOptions}
+            />
+            <form.ErrorLabel formKey="currency" />
+          </form.InputContainer>
+
+          <form.InputContainer>
+            <form.Label formKey="city" />
+            <form.Input formKey="city" />
+            <form.ErrorLabel formKey="city" />
+          </form.InputContainer>
+
           <div className="flex justify-end space-x-4">
             <Button variant="secondary" link={{ to: '/schools' }}>
               {t('common.actions.cancel')}
             </Button>
             <FormButton>{t('schools.create.form.submit')}</FormButton>
           </div>
-        </Form>
+        </form.Form>
       </div>
     </div>
   );

@@ -1,6 +1,4 @@
-import { form } from '../../../../components/form/ui/form';
-
-import { classNames } from '#core/react';
+import { form } from '#components';
 import { PersonalInfoDto } from '#features/settings/domain';
 
 export const PersonalInfoForm = () => {
@@ -10,33 +8,33 @@ export const PersonalInfoForm = () => {
 
   return (
     <form.Form
-      i18nPrefix="settings.personalInfo"
+      formName="PersonalInfoForm"
       dto={PersonalInfoDto}
       onSubmit={onSubmit}
-      className={classNames('bg-white shadow rounded-lg p-6', 'mx-auto')}
+      className="space-y-6"
     >
       <form.Header />
 
       <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-        <div className="sm:col-span-4">
+        <form.InputContainer className="sm:col-span-4">
           <form.Label<PersonalInfoDto> formKey="firstName" />
           <form.Input<PersonalInfoDto> formKey="firstName" type="text" />
           <form.ErrorLabel<PersonalInfoDto> formKey="firstName" />
-        </div>
+        </form.InputContainer>
 
-        <div className="sm:col-span-4">
+        <form.InputContainer className="sm:col-span-4">
           <form.Label<PersonalInfoDto> formKey="lastName" />
           <form.Input<PersonalInfoDto> formKey="lastName" type="text" />
           <form.ErrorLabel<PersonalInfoDto> formKey="lastName" />
-        </div>
+        </form.InputContainer>
 
-        <div className="sm:col-span-4">
+        <form.InputContainer className="sm:col-span-4">
           <form.Label<PersonalInfoDto> formKey="email" />
           <form.Input<PersonalInfoDto> formKey="email" type="email" />
           <form.ErrorLabel<PersonalInfoDto> formKey="email" />
-        </div>
+        </form.InputContainer>
 
-        <div className="sm:col-span-4">
+        <form.InputContainer className="sm:col-span-4">
           <form.Label<PersonalInfoDto> formKey="phoneNumber" />
           <form.Input<PersonalInfoDto>
             formKey="phoneNumber"
@@ -45,7 +43,7 @@ export const PersonalInfoForm = () => {
             placeholder="+1 (555) 987-6543"
           />
           <form.ErrorLabel<PersonalInfoDto> formKey="phoneNumber" />
-        </div>
+        </form.InputContainer>
       </div>
 
       <form.Footer />

@@ -1,17 +1,122 @@
 import { SchoolsI18nTranslationsKeys } from '../schools.i18n-translations-keys';
 
 export const frSchools: SchoolsI18nTranslationsKeys = {
+  dto: {
+    AddSchoolBankAccountBody: {
+      iban: {
+        label: 'IBAN',
+        validation: {
+          isNotEmpty: 'Ce champ est requis',
+          isIBAN: 'IBAN invalide',
+        },
+      },
+      bic: {
+        label: 'BIC/SWIFT',
+        validation: {
+          isNotEmpty: 'Ce champ est requis',
+          matches: 'BIC/SWIFT invalide',
+        },
+      },
+    },
+    CreateSchoolBody: {
+      name: {
+        label: "Nom de l'école",
+        validation: {
+          isString: "Le nom de l'école doit être du texte",
+          isNotEmpty: "Le nom de l'école est requis",
+          maxLength: "Le nom de l'école ne peut pas dépasser 100 caractères",
+        },
+      },
+      currency: {
+        label: 'Devise',
+        validation: {
+          isEnum: 'La devise doit être EUR',
+          isNotEmpty: 'La devise est requise',
+        },
+      },
+      city: {
+        label: 'Ville',
+        validation: {
+          isString: 'La ville doit être du texte',
+          isNotEmpty: 'La ville est requise',
+          maxLength: 'Le nom de la ville ne peut pas dépasser 100 caractères',
+        },
+      },
+    },
+  },
+  action: {
+    AddSchoolBankAccountAction: {
+      success: {
+        label: 'Compte bancaire ajouté avec succès !',
+      },
+      pending: {
+        label: 'Ajout du compte bancaire en cours...',
+      },
+      error: {
+        label: "Erreur lors de l'ajout du compte bancaire.",
+      },
+    },
+    CreateSchoolAction: {
+      success: {
+        label: 'École créée avec succès !',
+      },
+      pending: {
+        label: "Création de l'école en cours...",
+      },
+      error: {
+        label: "Erreur lors de la création de l'école. Veuillez réessayer.",
+      },
+    },
+  },
+  getter: {
+    SchoolGetter: {
+      success: {
+        label: 'École chargée avec succès !',
+      },
+      pending: {
+        label: "Chargement de l'école en cours...",
+      },
+      error: {
+        label: "Erreur lors du chargement de l'école.",
+      },
+      empty: {
+        label: 'École non trouvée.',
+      },
+    },
+    SchoolBankAccountsGetter: {
+      success: {
+        label: 'Comptes bancaires chargés avec succès !',
+      },
+      pending: {
+        label: 'Chargement des comptes bancaires en cours...',
+      },
+      error: {
+        label: 'Erreur lors du chargement des comptes bancaires.',
+      },
+      empty: {
+        label: 'Aucun compte bancaire trouvé.',
+      },
+    },
+    SchoolsGetter: {
+      success: {
+        label: 'Écoles chargées avec succès !',
+      },
+      pending: {
+        label: 'Chargement des écoles en cours...',
+      },
+      error: {
+        label: 'Erreur lors du chargement des écoles.',
+      },
+      empty: {
+        label: 'Aucune école trouvée.',
+      },
+    },
+  },
   title: 'Écoles',
   addSchool: 'Ajouter une école',
-  list: {
-    error: 'Erreur lors du chargement des écoles.',
-    pending: 'Chargement des écoles....',
-    empty: 'Aucune école trouvée.',
-  },
   detail: {
     title: "Informations de l'école",
     subtitle: 'Informations générales sur cette école',
-    error: "Erreur lors du chargement des détails de l'école.",
     fields: {
       name: "Nom de l'école",
       currency: 'Devise',
@@ -26,46 +131,13 @@ export const frSchools: SchoolsI18nTranslationsKeys = {
         title: 'Aucun compte bancaire',
         description: 'Ajoutez un compte bancaire pour cette école',
       },
-      fields: {
-        iban: 'IBAN',
-        bic: 'BIC/SWIFT',
-        isDefault: 'Définir comme compte par défaut',
-        isDefaultHelp: 'Ce compte sera utilisé par défaut pour les paiements',
-      },
       formDescription: 'Renseignez les informations bancaires de ce compte',
-      validation: {
-        required: 'Ce champ est requis',
-        invalidIban: 'IBAN invalide',
-        invalidBic: 'BIC/SWIFT invalide',
-      },
     },
   },
   create: {
     title: 'Créer une nouvelle école',
-    pending: "Création de l'école en cours...",
-    success: 'École créée avec succès !',
-    error: "Échec de la création de l'école. Veuillez réessayer.",
     form: {
-      name: "Nom de l'école",
-      currency: 'Devise',
-      city: 'Ville',
       submit: "Créer l'école",
-    },
-    validation: {
-      name: {
-        IsString: "Le nom de l'école doit être du texte",
-        IsNotEmpty: "Le nom de l'école est requis",
-        MaxLength: "Le nom de l'école ne peut pas dépasser 100 caractères",
-      },
-      currency: {
-        IsEnum: 'La devise doit être EUR',
-        IsNotEmpty: 'La devise est requise',
-      },
-      city: {
-        IsString: 'La ville doit être du texte',
-        IsNotEmpty: 'La ville est requise',
-        MaxLength: 'Le nom de la ville ne peut pas dépasser 100 caractères',
-      },
     },
   },
 } as const;

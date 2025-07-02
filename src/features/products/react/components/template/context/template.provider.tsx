@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { useForm } from '@mygoodstack/form-react';
 
 import { LayerConfig } from '../types';
 
@@ -9,7 +9,9 @@ import { TemplateContext } from './template.context';
 import { useItems, useValue } from '#core/react';
 
 export function TemplateProvider({ children }: { children: ReactNode }) {
-  const { watch } = useFormContext();
+  const {
+    form: { watch },
+  } = useForm();
   const layers = useItems(LayerConfig);
   const selectedLayerId = useValue<LayerConfig['id'] | null>(null);
 

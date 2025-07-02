@@ -1,4 +1,4 @@
-import { useFormContext } from 'react-hook-form';
+import { useForm } from '@mygoodstack/form-react';
 
 type HiddenObjectInputProps<TValue> = {
   formKey: string;
@@ -10,9 +10,11 @@ export function HiddenObjectInput<TValue>({
   value,
 }: HiddenObjectInputProps<TValue>) {
   const {
-    setValue,
-    formState: { errors },
-  } = useFormContext();
+    form: {
+      setValue,
+      formState: { errors },
+    },
+  } = useForm();
 
   const error = errors[formKey]?.message as string;
   if (error) {

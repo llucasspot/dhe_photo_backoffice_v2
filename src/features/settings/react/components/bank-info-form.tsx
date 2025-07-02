@@ -1,24 +1,33 @@
-import { Form, FormButton, Input } from '#components';
+import { form } from '#components';
 import { BankInfoDto } from '#features/settings/domain';
-import { useI18n } from '#i18n/react';
 
 export const BankInfoForm = () => {
-  const { t } = useI18n();
-
   const onSubmit = (data: BankInfoDto) => {
     console.log('form data : ', data);
   };
 
   return (
-    <Form
-      i18nPrefix="settings.bankInfo"
+    <form.Form
+      formName="BankInfoForm"
       dto={BankInfoDto}
       onSubmit={onSubmit}
       className="space-y-6"
     >
-      <Input formKey="iban" label={'settings.bankInfo.iban'} />
-      <Input formKey="bicNumber" label={'settings.bankInfo.bicNumber'} />
-      <FormButton>{t('settings.common.save')}</FormButton>
-    </Form>
+      <form.Header />
+
+      <form.InputContainer>
+        <form.Label formKey="iban" />
+        <form.Input formKey="iban" />
+        <form.ErrorLabel formKey="iban" />
+      </form.InputContainer>
+
+      <form.InputContainer>
+        <form.Label formKey="bicNumber" />
+        <form.Input formKey="bicNumber" />
+        <form.ErrorLabel formKey="bicNumber" />
+      </form.InputContainer>
+
+      <form.Footer />
+    </form.Form>
   );
 };

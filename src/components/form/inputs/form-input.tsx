@@ -1,5 +1,6 @@
 import { ComponentProps } from 'react';
-import { FieldValues, Path, useFormContext } from 'react-hook-form';
+import { FieldValues, Path } from 'react-hook-form';
+import { useForm } from '@mygoodstack/form-react';
 
 import { classNames } from '#core/react';
 
@@ -15,9 +16,11 @@ export function FormInput<TFormBody extends FieldValues>({
   ...props
 }: FormInputProps<TFormBody>) {
   const {
-    register,
-    formState: { errors },
-  } = useFormContext<TFormBody>();
+    form: {
+      register,
+      formState: { errors },
+    },
+  } = useForm<TFormBody>();
 
   const error = errors[formKey]?.message as string;
 

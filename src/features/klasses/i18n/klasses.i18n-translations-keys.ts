@@ -1,15 +1,24 @@
+import { I18nDto } from '../../../i18n.types';
+
+import {
+  CreateGroupPictureBody,
+  CreateKlassBody,
+  CreateKlassesBody,
+  KlassDto,
+} from '#features/klasses/domain';
+
 export type KlassesI18nTranslationsKeys = {
+  dto: {
+    CreateGroupPictureBody: I18nDto<CreateGroupPictureBody>;
+    CreateKlassBody: I18nDto<CreateKlassBody>;
+    CreateKlassesBody: I18nDto<CreateKlassesBody>;
+    KlassDto: I18nDto<KlassDto>;
+  };
   title: string;
   addClass: string;
-  list: {
-    error: string;
-    pending: string;
-    empty: string;
-  };
   detail: {
     title: string;
     subtitle: string;
-    error: string;
     fields: {
       name: string;
     };
@@ -27,8 +36,5 @@ export type KlassesI18nTranslationsKeys = {
   };
   create: {
     title: string;
-    pending: string;
-    success: string;
-    error: string;
   };
 };

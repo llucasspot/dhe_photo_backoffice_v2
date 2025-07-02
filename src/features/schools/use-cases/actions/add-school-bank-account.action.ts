@@ -23,11 +23,7 @@ export class AddSchoolBankAccountAction extends Action<BankAccountDto, Body> {
     @inject(CacheServicePort)
     private readonly cacheService: CacheServicePort,
   ) {
-    super({
-      success: 'schools.create.success',
-      pending: 'schools.create.pending',
-      error: 'schools.create.error',
-    });
+    super();
   }
 
   async execute({ schoolId, body }: Body) {

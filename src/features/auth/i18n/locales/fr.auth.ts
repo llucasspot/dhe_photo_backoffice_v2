@@ -1,76 +1,151 @@
 import { AuthI18nTranslationsKeys } from '../auth.i18n-translations-keys';
 
 export const frAuth: AuthI18nTranslationsKeys = {
-  'sign-in': {
-    pending: 'Connexion en cours...',
-    success: 'Connexion réussie !',
-    error: 'Échec de la connexion',
-  },
-  'sign-up': {
-    pending: 'Création du compte en cours...',
-    success: 'Compte créé avec succès !',
-    error: 'Échec de la création du compte',
-  },
-  'sign-out': {
-    pending: 'Déconnexion en cours...',
-    success: 'Déconnexion réussie',
-    error: 'Échec de la déconnexion',
-  },
-  authenticate: {
-    pending: 'Authentification en cours...',
-    success: 'Authentification réussie',
-    error: "Échec de l'authentification",
-  },
-  login: {
-    title: 'Connexion',
-    subtitle: 'Bon retour, veuillez vous connecter à votre compte',
-    oauthSeparatorLabel: 'Ou continuer avec',
-    notAClientQuestion: 'Pas client chez nous ?',
-    notAClientButtonLabel: 'Contactez nous ici',
-    form: {
-      submitButton: {
-        label: 'Se connecter',
-      },
-      input: {
-        email: {
-          label: 'Email',
-          validation: {
-            IsEmail: 'Adresse email invalide',
-            IsNotEmpty: "L'email est requis",
-          },
+  dto: {
+    LoginBody: {
+      email: {
+        label: 'Email',
+        validation: {
+          isEmail: 'Adresse email invalide',
+          isNotEmpty: "L'email est requis",
         },
-        password: {
-          label: 'Mot de passe',
-          validation: {
-            IsString: 'Le mot de passe doit être du texte',
-            Length: 'Le mot de passe doit contenir au moins 8 caractères',
-            IsNotEmpty: 'Le mot de passe est requis',
-          },
+      },
+      password: {
+        label: 'Mot de passe',
+        validation: {
+          isString: 'Le mot de passe doit être du texte',
+          length: 'Le mot de passe doit contenir au moins 8 caractères',
+          isNotEmpty: 'Le mot de passe est requis',
+        },
+      },
+    },
+    RegisterBody: {
+      email: {
+        label: 'Email',
+        validation: {
+          isEmail: 'Adresse email invalide',
+          isNotEmpty: "L'email est requis",
+        },
+      },
+      password: {
+        label: 'Mot de passe',
+        validation: {
+          isString: 'Le mot de passe doit être du texte',
+          length: 'Le mot de passe doit contenir au moins 8 caractères',
+          isNotEmpty: 'Le mot de passe est requis',
+        },
+      },
+      confirmPassword: {
+        label: 'Confirmer le mot de passe',
+        validation: {
+          isString: 'La confirmation du mot de passe doit être du texte',
+          isNotEmpty: 'Veuillez confirmer votre mot de passe',
+          matches: 'Les mots de passe ne correspondent pas',
         },
       },
     },
   },
-  register: {
-    title: 'Créer un compte',
-    subtitle: 'Inscrivez-vous pour commencer',
-    email: 'Email',
-    password: 'Mot de passe',
-    confirmPassword: 'Confirmer le mot de passe',
-    submit: "S'inscrire",
-    validation: {
-      email: {
-        IsEmail: 'Adresse email invalide',
-        IsNotEmpty: "L'email est requis",
+  form: {
+    SignInForm: {
+      title: 'Créer un compte',
+      subtitle: 'Bon retour, veuillez vous connecter à votre compte',
+      button: {
+        submit: {
+          label: "S'inscrire",
+        },
+        reset: {
+          label: 'Annuler',
+        },
       },
-      password: {
-        IsString: 'Le mot de passe doit être du texte',
-        Length: 'Le mot de passe doit contenir au moins 8 caractères',
-        IsNotEmpty: 'Le mot de passe est requis',
+    },
+    RegisterForm: {
+      title: 'Créer un compte',
+      subtitle: 'Inscrivez-vous pour commencer',
+      button: {
+        submit: {
+          label: "S'inscrire",
+        },
+        reset: {
+          label: 'Annuler',
+        },
       },
-      confirmPassword: {
-        IsString: 'La confirmation du mot de passe doit être du texte',
-        IsNotEmpty: 'Veuillez confirmer votre mot de passe',
-        Matches: 'Les mots de passe ne correspondent pas',
+    },
+  },
+  action: {
+    AuthenticateAction: {
+      success: {
+        label: 'Authentification réussie !',
+      },
+      pending: {
+        label: 'Authentification en cours...',
+      },
+      error: {
+        label: "Erreur lors de l'authentification.",
+      },
+    },
+    SignInAction: {
+      success: {
+        label: 'Connexion réussie !',
+      },
+      pending: {
+        label: 'Connexion en cours...',
+      },
+      error: {
+        label: 'Erreur lors de la connexion.',
+      },
+    },
+    SignOutAction: {
+      success: {
+        label: 'Déconnexion réussie',
+      },
+      pending: {
+        label: 'Déconnexion en cours...',
+      },
+      error: {
+        label: 'Erreur lors de la déconnexion.',
+      },
+    },
+    SignUpAction: {
+      success: {
+        label: 'Compte créé avec succès !',
+      },
+      pending: {
+        label: 'Création du compte en cours...',
+      },
+      error: {
+        label: 'Erreur lors de la création du compte.',
+      },
+    },
+  },
+  getter: {
+    UserInfoGetter: {
+      success: {
+        label: 'Données utilisateur chargées avec succès !',
+      },
+      pending: {
+        label: 'Chargement des données utilisateur en cours...',
+      },
+      error: {
+        label: 'Erreur lors du chargement des données utilisateur.',
+      },
+      empty: {
+        label: 'Aucune donnée utilisateur trouvée.',
+      },
+    },
+  },
+  login: {
+    oauthSeparatorLabel: 'Ou continuer avec',
+    notAClientQuestion: 'Pas client chez nous ?',
+    notAClientButtonLabel: 'Contactez nous ici',
+    form: {
+      title: 'Connexion',
+      button: {
+        submit: {
+          label: 'Se connecter',
+        },
+        reset: {
+          label: 'Annuler',
+        },
       },
     },
   },

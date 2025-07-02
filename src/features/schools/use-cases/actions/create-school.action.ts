@@ -18,11 +18,7 @@ export class CreateSchoolAction extends Action<SchoolDto, CreateSchoolBody> {
     @inject(CacheServicePort)
     private readonly cacheService: CacheServicePort,
   ) {
-    super({
-      success: 'schools.create.success',
-      pending: 'schools.create.pending',
-      error: 'schools.create.error',
-    });
+    super();
   }
 
   async execute(body: CreateSchoolBody) {

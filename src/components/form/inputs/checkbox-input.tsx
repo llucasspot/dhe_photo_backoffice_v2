@@ -1,5 +1,5 @@
 import { ComponentProps } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { useForm } from '@mygoodstack/form-react';
 
 import { classNames } from '#core/react';
 import { useI18n } from '#i18n/react';
@@ -10,13 +10,18 @@ type CheckboxInputProps = ComponentProps<'input'> & {
 };
 
 export function CheckboxInput({
-  label,
   formKey,
   className = '',
   ...props
 }: CheckboxInputProps) {
   const { t } = useI18n();
-  const { register } = useFormContext();
+  const {
+    dto,
+    form: { register },
+  } = useForm();
+
+  const dtoName = dto.name;
+  const i18nLabelKey = `dto.${dtoName}.${formKey}.label`;
 
   return (
     <div className="flex items-center space-x-2">
@@ -29,7 +34,7 @@ export function CheckboxInput({
         {...register(formKey)}
         {...props}
       />
-      <label className="text-sm text-gray-700">{t(label)}</label>
+      <label className="text-sm text-gray-700">{t(i18nLabelKey)}</label>
     </div>
   );
 }

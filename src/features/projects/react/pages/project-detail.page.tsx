@@ -71,7 +71,7 @@ const ProjectDetailContent = ({ project }: { project: ProjectDto }) => {
           <dl>
             <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">
-                {t('projects.detail.fields.name')}
+                {t('ProjectDto.name.label')}
               </dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                 {project.name}
@@ -79,7 +79,7 @@ const ProjectDetailContent = ({ project }: { project: ProjectDto }) => {
             </div>
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">
-                {t('projects.detail.fields.school')}
+                {t('ProjectDto.schoolId.label')}
               </dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                 {school ? school.name : '// TODO unknown'}
@@ -87,7 +87,7 @@ const ProjectDetailContent = ({ project }: { project: ProjectDto }) => {
             </div>
             <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">
-                {t('projects.detail.fields.shotDate')}
+                {t('ProjectDto.shotDate.label')}
               </dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                 {new Date(project.shotDate).toLocaleDateString()}
@@ -95,7 +95,7 @@ const ProjectDetailContent = ({ project }: { project: ProjectDto }) => {
             </div>
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">
-                {t('projects.detail.fields.orderEndDate')}
+                {t('ProjectDto.orderEndDate.label')}
               </dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                 {new Date(project.orderEndDate).toLocaleDateString()}
@@ -103,7 +103,7 @@ const ProjectDetailContent = ({ project }: { project: ProjectDto }) => {
             </div>
             <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">
-                {t('projects.detail.fields.status')}
+                {t('ProjectDto.state.label')}
               </dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                 <span
@@ -120,7 +120,7 @@ const ProjectDetailContent = ({ project }: { project: ProjectDto }) => {
             {project.messageForClients && (
               <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt className="text-sm font-medium text-gray-500">
-                  {t('projects.detail.fields.messageForClients')}
+                  {t('ProjectDto.messageForClients.label')}
                 </dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                   {project.messageForClients}

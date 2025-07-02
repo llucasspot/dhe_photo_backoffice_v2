@@ -1,28 +1,34 @@
-import { CheckboxInput, Form, FormButton, Input } from '#components';
+import { CheckboxInput, form } from '#components';
 import { CompanyInfoDto } from '#features/settings/domain';
-import { useI18n } from '#i18n/react';
 
 export const CompanyInfoForm = () => {
-  const { t } = useI18n();
-
   const onSubmit = (data: CompanyInfoDto) => {
     console.log('form data : ', data);
   };
 
   return (
-    <Form
-      i18nPrefix="settings.companyInfo"
+    <form.Form
+      formName="CompanyInfoForm"
       dto={CompanyInfoDto}
       onSubmit={onSubmit}
       className="space-y-6"
     >
-      <Input formKey="companyName" label={'settings.companyInfo.companyName'} />
-      <Input formKey="vatNumber" label={'settings.companyInfo.vatNumber'} />
+      <form.Title />
+      <form.InputContainer>
+        <form.Label formKey="companyName" />
+        <form.Input formKey="companyName" />
+        <form.ErrorLabel formKey="email" />
+      </form.InputContainer>
+      <form.InputContainer>
+        <form.Label formKey="vatNumber" />
+        <form.Input formKey="vatNumber" type="number" />
+        <form.ErrorLabel formKey="vatNumber" />
+      </form.InputContainer>
       <CheckboxInput
         formKey="subjectToVat"
-        label={'settings.companyInfo.subjectToVat'}
+        label={'settings.companyInfo.form.input.subjectToVat.label'}
       />
-      <FormButton type="submit">{t('settings.common.save')}</FormButton>
-    </Form>
+      <form.Footer />
+    </form.Form>
   );
 };

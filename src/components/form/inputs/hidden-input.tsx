@@ -1,5 +1,5 @@
 import { ComponentProps } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { useForm } from '@mygoodstack/form-react';
 
 type InputProps = Omit<
   ComponentProps<'input'>,
@@ -10,9 +10,11 @@ type InputProps = Omit<
 
 export function HiddenInput({ formKey, ...props }: InputProps) {
   const {
-    register,
-    formState: { errors },
-  } = useFormContext();
+    form: {
+      register,
+      formState: { errors },
+    },
+  } = useForm();
 
   const error = errors[formKey]?.message as string;
   if (error) {

@@ -10,9 +10,11 @@ export const RegisterPage = () => {
       <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900">
-            {t('auth.register.title')}
+            {t('form.RegisterForm.title')}
           </h1>
-          <p className="text-gray-500 mt-2">{t('auth.register.subtitle')}</p>
+          <p className="text-gray-500 mt-2">
+            {t('form.RegisterForm.subtitle')}
+          </p>
         </div>
         <RegisterForm />
       </div>

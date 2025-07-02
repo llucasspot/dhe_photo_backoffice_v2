@@ -1,6 +1,4 @@
-import { form } from '../../../../components/form/ui/form';
-
-import { classNames } from '#core/react';
+import { form } from '#components';
 import { AddressDto } from '#features/settings/domain';
 
 export const AddressForm = () => {
@@ -10,39 +8,37 @@ export const AddressForm = () => {
 
   return (
     <form.Form
-      i18nPrefix="settings.address"
+      formName="AddressForm"
       dto={AddressDto}
       onSubmit={onSubmit}
-      className={classNames('bg-white shadow rounded-lg p-6', 'mx-auto')}
+      className="space-y-6"
     >
       <form.Header />
 
       <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-        <div className="col-span-full">
+        <form.InputContainer className="col-span-full">
           <form.Label<AddressDto> formKey="street" />
           <form.Input<AddressDto> formKey="street" type="text" />
           <form.ErrorLabel<AddressDto> formKey="street" />
-        </div>
+        </form.InputContainer>
 
-        <div className="sm:col-span-2 sm:col-start-1">
+        <form.InputContainer className="sm:col-span-2 sm:col-start-1">
           <form.Label<AddressDto> formKey="city" />
           <form.Input<AddressDto> formKey="city" type="text" />
           <form.ErrorLabel<AddressDto> formKey="city" />
-        </div>
+        </form.InputContainer>
 
-        <div className="sm:col-span-2">
+        <form.InputContainer className="sm:col-span-2">
           <form.Label<AddressDto> formKey="state" />
           <form.Input<AddressDto> formKey="state" type="text" />
           <form.ErrorLabel<AddressDto> formKey="state" />
-        </div>
+        </form.InputContainer>
 
-        <div className="sm:col-span-2">
+        <form.InputContainer className="sm:col-span-2">
           <form.Label<AddressDto> formKey="postalCode" />
           <form.Input<AddressDto> formKey="postalCode" type="text" />
           <form.ErrorLabel<AddressDto> formKey="postalCode" />
-        </div>
-
-        <div className="sm:col-span-2"></div>
+        </form.InputContainer>
       </div>
 
       <form.Footer />

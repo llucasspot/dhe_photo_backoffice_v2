@@ -1,11 +1,19 @@
+import { I18nDto, I18nForm } from '../../../i18n.types';
+
+import { CreateProductBody, TemplateBody } from '#features/products/domain';
+
 export type ProductsI18nTranslationsKeys = {
+  dto: {
+    CreateProductBody: I18nDto<CreateProductBody>;
+    TemplateBody: I18nDto<TemplateBody>;
+    LayerBody: I18nDto<TemplateBody['layers'][0]>;
+    CanvasBody: I18nDto<TemplateBody['canvas']>;
+  };
+  form: {
+    CreateProductForm: I18nForm;
+  };
   title: string;
   addProduct: string;
-  list: {
-    error: string;
-    pending: string;
-    empty: string;
-  };
   detail: {
     title: string;
     subtitle: string;
@@ -22,72 +30,6 @@ export type ProductsI18nTranslationsKeys = {
   };
   create: {
     title: string;
-    pending: string;
-    success: string;
-    error: string;
-    form: {
-      name: string;
-      description: string;
-      template: {
-        canvas: {
-          height: string;
-          width: string;
-        };
-      };
-      submit: string;
-    };
-    validation: {
-      name: {
-        IsString: string;
-        IsNotEmpty: string;
-        MaxLength: string;
-      };
-      description: {
-        IsString: string;
-        MaxLength: string;
-      };
-      template: {
-        canvas: {
-          ValidateNested: string;
-          IsNumber: string;
-          Min: string;
-          Required: string;
-          height: {
-            IsNumber: string;
-            Min: string;
-          };
-          width: {
-            IsNumber: string;
-            Min: string;
-          };
-        };
-        layers: {
-          IsArray: string;
-          ValidateNested: string;
-          Required: string;
-          item: {
-            x: {
-              IsNumber: string;
-              Required: string;
-            };
-            y: {
-              IsNumber: string;
-              Required: string;
-            };
-            width: {
-              IsNumber: string;
-              Min: string;
-              Required: string;
-            };
-            height: {
-              IsNumber: string;
-              Min: string;
-              Required: string;
-            };
-          };
-        };
-      };
-    };
   };
   template: {
     layers: {

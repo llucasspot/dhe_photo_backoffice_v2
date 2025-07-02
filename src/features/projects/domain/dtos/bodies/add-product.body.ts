@@ -11,7 +11,7 @@ export class AddProductBody extends Dto<AddProductBody> {
   productId!: string;
 
   @IsNumber()
-  @Min(0, { message: 'projects.products.validation.price.Min' })
+  @Min(0)
   @Type(() => Number)
   price!: number;
 }

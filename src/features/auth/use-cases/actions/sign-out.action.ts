@@ -19,11 +19,7 @@ export class SignOutAction extends Action {
     @inject(UserInfoGetter)
     private readonly userInfoGetter: UserInfoGetter,
   ) {
-    super({
-      pending: 'auth.sign-out.pending',
-      success: 'auth.sign-out.success',
-      error: 'auth.sign-out.error',
-    });
+    super();
   }
 
   async execute() {

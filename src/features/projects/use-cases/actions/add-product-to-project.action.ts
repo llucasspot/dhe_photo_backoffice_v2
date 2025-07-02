@@ -21,11 +21,7 @@ export class AddProductToProjectAction extends Action<
     @inject(CacheServicePort)
     private readonly cacheService: CacheServicePort,
   ) {
-    super({
-      pending: 'projects.detail.products.adding',
-      success: 'projects.detail.products.added',
-      error: 'projects.detail.products.error',
-    });
+    super();
   }
 
   async execute(body: AddProductBody) {

@@ -1,17 +1,81 @@
 import { KlassesI18nTranslationsKeys } from '../klasses.i18n-translations-keys';
 
 export const frKlasses: KlassesI18nTranslationsKeys = {
+  dto: {
+    CreateGroupPictureBody: {
+      projectId: {
+        label: 'Projet',
+        validation: {},
+      },
+      klassId: {
+        label: 'Classe',
+        validation: {},
+      },
+      photo: {
+        label: 'Photo',
+        validation: {},
+      },
+    },
+    CreateKlassBody: {
+      projectId: {
+        label: 'Projet',
+        validation: {},
+      },
+      klass: {
+        label: 'Classe',
+        validation: {},
+      },
+    },
+    CreateKlassesBody: {
+      projectId: {
+        label: 'Projet',
+        validation: {},
+      },
+      klasses: {
+        label: 'Classes',
+        validation: {},
+      },
+    },
+    KlassDto: {
+      projectId: {
+        label: 'Projet',
+        validation: {},
+      },
+      id: {
+        label: 'Identifiant',
+        validation: {},
+      },
+      name: {
+        label: 'Nom',
+        validation: {},
+      },
+      project: {
+        label: 'Projet',
+        validation: {},
+      },
+      students: {
+        label: 'Étudiants',
+        validation: {},
+      },
+      studentIds: {
+        label: 'Étudiants',
+        validation: {},
+      },
+      photos: {
+        label: 'Photos',
+        validation: {},
+      },
+      photoIds: {
+        label: 'Photos',
+        validation: {},
+      },
+    },
+  },
   title: 'Classes',
   addClass: 'Ajouter une classe',
-  list: {
-    error: 'Erreur lors du chargement des classes.',
-    pending: 'Chargement des classes....',
-    empty: 'Aucune classe trouvée.',
-  },
   detail: {
     title: 'Détails de la classe',
     subtitle: 'Voir les informations détaillées de cette classe.',
-    error: 'Erreur lors du chargement des détails de la classe.',
     fields: {
       name: 'Nom de la classe',
     },
@@ -29,8 +93,5 @@ export const frKlasses: KlassesI18nTranslationsKeys = {
   },
   create: {
     title: 'Créer une nouvelle classe',
-    pending: 'Création de la classe en cours...',
-    success: 'Classe créée avec succès !',
-    error: 'Échec de la création des classes. Veuillez réessayer.',
   },
 } as const;

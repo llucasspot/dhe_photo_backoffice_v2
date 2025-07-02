@@ -18,11 +18,7 @@ export class CreateProductAction extends Action<ProductDto, CreateProductBody> {
     @inject(CacheServicePort)
     private readonly cacheService: CacheServicePort,
   ) {
-    super({
-      success: 'products.create.success',
-      pending: 'products.create.pending',
-      error: 'products.create.error',
-    });
+    super();
   }
 
   async execute(body: CreateProductBody) {

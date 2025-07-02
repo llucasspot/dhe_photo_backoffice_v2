@@ -17,21 +17,19 @@ export const SettingsPage = () => {
       </h1>
 
       <div className="space-y-8">
-        <PersonalInfoForm />
+        <div className="bg-white shadow rounded-lg p-6">
+          <PersonalInfoForm />
+        </div>
 
         <div className="bg-white shadow rounded-lg p-6">
-          <h2 className="text-lg font-medium text-gray-900 mb-6">
-            {t('settings.companyInfo.title')}
-          </h2>
           <CompanyInfoForm />
         </div>
 
-        <AddressForm />
+        <div className="bg-white shadow rounded-lg p-6">
+          <AddressForm />
+        </div>
 
         <div className="bg-white shadow rounded-lg p-6">
-          <h2 className="text-lg font-medium text-gray-900 mb-6">
-            {t('settings.bankInfo.title')}
-          </h2>
           <BankInfoForm />
         </div>
       </div>

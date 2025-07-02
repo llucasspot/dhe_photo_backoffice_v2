@@ -4,70 +4,38 @@ import { plainToInstance, Type } from '#class-transformer';
 import { Dto } from '#core/domain';
 
 class LayerBody extends Dto<LayerBody> {
-  @IsNumber(
-    {},
-    { message: 'products.create.validation.template.layers.item.x.IsNumber' },
-  )
+  @IsNumber()
   x!: number;
 
-  @IsNumber(
-    {},
-    { message: 'products.create.validation.template.layers.item.y.IsNumber' },
-  )
+  @IsNumber()
   y!: number;
 
-  @IsNumber(
-    {},
-    {
-      message: 'products.create.validation.template.layers.item.width.IsNumber',
-    },
-  )
-  @Min(1, {
-    message: 'products.create.validation.template.layers.item.width.Min',
-  })
+  @IsNumber()
+  @Min(1)
   width!: number;
 
-  @IsNumber(
-    {},
-    {
-      message:
-        'products.create.validation.template.layers.item.height.IsNumber',
-    },
-  )
-  @Min(1, {
-    message: 'products.create.validation.template.layers.item.height.Min',
-  })
+  @IsNumber()
+  @Min(1)
   height!: number;
 }
 
 class CanvasBody extends Dto<CanvasBody> {
-  @IsNumber(
-    {},
-    { message: 'products.create.validation.template.canvas.IsNumber' },
-  )
-  @Min(1, { message: 'products.create.validation.template.canvas.Min' })
+  @IsNumber()
+  @Min(1)
   height!: number;
 
-  @IsNumber(
-    {},
-    { message: 'products.create.validation.template.canvas.IsNumber' },
-  )
-  @Min(1, { message: 'products.create.validation.template.canvas.Min' })
+  @IsNumber()
+  @Min(1)
   width!: number;
 }
 
 export class TemplateBody extends Dto<TemplateBody> {
-  @IsArray({ message: 'products.create.validation.template.layers.IsArray' })
-  @ValidateNested({
-    each: true,
-    message: 'products.create.validation.template.layers.ValidateNested',
-  })
+  @IsArray()
+  @ValidateNested()
   @Type(() => LayerBody)
   layers!: LayerBody[];
 
-  @ValidateNested({
-    message: 'products.create.validation.template.ValidateNested',
-  })
+  @ValidateNested()
   @Type(() => CanvasBody)
   canvas!: CanvasBody;
 

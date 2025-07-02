@@ -1,7 +1,8 @@
 import { FormDebug } from '../../../../components/form/inputs/form-debug';
 import { AddSchoolBankAccountBody } from '../../domain/dtos/bodies/add-school-bank-account.body';
 
-import { Form, FormButton, Input } from '#components';
+import { form } from '#components';
+import { FormButton } from '#components';
 import { useI18n } from '#i18n/react';
 
 type BankAccountFormProps = {
@@ -18,35 +19,49 @@ export const BankAccountForm = ({
   const { t } = useI18n();
 
   return (
-    <Form
-      i18nPrefix="bankAccounts"
+    <form.Form
+      formName="BankAccountForm"
       dto={AddSchoolBankAccountBody}
       onSubmit={onSubmit}
-      className="mt-5 space-y-6"
+      className="space-y-6"
     >
       <div>
         <div className="mt-1">
-          <Input
-            formKey="iban"
-            label="iban"
-            type="text"
-            id="iban"
-            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm uppercase"
-            placeholder="FR76 3000 1007 1600 0000 0000 123"
-          />
+          <form.InputContainer>
+            <form.Label formKey="iban" />
+            <form.Input
+              formKey="iban"
+              type="text"
+              placeholder="FR76 3000 1007 1600 0000 0000 123"
+            />
+            <form.ErrorLabel formKey="iban" />
+          </form.InputContainer>
+          {/*<Input*/}
+          {/*  formKey="iban"*/}
+          {/*  label="iban"*/}
+          {/*  type="text"*/}
+          {/*  id="iban"*/}
+          {/*  className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm uppercase"*/}
+          {/*  placeholder="FR76 3000 1007 1600 0000 0000 123"*/}
+          {/*/>*/}
         </div>
       </div>
 
       <div>
         <div className="mt-1">
-          <Input
-            formKey="bic"
-            label="bic"
-            type="text"
-            id="bic"
-            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm uppercase"
-            placeholder="SOGEFRPP"
-          />
+          <form.InputContainer>
+            <form.Label formKey="bic" />
+            <form.Input formKey="bic" type="text" placeholder="SOGEFRPP" />
+            <form.ErrorLabel formKey="bic" />
+          </form.InputContainer>
+          {/*<Input*/}
+          {/*  formKey="bic"*/}
+          {/*  label="bic"*/}
+          {/*  type="text"*/}
+          {/*  id="bic"*/}
+          {/*  className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm uppercase"*/}
+          {/*  placeholder="SOGEFRPP"*/}
+          {/*/>*/}
         </div>
       </div>
 
@@ -82,6 +97,6 @@ export const BankAccountForm = ({
         </button>
       </div>
       <FormDebug />
-    </Form>
+    </form.Form>
   );
 };

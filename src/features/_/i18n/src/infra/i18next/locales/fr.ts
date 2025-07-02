@@ -8,6 +8,42 @@ import { frStudents } from '#features/students/i18n';
 import { Translations } from '#i18n/domain';
 
 export const fr: Translations = {
+  dto: {
+    ...frAuth.dto,
+    ...frSettings.dto,
+    ...frProjects.dto,
+    ...frProducts.dto,
+    ...frSchools.dto,
+    ...frStudents.dto,
+    ...frKlasses.dto,
+  },
+  form: {
+    ...frAuth.form,
+    ...frSettings.form,
+    ...frProjects.form,
+    ...frProducts.form,
+    // ...frSchools.form,
+    // ...frStudents.form,
+    // ...frKlasses.form,
+  },
+  action: {
+    ...frAuth.action,
+    // ...frSettings.action,
+    ...frProjects.action,
+    // ...frProducts.action,
+    ...frSchools.action,
+    // ...frStudents.action,
+    // ...frKlasses.action,
+  },
+  getter: {
+    ...frAuth.getter,
+    // ...frSettings.getter,
+    // ...frProjects.getter,
+    // ...frProducts.getter,
+    ...frSchools.getter,
+    ...frStudents.getter,
+    // ...frKlasses.getter,
+  },
   auth: frAuth,
   settings: frSettings,
   projects: frProjects,
@@ -51,3 +87,7 @@ export const fr: Translations = {
       'Commencez par créer un compte ou connectez-vous si vous en avez déjà un.',
   },
 } as const;
+
+console.log('number of dtos', Object.keys(fr.dto).length);
+console.log('number of forms', Object.keys(fr.form).length);
+console.log('number of actions', Object.keys(fr.action).length);

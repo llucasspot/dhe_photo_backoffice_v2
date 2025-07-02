@@ -1,15 +1,27 @@
+import { I18nAction, I18nDto, I18nGetter } from '../../../i18n.types';
+import { AddSchoolBankAccountBody } from '../domain/dtos/bodies/add-school-bank-account.body';
+
+import { CreateSchoolBody } from '#features/schools/domain';
+
 export type SchoolsI18nTranslationsKeys = {
+  dto: {
+    AddSchoolBankAccountBody: I18nDto<AddSchoolBankAccountBody>;
+    CreateSchoolBody: I18nDto<CreateSchoolBody>;
+  };
+  action: {
+    AddSchoolBankAccountAction: I18nAction;
+    CreateSchoolAction: I18nAction;
+  };
+  getter: {
+    SchoolGetter: I18nGetter;
+    SchoolBankAccountsGetter: I18nGetter;
+    SchoolsGetter: I18nGetter;
+  };
   title: string;
   addSchool: string;
-  list: {
-    error: string;
-    pending: string;
-    empty: string;
-  };
   detail: {
     title: string;
     subtitle: string;
-    error: string;
     fields: {
       name: string;
       currency: string;
@@ -24,46 +36,13 @@ export type SchoolsI18nTranslationsKeys = {
         title: string;
         description: string;
       };
-      fields: {
-        iban: string;
-        bic: string;
-        isDefault: string;
-        isDefaultHelp: string;
-      };
       formDescription: string;
-      validation: {
-        required: string;
-        invalidIban: string;
-        invalidBic: string;
-      };
     };
   };
   create: {
     title: string;
-    pending: string;
-    success: string;
-    error: string;
     form: {
-      name: string;
-      currency: string;
-      city: string;
       submit: string;
-    };
-    validation: {
-      name: {
-        IsString: string;
-        IsNotEmpty: string;
-        MaxLength: string;
-      };
-      currency: {
-        IsEnum: string;
-        IsNotEmpty: string;
-      };
-      city: {
-        IsString: string;
-        IsNotEmpty: string;
-        MaxLength: string;
-      };
     };
   };
 };

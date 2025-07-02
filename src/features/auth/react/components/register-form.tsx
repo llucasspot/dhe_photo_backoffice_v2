@@ -1,34 +1,36 @@
-import { Form, FormButton, Input } from '#components';
+import { form } from '#components';
 import { RegisterBody } from '#features/auth/domain';
-import { useI18n } from '#i18n/react';
 
 export const RegisterForm = () => {
-  const { t } = useI18n();
-
   const onSubmit = (data: RegisterBody) => {
     console.log('form data : ', data);
   };
 
   return (
-    <Form
-      // TODO Form i18nPrefix
-      i18nPrefix="RegisterBody"
+    <form.Form
+      formName="RegisterForm"
       dto={RegisterBody}
       onSubmit={onSubmit}
       className="space-y-6"
     >
-      <Input formKey="email" label={'auth.register.email'} type="email" />
-      <Input
-        formKey="password"
-        label={'auth.register.password'}
-        type="password"
-      />
-      <Input
-        formKey="confirmPassword"
-        label={'auth.register.confirmPassword'}
-        type="password"
-      />
-      <FormButton className="w-full">{t('auth.register.submit')}</FormButton>
-    </Form>
+      <form.InputContainer>
+        <form.Label formKey="email" />
+        <form.Input formKey="email" type="email" />
+        <form.ErrorLabel formKey="email" />
+      </form.InputContainer>
+
+      <form.InputContainer>
+        <form.Label formKey="password" />
+        <form.Input formKey="password" type="password" />
+        <form.ErrorLabel formKey="password" />
+      </form.InputContainer>
+
+      <form.InputContainer>
+        <form.Label formKey="confirmPassword" />
+        <form.Input formKey="confirmPassword" type="password" />
+        <form.ErrorLabel formKey="password" />
+      </form.InputContainer>
+      <form.SubmitButton className="w-full" />
+    </form.Form>
   );
 };

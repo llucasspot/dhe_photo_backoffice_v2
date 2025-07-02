@@ -7,17 +7,15 @@ export class BankAccountDto extends Dto<BankAccountDto> {
   @IsString()
   id!: string;
 
-  @IsString({ message: 'settings.bankInfo.validation.ibanRequired' })
-  @IsIBAN({ message: 'settings.bankInfo.validation.ibanInvalid' })
-  @IsNotEmpty({ message: 'settings.bankInfo.validation.ibanRequired' })
+  @IsString()
+  @IsIBAN()
+  @IsNotEmpty()
   @Transform(({ value }) => value?.trim().toUpperCase())
   iban!: string;
 
-  @IsString({ message: 'settings.bankInfo.validation.bicRequired' })
-  @IsNotEmpty({ message: 'settings.bankInfo.validation.bicRequired' })
-  @Matches(/^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/, {
-    message: 'settings.bankInfo.validation.bicInvalid',
-  })
+  @IsString()
+  @IsNotEmpty()
+  @Matches(/^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/)
   @Transform(({ value }) => value?.trim().toUpperCase())
   bic!: string;
 

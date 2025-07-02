@@ -22,11 +22,7 @@ export class CreateGroupPictureFromFilesAction extends Action<void, Body> {
     @inject(CacheServicePort)
     private readonly cacheService: CacheServicePort,
   ) {
-    super({
-      pending: 'klasses.create.pending',
-      success: 'klasses.create.success',
-      error: 'klasses.create.error',
-    });
+    super();
   }
 
   async execute(body: Body) {

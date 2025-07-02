@@ -17,11 +17,7 @@ export class SignInAction extends Action<AuthResponse, LoginBody> {
     @inject(AuthenticateAction)
     private readonly authenticateAction: AuthenticateAction,
   ) {
-    super({
-      pending: 'auth.sign-in.pending',
-      success: 'auth.sign-in.success',
-      error: 'auth.sign-in.error',
-    });
+    super();
   }
 
   async execute(body: LoginBody) {
