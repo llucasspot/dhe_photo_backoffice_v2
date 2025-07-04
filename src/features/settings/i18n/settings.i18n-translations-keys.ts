@@ -20,6 +20,8 @@ export type SettingsI18nTranslationsKeys = {
     CompanyInfoForm: I18nForm;
     PersonalInfoForm: I18nForm;
   };
+  action: {};
+  getter: {};
   title: string;
   common: {
     cancel: string;

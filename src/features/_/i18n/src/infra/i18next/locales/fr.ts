@@ -5,52 +5,57 @@ import { frProjects } from '#features/projects/i18n';
 import { frSchools } from '#features/schools/i18n';
 import { frSettings } from '#features/settings/i18n';
 import { frStudents } from '#features/students/i18n';
-import { Translations } from '#i18n/domain';
 
-export const fr: Translations = {
+export const fr = {
+  test: {
+    test: 'hihi {{lala}}',
+  },
+  // iso
   dto: {
     ...frAuth.dto,
-    ...frSettings.dto,
-    ...frProjects.dto,
-    ...frProducts.dto,
-    ...frSchools.dto,
-    ...frStudents.dto,
     ...frKlasses.dto,
+    ...frProducts.dto,
+    ...frProjects.dto,
+    ...frSchools.dto,
+    ...frSettings.dto,
+    ...frStudents.dto,
   },
   form: {
     ...frAuth.form,
-    ...frSettings.form,
-    ...frProjects.form,
+    ...frKlasses.form,
     ...frProducts.form,
-    // ...frSchools.form,
-    // ...frStudents.form,
-    // ...frKlasses.form,
+    ...frProjects.form,
+    ...frSchools.form,
+    ...frSettings.form,
+    ...frStudents.form,
   },
   action: {
     ...frAuth.action,
-    // ...frSettings.action,
+    ...frKlasses.action,
+    ...frProducts.action,
     ...frProjects.action,
-    // ...frProducts.action,
     ...frSchools.action,
-    // ...frStudents.action,
-    // ...frKlasses.action,
+    ...frSettings.action,
+    ...frStudents.action,
   },
   getter: {
     ...frAuth.getter,
-    // ...frSettings.getter,
-    // ...frProjects.getter,
-    // ...frProducts.getter,
+    ...frKlasses.getter,
+    ...frProducts.getter,
+    ...frProjects.getter,
     ...frSchools.getter,
+    ...frSettings.getter,
     ...frStudents.getter,
-    // ...frKlasses.getter,
   },
+  // module iso
   auth: frAuth,
-  settings: frSettings,
-  projects: frProjects,
-  products: frProducts,
-  schools: frSchools,
-  students: frStudents,
   klasses: frKlasses,
+  products: frProducts,
+  projects: frProjects,
+  schools: frSchools,
+  settings: frSettings,
+  students: frStudents,
+  // other
   navigation: {
     dashboard: 'Tableau de bord',
     schools: 'Écoles',
@@ -75,6 +80,9 @@ export const fr: Translations = {
       inactive: 'Inactif',
       published: 'Publié',
       unpublished: 'Non publié',
+    },
+    error: {
+      undefined: 'Une erreur inconnue.',
     },
   },
   dashboard: {

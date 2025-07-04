@@ -1,6 +1,7 @@
-import { AuthI18nTranslationsKeys } from '../auth.i18n-translations-keys';
+import { AuthI18nTranslationsKeys } from '../auth.i18n-translations-keys.ts';
 
 export const frAuth: AuthI18nTranslationsKeys = {
+  // iso
   dto: {
     LoginBody: {
       email: {
@@ -133,6 +134,7 @@ export const frAuth: AuthI18nTranslationsKeys = {
       },
     },
   },
+  // other
   login: {
     oauthSeparatorLabel: 'Ou continuer avec',
     notAClientQuestion: 'Pas client chez nous ?',

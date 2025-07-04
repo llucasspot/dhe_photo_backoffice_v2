@@ -1,6 +1,7 @@
 import { ProjectsI18nTranslationsKeys } from '../projects.i18n-translations-keys';
 
 export const frProjects: ProjectsI18nTranslationsKeys = {
+  // iso
   dto: {
     AddProductBody: {
       projectId: {
@@ -175,6 +176,51 @@ export const frProjects: ProjectsI18nTranslationsKeys = {
       },
     },
   },
+  getter: {
+    ProjectsGetter: {
+      success: {
+        label: 'Projets chargés avec succès !',
+      },
+      pending: {
+        label: 'Chargement des projets en cours...',
+      },
+      error: {
+        label: 'Erreur lors du chargement des projets.',
+      },
+      empty: {
+        label: 'Aucun projet trouvé.',
+      },
+    },
+    ProjectGetter: {
+      success: {
+        label: 'Projet chargé avec succès !',
+      },
+      pending: {
+        label: 'Chargement du projet en cours...',
+      },
+      error: {
+        label: 'Erreur lors du chargement du projet.',
+      },
+      empty: {
+        label: 'Projet non trouvé.',
+      },
+    },
+    KlassGetter: {
+      success: {
+        label: 'Classe chargée avec succès !',
+      },
+      pending: {
+        label: 'Chargement de la classe en cours...',
+      },
+      error: {
+        label: 'Erreur lors du chargement de la classe.',
+      },
+      empty: {
+        label: 'Classe non trouvée.',
+      },
+    },
+  },
+  // other
   title: 'Projets',
   addProject: 'Ajouter un projet',
   detail: {

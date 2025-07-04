@@ -2,33 +2,42 @@ import { match } from 'ts-pattern';
 
 import { ProjectRow } from './project-row';
 
+import { useContextGetter } from '#action/react';
 import { ProjectDto } from '#features/projects/domain';
+import { ProjectsGetter } from '#features/projects/use-cases';
 import { useI18n } from '#i18n/react';
 
 const ProjectListLoading = () => {
   const { t } = useI18n();
+  const { getter } = useContextGetter(ProjectsGetter);
+
   return (
     <div className="p-4 text-center text-gray-500">
-      {t('projects.list.pending')}
+      {t(getter.i18nKeys.pending)}
     </div>
   );
 };
 
 const ProjectListError = ({ error }: { error: Error | null }) => {
   const { t } = useI18n();
+  const { getter } = useContextGetter(ProjectsGetter);
+
   console.error('Project list error:', error);
+
   return (
     <div className="p-4 text-center text-red-500">
-      {t('projects.list.error')}
+      {t(getter.i18nKeys.error)}
     </div>
   );
 };
 
 const ProjectListEmpty = () => {
   const { t } = useI18n();
+  const { getter } = useContextGetter(ProjectsGetter);
+
   return (
     <div className="p-4 text-center text-gray-500">
-      {t('projects.list.empty')}
+      {t(getter.i18nKeys.empty)}
     </div>
   );
 };
@@ -45,15 +54,11 @@ const ProjectListNonEmpty = ({ projects }: { projects: ProjectDto[] }) => {
   );
 };
 
-export const ProjectList = ({
-  projects,
-  isLoading,
-  error,
-}: {
-  projects: ProjectDto[];
-  isLoading: boolean;
-  error: Error | null;
-}) => {
+export const ProjectList = () => {
+  const {
+    queryResult: { data: projects = [], isLoading, error },
+  } = useContextGetter(ProjectsGetter);
+
   return match({ isLoading, error, projects })
     .with({ isLoading: true }, ProjectListLoading)
     .when(({ error }) => !!error, ProjectListError)

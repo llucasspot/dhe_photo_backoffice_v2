@@ -14,6 +14,9 @@ export type KlassesI18nTranslationsKeys = {
     CreateKlassesBody: I18nDto<CreateKlassesBody>;
     KlassDto: I18nDto<KlassDto>;
   };
+  form: {};
+  action: {};
+  getter: {};
   title: string;
   addClass: string;
   detail: {

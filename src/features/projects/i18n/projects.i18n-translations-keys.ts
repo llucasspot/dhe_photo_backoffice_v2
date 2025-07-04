@@ -1,4 +1,4 @@
-import { I18nAction, I18nDto, I18nForm } from '../../../i18n.types';
+import { I18nAction, I18nDto, I18nForm, I18nGetter } from '../../../i18n.types';
 
 import {
   AddProductBody,
@@ -19,6 +19,11 @@ export type ProjectsI18nTranslationsKeys = {
     CreateGroupPictureFromFilesAction: I18nAction;
     CreateKlassesFromFilesAction: I18nAction;
     CreateProjectAction: I18nAction;
+  };
+  getter: {
+    ProjectsGetter: I18nGetter;
+    ProjectGetter: I18nGetter;
+    KlassGetter: I18nGetter;
   };
   form: {
     CreateProjectForm: I18nForm;

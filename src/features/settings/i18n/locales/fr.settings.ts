@@ -1,6 +1,7 @@
 import { SettingsI18nTranslationsKeys } from '../settings.i18n-translations-keys';
 
 export const frSettings: SettingsI18nTranslationsKeys = {
+  // iso
   dto: {
     PersonalInfoDto: {
       email: {
@@ -182,6 +183,9 @@ export const frSettings: SettingsI18nTranslationsKeys = {
       },
     },
   },
+  action: {},
+  getter: {},
+  // other
   title: 'Paramètres',
   common: {
     cancel: 'Annuler',

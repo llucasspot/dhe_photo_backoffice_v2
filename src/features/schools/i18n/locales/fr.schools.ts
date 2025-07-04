@@ -1,6 +1,7 @@
 import { SchoolsI18nTranslationsKeys } from '../schools.i18n-translations-keys';
 
 export const frSchools: SchoolsI18nTranslationsKeys = {
+  // iso
   dto: {
     AddSchoolBankAccountBody: {
       iban: {
@@ -40,6 +41,20 @@ export const frSchools: SchoolsI18nTranslationsKeys = {
           isString: 'La ville doit être du texte',
           isNotEmpty: 'La ville est requise',
           maxLength: 'Le nom de la ville ne peut pas dépasser 100 caractères',
+        },
+      },
+    },
+  },
+  form: {
+    CreateSchoolForm: {
+      title: "Création de l'école",
+      subtitle: undefined,
+      button: {
+        submit: {
+          label: 'Enregistrer',
+        },
+        reset: {
+          label: 'Annuler',
         },
       },
     },
@@ -112,6 +127,7 @@ export const frSchools: SchoolsI18nTranslationsKeys = {
       },
     },
   },
+  // other
   title: 'Écoles',
   addSchool: 'Ajouter une école',
   detail: {

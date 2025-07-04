@@ -6,6 +6,8 @@ export type StudentsI18nTranslationsKeys = {
   dto: {
     CreateStudentBody: I18nDto<CreateStudentBody>;
   };
+  form: {};
+  action: {};
   getter: {
     StudentsGetter: I18nGetter;
   };

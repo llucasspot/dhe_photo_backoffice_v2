@@ -21,6 +21,7 @@ module.exports = {
     ],
     // TODO eslint rules
     "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
+    '@typescript-eslint/no-empty-object-type': 'off',
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error"
   },

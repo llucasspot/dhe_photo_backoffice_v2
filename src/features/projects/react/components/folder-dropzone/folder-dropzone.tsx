@@ -1,5 +1,6 @@
 import { FileError, FileRejection, useDropzone } from 'react-dropzone';
 
+import { I18nKey } from '#i18n/domain';
 import { useI18n } from '#i18n/react';
 
 interface FolderDropzoneProps {
@@ -11,9 +12,9 @@ interface FolderDropzoneProps {
     file: T,
   ) => FileError | readonly FileError[] | null;
   labels: {
-    instructions: string;
-    hint: string;
-    dragActive: string;
+    instructions: I18nKey;
+    hint: I18nKey;
+    dragActive: I18nKey;
   };
 }
 

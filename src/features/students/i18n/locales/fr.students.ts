@@ -1,6 +1,7 @@
 import { StudentsI18nTranslationsKeys } from '../students.i18n-translations-keys';
 
 export const frStudents: StudentsI18nTranslationsKeys = {
+  // iso
   dto: {
     CreateStudentBody: {
       klassId: {
@@ -13,6 +14,8 @@ export const frStudents: StudentsI18nTranslationsKeys = {
       },
     },
   },
+  form: {},
+  action: {},
   getter: {
     StudentsGetter: {
       success: {
@@ -29,6 +32,7 @@ export const frStudents: StudentsI18nTranslationsKeys = {
       },
     },
   },
+  // other
   title: 'Élèves',
   addStudent: 'Ajouter un élève',
   detail: {

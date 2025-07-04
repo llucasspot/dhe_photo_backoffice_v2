@@ -1,13 +1,12 @@
 import { ProductList } from '../components';
 
-import { useGetter } from '#action/react';
+import { GetterProvider } from '#action/react';
 import { Button } from '#components';
 import { ProductsGetter } from '#features/products/use-cases';
 import { useI18n } from '#i18n/react';
 
 export const ProductsPage = () => {
   const { t } = useI18n();
-  const { data: products = [], isLoading, error } = useGetter(ProductsGetter);
 
   return (
     <div className="p-8">
@@ -25,7 +24,9 @@ export const ProductsPage = () => {
       </div>
 
       <div className="mt-8 bg-white shadow overflow-hidden sm:rounded-md">
-        <ProductList products={products} isLoading={isLoading} error={error} />
+        <GetterProvider Getter={ProductsGetter}>
+          <ProductList />
+        </GetterProvider>
       </div>
     </div>
   );

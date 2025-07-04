@@ -1,13 +1,12 @@
 import { ProjectList } from '../components';
 
-import { useGetter } from '#action/react';
+import { GetterProvider } from '#action/react';
 import { Button } from '#components';
 import { ProjectsGetter } from '#features/projects/use-cases';
 import { useI18n } from '#i18n/react';
 
 export const ProjectsPage = () => {
   const { t } = useI18n();
-  const { data: projects = [], isLoading, error } = useGetter(ProjectsGetter);
 
   return (
     <div className="p-8">
@@ -25,7 +24,9 @@ export const ProjectsPage = () => {
       </div>
 
       <div className="mt-8 bg-white shadow overflow-hidden sm:rounded-md">
-        <ProjectList projects={projects} error={error} isLoading={isLoading} />
+        <GetterProvider Getter={ProjectsGetter}>
+          <ProjectList />
+        </GetterProvider>
       </div>
     </div>
   );

@@ -1,37 +1,32 @@
 import { toast, ToastOptions } from 'react-toastify';
-import { adapter, inject } from '@mygoodstack/di-react';
+import { adapter } from '@mygoodstack/di-react';
 
 import { ToastServicePort } from '../domain';
 
-import { I18nServicePort } from '#i18n/domain';
-
 @adapter(ToastServicePort)
 export class ToastServiceToastifyAdapter extends ToastServicePort {
-  constructor(
-    @inject(I18nServicePort)
-    private readonly i18nService: I18nServicePort,
-  ) {
+  constructor() {
     super();
   }
 
   success(message: string, options?: ToastOptions) {
-    return toast.success(this.i18nService.translate(message), options);
+    return toast.success(message, options);
   }
 
   error(message: string, options?: ToastOptions) {
-    return toast.error(this.i18nService.translate(message), options);
+    return toast.error(message, options);
   }
 
   info(message: string, options?: ToastOptions) {
-    return toast.info(this.i18nService.translate(message), options);
+    return toast.info(message, options);
   }
 
   warn(message: string, options?: ToastOptions) {
-    return toast.warn(this.i18nService.translate(message), options);
+    return toast.warn(message, options);
   }
 
   dark(message: string, options?: ToastOptions) {
-    return toast.dark(this.i18nService.translate(message), options);
+    return toast.dark(message, options);
   }
 
   promise<TPromiseResult>(

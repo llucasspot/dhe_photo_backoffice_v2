@@ -5,20 +5,14 @@ import {
 
 import { AuthLayout } from '../../../../../layout/auth.layout';
 import { OAuthCallbackPage } from '../../../../auth/react/pages/oauth-callback.page';
+import { ProductDetailPage } from '../../../../products/react/pages/product-detail.page.tsx';
+import { KlassDetailPage } from '../../../../projects/react/pages/klass-detail.page.tsx';
+import { ProjectDetailPage } from '../../../../projects/react/pages/project-detail.page.tsx';
 
 import { LoginPage, RegisterPage } from '#features/auth/react';
 import { DashboardPage } from '#features/dashboard/react';
-import {
-  CreateProductPage,
-  ProductDetailPage,
-  ProductsPage,
-} from '#features/products/react';
-import {
-  CreateProjectPage,
-  KlassDetailPage,
-  ProjectDetailPage,
-  ProjectsPage,
-} from '#features/projects/react';
+import { CreateProductPage, ProductsPage } from '#features/products/react';
+import { CreateProjectPage, ProjectsPage } from '#features/projects/react';
 import {
   CreateSchoolPage,
   SchoolDetailPage,

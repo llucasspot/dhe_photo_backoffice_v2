@@ -5,7 +5,12 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 import { fr } from './locales/fr';
 
-import { I18nServicePort, TranslateOptions, Translations } from '#i18n/domain';
+import {
+  I18nKey,
+  I18nServicePort,
+  I18nTranslation,
+  TranslateOptions,
+} from '#i18n/domain';
 
 @adapter(I18nServicePort)
 export class I18nServiceI18nextAdapter implements I18nServicePort {
@@ -13,7 +18,11 @@ export class I18nServiceI18nextAdapter implements I18nServicePort {
     this.initializeI18n();
   }
 
-  translate(key: string, options?: TranslateOptions): string {
+  translate<TI18nKey extends I18nKey>(
+    key: TI18nKey,
+    options?: TranslateOptions<TI18nKey>,
+  ): string {
+    // @ts-expect-error i18next
     return i18next.t(key, options);
   }
 
@@ -42,7 +51,7 @@ export class I18nServiceI18nextAdapter implements I18nServicePort {
       });
   }
 
-  private buildResources(record: Record<string, Translations>) {
+  private buildResources(record: Record<string, I18nTranslation>) {
     const resources: Resource = {};
     Object.entries(record).forEach(([key, value]) => {
       resources[key] = {

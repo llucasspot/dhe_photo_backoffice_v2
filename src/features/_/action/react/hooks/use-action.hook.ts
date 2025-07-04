@@ -11,7 +11,7 @@ export function useAction<TData = void, TBody = void>(
   const action = useInstance(Action);
   const toastService = useInstance(ToastService);
 
-  return useMutation({
+  return useMutation<TData, Error, TBody>({
     mutationFn: async (body: TBody) => {
       return toastService.promise(() => action.execute(body), action.i18nKeys);
     },

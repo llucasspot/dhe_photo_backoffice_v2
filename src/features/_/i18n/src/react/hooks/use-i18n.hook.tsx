@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useInstance } from '@mygoodstack/di-react';
 
-import { I18nServicePort } from '#i18n/domain';
+import { I18nKey, I18nServicePort, TranslateOptions } from '#i18n/domain';
 
 export const useI18n = () => {
   // const i18nService = useInstance(I18nServicePort);
@@ -35,7 +35,10 @@ export const useI18n = () => {
   } = useTranslation();
 
   return {
-    t: (key?: string, options?: Record<string, string | undefined>) => {
+    t: <TI18nKey extends I18nKey>(
+      key?: TI18nKey,
+      options?: TranslateOptions<TI18nKey>,
+    ) => {
       if (key) {
         return t(key, options);
       }

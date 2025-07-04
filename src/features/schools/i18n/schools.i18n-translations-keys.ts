@@ -1,4 +1,4 @@
-import { I18nAction, I18nDto, I18nGetter } from '../../../i18n.types';
+import { I18nAction, I18nDto, I18nForm, I18nGetter } from '../../../i18n.types';
 import { AddSchoolBankAccountBody } from '../domain/dtos/bodies/add-school-bank-account.body';
 
 import { CreateSchoolBody } from '#features/schools/domain';
@@ -7,6 +7,9 @@ export type SchoolsI18nTranslationsKeys = {
   dto: {
     AddSchoolBankAccountBody: I18nDto<AddSchoolBankAccountBody>;
     CreateSchoolBody: I18nDto<CreateSchoolBody>;
+  };
+  form: {
+    CreateSchoolForm: I18nForm;
   };
   action: {
     AddSchoolBankAccountAction: I18nAction;

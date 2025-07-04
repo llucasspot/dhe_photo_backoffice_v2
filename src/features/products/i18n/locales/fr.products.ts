@@ -1,6 +1,7 @@
 import { ProductsI18nTranslationsKeys } from '../products.i18n-translations-keys';
 
 export const frProducts: ProductsI18nTranslationsKeys = {
+  // iso
   dto: {
     CreateProductBody: {
       name: {
@@ -88,6 +89,28 @@ export const frProducts: ProductsI18nTranslationsKeys = {
         },
       },
     },
+    ProductDto: {
+      name: {
+        label: 'Nom du produit',
+        validation: undefined,
+      },
+      description: {
+        label: 'Description',
+        validation: undefined,
+      },
+      id: {
+        label: 'Identifiant',
+        validation: undefined,
+      },
+      mediaTypeName: {
+        label: 'Nom du type de media',
+        validation: undefined,
+      },
+      pictureFormatName: {
+        label: "Format de l'image",
+        validation: undefined,
+      },
+    },
   },
   form: {
     CreateProductForm: {
@@ -102,6 +125,50 @@ export const frProducts: ProductsI18nTranslationsKeys = {
       },
     },
   },
+  action: {
+    CreateProductAction: {
+      success: {
+        label: 'Produit créé avec success !',
+      },
+      pending: {
+        label: 'Création du produit en cours...',
+      },
+      error: {
+        label: 'Erreur lors de la création du produit.',
+      },
+    },
+  },
+  getter: {
+    ProductsGetter: {
+      success: {
+        label: 'Produits chargés avec success !',
+      },
+      pending: {
+        label: 'Chargement des produits en cours...',
+      },
+      error: {
+        label: 'Erreur lors du chargement des produits.',
+      },
+      empty: {
+        label: 'Aucun produit trouvé.',
+      },
+    },
+    ProductGetter: {
+      success: {
+        label: 'Produit chargé avec success !',
+      },
+      pending: {
+        label: 'Chargement du produit en cours...',
+      },
+      error: {
+        label: 'Erreur lors du chargement du produit.',
+      },
+      empty: {
+        label: 'Produit non trouvé.',
+      },
+    },
+  },
+  // other
   title: 'Produits',
   addProduct: 'Ajouter un produit',
   detail: {

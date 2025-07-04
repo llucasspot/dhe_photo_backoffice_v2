@@ -2,33 +2,42 @@ import { match } from 'ts-pattern';
 
 import { SchoolRow } from './school-row';
 
+import { useContextGetter } from '#action/react';
 import { SchoolDto } from '#features/schools/domain';
+import { SchoolsGetter } from '#features/schools/use-cases';
 import { useI18n } from '#i18n/react';
 
 const SchoolListLoading = () => {
   const { t } = useI18n();
+  const { getter } = useContextGetter(SchoolsGetter);
+
   return (
     <div className="p-4 text-center text-gray-500">
-      {t('schools.list.pending')}
+      {t(getter.i18nKeys.pending)}
     </div>
   );
 };
 
 const SchoolListError = ({ error }: { error: Error | null }) => {
   const { t } = useI18n();
+  const { getter } = useContextGetter(SchoolsGetter);
+
   console.error('SchoolListError list error:', error);
+
   return (
     <div className="p-4 text-center text-red-500">
-      {t('schools.list.error')}
+      {t(getter.i18nKeys.error)}
     </div>
   );
 };
 
 const SchoolListEmpty = () => {
   const { t } = useI18n();
+  const { getter } = useContextGetter(SchoolsGetter);
+
   return (
     <div className="p-4 text-center text-gray-500">
-      {t('schools.list.empty')}
+      {t(getter.i18nKeys.empty)}
     </div>
   );
 };
@@ -45,15 +54,10 @@ const SchoolListNonEmpty = ({ schools }: { schools: SchoolDto[] }) => {
   );
 };
 
-export const SchoolList = ({
-  schools,
-  isLoading,
-  error,
-}: {
-  schools: SchoolDto[];
-  isLoading: boolean;
-  error: Error | null;
-}) => {
+export const SchoolList = () => {
+  const { queryResult } = useContextGetter(SchoolsGetter);
+  const { data: schools = [], isLoading, error } = queryResult;
+
   return match({ isLoading, error, schools })
     .with({ isLoading: true }, SchoolListLoading)
     .when(({ error }) => !!error, SchoolListError)

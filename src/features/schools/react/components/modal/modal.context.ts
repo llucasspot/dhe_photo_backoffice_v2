@@ -1,8 +1,10 @@
 import { createContext, ReactNode } from 'react';
 
+import { I18nKey } from '#i18n/domain';
+
 export type ModalOpenOptions = {
-  title: string;
-  subtitle: string;
+  title: I18nKey;
+  subtitle: I18nKey;
 };
 
 type ModalContextType = {

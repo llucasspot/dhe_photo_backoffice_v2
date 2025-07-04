@@ -12,14 +12,16 @@ import { FormInput } from '../inputs/form-input';
 
 import { FormButton } from '#components';
 import { classNames } from '#core/react';
+import { I18nDtoName, I18nFormName, I18nKey } from '#i18n/domain';
 import { useI18n } from '#i18n/react';
 
 const Header = () => {
   const { t } = useI18n();
-  const { formName } = useForm();
+  const { formName: _formName } = useForm();
+  const formName: I18nFormName = _formName as I18nFormName;
 
   const title = t(`form.${formName}.title`);
-  const subtitleI18nKey = `form.${formName}.subtitle`;
+  const subtitleI18nKey = `form.${formName}.subtitle` as const;
   const subtitle = t(subtitleI18nKey);
   const isSubtitlePresent = subtitle != subtitleI18nKey;
 
@@ -38,11 +40,13 @@ const Header = () => {
 const Footer = () => {
   const { t } = useI18n();
   const {
-    formName,
+    formName: _formName,
     form: {
       formState: { isSubmitting },
     },
   } = useForm();
+  const formName: I18nFormName = _formName as I18nFormName;
+
   return (
     <div className="mt-6 flex items-center justify-end gap-x-6">
       <button
@@ -77,8 +81,8 @@ const Label = <TFormBody extends FieldValues>({
   const { required } = useInputProps<TFormBody>(formKey);
   const { props: labelProps } = useLabelProps<TFormBody>(formKey);
 
-  const dtoName = dto.name;
-  const i18nLabelKey = `dto.${dtoName}.${formKey}.label`;
+  const dtoName = dto.name as I18nDtoName;
+  const i18nLabelKey = `dto.${dtoName}.${formKey}.label` as I18nKey;
 
   return (
     <label
@@ -104,11 +108,11 @@ const ErrorLabel = <TFormBody extends FieldValues>({
   if (!error) {
     return null;
   }
-  const dtoName = dto.name;
+  const dtoName = dto.name as I18nDtoName;
   const errorType = error.type;
   const i18nErrorMessageKey = errorType
-    ? `dto.${dtoName}.${formKey}.validation.${errorType}`
-    : 'common.errors.undefined';
+    ? (`dto.${dtoName}.${formKey}.validation.${errorType}` as I18nKey)
+    : 'common.error.undefined';
 
   return (
     <p id={`${formKey}-error`} className="mt-2 text-sm text-red-600">
@@ -170,7 +174,9 @@ const InputContainer = ({
 
 const SubmitButton = ({ className }: { className?: string }) => {
   const { t } = useI18n();
-  const { formName } = useForm();
+  const { formName: _formName } = useForm();
+  const formName: I18nFormName = _formName as I18nFormName;
+
   return (
     <FormButton className={className}>
       {t(`form.${formName}.button.submit.label`)}
@@ -180,7 +186,8 @@ const SubmitButton = ({ className }: { className?: string }) => {
 
 const Title = () => {
   const { t } = useI18n();
-  const { formName } = useForm();
+  const { formName: _formName } = useForm();
+  const formName: I18nFormName = _formName as I18nFormName;
 
   return (
     <h2 className="text-base font-semibold leading-7 text-gray-900">

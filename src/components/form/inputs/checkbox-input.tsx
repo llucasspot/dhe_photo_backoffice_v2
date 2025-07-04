@@ -2,6 +2,7 @@ import { ComponentProps } from 'react';
 import { useForm } from '@mygoodstack/form-react';
 
 import { classNames } from '#core/react';
+import { I18nDtoName, I18nKey } from '#i18n/domain';
 import { useI18n } from '#i18n/react';
 
 type CheckboxInputProps = ComponentProps<'input'> & {
@@ -20,8 +21,8 @@ export function CheckboxInput({
     form: { register },
   } = useForm();
 
-  const dtoName = dto.name;
-  const i18nLabelKey = `dto.${dtoName}.${formKey}.label`;
+  const dtoName = dto.name as I18nDtoName;
+  const i18nLabelKey = `dto.${dtoName}.${formKey}.label` as I18nKey;
 
   return (
     <div className="flex items-center space-x-2">

@@ -1,6 +1,7 @@
 import { KlassesI18nTranslationsKeys } from '../klasses.i18n-translations-keys';
 
 export const frKlasses: KlassesI18nTranslationsKeys = {
+  // iso
   dto: {
     CreateGroupPictureBody: {
       projectId: {
@@ -71,6 +72,10 @@ export const frKlasses: KlassesI18nTranslationsKeys = {
       },
     },
   },
+  form: {},
+  action: {},
+  getter: {},
+  // other
   title: 'Classes',
   addClass: 'Ajouter une classe',
   detail: {
