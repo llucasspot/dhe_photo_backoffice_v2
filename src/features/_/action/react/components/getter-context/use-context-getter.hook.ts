@@ -1,9 +1,9 @@
 import { useContext } from 'react';
+import { Type } from '@mygoodstack/di-react';
 
 import { GetterContext, GetterContextType } from './getter.context';
 
 import { GetterI } from '#action/domain';
-import { Type } from '#di/domain';
 
 export function useContextGetter<
   TCacheTags extends string[] | Readonly<string[]>,

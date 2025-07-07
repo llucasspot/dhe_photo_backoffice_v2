@@ -1,11 +1,10 @@
 import { PropsWithChildren } from 'react';
-import { useInstance } from '@mygoodstack/di-react';
+import { Type, useInstance } from '@mygoodstack/di-react';
 
 import { ActionContext } from './action.context.ts';
 
 import { ActionI } from '#action/domain';
 import { useAction } from '#action/react';
-import { Type } from '#di/domain';
 
 type ActionProviderProps<TData, TBody> = PropsWithChildren<{
   Action: Type<ActionI<TData, TBody>>;

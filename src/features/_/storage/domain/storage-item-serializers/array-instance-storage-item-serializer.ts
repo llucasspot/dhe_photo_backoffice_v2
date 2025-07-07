@@ -1,7 +1,8 @@
+import { Type } from '@mygoodstack/di-react';
+
 import { StorageItemSerializer } from './storage-item-serializer.abstract';
 
 import { instanceToPlain, plainToInstance } from '#class-transformer';
-import { Type } from '#di/domain';
 
 export class ArrayInstanceStorageItemSerializer<
   TData extends object,

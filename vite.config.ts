@@ -63,7 +63,6 @@ export default defineConfig({
       '#features/files/infra': build('src/features/files/infra'),
       '#features/files/react': build('src/features/files/react'),
       '#layout': build('src/layout'),
-      '#di/domain': build('src/lib/di/src/domain'),
       '#di/react': build('src/lib/di/src/react'),
       '#di': build('src/lib/di/src'),
       '#i18n/domain': build('src/features/_/i18n/src/domain'),

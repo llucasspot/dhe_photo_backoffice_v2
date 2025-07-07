@@ -1,4 +1,5 @@
 import { singleton } from '@mygoodstack/di-react';
+import { Type } from '@mygoodstack/di-react';
 import Dexie, { EntityTable } from 'dexie';
 
 import { DatabaseServicePort } from '../../../domain';
@@ -27,8 +28,6 @@ import {
 } from '../dao/dto-by-table-name.type.dexie';
 
 import { DatabaseServiceDexieAdapterAbstract } from './database.service.dexie-adapter.abstract';
-
-import { Type } from '#di/domain';
 
 export type DexieConnexion = Dexie & {
   // @ts-expect-error dao

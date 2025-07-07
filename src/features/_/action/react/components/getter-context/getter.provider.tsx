@@ -1,11 +1,10 @@
 import { PropsWithChildren } from 'react';
-import { useInstance } from '@mygoodstack/di-react';
+import { Type, useInstance } from '@mygoodstack/di-react';
 
 import { GetterContext } from './getter.context';
 
 import { GetterI } from '#action/domain';
 import { useGetter } from '#action/react';
-import { Type } from '#di/domain';
 
 type GetterProviderProps<
   TCacheTags extends string[] | Readonly<string[]>,

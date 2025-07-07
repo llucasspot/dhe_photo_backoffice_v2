@@ -1,8 +1,7 @@
-import { useInstance } from '@mygoodstack/di-react';
+import { Token, useInstance } from '@mygoodstack/di-react';
 import { useQuery } from '@tanstack/react-query';
 
 import { GetterI } from '#action/domain';
-import { Token } from '#di/domain';
 
 export function useGetter<
   TCacheTags extends string[] | Readonly<string[]>,

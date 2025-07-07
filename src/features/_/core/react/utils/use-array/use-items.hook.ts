@@ -1,7 +1,8 @@
+import { Type } from '@mygoodstack/di-react';
+
 import { useValue } from '../use-value.hook';
 
 import { plainToInstance } from '#class-transformer';
-import { Type } from '#di/domain';
 
 function transformArrayToRecord<TItem extends { id: string }>(
   items: TItem[],

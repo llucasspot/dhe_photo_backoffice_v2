@@ -1,3 +1,4 @@
+import { Type } from '@mygoodstack/di-react';
 import Dexie, { Collection, EntityTable, IDType, InsertType } from 'dexie';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -13,8 +14,6 @@ import {
 } from '../dao/dto-by-table-name.type.dexie';
 
 import { operatorMapperDexie } from './operator-mapper.dexie';
-
-import { Type } from '#di/domain';
 
 export type DexieConnexion = Dexie & {
   // @ts-expect-error dao

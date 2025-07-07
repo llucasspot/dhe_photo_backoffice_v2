@@ -9,8 +9,7 @@ declare module '@tanstack/react-router' {
 }
 
 export function TanstackRouter() {
-  // TODO import.meta.env
-  const basepath = import.meta.env.VITE_BASE_PATH ?? '/';
+  const basepath = import.meta.env.BASE_URL;
   console.log('base-path : ', basepath);
 
   return (

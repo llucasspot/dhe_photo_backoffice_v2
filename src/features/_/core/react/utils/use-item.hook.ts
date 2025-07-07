@@ -1,8 +1,8 @@
 import { useState } from 'react';
+import { Type } from '@mygoodstack/di-react';
 
 import { plainToInstance } from '#class-transformer';
 import { StateValue } from '#core/react';
-import { Type } from '#di/domain';
 
 export function useItem<TItem extends object>(
   Type: Type<TItem>,

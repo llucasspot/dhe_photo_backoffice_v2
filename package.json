@@ -120,7 +120,6 @@
     "#features/files/infra": "src/features/files/infra",
     "#features/files/react": "src/features/files/react",
     "#layout": "src/layout",
-    "#di/domain": "./src/lib/di/src/domain",
     "#di/react": "./src/lib/di/src/react",
     "#di": "./src/lib/di/src",
     "#i18n/domain": "./src/features/_/i18n/src/domain",

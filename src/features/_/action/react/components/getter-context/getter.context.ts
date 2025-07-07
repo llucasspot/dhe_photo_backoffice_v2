@@ -1,8 +1,8 @@
 import { createContext } from 'react';
+import { Type } from '@mygoodstack/di-react';
 import { UseQueryResult } from '@tanstack/react-query';
 
 import { GetterI } from '#action/domain';
-import { Type } from '#di/domain';
 
 export type GetterContextType<
   TCacheTags extends string[] | Readonly<string[]>,

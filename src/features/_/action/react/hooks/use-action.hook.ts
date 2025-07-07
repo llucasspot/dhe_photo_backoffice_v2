@@ -1,8 +1,7 @@
-import { useInstance } from '@mygoodstack/di-react';
+import { Token, useInstance } from '@mygoodstack/di-react';
 import { useMutation } from '@tanstack/react-query';
 
 import { ActionI } from '#action/domain';
-import { Token } from '#di/domain';
 import { ToastService } from '#toast/domain';
 
 export function useAction<TData = void, TBody = void>(

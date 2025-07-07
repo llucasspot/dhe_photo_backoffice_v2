@@ -1,9 +1,9 @@
 import { useContext } from 'react';
+import { Type } from '@mygoodstack/di-react';
 
 import { ActionContext, ActionContextType } from './action.context.ts';
 
 import { ActionI } from '#action/domain';
-import { Type } from '#di/domain';
 
 export function useContextAction<TData, TBody>(
   Action: Type<ActionI<TData, TBody>>,
