@@ -7,9 +7,6 @@ import { frSettings } from '#features/settings/i18n';
 import { frStudents } from '#features/students/i18n';
 
 export const fr = {
-  test: {
-    test: 'hihi {{lala}}',
-  },
   // iso
   dto: {
     ...frAuth.dto,

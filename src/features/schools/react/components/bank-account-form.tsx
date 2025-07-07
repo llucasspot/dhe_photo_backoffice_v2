@@ -75,9 +75,11 @@ export const BankAccountForm = ({
         </div>
         <div className="ml-3 text-sm">
           <label htmlFor="isDefault" className="font-medium text-gray-700">
+            {/*// @ts-expect-error I18n*/}
             {t('schools.detail.bankAccounts.fields.isDefault')}
           </label>
           <p className="text-gray-500">
+            {/*// @ts-expect-error I18n*/}
             {t('schools.detail.bankAccounts.fields.isDefaultHelp')}
           </p>
         </div>

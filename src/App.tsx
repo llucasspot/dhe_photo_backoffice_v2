@@ -1,5 +1,4 @@
 import { ToastContainer } from 'react-toastify';
-import { containerByEnv as containerByEnvCore } from '@mygoodstack/di-core';
 import { containerByEnv } from '@mygoodstack/di-react';
 import { DIProvider, useInstance } from '@mygoodstack/di-react';
 import { Theme } from '@radix-ui/themes';
@@ -11,12 +10,25 @@ import { ReactQueryDevtools } from './ReactQueryDevtools';
 
 import { Router } from '#routing/react';
 
-export const App = () => {
-  const nodeEnv = process.env.NODE_ENV as keyof typeof containerByEnv;
-  console.log(`process.env.NODE_ENV : ${nodeEnv}`);
+console.log('-------------------------------');
+console.log('----- General information -----');
+console.log('-------------------------------');
+console.table({
+  'Time Stamp': new Date().getTime(),
+  OS: navigator['platform'],
+  Browser: navigator['appCodeName'],
+  Language: navigator['language'],
+});
 
-  const container = containerByEnv[nodeEnv];
-  console.log(containerByEnvCore === containerByEnv);
+const env: keyof typeof containerByEnv =
+  import.meta.env.VITE_APP_ENV ?? import.meta.env.MODE;
+console.log(`env : ${env}`);
+
+const container = containerByEnv[env];
+
+container.consoleLog();
+
+export const App = () => {
   return (
     <DIProvider container={container}>
       <AppContent />

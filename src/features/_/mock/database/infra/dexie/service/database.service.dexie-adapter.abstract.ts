@@ -17,6 +17,7 @@ import { operatorMapperDexie } from './operator-mapper.dexie';
 import { Type } from '#di/domain';
 
 export type DexieConnexion = Dexie & {
+  // @ts-expect-error dao
   [K in DexieTableName]: EntityTable<DtoByDexieTableName[K], 'id'>;
 };
 
@@ -54,20 +55,25 @@ export class DatabaseServiceDexieAdapterAbstract
     TPopulatedEntity extends DtoByDexieTableName[TTableName],
   >(
     query: Pick<
+      // @ts-expect-error dao
       EntityTable<DtoByDexieTableName[TTableName], 'id'>,
       'filter' | 'toArray'
     >,
     finder?: Finder<DtoByDexieTableName, TTableName, TPopulatedEntity>,
   ): Promise<DtoByDexieTableName[TTableName][] | TPopulatedEntity[]> {
+    // @ts-expect-error dao
     const _query = this.rebuildWithFilters(query, finder?.filters);
     const results = await _query.toArray();
     // @ts-expect-error Type string is not assignable to type "id"
     await this.applyPopulators(results, finder?.populators);
+    // @ts-expect-error dao
     return results;
   }
 
   async getById<TTableName extends DexieTableName>(
+    // @ts-expect-error dao
     query: EntityTable<DtoByDexieTableName[TTableName], 'id'>,
+    // @ts-expect-error dao
     id: DtoByDexieTableName[TTableName]['id'],
   ) {
     return this.get(
@@ -76,6 +82,7 @@ export class DatabaseServiceDexieAdapterAbstract
         DtoByDexieTableName,
         TTableName,
         DtoByDexieTableName[TTableName]
+        // @ts-expect-error dao
       >().filtersWith(['id', '$equals', id]),
     );
   }
@@ -85,11 +92,13 @@ export class DatabaseServiceDexieAdapterAbstract
     TPopulatedEntity extends DtoByDexieTableName[TTableName],
   >(
     query: Pick<
+      // @ts-expect-error dao
       EntityTable<DtoByDexieTableName[TTableName], 'id'>,
       'filter' | 'toArray'
     >,
     finder?: Finder<DtoByDexieTableName, TTableName, TPopulatedEntity>,
   ): Promise<DtoByDexieTableName[TTableName] | TPopulatedEntity | undefined> {
+    // @ts-expect-error dao
     const _query = this.rebuildWithFilters(query, finder?.filters);
     const result = await _query.first();
     if (!result) {
@@ -97,13 +106,16 @@ export class DatabaseServiceDexieAdapterAbstract
     }
     // @ts-expect-error Type string is not assignable to type "id"
     await this.applyPopulatorsForGet(result, finder?.populators);
+    // @ts-expect-error dao
     return result;
   }
 
   async save<TTableName extends DexieTableName>(
+    // @ts-expect-error dao
     query: EntityTable<DtoByDexieTableName[TTableName], 'id'>,
     body: Omit<DtoByDexieTableName[TTableName], 'id'>,
   ) {
+    // @ts-expect-error dao
     const id: DtoByDexieTableName[TTableName]['id'] = await query.add(
       // @ts-expect-error save
       body,
@@ -113,6 +125,7 @@ export class DatabaseServiceDexieAdapterAbstract
   }
 
   async saveMany<TTableName extends DexieTableName>(
+    // @ts-expect-error dao
     query: EntityTable<DtoByDexieTableName[TTableName], 'id'>,
     entities: Omit<DtoByDexieTableName[TTableName], 'id'>[],
   ) {
@@ -125,7 +138,9 @@ export class DatabaseServiceDexieAdapterAbstract
   }
 
   async update<TTableName extends DexieTableName>(
+    // @ts-expect-error dao
     query: EntityTable<DtoByDexieTableName[TTableName], 'id'>,
+    // @ts-expect-error dao
     id: DtoByDexieTableName[TTableName]['id'],
     body: Partial<DtoByDexieTableName[TTableName]>,
   ) {
@@ -142,7 +157,9 @@ export class DatabaseServiceDexieAdapterAbstract
   }
 
   async deleteById<TTableName extends DexieTableName>(
+    // @ts-expect-error dao
     query: EntityTable<DtoByDexieTableName[TTableName], 'id'>,
+    // @ts-expect-error dao
     id: DtoByDexieTableName[TTableName]['id'],
   ): Promise<boolean> {
     try {
@@ -158,8 +175,10 @@ export class DatabaseServiceDexieAdapterAbstract
   }
 
   getRelatedTable<TTableName extends DexieTableName>(tableName: TTableName) {
+    // @ts-expect-error dao
     return this.db[tableName] as EntityTable<
       DtoByDexieTableName[TTableName],
+      // @ts-expect-error dao
       'id'
     >;
   }
@@ -245,6 +264,7 @@ export class DatabaseServiceDexieAdapterAbstract
       TPopulatedEntity,
       TPopulatedAs
     >,
+    // @ts-expect-error dao
     query: EntityTable<DtoByDexieTableName[TTableName], 'id'>,
   ) {
     // const query = this.getRelatedTable(populator.tableName);

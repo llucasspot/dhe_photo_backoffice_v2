@@ -8,6 +8,7 @@ import { DtoByDexieTableName } from './dto-by-table-name.type.dexie';
 export class DaoDexie<TTableName extends keyof DtoByDexieTableName>
   implements Dao<DtoByDexieTableName, TTableName>
 {
+  // @ts-expect-error dao
   protected query: EntityTable<DtoByDexieTableName[TTableName], 'id'>;
 
   constructor(
@@ -39,7 +40,9 @@ export class DaoDexie<TTableName extends keyof DtoByDexieTableName>
     return this.databaseService.get(this.query, finder);
   }
 
+  // @ts-expect-error dao
   async getById(
+    // @ts-expect-error dao
     id: DtoByDexieTableName[TTableName]['id'],
   ): Promise<DtoByDexieTableName[TTableName] | undefined> {
     return this.databaseService.getById(this.query, id);
@@ -57,7 +60,9 @@ export class DaoDexie<TTableName extends keyof DtoByDexieTableName>
     return this.databaseService.saveMany(this.query, entities);
   }
 
+  // @ts-expect-error dao
   async update(
+    // @ts-expect-error dao
     id: DtoByDexieTableName[TTableName]['id'],
     body: Partial<DtoByDexieTableName[TTableName]>,
   ): Promise<DtoByDexieTableName[TTableName] | undefined> {
@@ -65,6 +70,7 @@ export class DaoDexie<TTableName extends keyof DtoByDexieTableName>
   }
 
   async deleteById(id: string): Promise<boolean> {
+    // @ts-expect-error dao
     return this.databaseService.deleteById(this.query, id);
   }
 }

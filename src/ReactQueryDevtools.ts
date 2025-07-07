@@ -4,7 +4,7 @@ import { ReactQueryDevtoolsPanel as DevtoolsPanel } from '../node_modules/@tanst
 export const ReactQueryDevtools: typeof Devtools = ![
   'mock',
   'development',
-].includes(process.env.NODE_ENV as string)
+].includes(import.meta.env.VITE_APP_ENV as string)
   ? function () {
       return null;
     }
@@ -13,7 +13,7 @@ export const ReactQueryDevtools: typeof Devtools = ![
 export const ReactQueryDevtoolsPanel: typeof DevtoolsPanel = ![
   'mock',
   'development',
-].includes(process.env.NODE_ENV as string)
+].includes(import.meta.env.VITE_APP_ENV as string)
   ? function () {
       return null;
     }

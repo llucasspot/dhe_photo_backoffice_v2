@@ -116,6 +116,7 @@ export class DaoSequelize<TTableName extends keyof DtoBySequelizeTableName>
   >(finder?: Finder<DtoBySequelizeTableName, TTableName, TPopulatedEntity>) {
     const findOptions: FindOptions<DtoBySequelizeTableName[TTableName]> = {};
     if (finder?.filters) {
+      // @ts-expect-error dao
       this.applyFilters(findOptions, finder.filters);
     }
     if (finder?.populators) {

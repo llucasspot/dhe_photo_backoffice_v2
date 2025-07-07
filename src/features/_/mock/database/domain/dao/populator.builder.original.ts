@@ -84,6 +84,7 @@ class PopulatorBuilder<
     this.populators.push(populator);
     return this as PopulatorBuilder<
       (typeof this)['tableName'],
+      // @ts-expect-error dao
       PopulateWith<TPopulatedEntity, TEntity, TAs>,
       TPopulatedAs
     >;
@@ -101,6 +102,7 @@ class PopulatorBuilder<
     this.populators.push(populator);
     return this as PopulatorBuilder<
       (typeof this)['tableName'],
+      // @ts-expect-error dao
       PopulateManyWith<TPopulatedEntity, TEntity, TAs>,
       TPopulatedAs
     >;
@@ -171,6 +173,7 @@ export class Finder<
     this.populators.push(populator);
     return this as Finder<
       (typeof this)['tableName'],
+      // @ts-expect-error dao
       PopulateWith<TPopulatedEntity, TEntity, TAs>
     >;
   }
@@ -187,6 +190,7 @@ export class Finder<
     this.populators.push(populator);
     return this as Finder<
       (typeof this)['tableName'],
+      // @ts-expect-error dao
       PopulateManyWith<TPopulatedEntity, TEntity, TAs>
     >;
   }

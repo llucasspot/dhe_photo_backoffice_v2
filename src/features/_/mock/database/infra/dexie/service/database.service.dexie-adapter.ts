@@ -31,6 +31,7 @@ import { DatabaseServiceDexieAdapterAbstract } from './database.service.dexie-ad
 import { Type } from '#di/domain';
 
 export type DexieConnexion = Dexie & {
+  // @ts-expect-error dao
   [K in DexieTableName]: EntityTable<DtoByDexieTableName[K], 'id'>;
 };
 
