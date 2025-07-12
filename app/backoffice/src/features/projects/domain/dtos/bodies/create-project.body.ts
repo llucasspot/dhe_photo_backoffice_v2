@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import { IsDate, IsNotEmpty, IsString, MaxLength } from 'class-validator';
 
 import { Transform } from '#class-transformer';
@@ -16,13 +17,15 @@ export class CreateProjectBody extends Dto<CreateProjectBody> {
   schoolId!: string;
 
   @IsDate()
+  @Type(() => Date)
   @IsNotEmpty()
-  @Transform(({ value }) => (value ? new Date(value) : null))
+  // @Transform(({ value }) => (value ? new Date(value) : null))
   shotDate!: Date;
 
   @IsDate()
+  @Type(() => Date)
   @IsNotEmpty()
-  @Transform(({ value }) => (value ? new Date(value) : null))
+  // @Transform(({ value }) => (value ? new Date(value) : null))
   orderEndDate!: Date;
 
   @IsString()

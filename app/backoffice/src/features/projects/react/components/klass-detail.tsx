@@ -1,3 +1,4 @@
+import { ProjectKlassDto } from '@domain/modules';
 import { useInstance } from '@mygoodstack/di-react';
 import { match } from 'ts-pattern';
 
@@ -5,7 +6,6 @@ import { FolderDropzone, KlassPictureDropzoneHandlerService } from './index';
 
 import { useAction, useContextGetter } from '#action/react';
 import { BlobViewer } from '#components';
-import { KlassDto } from '#features/klasses/domain';
 import {
   CreateGroupPictureFromFilesAction,
   KlassGetter,
@@ -38,11 +38,7 @@ const KlassDetailError = ({ error }: { error: Error | null }) => {
   );
 };
 
-const KlassDetailContent = ({
-  klass,
-}: {
-  klass: Omit<KlassDto, 'project'>;
-}) => {
+const KlassDetailContent = ({ klass }: { klass: ProjectKlassDto }) => {
   const { t } = useI18n();
   const klassPictureDropzoneHandlerService = useInstance(
     KlassPictureDropzoneHandlerService,
@@ -98,7 +94,7 @@ const KlassDetailContent = ({
             {t('klasses.detail.groupPhoto.list.empty')}
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-6">
-            {klass.photos.map((picture) => (
+            {klass.photos?.map((picture) => (
               <div
                 key={picture.id}
                 className="bg-white p-4 rounded-lg shadow-sm border border-gray-200"
@@ -119,7 +115,7 @@ const KlassDetailContent = ({
 
       <div className="bg-white shadow overflow-hidden sm:rounded-lg">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-6">
-          {klass.students.map((student) => (
+          {klass.students?.map((student) => (
             <div
               key={student.id}
               className="bg-white p-4 rounded-lg shadow-sm border border-gray-200"
@@ -130,7 +126,7 @@ const KlassDetailContent = ({
                 </span>
               </div>
               <div className="grid grid-cols-2 gap-2">
-                {student.photos.map((picture) => (
+                {student.photos?.map((picture) => (
                   <div
                     key={picture.id}
                     className="aspect-square bg-gray-100 rounded-md flex items-center justify-center"

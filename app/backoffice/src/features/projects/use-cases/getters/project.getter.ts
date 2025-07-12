@@ -1,9 +1,9 @@
+import { ProjectDto } from '@domain/modules';
 import { inject, singleton } from '@mygoodstack/di-react';
 
 import { ProjectsControllerServicePort } from '../../domain/ports';
 
 import { Getter } from '#action/domain';
-import { ProjectDto } from '#features/projects/domain';
 
 export const projectsKeys = {
   all: ['projects'] as const,

@@ -6,6 +6,7 @@ import { CreateProjectBody } from '#features/projects/domain';
 import { CreateProjectAction } from '#features/projects/use-cases';
 import { SchoolsGetter } from '#features/schools/use-cases';
 import { RoutingServicePort } from '#routing/domain';
+import { FormDebug } from "../../../../../components/form/inputs/form-debug.tsx";
 
 export const CreateProjectForm = () => {
   const routingService = useInstance(RoutingServicePort);
@@ -54,12 +55,6 @@ export const CreateProjectForm = () => {
       </form.InputContainer>
 
       <form.InputContainer>
-        <form.Label formKey="shotDate" />
-        <form.Input formKey="shotDate" type="date" />
-        <form.ErrorLabel formKey="shotDate" />
-      </form.InputContainer>
-
-      <form.InputContainer>
         <form.Label formKey="orderEndDate" />
         <form.Input formKey="orderEndDate" type="date" />
         <form.ErrorLabel formKey="orderEndDate" />
@@ -72,6 +67,7 @@ export const CreateProjectForm = () => {
       </form.InputContainer>
 
       <form.Footer />
+      <FormDebug />
     </form.Form>
   );
 };

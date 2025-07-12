@@ -1,4 +1,3 @@
-export * from './dtos';
 export * from './dtos/bodies/create-group-picture.body';
 export * from './dtos/bodies/create-klass.body';
 export * from './dtos/bodies/create-klasses.body';

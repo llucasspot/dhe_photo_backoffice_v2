@@ -16,7 +16,7 @@
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
     "@domain/core": "workspace:*",
-    "@domain/schools": "workspace:*",
+    "@domain/modules": "workspace:*",
     "@headlessui/react": "^2.2.4",
     "@heroicons/react": "^2.2.0",
     "@hookform/resolvers": "^5.1.1",

@@ -1,4 +1,6 @@
+import { ProjectDto } from '@domain/modules';
 import { adapter, inject, Scope } from '@mygoodstack/di-react';
+import { plainToInstance } from 'class-transformer';
 
 import { Finder, Populator } from '../../../../database/domain';
 import { ProjectProductsDaoPort } from '../../../../database/modules/products/domain/project-products-dao.port';
@@ -10,9 +12,7 @@ import { LogAction } from '#core/domain';
 import {
   AddProductBody,
   CreateProjectBody,
-  ProjectDto,
   ProjectsControllerServicePort,
-  ProjectState,
 } from '#features/projects/domain';
 
 @adapter(ProjectsControllerServicePort, Scope.Singleton, 'mock')
@@ -46,14 +46,14 @@ export class ProjectsServiceMockAdapter
   async getProjects(): Promise<ProjectDto[]> {
     await this.delay();
     const projects = await this.projectsDao.getAll(this.buildFinder());
-    return ProjectDto.build(projects);
+    return plainToInstance(ProjectDto, projects);
   }
 
   @LogAction()
   async getProject(projectId: string): Promise<ProjectDto> {
     await this.delay();
     const project = await this.projectsDao.get(this.buildFinder(projectId));
-    return ProjectDto.build(project);
+    return plainToInstance(ProjectDto, project);
   }
 
   @LogAction()
@@ -61,10 +61,10 @@ export class ProjectsServiceMockAdapter
     await this.delay();
     const createdProject = await this.projectsDao.save({
       ...body,
-      state: ProjectState.Unpublished,
+      state: 'unpublished',
     });
     const project = this.getProject(createdProject.id);
-    return ProjectDto.build(project);
+    return plainToInstance(ProjectDto, project);
   }
 
   @LogAction()
@@ -78,7 +78,7 @@ export class ProjectsServiceMockAdapter
       throw new HttpError(404, 'Project not found');
     }
     const project = this.getProject(updatedProject.id);
-    return ProjectDto.build(project);
+    return plainToInstance(ProjectDto, project);
   }
 
   @LogAction()

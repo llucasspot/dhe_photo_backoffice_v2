@@ -1,10 +1,10 @@
 import {
-  BankAccountDto,
   CreateSchoolBody,
   SchoolDto,
   SchoolsControllerServicePort,
-} from '@domain/schools';
-import { AddSchoolBankAccountBody } from '@domain/schools';
+} from '@domain/modules';
+import { AddSchoolBankAccountBody } from '@domain/modules';
+import { SchoolBankAccountDto } from '@domain/modules';
 import { adapter, inject } from '@mygoodstack/di-react';
 
 import { HttpClient } from '../../../utils/http';
@@ -55,8 +55,8 @@ export class SchoolsServiceApiAdapter implements SchoolsControllerServicePort {
 
   // bank accounts
 
-  async getBankAccounts(id: string): Promise<BankAccountDto[]> {
-    const response = await this.httpClient.get<BankAccountDto[]>(
+  async getBankAccounts(id: string): Promise<SchoolBankAccountDto[]> {
+    const response = await this.httpClient.get<SchoolBankAccountDto[]>(
       `/user/schools/${id}/bank-accounts`,
     );
     return response.data;
@@ -65,8 +65,8 @@ export class SchoolsServiceApiAdapter implements SchoolsControllerServicePort {
   async addBankAccount(
     id: string,
     body: AddSchoolBankAccountBody,
-  ): Promise<BankAccountDto> {
-    const response = await this.httpClient.post<BankAccountDto>(
+  ): Promise<SchoolBankAccountDto> {
+    const response = await this.httpClient.post<SchoolBankAccountDto>(
       `/user/schools/${id}/bank-accounts`,
       body,
     );

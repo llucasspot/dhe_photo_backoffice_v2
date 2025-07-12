@@ -1,4 +1,6 @@
+import { ProjectKlassDto } from '@domain/modules';
 import { adapter, inject, Scope } from '@mygoodstack/di-react';
+import { plainToInstance } from 'class-transformer';
 
 import { Finder, Populator } from '../../../../database/domain';
 import { KlassesDaoPort } from '../../../../database/modules/klasses/domain/klasses-dao.port';
@@ -6,10 +8,7 @@ import { ForMockControllerService } from '../../../domain/for-mock-controller-se
 import { HttpError } from '../../../domain/http-error';
 
 import { LogAction } from '#core/domain';
-import {
-  KlassDto,
-  KlassesControllerServicePort,
-} from '#features/klasses/domain';
+import { KlassesControllerServicePort } from '#features/klasses/domain';
 import { CreateKlassesBody } from '#features/projects/domain';
 import { StudentsCreatorControllerServicePort } from '#features/students/domain';
 
@@ -28,7 +27,7 @@ export class KlassesServiceMockAdapter
   }
 
   @LogAction()
-  async getKlass(projectId: string, klassId: string): Promise<KlassDto> {
+  async getKlass(projectId: string, klassId: string): Promise<ProjectKlassDto> {
     await this.delay();
     const klass = await this.klassesDao.get(
       new Finder('klasses')
@@ -70,16 +69,16 @@ export class KlassesServiceMockAdapter
     if (!klass) {
       throw new HttpError(404, 'Klass not found');
     }
-    return KlassDto.build(klass);
+    return plainToInstance(ProjectKlassDto, klass);
   }
 
   @LogAction()
   async createKlassesFromFolders({
     projectId,
     klasses: bodies,
-  }: CreateKlassesBody): Promise<KlassDto[]> {
+  }: CreateKlassesBody): Promise<ProjectKlassDto[]> {
     await this.delay();
-    const klasses: KlassDto[] = [];
+    const klasses: ProjectKlassDto[] = [];
     for (const {
       name,
       studentPicture: { file },
@@ -95,7 +94,7 @@ export class KlassesServiceMockAdapter
           klassId: klass.id,
         });
         klasses.push(
-          KlassDto.build({
+          plainToInstance(ProjectKlassDto, {
             ...klass,
             students: [student],
           }),
@@ -106,7 +105,7 @@ export class KlassesServiceMockAdapter
     return klasses;
   }
 
-  async getKlasses(projectId: string): Promise<KlassDto[]> {
+  async getKlasses(projectId: string): Promise<ProjectKlassDto[]> {
     const klasses = await this.klassesDao.getAll(
       new Finder('klasses')
         .filtersWith(['projectId', '$equals', projectId])
@@ -134,6 +133,6 @@ export class KlassesServiceMockAdapter
             .build(),
         ),
     );
-    return KlassDto.build(klasses);
+    return plainToInstance(ProjectKlassDto, klasses);
   }
 }

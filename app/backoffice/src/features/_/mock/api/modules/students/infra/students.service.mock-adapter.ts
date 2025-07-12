@@ -1,3 +1,4 @@
+import { KlassStudentDto } from '@domain/modules';
 import { adapter, inject, Scope } from '@mygoodstack/di-react';
 
 import { StudentsDaoPort } from '../../../../database/modules/students/domain/students-dao.port';
@@ -6,7 +7,6 @@ import { HttpError } from '../../../domain/http-error';
 
 import { LogAction } from '#core/domain';
 import {
-  StudentDto,
   StudentsControllerServicePort,
   StudentsGetterControllerServicePort,
 } from '#features/students/domain';
@@ -28,8 +28,8 @@ export class StudentsServiceMockAdapter
   @LogAction()
   async updateStudent(
     studentId: string,
-    body: Partial<StudentDto>,
-  ): Promise<StudentDto> {
+    body: Partial<KlassStudentDto>,
+  ): Promise<KlassStudentDto> {
     await this.delay();
     const student = await this.studentsDao.update(studentId, body);
     if (!student) {

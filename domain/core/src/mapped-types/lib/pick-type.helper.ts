@@ -1,4 +1,7 @@
-import { Type } from '@mygoodstack/di-react';
+/* eslint-disable */
+// @ts-nocheck
+
+import { Type } from '@mygoodstack/di-core';
 
 import { RemoveFieldsWithType } from './types/remove-fields-with-type.type';
 import { MappedType } from './mapped-type.interface';

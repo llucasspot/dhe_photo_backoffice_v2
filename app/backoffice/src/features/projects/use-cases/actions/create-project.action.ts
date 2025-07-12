@@ -1,3 +1,4 @@
+import { ProjectDto } from '@domain/modules';
 import { inject, singleton } from '@mygoodstack/di-react';
 
 import { projectsKeys } from '../getters';
@@ -6,7 +7,6 @@ import { Action } from '#action/domain';
 import { CacheServicePort } from '#cache/domain';
 import {
   CreateProjectBody,
-  ProjectDto,
   ProjectsControllerServicePort,
 } from '#features/projects/domain';
 

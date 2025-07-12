@@ -206,7 +206,7 @@ function isClassTransformerAvailable() {
 export function inheritPropertyInitializers(
   target: Record<string, any>,
   sourceClass: Type<any>,
-   
+
   isPropertyInherited = (key: string) => true,
 ) {
   try {

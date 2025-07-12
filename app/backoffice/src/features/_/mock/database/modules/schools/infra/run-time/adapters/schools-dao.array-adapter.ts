@@ -1,4 +1,3 @@
-import { AvailableCurrency } from '@domain/schools';
 import { adapter, Scope } from '@mygoodstack/di-react';
 
 import { DtoByTableName } from '../../../../../domain';
@@ -15,19 +14,19 @@ export class SchoolsDaoArrayAdapter
       {
         id: '1',
         name: 'Saint Joseph High School',
-        currency: AvailableCurrency.EUR,
+        currency: 'EUR',
         city: 'Paris',
       },
       {
         id: '2',
         name: 'Lycée Victor Hugo',
-        currency: AvailableCurrency.EUR,
+        currency: 'EUR',
         city: 'Lyon',
       },
       {
         id: '3',
         name: 'International School of Marseille',
-        currency: AvailableCurrency.EUR,
+        currency: 'EUR',
         city: 'Marseille',
       },
     ]);

@@ -4,8 +4,6 @@ import { DtoByTableName } from '../../../../../domain';
 import { DaoRunTime } from '../../../../../infra/run-time';
 import { ProjectsDaoPort } from '../../../domain/projects-dao.port';
 
-import { ProjectState } from '#features/projects/domain';
-
 @adapter(ProjectsDaoPort, Scope.Singleton, 'mock')
 export class ProjectsDaoArrayAdapter
   extends DaoRunTime<DtoByTableName, 'projects'>
@@ -16,7 +14,7 @@ export class ProjectsDaoArrayAdapter
       {
         id: '1',
         name: 'School Project A',
-        state: ProjectState.Published,
+        state: 'published',
         schoolId: '1',
         shotDate: new Date(),
         orderEndDate: new Date(),
@@ -24,7 +22,7 @@ export class ProjectsDaoArrayAdapter
       {
         id: '2',
         name: 'School Project B',
-        state: ProjectState.Unpublished,
+        state: 'published',
         schoolId: '2',
         shotDate: new Date(),
         orderEndDate: new Date(),
@@ -32,7 +30,7 @@ export class ProjectsDaoArrayAdapter
       {
         id: '3',
         name: 'School Project C',
-        state: ProjectState.Published,
+        state: 'published',
         schoolId: '3',
         shotDate: new Date(),
         orderEndDate: new Date(),

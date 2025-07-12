@@ -1,3 +1,4 @@
+import { KlassStudentDto } from '@domain/modules';
 import { adapter, inject, Scope } from '@mygoodstack/di-react';
 
 import { StudentsDaoPort } from '../../../../database/modules/students/domain/students-dao.port';
@@ -7,7 +8,6 @@ import { LogAction } from '#core/domain';
 import { FileStudentsCreatorControllerServicePort } from '#features/files/domain';
 import {
   CreateStudentBody,
-  StudentDto,
   StudentsCreatorControllerServicePort,
   StudentsGetterControllerServicePort,
 } from '#features/students/domain';
@@ -29,7 +29,7 @@ export class StudentsCreatorMockAdapter
   }
 
   @LogAction()
-  async createStudent(body: CreateStudentBody): Promise<StudentDto> {
+  async createStudent(body: CreateStudentBody): Promise<KlassStudentDto> {
     await this.delay();
     const student = await this.studentsDao.save({
       ...body,
@@ -43,7 +43,9 @@ export class StudentsCreatorMockAdapter
   }
 
   @LogAction()
-  async createStudents(students: CreateStudentBody[]): Promise<StudentDto[]> {
+  async createStudents(
+    students: CreateStudentBody[],
+  ): Promise<KlassStudentDto[]> {
     await this.delay();
     return Promise.all(students.map((student) => this.createStudent(student)));
   }

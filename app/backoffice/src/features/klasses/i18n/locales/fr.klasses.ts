@@ -37,7 +37,7 @@ export const frKlasses: KlassesI18nTranslationsKeys = {
         validation: {},
       },
     },
-    KlassDto: {
+    ProjectKlassDto: {
       projectId: {
         label: 'Projet',
         validation: {},
@@ -58,15 +58,7 @@ export const frKlasses: KlassesI18nTranslationsKeys = {
         label: 'Étudiants',
         validation: {},
       },
-      studentIds: {
-        label: 'Étudiants',
-        validation: {},
-      },
       photos: {
-        label: 'Photos',
-        validation: {},
-      },
-      photoIds: {
         label: 'Photos',
         validation: {},
       },

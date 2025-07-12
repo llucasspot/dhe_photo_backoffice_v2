@@ -1,15 +1,13 @@
+import { KlassStudentDto } from '@domain/modules';
 import { adapter, inject, Scope } from '@mygoodstack/di-react';
+import { plainToInstance } from 'class-transformer';
 
 import { Finder, Populator } from '../../../../database/domain';
 import { StudentsDaoPort } from '../../../../database/modules/students/domain/students-dao.port';
 import { ForMockControllerService } from '../../../domain/for-mock-controller-service';
 import { HttpError } from '../../../domain/http-error';
 
-import { KlassDto } from '#features/klasses/domain';
-import {
-  KlassStudentsGetterControllerServicePort,
-  StudentDto,
-} from '#features/students/domain';
+import { KlassStudentsGetterControllerServicePort } from '#features/students/domain';
 
 @adapter(KlassStudentsGetterControllerServicePort, Scope.Singleton, 'mock')
 export class KlassStudentsServiceMockAdapter
@@ -23,7 +21,7 @@ export class KlassStudentsServiceMockAdapter
     super();
   }
 
-  async getStudents(klassId: string): Promise<KlassDto['students']> {
+  async getStudents(klassId: string): Promise<KlassStudentDto[]> {
     const students = await this.studentsDao.getAll(
       new Finder('students')
         .filtersWith(['klassId', '$equals', klassId])
@@ -37,13 +35,13 @@ export class KlassStudentsServiceMockAdapter
             .build(),
         ),
     );
-    return StudentDto.build(students);
+    return plainToInstance(KlassStudentDto, students);
   }
 
   async getStudent(
     klassId: string,
     studentId: string,
-  ): Promise<KlassDto['students'][0]> {
+  ): Promise<KlassStudentDto> {
     const student = await this.studentsDao.get(
       new Finder('students')
         .filtersWith(['klassId', '$equals', klassId])
@@ -61,6 +59,6 @@ export class KlassStudentsServiceMockAdapter
     if (!student) {
       throw new HttpError(404, 'Student not found');
     }
-    return StudentDto.build(student);
+    return plainToInstance(KlassStudentDto, student);
   }
 }

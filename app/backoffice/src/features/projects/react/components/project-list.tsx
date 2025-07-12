@@ -1,9 +1,9 @@
+import { ProjectDto } from "@domain/modules";
 import { match } from 'ts-pattern';
 
 import { ProjectRow } from './project-row';
 
 import { useContextGetter } from '#action/react';
-import { ProjectDto } from '#features/projects/domain';
 import { ProjectsGetter } from '#features/projects/use-cases';
 import { useI18n } from '#i18n/react';
 

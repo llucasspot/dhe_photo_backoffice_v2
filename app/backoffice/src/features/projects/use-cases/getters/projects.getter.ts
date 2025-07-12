@@ -1,3 +1,4 @@
+import { ProjectDto } from '@domain/modules';
 import { inject, singleton } from '@mygoodstack/di-react';
 
 import { ProjectsControllerServicePort } from '../../domain/ports';
@@ -5,7 +6,6 @@ import { ProjectsControllerServicePort } from '../../domain/ports';
 import { projectsKeys } from './project.getter';
 
 import { Getter } from '#action/domain';
-import { ProjectDto } from '#features/projects/domain';
 
 @singleton()
 export class ProjectsGetter extends Getter<

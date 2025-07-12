@@ -1,10 +1,11 @@
+import { SchoolProjectDto } from '@domain/modules';
+
 import { I18nAction, I18nDto, I18nForm, I18nGetter } from '../../../i18n.types';
 
 import {
   AddProductBody,
   CreateKlassesBody,
   CreateProjectBody,
-  ProjectDto,
 } from '#features/projects/domain';
 
 export type ProjectsI18nTranslationsKeys = {
@@ -12,7 +13,7 @@ export type ProjectsI18nTranslationsKeys = {
     AddProductBody: I18nDto<AddProductBody>;
     CreateKlassesBody: I18nDto<CreateKlassesBody>;
     CreateProjectBody: I18nDto<CreateProjectBody>;
-    ProjectDto: I18nDto<ProjectDto>;
+    SchoolProjectDto: I18nDto<SchoolProjectDto>;
   };
   action: {
     AddProductToProjectAction: I18nAction;

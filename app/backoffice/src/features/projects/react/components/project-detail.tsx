@@ -1,3 +1,4 @@
+import { SchoolProjectDto } from '@domain/modules';
 import { useInstance } from '@mygoodstack/di-react';
 import { match } from 'ts-pattern';
 
@@ -6,7 +7,6 @@ import { FolderDropzone, KlassDropzoneHandlerService } from './index';
 
 import { useAction, useContextGetter } from '#action/react';
 import { KlassGrid } from '#features/klasses/react';
-import { ProjectDto } from '#features/projects/domain';
 import {
   CreateKlassesFromFilesAction,
   ProjectGetter,
@@ -39,7 +39,7 @@ const ProjectDetailError = ({ error }: { error: Error | null }) => {
   );
 };
 
-const ProjectDetailContent = ({ project }: { project: ProjectDto }) => {
+const ProjectDetailContent = ({ project }: { project: SchoolProjectDto }) => {
   const { t } = useI18n();
   const folderDropzoneService = useInstance(KlassDropzoneHandlerService);
   const createKlassesFromFiles = useAction(CreateKlassesFromFilesAction);
@@ -75,7 +75,7 @@ const ProjectDetailContent = ({ project }: { project: ProjectDto }) => {
           <dl>
             <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">
-                {t('dto.ProjectDto.name.label')}
+                {t('dto.SchoolProjectDto.name.label')}
               </dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                 {project.name}
@@ -83,7 +83,7 @@ const ProjectDetailContent = ({ project }: { project: ProjectDto }) => {
             </div>
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">
-                {t('dto.ProjectDto.schoolId.label')}
+                {t('dto.SchoolProjectDto.schoolId.label')}
               </dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                 {school ? school.name : '// TODO unknown'}
@@ -91,7 +91,7 @@ const ProjectDetailContent = ({ project }: { project: ProjectDto }) => {
             </div>
             <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">
-                {t('dto.ProjectDto.shotDate.label')}
+                {t('dto.SchoolProjectDto.shotDate.label')}
               </dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                 {new Date(project.shotDate).toLocaleDateString()}
@@ -99,7 +99,7 @@ const ProjectDetailContent = ({ project }: { project: ProjectDto }) => {
             </div>
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">
-                {t('dto.ProjectDto.orderEndDate.label')}
+                {t('dto.SchoolProjectDto.orderEndDate.label')}
               </dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                 {new Date(project.orderEndDate).toLocaleDateString()}
@@ -107,7 +107,7 @@ const ProjectDetailContent = ({ project }: { project: ProjectDto }) => {
             </div>
             <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">
-                {t('dto.ProjectDto.state.label')}
+                {t('dto.SchoolProjectDto.state.label')}
               </dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                 <span
@@ -124,7 +124,7 @@ const ProjectDetailContent = ({ project }: { project: ProjectDto }) => {
             {project.messageForClients && (
               <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt className="text-sm font-medium text-gray-500">
-                  {t('dto.ProjectDto.messageForClients.label')}
+                  {t('dto.SchoolProjectDto.messageForClients.label')}
                 </dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                   {project.messageForClients}
@@ -158,7 +158,7 @@ const ProjectDetailContent = ({ project }: { project: ProjectDto }) => {
             });
           }}
         />
-        <KlassGrid klasses={project.klasses} />
+        <KlassGrid klasses={project.klasses ?? []} />
       </div>
     </div>
   );

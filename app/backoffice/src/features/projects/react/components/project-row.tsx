@@ -1,9 +1,10 @@
-import { ProjectDto } from '#features/projects/domain';
+import { SchoolProjectDto } from '@domain/modules';
+
 import { useI18n } from '#i18n/react';
 import { Link } from '#routing/react';
 
 interface ProjectRowProps {
-  project: ProjectDto;
+  project: SchoolProjectDto;
 }
 
 export const ProjectRow = ({ project }: ProjectRowProps) => {

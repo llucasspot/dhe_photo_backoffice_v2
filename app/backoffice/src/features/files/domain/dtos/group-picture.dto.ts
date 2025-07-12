@@ -1,10 +1,10 @@
+import { ProjectKlassDto } from '@domain/modules';
 import { IsOptional, IsString, ValidateNested } from 'class-validator';
 
 import { PictureDto } from './picture.dto';
 
 import { plainToInstance, Type } from '#class-transformer';
 import { Dto } from '#core/domain';
-import { KlassDto } from '#features/klasses/domain';
 import { HavePicture } from '#features/students/domain';
 
 export class GroupPictureDto
@@ -16,7 +16,7 @@ export class GroupPictureDto
   klassId!: string;
   // relationships
   @IsOptional()
-  klass?: KlassDto;
+  klass?: ProjectKlassDto;
 
   // HavePicture properties
   @IsString()

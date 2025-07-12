@@ -1,4 +1,6 @@
+import { KlassStudentDto } from '@domain/modules';
 import { adapter, inject, Scope } from '@mygoodstack/di-react';
+import { plainToInstance } from 'class-transformer';
 
 import { Finder, Populator } from '../../../../database/domain';
 import { StudentsDaoPort } from '../../../../database/modules/students/domain/students-dao.port';
@@ -6,10 +8,7 @@ import { ForMockControllerService } from '../../../domain/for-mock-controller-se
 import { HttpError } from '../../../domain/http-error';
 
 import { LogAction } from '#core/domain';
-import {
-  StudentDto,
-  StudentsGetterControllerServicePort,
-} from '#features/students/domain';
+import { StudentsGetterControllerServicePort } from '#features/students/domain';
 
 @adapter(StudentsGetterControllerServicePort, Scope.Singleton, 'mock')
 export class StudentsGetterPortMockAdapter
@@ -24,22 +23,22 @@ export class StudentsGetterPortMockAdapter
   }
 
   @LogAction()
-  async getStudents(): Promise<StudentDto[]> {
+  async getStudents(): Promise<KlassStudentDto[]> {
     await this.delay();
     const finder = this.buildFinder();
     const students = await this.studentsDao.getAll(finder);
-    return StudentDto.build(students);
+    return plainToInstance(KlassStudentDto, students);
   }
 
   @LogAction()
-  async getStudent(studentId: string): Promise<StudentDto> {
+  async getStudent(studentId: string): Promise<KlassStudentDto> {
     await this.delay();
     const finder = this.buildFinder(studentId);
     const student = await this.studentsDao.get(finder);
     if (!student) {
       throw new HttpError(404, 'Student not found');
     }
-    return StudentDto.build(student);
+    return plainToInstance(KlassStudentDto, student);
   }
 
   private buildFinder(studentId?: string) {

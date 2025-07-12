@@ -1,4 +1,4 @@
-import { SchoolDto } from "@domain/schools";
+import { SchoolDto } from "@domain/modules";
 import { match } from 'ts-pattern';
 
 import { SchoolRow } from './school-row';

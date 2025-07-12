@@ -1,7 +1,7 @@
-import { StudentDto } from '../dtos/student.dto';
+import { KlassStudentDto } from '@domain/modules';
 
 export abstract class StudentsGetterControllerServicePort {
-  abstract getStudents(): Promise<StudentDto[]>;
+  abstract getStudents(): Promise<KlassStudentDto[]>;
 
-  abstract getStudent(studentId: string): Promise<StudentDto>;
+  abstract getStudent(studentId: string): Promise<KlassStudentDto>;
 }

@@ -2,7 +2,7 @@ import {
   AddSchoolBankAccountBody,
   BankAccountDto,
   SchoolsControllerServicePort,
-} from '@domain/schools';
+} from '@domain/modules';
 import { inject, singleton } from '@mygoodstack/di-react';
 
 import { schoolsKeys } from '../getters';

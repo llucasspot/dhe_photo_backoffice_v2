@@ -1,4 +1,4 @@
-import { AddSchoolBankAccountBody, SchoolDto } from "@domain/schools";
+import { AddSchoolBankAccountBody, SchoolDto } from '@domain/modules';
 import { match } from 'ts-pattern';
 
 import { AddSchoolBankAccountAction } from '../../use-cases/actions/add-school-bank-account.action';
@@ -115,7 +115,7 @@ const SchoolDetailContent = ({ school }: { school: SchoolDto }) => {
                   {t('schools.detail.fields.city')}
                 </dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {school.city}
+                  {school.address?.city}
                 </dd>
               </div>
             </dl>
@@ -123,7 +123,7 @@ const SchoolDetailContent = ({ school }: { school: SchoolDto }) => {
         </div>
 
         <BankAccountSection
-          bankAccounts={school.bankAccounts}
+          bankAccounts={school.bankAccounts ?? []}
           onAddAccount={handleAddAccount}
           onEditAccount={handleEditAccount}
         />

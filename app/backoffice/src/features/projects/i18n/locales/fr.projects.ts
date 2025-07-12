@@ -65,7 +65,7 @@ export const frProjects: ProjectsI18nTranslationsKeys = {
         },
       },
     },
-    ProjectDto: {
+    SchoolProjectDto: {
       name: {
         label: 'Nom du projet',
         validation: {},
@@ -103,14 +103,6 @@ export const frProjects: ProjectsI18nTranslationsKeys = {
         validation: {},
       },
       products: {
-        label: 'Produits',
-        validation: {},
-      },
-      klassIds: {
-        label: 'Classes',
-        validation: {},
-      },
-      productIds: {
         label: 'Produits',
         validation: {},
       },

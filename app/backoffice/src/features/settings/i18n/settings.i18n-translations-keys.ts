@@ -1,18 +1,14 @@
-import { I18nDto, I18nForm } from '../../../i18n.types';
+import { AddressDto, CompanyInfoDto, PersonalInfoDto } from '@domain/modules';
+import { BankAccountDto } from '@domain/modules';
 
-import {
-  AddressDto,
-  BankInfoDto,
-  CompanyInfoDto,
-  PersonalInfoDto,
-} from '#features/settings/domain';
+import { I18nDto, I18nForm } from '../../../i18n.types';
 
 export type SettingsI18nTranslationsKeys = {
   dto: {
     PersonalInfoDto: I18nDto<PersonalInfoDto>;
     CompanyInfoDto: I18nDto<CompanyInfoDto>;
     AddressDto: I18nDto<AddressDto>;
-    BankInfoDto: I18nDto<BankInfoDto>;
+    BankAccountDto: I18nDto<BankAccountDto>;
   };
   form: {
     AddressForm: I18nForm;

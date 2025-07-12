@@ -18,13 +18,11 @@ export default defineConfig({
       fileName: 'index',
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'class-transformer', 'class-validator'],
-      output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-        },
-      },
+      external: [
+        'class-transformer',
+        'class-validator',
+        '@mygoodstack/di-core',
+      ],
     },
     sourcemap: true,
   },

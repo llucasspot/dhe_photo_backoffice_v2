@@ -1,5 +1,6 @@
+import { SchoolDto } from '@domain/modules';
+
 import { Link } from '#routing/react';
-import { SchoolDto } from "@domain/schools";
 
 interface SchoolRowProps {
   school: SchoolDto;
@@ -18,7 +19,7 @@ export const SchoolRow = ({ school }: SchoolRowProps) => {
           <div>
             <h3 className="text-sm font-medium text-gray-900">{school.name}</h3>
             <p className="text-sm text-gray-500">
-              {school.city} • {school.currency}
+              {school.address?.city} • {school.currency}
             </p>
           </div>
         </div>

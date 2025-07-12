@@ -4,6 +4,10 @@ export const frSettings: SettingsI18nTranslationsKeys = {
   // iso
   dto: {
     PersonalInfoDto: {
+      id: {
+        label: 'Identifiant',
+        validation: {},
+      },
       email: {
         label: 'Adresse email',
         validation: {
@@ -44,6 +48,10 @@ export const frSettings: SettingsI18nTranslationsKeys = {
       },
     },
     CompanyInfoDto: {
+      id: {
+        label: 'Identifiant',
+        validation: {},
+      },
       companyName: {
         label: 'Nom de la société',
         validation: {
@@ -67,6 +75,16 @@ export const frSettings: SettingsI18nTranslationsKeys = {
       },
     },
     AddressDto: {
+      id: {
+        label: 'Identifiant',
+        validation: {},
+      },
+      number: {
+        label: 'Numéro',
+        validation: {
+          isNotEmpty: 'Le numéro est requise',
+        },
+      },
       street: {
         label: 'Rue',
         validation: {
@@ -95,7 +113,7 @@ export const frSettings: SettingsI18nTranslationsKeys = {
           isPostalCode: 'Le format du code postal est invalide',
         },
       },
-      countryIsoCode: {
+      country: {
         label: 'Code pays',
         validation: {
           isString: 'Le code pays doit être du texte',
@@ -103,16 +121,20 @@ export const frSettings: SettingsI18nTranslationsKeys = {
           isNotEmpty: 'Le code pays est requis',
         },
       },
-      address1: {
-        label: 'Adresse',
+      complement: {
+        label: 'Complément',
         validation: {
-          isString: "L'adresse doit être du texte",
-          isNotEmpty: "L'adresse est requise",
-          maxLength: "L'adresse ne peut pas dépasser 100 caractères",
+          isString: 'Le complément doit être du texte',
+          isNotEmpty: 'Le complément est requise',
+          maxLength: 'Le complément ne peut pas dépasser 100 caractères',
         },
       },
     },
-    BankInfoDto: {
+    BankAccountDto: {
+      id: {
+        label: 'Identifiant',
+        validation: {},
+      },
       iban: {
         label: 'IBAN',
         validation: {
@@ -120,16 +142,12 @@ export const frSettings: SettingsI18nTranslationsKeys = {
           isIBAN: "Format d'IBAN invalide",
         },
       },
-      bicNumber: {
+      bic: {
         label: 'BIC',
         validation: {
           isNotEmpty: 'Le BIC est requis',
           matches: 'Format de BIC invalide',
         },
-      },
-      id: {
-        label: 'Identifiant',
-        validation: {},
       },
     },
   },

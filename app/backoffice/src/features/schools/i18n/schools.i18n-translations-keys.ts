@@ -1,4 +1,4 @@
-import { AddSchoolBankAccountBody, CreateSchoolBody } from '@domain/schools';
+import { AddSchoolBankAccountBody, CreateSchoolBody } from '@domain/modules';
 
 import { I18nAction, I18nDto, I18nForm, I18nGetter } from '../../../i18n.types';
 

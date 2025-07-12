@@ -1,4 +1,4 @@
-import { SchoolDto, SchoolsControllerServicePort } from '@domain/schools';
+import { SchoolDto, SchoolsControllerServicePort } from '@domain/modules';
 import { inject, singleton } from '@mygoodstack/di-react';
 
 import { Getter } from '#action/domain';

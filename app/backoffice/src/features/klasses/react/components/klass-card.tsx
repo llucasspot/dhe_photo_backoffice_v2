@@ -1,8 +1,9 @@
-import { KlassDto } from '#features/klasses/domain';
+import { ProjectKlassDto } from '@domain/modules';
+
 import { Link } from '#routing/react';
 
 interface KlassCardProps {
-  klass: Omit<KlassDto, 'project'>;
+  klass: ProjectKlassDto;
   numberStudentCodeToShow?: number;
 }
 
@@ -19,10 +20,12 @@ export const KlassCard = ({
       <h4 className="text-sm font-medium text-gray-900 truncate">
         {klass.name}
       </h4>
-      <p className="text-sm text-gray-500 mt-1">
-        {klass.students.length} students
-      </p>
-      {numberStudentCodeToShow && (
+      {klass.students && (
+        <p className="text-sm text-gray-500 mt-1">
+          {klass.students.length} students
+        </p>
+      )}
+      {numberStudentCodeToShow && klass.students && (
         <div className="mt-2 flex flex-wrap gap-1">
           {klass.students.slice(0, numberStudentCodeToShow).map((student) => (
             <div

@@ -1,3 +1,4 @@
+import { KlassStudentDto } from '@domain/modules';
 import { IsOptional, IsString, ValidateNested } from 'class-validator';
 
 import { PictureDto } from './picture.dto';
@@ -5,7 +6,6 @@ import { PictureDto } from './picture.dto';
 import { plainToInstance, Type } from '#class-transformer';
 import { Dto } from '#core/domain';
 import { HavePicture } from '#features/students/domain';
-import { StudentDto } from '#features/students/domain';
 
 export class StudentPictureDto
   extends Dto<StudentPictureDto>
@@ -16,7 +16,7 @@ export class StudentPictureDto
   studentId!: string;
   // relationships
   @IsOptional()
-  student?: StudentDto;
+  student?: KlassStudentDto;
 
   // HavePicture properties
   @IsString()

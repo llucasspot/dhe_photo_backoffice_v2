@@ -1,5 +1,6 @@
+import { CompanyInfoDto } from '@domain/modules';
+
 import { CheckboxInput, form } from '#components';
-import { CompanyInfoDto } from '#features/settings/domain';
 
 export const CompanyInfoForm = () => {
   const onSubmit = (data: CompanyInfoDto) => {

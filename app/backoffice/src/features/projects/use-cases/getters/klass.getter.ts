@@ -1,10 +1,8 @@
+import { ProjectKlassDto } from '@domain/modules';
 import { inject, singleton } from '@mygoodstack/di-react';
 
 import { Getter } from '#action/domain';
-import {
-  KlassDto,
-  KlassesControllerServicePort,
-} from '#features/klasses/domain';
+import { KlassesControllerServicePort } from '#features/klasses/domain';
 
 export const klassKeys = {
   all: ['klasses'] as const,
@@ -17,7 +15,7 @@ export const klassKeys = {
 @singleton()
 export class KlassGetter extends Getter<
   ReturnType<typeof klassKeys.detail>,
-  KlassDto,
+  ProjectKlassDto,
   [
     {
       projectId: string;

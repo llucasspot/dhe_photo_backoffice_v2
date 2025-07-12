@@ -1,10 +1,11 @@
+import { ProjectKlassDto } from '@domain/modules';
+
 import { I18nDto } from '../../../i18n.types';
 
 import {
   CreateGroupPictureBody,
   CreateKlassBody,
   CreateKlassesBody,
-  KlassDto,
 } from '#features/klasses/domain';
 
 export type KlassesI18nTranslationsKeys = {
@@ -12,7 +13,7 @@ export type KlassesI18nTranslationsKeys = {
     CreateGroupPictureBody: I18nDto<CreateGroupPictureBody>;
     CreateKlassBody: I18nDto<CreateKlassBody>;
     CreateKlassesBody: I18nDto<CreateKlassesBody>;
-    KlassDto: I18nDto<KlassDto>;
+    ProjectKlassDto: I18nDto<ProjectKlassDto>;
   };
   form: {};
   action: {};

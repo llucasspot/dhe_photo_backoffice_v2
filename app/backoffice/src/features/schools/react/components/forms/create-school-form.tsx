@@ -1,4 +1,4 @@
-import { CreateSchoolBody, SchoolDto } from "@domain/schools";
+import { availableCurrenciesOptions, CreateSchoolBody } from '@domain/modules';
 import { useInstance } from '@mygoodstack/di-react';
 
 import { useAction } from '#action/react';
@@ -36,10 +36,7 @@ export const CreateSchoolForm = () => {
 
       <form.InputContainer>
         <form.Label formKey="currency" />
-        <form.Select
-          formKey="currency"
-          options={SchoolDto.availableCurrencyOptions}
-        />
+        <form.Select formKey="currency" options={availableCurrenciesOptions} />
         <form.ErrorLabel formKey="currency" />
       </form.InputContainer>
 

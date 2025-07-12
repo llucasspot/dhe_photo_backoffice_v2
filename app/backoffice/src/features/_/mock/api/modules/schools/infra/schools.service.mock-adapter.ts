@@ -1,10 +1,10 @@
 import {
   AddSchoolBankAccountBody,
-  BankAccountDto,
   CreateSchoolBody,
   SchoolDto,
   SchoolsControllerServicePort,
-} from '@domain/schools';
+} from '@domain/modules';
+import { SchoolBankAccountDto } from '@domain/modules';
 import { adapter, inject, Scope } from '@mygoodstack/di-react';
 import { plainToInstance } from 'class-transformer';
 
@@ -103,7 +103,7 @@ export class SchoolsServiceMockAdapter
   async addBankAccount(
     id: string,
     body: AddSchoolBankAccountBody,
-  ): Promise<BankAccountDto> {
+  ): Promise<SchoolBankAccountDto> {
     await this.delay();
     // const body: AddSchoolBankAccountBody = {
     //   iban: 'FR7630001007941234567890185',
@@ -114,21 +114,22 @@ export class SchoolsServiceMockAdapter
       schoolId: id,
       bankAccountId: bankAccount.id,
     });
-    return bankAccount;
+    return plainToInstance(SchoolBankAccountDto, bankAccount);
   }
 
-  async getBankAccounts(id: string): Promise<BankAccountDto[]> {
+  async getBankAccounts(id: string): Promise<SchoolBankAccountDto[]> {
     await this.delay();
     const schoolBankAccounts = await this.schoolBankAccountsDao.getAll(
       new Finder('schoolBankAccounts').filtersWith(['schoolId', '$equals', id]),
     );
-    return await this.bankAccountsDaoPort.getAll(
+    const bankAccounts = await this.bankAccountsDaoPort.getAll(
       new Finder('bankAccounts').filtersWith([
         'id',
         '$in',
         schoolBankAccounts.map((sba) => sba.bankAccountId),
       ]),
     );
+    return plainToInstance(SchoolBankAccountDto, bankAccounts);
   }
 
   private buildFinder(schoolId?: string) {

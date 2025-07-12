@@ -1,7 +1,6 @@
-import { AvailableCurrency } from '@domain/schools';
+import { AvailableCurrency, ProjectDto } from '@domain/modules';
 
 import { Dto } from '#core/domain';
-import { ProjectState } from '#features/projects/domain';
 
 export class Photographer extends Dto<Photographer> {
   id!: string;
@@ -44,7 +43,7 @@ export class Project extends Dto<Project> {
   name!: string;
   orderEndDate!: Date;
   shotDate!: Date;
-  state!: ProjectState;
+  state!: ProjectDto['state'];
 }
 
 // schools

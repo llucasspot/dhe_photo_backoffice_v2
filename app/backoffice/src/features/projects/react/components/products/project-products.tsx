@@ -1,16 +1,16 @@
 import { useState } from 'react';
+import { SchoolProjectDto } from '@domain/modules';
 
 import { ProductSelector } from './product-selector';
 
 import { useAction } from '#action/react';
 import { Button } from '#components';
 import { ProductDto } from '#features/products/domain';
-import { ProjectDto } from '#features/projects/domain';
 import { AddProductToProjectAction } from '#features/projects/use-cases';
 import { useI18n } from '#i18n/react';
 
 interface ProjectProductsProps {
-  project: ProjectDto;
+  project: SchoolProjectDto;
 }
 
 export const ProjectProducts = ({ project }: ProjectProductsProps) => {
@@ -78,7 +78,7 @@ export const ProjectProducts = ({ project }: ProjectProductsProps) => {
           )}
         </div>
 
-        {project.products.length > 0 ? (
+        {project.products?.length && project.products.length > 0 ? (
           <div className="mt-6">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
@@ -95,7 +95,7 @@ export const ProjectProducts = ({ project }: ProjectProductsProps) => {
                 {project.products.map((projectProduct) => (
                   <tr key={projectProduct.id}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {projectProduct.product?.name}
+                      {projectProduct?.name}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       €{projectProduct.price.toFixed(2)}

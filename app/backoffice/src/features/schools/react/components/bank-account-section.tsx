@@ -1,4 +1,4 @@
-import { BankAccountDto } from '@domain/schools';
+import { BankAccountDto } from '@domain/modules';
 import { PlusIcon } from '@heroicons/react/20/solid';
 
 import { useI18n } from '#i18n/react';

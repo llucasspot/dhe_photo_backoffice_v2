@@ -1,10 +1,10 @@
-import { KlassDto } from '#features/klasses/domain';
+import { KlassStudentDto } from '@domain/modules';
 
 export abstract class KlassStudentsGetterControllerServicePort {
-  abstract getStudents(klassId: string): Promise<KlassDto['students']>;
+  abstract getStudents(klassId: string): Promise<KlassStudentDto[]>;
 
   abstract getStudent(
     klassId: string,
     studentId: string,
-  ): Promise<KlassDto['students'][0]>;
+  ): Promise<KlassStudentDto | undefined>;
 }

@@ -1,12 +1,12 @@
+import { ProjectKlassDto } from '@domain/modules';
+
 import { KlassCard } from './klass-card';
 
-import { KlassDto } from '#features/klasses/domain';
-
 interface KlassGridProps {
-  klasses: Omit<KlassDto, 'project'>[];
+  klasses: ProjectKlassDto[] | undefined;
 }
 
-export const KlassGrid = ({ klasses }: KlassGridProps) => {
+export const KlassGrid = ({ klasses = [] }: KlassGridProps) => {
   if (!klasses.length) return null;
 
   return (

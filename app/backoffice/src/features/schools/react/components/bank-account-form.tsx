@@ -1,4 +1,4 @@
-import { AddSchoolBankAccountBody } from '@domain/schools';
+import { AddSchoolBankAccountBody } from '@domain/modules';
 
 import { FormDebug } from '../../../../components/form/inputs/form-debug';
 

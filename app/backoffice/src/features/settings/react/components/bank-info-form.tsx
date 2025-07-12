@@ -1,15 +1,16 @@
+import { BankAccountDto } from '@domain/modules';
+
 import { form } from '#components';
-import { BankInfoDto } from '#features/settings/domain';
 
 export const BankInfoForm = () => {
-  const onSubmit = (data: BankInfoDto) => {
+  const onSubmit = (data: BankAccountDto) => {
     console.log('form data : ', data);
   };
 
   return (
     <form.Form
       formName="BankInfoForm"
-      dto={BankInfoDto}
+      dto={BankAccountDto}
       onSubmit={onSubmit}
       className="space-y-6"
     >

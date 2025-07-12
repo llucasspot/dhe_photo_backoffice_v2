@@ -1,10 +1,8 @@
+import { KlassStudentDto } from '@domain/modules';
 import { inject, singleton } from '@mygoodstack/di-react';
 
 import { Getter } from '#action/domain';
-import {
-  KlassStudentsGetterControllerServicePort,
-  StudentDto,
-} from '#features/students/domain';
+import { KlassStudentsGetterControllerServicePort } from '#features/students/domain';
 
 export const studentsKeys = {
   all: ['students'] as const,
@@ -17,7 +15,7 @@ export const studentsKeys = {
 @singleton()
 export class StudentsGetter extends Getter<
   ReturnType<typeof studentsKeys.list>,
-  StudentDto[],
+  KlassStudentDto[],
   [{ klassId: string }]
 > {
   constructor(

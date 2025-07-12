@@ -50,9 +50,9 @@ importers:
       '@domain/core':
         specifier: workspace:*
         version: link:../../domain/core
-      '@domain/schools':
+      '@domain/modules':
         specifier: workspace:*
-        version: link:../../domain/schools
+        version: link:../../domain/modules
       '@headlessui/react':
         specifier: ^2.2.4
         version: 2.2.4(react-dom@19.1.0)(react@19.1.0)
@@ -240,9 +240,9 @@ importers:
 
   domain/core:
     dependencies:
-      '@mygoodstack/di-react':
-        specifier: ^0.1.14
-        version: 0.1.15(@mygoodstack/di-core@0.1.4)(react-dom@19.1.0)(react@19.1.0)
+      '@mygoodstack/di-core':
+        specifier: ^0.1.4
+        version: 0.1.4(reflect-metadata@0.2.2)(tsyringe@4.10.0)
       class-transformer:
         specifier: ^0.5.1
         version: 0.5.1
@@ -290,7 +290,7 @@ importers:
         specifier: ^4.5.4
         version: 4.5.4(@types/node@20.19.4)(typescript@5.8.3)(vite@7.0.3)
 
-  domain/schools:
+  domain/modules:
     dependencies:
       '@domain/core':
         specifier: workspace:*
@@ -301,10 +301,16 @@ importers:
       class-validator:
         specifier: ^0.14.2
         version: 0.14.2
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
     devDependencies:
       '@eslint/js':
         specifier: ^9.16.0
         version: 9.30.1
+      '@types/lodash':
+        specifier: ^4.17.13
+        version: 4.17.20
       eslint:
         specifier: ^8.57.0
         version: 8.57.1
